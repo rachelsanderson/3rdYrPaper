@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.1in]{geometry}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{enumitem}
+\usepackage{mathtools,xparse}
+\colorlet{shadecolor}{orange!15}
+% \definecolor{shadecolor}{rgb}{255,128,0}\
+\usepackage{float}
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{longtable}
+\usepackage{indentfirst}
+%Allows multi-column tables 
+\setlength{\parindent}{2em}
+% \setstretch{1.25}
+\doublespacing
+\title{The effects of matching algorithms and estimation methods using linked data}
+\author{Rachel Anderson}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+The goal of this paper is to study the effects of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  
+
+In applied microeconomics, identifying an overlapping set of individuals appearing in two or more datasets is complicated by imperfect identifiers. One such example is \cite{CITE HERE}, who link children listed in their mother's welfare program applications with their death records more than 50 years later.  Since the children are linked by name and date of birth, which are not always unique and are prone to typographical error, some individuals appear to have multiple death records, all of which seem equally likely to be the true match.   Lacking further information about match quality, the authors use the estimation procedure in AHL (2019), which allows for observations to have multiple associated outcomes.  
+
+The methods in AHL (2019) consider the linked data as given, however the authors hypothesize that there could be efficiency gains if additional information about match quality is available.  Specifically, if the probability that a record pair refers to the same individual is known, then this knowledge can be used to achieve a reduction in mean-squared error.  Conveniently, these probabilities can be estimated by using probabilistic record linkage procedures developed by \cite{} and \cite{}. 
+
+Thus, the first contribution of this paper is to study the effects of different record linkage methods on the configuration of the matched data.  I will examine (1) whether they match the same individuals, (2) differences in sample size, confidence about correctness, etc.  With these matched configurations of the data, I will then perform different estimation procedures to estimate the same quantity of interest -- the average treatment effect of a conditional cash transfer program on recipients' children's longevity.   I will compare these methods first theoretically, then with simulated data, and, finally, with the actual dataset.   
+
+Estimation techniques include AHL (2019), Lahiri and Larsen (2005), and a fully Bayesian approach, that is described in this paper. 
+
+Currently, little is known about how data pre-processing impacts subsequent inference in the economics literature, and especially those projects that rely on matching historical datasets with imperfect identifiers.  This paper adds to a recent series of papers by Abramitzky, Boustan, etc.  in its effort to understand how these decisions impact the quality of inference. 
+
+The general outline will be as follows:
+
+(1) Matching 
+- Overview of matching methods
+- Comparison of matching methods from (a) theoretical perspective, (b) with simulated data, (c) with actual data
+
+(2) Estimation 
+- Overview of estimation methods
+- Comparison of estimation methods from (a) theoretical perspective, (b) with simulated data, (c) with actual data
+
+(3) Further investigation/follow-up simulations inspired by steps 1 and 2  
+
+
+
+% In contrast to deterministic record linkage, which has been used extensively in the economics literature (Ferrie, cite etc.).... descriptions here
+
+% Thus, it is the goal of this paper.  
+
+
+
+% In the literature, there are different methods for matching:  deterministic matching methods, such as those used by Joe Ferrie, probabilistic record linkage, and machine learning techniques.   Using the same datasets (simulated and real), I will apply each of these methods in order to create different matched versions of the same datasets. 
+
+% The output of the matching algorithms are different.  In the case of deterministic matching, the output is a configuration of the data.  However, probabilistic and machine learning matching also output estimated probabilities of matches, which are then available for subsequent inference.   One question that AHL examine is how using information about match quality can improve the quality of the estimators, in terms of MSE reduction.   
+
+
+\end{document}
