@@ -4,6 +4,7 @@
 \usepackage{framed}
 \usepackage{enumitem}
 \usepackage{mathtools,xparse}
+\usepackage{graphics}
 \colorlet{shadecolor}{orange!15}
 % \definecolor{shadecolor}{rgb}{255,128,0}\
 \usepackage{float}
@@ -18,8 +19,20 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{longtable}
 \usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+
+\tikzset{
+  basic/.style  = {draw, text width=2cm, drop shadow, font=\sffamily, rectangle},
+  root/.style   = {basic, rounded corners=2pt, thin, align=center,
+                   fill=green!30},
+  level 2/.style = {basic, rounded corners=6pt, thin,align=center, fill=green!60,
+                   text width=8em},
+  level 3/.style = {basic, thin, align=left, fill=pink!60, text width=6.5em}
+}
+
 %Allows multi-column tables 
-\input{tcilatex}
+\input{../tcilatex}
 
 \setlength{\topmargin}{-0.4in} 
 \setlength{\textheight}{8.9in}
@@ -39,26 +52,36 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \begin{abstract}
 \singlespacing
-\noindent This paper studies the effect of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  
+\noindent This paper studies the effect of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  Using simulations, I will explore differences produced by  
 \end{abstract}
 
-\begin{Introduction}
+\section{Introduction}
 In applied microeconomics, identifying a common set of individuals appearing in two or more datasets is often complicated by the absence of unique identifying variables. For example,  \cite{CITE HERE} link children listed on their mother's welfare program applications with their death records by matching individuals who have the same name and date of birth.  Since name and date combinations are not necessarily unique and can be prone to typographical errors, the authors match some individuals to multiple death records, all of which seem equally likely to be the true match.  Estimation proceeds using techniques from AHL (2019), which allow for observations to have multiple linked outcomes.  
 
-The methods in AHL (2019) consider the matched dataset as given, however the authors hypothesize that there could be efficiency gains if additional information about match quality is available.  Specifically, if the probability that a record pair refers to the same individual is known, then this knowledge can be used to achieve a reduction in mean-squared error.  Conveniently, these probabilities are estimable using probabilistic record linkage procedures developed by \cite{FellegiSunter} and \cite{Name}. 
+The methods in AHL (2019) consider the matched dataset as given, however the authors hypothesize that there could be efficiency gains if additional information about match quality is available.  Specifically, if the probability that a record pair refers to the same individual is known, then this knowledge can be used to achieve a reduction in mean-squared error.  Conveniently, these probabilities are outputted by probabilistic record linkage procedures introduced by \cite{FellegiSunter} and \cite{Newcome}. 
 
 Thus, the goal of this paper is to study the effects of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  First, I will examine different matching algorithms to determine whether they produce different configurations of matched data.  With multiple matched versions of the data in hand, I will then use various estimation methods to estimate the same parameter of interest -- the average treatment effect of a conditional cash transfer program on recipients' children's longevity.   I will compare these methods first theoretically, then with simulated data, and, finally, with the original, unmatched data from \cite{}.   
 
 Matching techniques include deterministic record linkage as described in \cite{}, and multiple implementations of probabilistic record linkage -- the fastLink, machine learning, etc. Estimation techniques include AHL (2019), Lahiri and Larsen (2005), and a fully Bayesian approach, that is described in this paper. 
 
-Currently, little is known about how data pre-processing impacts subsequent inference in the economics literature, and especially those projects that rely on matching historical datasets with imperfect identifiers.  This paper adds to a recent series of papers by Abramitzky, Boustan, etc.  in its effort to understand how these decisions impact the quality of inference. 
+Currently, little is known about how data pre-processing impacts subsequent inference in the economics literature, and especially those projects that rely on matching historical datasets with imperfect identifiers.  This paper adds to a recent series of papers by Abramitzky, Boustan, etc.  in its effort to understand how matching decisions impact the quality of inference.   This paper goes a step further, by incorporating information obtained in the matching process in the estimation process.  
 
 The general outline will be as follows:
 
 
 \section{Matching Methods}
 
-A matching procedure is a set of choices about (i) selecting which variables to use when matching, (ii) defining a ``distance" metric between said variables, (iii) blocking observations into non-overlapping groups for computational feasibility, and (iv) designating record pairs as matches if a one-to-one matching is desired. 
+A matching procedure is a set of choices about (i) selecting which variables to use when matching, (ii) defining a ``distance" metric between said variables, (iii) blocking observations into non-overlapping groups for computational feasibility, and (iv) designating record pairs as matches if a one-to-one matching is desired.    
+
+Matching procedures can be divided into two categories, (i) deterministic approaches, where a fixed set of rules determine which records are matching and which are not; and (ii) probabilistic methods, which involve estimating the probability that each record pair refers to a match.  COMPARE AND CONTRAST WEAKNESSES.  Deterministic approaches are susceptible to X YZ  see Enamorado, etc. 
+
+\begin{figure}[h!]
+\centering
+\caption{Overview of matching methods}
+\includegraphics[width=0.7\textwidth]{./RecordLinkageGraphics.pdf}
+\end{figure}
+
+INSERT A GRAPHIC WITH THE METHODS I WILL TEST
 \begin{itemize}
 \item Deterministic
 \item Probabilistic  (see Winkler 2006 for survey)
@@ -109,7 +132,12 @@ I will also allow for missing data.
 \item SW (1997, 1991): iterative procedure that modifies regression and matching results for apparent outliers 
 \item Lahiri and Larsen (2005):   provides unbiased estimator directly instead of bias correction for OLS, by applying regression to transformed model 
 \item Abramitzky, Mill, P\'erez (2019): guide for researchers in the choice of which variables to use for linking, how to estimate probabilities, and then choose which records to use in the analysis.  Created R code and stata command to implement the method
-\item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) are deterministic
+\item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) are deterministic.  Conservative methods require no other potential match with same name within a 5-year band
 \item Semi-automated Feigenbaum, Ruggles et al 
+\item Abramitzky, Boustan, Eriksson, Feigenbaum, P\`erez (2019): evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
+\item Bailey et al. (2017) say automated methods perform quite poorly
+\item Survey paper from handbook of econometrics
 \end{itemize}
+
+Overall, high variability in performance of matching methods depending on choice of variables, string comparators used. 
 \end{document}
