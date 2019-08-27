@@ -62,9 +62,9 @@ The methods in \cite{ahl2019} assume that each of the linked outcomes is equally
 
 The goal of this paper is therefore to study the effects of different combinations of matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  First, I will compare how different matching algorithms perform in terms of the representativeness of the matched data they produce and their tolerance for type I and type II errors.  Next, with multiple matched versions of the data in hand, I will compute point estimates and confidence intervals for the same parameter of interest using methods that vary by whether they allow for multiple matches, incorporate the matching probabilities, and are likelihood-based in their approach.  In total, I will perform the above analysis twice -- with simulated data and with real data that the simulated data are generated to imitate.  
 
-To the best of my knowledge, how data pre-processing impacts subsequent inference in economics research is not well understood.  This paper adds to a recent series of papers by \cite{arp2018} and \cite{abe2019}, who seek to understand how different matching algorithms impact the quality of inference.  This paper goes a step further, by testing also the effect of different estimation techniques that incorporate information from the matching process, and uses simulations to make more generalizable conclusions.  
+To the best of my knowledge, how data pre-processing impacts subsequent inference in economics research is not well understood.  This paper adds to a recent series of papers by  \cite{bailey2017} and \cite{arp2018, abe2019}, which compare how common matching algorithms for historical data produce different datasets, and offer informal discussion of the impact on inferences.  This paper goes a step further, by testing also the effect of different estimation techniques that incorporate information from the matching process, and uses simulations to make more generalizable conclusions.  
 
-Matching techniques will include deterministic record linkage as described in \cite{ferrie}, and \cite{arp2018}, and multiple implementations of probabilistic record linkage, specifically the fastLink \cite{enamorado2019}, and machine learning approaches \cite{Feigenbaum2016AML}. Estimation techniques will include \cite{ahl2019}, \cite{lahiri05}, and a fully Bayesian approach that I will develop in this paper. 
+Matching techniques will include deterministic record linkage procedures developed by \cite{ferrie96} and \cite{abe2012, abe2014, abe2017}, and \cite{aizer2016}, and multiple implementations of probabilistic record linkage, specifically the fastLink \cite{enamorado2019}, and machine learning approaches \cite{Feigenbaum2016AML}. Estimation techniques will include \cite{ahl2019}, \cite{lahiri05}, and a fully Bayesian approach that I will develop in this paper. 
 
 The real data consists of the unmerged files from \cite{aizer2016}, which I will pre-process using the practices developed by \cite{arp2018}.  The parameter of interest is the average treatment effect of a conditional cash transfer program on recipients' children's longevity.   
 
@@ -76,7 +76,7 @@ By Friday, I will write a description of the model, the parameter of interest, a
 
 A matching procedure is a set of choices about (i) selecting which variables to use when matching, (ii) defining a ``distance" metric between said variables, (iii) blocking observations into non-overlapping groups for computational feasibility, and (iv) designating record pairs as matches if a one-to-one matching is desired.    
 
-Matching procedures can be divided into two categories, (i) deterministic approaches, where a fixed set of rules determine which records are matching and which are not; and (ii) probabilistic methods, which involve estimating the probability that each record pair refers to a match.  COMPARE AND CONTRAST WEAKNESSES.  Deterministic approaches are susceptible to X YZ  see Enamorado, etc. 
+Matching procedures can be divided into two categories, (i) deterministic approaches, where a fixed set of rules determine which records are matching and which are not; and (ii) probabilistic methods, which involve estimating the probability that each record pair refers to a match.  COMPARE AND CONTRAST WEAKNESSES.   Deterministic approaches are susceptible to X YZ  see Enamorado, etc. 
 
 \begin{figure}[h!]
 \centering
@@ -85,12 +85,24 @@ Matching procedures can be divided into two categories, (i) deterministic approa
 \end{figure}
 
 INSERT A GRAPHIC WITH THE METHODS I WILL TEST
+
+
+
+TABLE WITH SURVEY OF MATCHING METHODS used in literature.   categoreis are like enforces one to one matching, blocking, string comparator, phonetic algorithm (this is lit review essentially/annotated bibliography) 
 \begin{itemize}
-\item Deterministic
+\item Deterministic:  Rely heavily on phonetic algorithms (i.e. SOUNDEX, NYSIIS, Metaphone, Spanish Metaphone) and string distance measures (SPEDIS, Jaro-Winkler).    \cite{abe2019} discuss differences in these choices and call SOUNDEX outdated.
+\begin{enumerate}
+\item \cite{aizer2016}:  Described in appendix, match uses first name, middle initial, last name, day, month and years of birth.   Match allows for errors in strings (using SOUNDEX and SPEDIS) and in single digits for DOB. 
+\item Abramtizky, Boustan and Eriksson (ABE) algorithms -- discard observations that do not have unique matches; they typically perform multiple variations of the same algorithm to check robustness.  Perform matching in both directions, and then take the intersection of the two matched samples.  Implemented with abematch stata command. 
+\item ABE-JW adjustment algorithm -- block by place of birth, first letter of first and last names match.  Jaro-winkler can be implemented with stata jarowinkler command; R package stirngdist.  They also only accept one-to-one matching. 
+
+Limitation of ABE algorithms is that ``it is not clear how to
+appropriately weight differences in name spelling versus differences in age when comparing two records".  
+\end{enumerate}
 \item Probabilistic  (see Winkler 2006 for survey)
 \begin{itemize}
-\item E-M Algorithm
-\item Training sample (Ruggles and Feigenbaum)
+\item E-M Algorithm \cite{arp2018} still blocking by same place of birth, predicted year of birth, and first letter of first and last name.  Still use decision rule to enforce one-to-one matching. 
+\item Training sample (Ruggles and Feigenbaum) -- trained to NOT allow mutliple matches; generates a predicted probability of being a match for each pair of records in A and B
 \item IPUMS linking method:  trains support vector machine on training sample of manually classified records (like Feigenbaum 2016)  In historical applications this is problematic due to sample attrition.  The DGP changes, so a full likelihood is a good idea. 
 \end{itemize}
 \end{itemize}
@@ -126,6 +138,15 @@ Important measurements:  estimated type 1, type 2 errors; representativeness of 
 % The output of the matching algorithms are different.  In the case of deterministic matching, the output is a configuration of the data.  However, probabilistic and machine learning matching also output estimated probabilities of matches, which are then available for subsequent inference.   One question that AHL examine is how using information about match quality can improve the quality of the estimators, in terms of MSE reduction.   
 
 
+Data problems in practice \cite{bailey2017}
+\begin{itemize}
+\item ``time-invariant" features not time-invariant -- names misspelled, individual reported incorrectly, or individual changed name 
+\item Age heaping -- rounding ages to the nearest multiple of five
+\item digitization of handwritten manuscripts 
+\end{itemize}
+
+String comparators: NYSIIS, Soundex, Jaro-Winkler, Levenstein, etc. 
+
 I will also allow for missing data. 
 
 \section{Annotated bibliography}
@@ -138,11 +159,30 @@ I will also allow for missing data.
 \item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) are deterministic.  Conservative methods require no other potential match with same name within a 5-year band
 \item Semi-automated Feigenbaum, Ruggles et al 
 \item Abramitzky, Boustan, Eriksson, Feigenbaum, P\`erez (2019): evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
-\item Bailey et al. (2017) say automated methods perform quite poorly
+\item Bailey et al. (2017) review literature on historical record linkage in US and examines performance of automated record linkage algorithms with two high-quality historical datasets and one synthetic ground truth.  They conclude that no method consistently produces representative samples; machine linking has high number of false links and may introduce bias into analyses
 \item Survey paper from handbook of econometrics
+\item For example, Goeken et al. (2017) document that
+in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches,
+and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a
+shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
 \end{itemize}
 
 Overall, high variability in performance of matching methods depending on choice of variables, string comparators used. 
+
+
+\section*{Empirical Application}
+
+What are the long-run effects of cash transfers to poor families?  Specifically, are there lifelong benefits for children raised in poor families?  Transfers may not help poor children if the amounts are insufficent, parents mis-allocate funds, or the transfers induce behavioral changes that are detrimental to the child.  
+
+Evaluating whether cash transfers improve outcomes necessitates identifying a plausible counterfactual.  \cite{aizer2019}  collect administrative records from the MOthers' Pension program (1911-1935), which was the first US government-sponsored welfare program for poor mothers with dependent children.  The intent of the MP program was to imrpove the conditions of ``young children that have become dependent through the loss or disability of the breadwinner" (Abbott 1993, p 1).  The transfers generally represented 12-25 percent of family income, and typically lasted for three years.   
+
+The authors measure the impact in terms of longetivity and other outcomes of the children whose mothers applied to the program.  These data include information on thousands of accepted and rejected applciants born between 1900 and 1925, most of whom had died by 2012.  The idetnifying information in the application records allows them to link children with other datasets to trace their lifetime outcomes.
+
+Identification comes from comparing children of mothers who applied for transfers and who were initially deemed eligible, but were denied upon further investigation.  This is a standard strategy in program evaluation that has been used successfully in studies of disability insurance.  The validity of this strategy hinges on the assumpotion that accepted and rejected mothers and their children do not differ on unobservable characteristics.  Rejected mothers were on average slightly better-off, based on observable characteristics at the time of the applciation.    Authors say that the outcomes for boys of rjeected mothers provide a best-case scenario (upper bound) for what could be expected of beneficiaries in the absence of transfers.  
+
+Data collected on over 16,000 boys from 11 states who were born between 1900 and 1925, and whose mothers applied to the MP program; find that transfers increased longevity by about 1 year.  Poorest families in the sample had longevity increased by 1.5 years of life.  Results are robust to alternative function form specifications, counterfactual comparisons, and treatment of attrition.  They interpret their results as the effect of cash transfers alone.  
+
+The authors match also a subset of the records to WWII enlistment and 1940 census records; cash transfers reduced the probability fo being underweight by half, increased educational attainment by 0.34 years, and increased income in early adulthood by 14 percent.  They say that these mechanisms are responsible for 75 percent of the increase in longevitiy
 
 
 \end{document}

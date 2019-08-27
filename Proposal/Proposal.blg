@@ -8,7 +8,12 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: ./proposal_bib.bib
-Warning--I didn't find a database entry for "ferrie"
+I was expecting a `,' or a `}'---line 101 of file ./proposal_bib.bib
+ :  
+ :  ISSN = {00223808, 1537534X},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "aizer2019"
 -- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -16,48 +21,52 @@ Warning--I didn't find a database entry for "ferrie"
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Warning--empty author in abe2014
+Warning--empty title in abe2014
+Warning--empty journal in abe2014
+Warning--empty year in abe2014
 Warning--empty booktitle in Feigenbaum2016AML
 
 Done.
-You've used 8 entries,
+You've used 13 entries,
             4855 wiz_defined-function locations,
-            1003 strings with 9638 characters,
-and the built_in function-call counts, 6797 in all, are:
-= -- 626
-> -- 199
-< -- 39
-+ -- 96
-- -- 46
-* -- 408
-:= -- 1097
-add.period$ -- 16
-call.type$ -- 8
-change.case$ -- 16
-chr.to.int$ -- 80
-cite$ -- 9
-duplicate$ -- 457
-empty$ -- 453
-format.name$ -- 65
-if$ -- 1494
-int.to.chr$ -- 1
-int.to.str$ -- 9
-missing$ -- 71
-newline$ -- 56
-num.names$ -- 24
-pop$ -- 170
+            1033 strings with 10490 characters,
+and the built_in function-call counts, 11051 in all, are:
+= -- 1022
+> -- 304
+< -- 72
++ -- 154
+- -- 68
+* -- 672
+:= -- 1757
+add.period$ -- 24
+call.type$ -- 13
+change.case$ -- 25
+chr.to.int$ -- 150
+cite$ -- 19
+duplicate$ -- 743
+empty$ -- 732
+format.name$ -- 94
+if$ -- 2442
+int.to.chr$ -- 2
+int.to.str$ -- 14
+missing$ -- 115
+newline$ -- 77
+num.names$ -- 36
+pop$ -- 266
 preamble$ -- 1
-purify$ -- 8
+purify$ -- 13
 quote$ -- 2
-skip$ -- 504
+skip$ -- 814
 stack$ -- 0
-substring$ -- 207
-swap$ -- 334
-text.length$ -- 12
+substring$ -- 378
+swap$ -- 564
+text.length$ -- 22
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 128
-warning$ -- 1
-while$ -- 28
+type$ -- 208
+warning$ -- 5
+while$ -- 46
 width$ -- 0
-write$ -- 126
-(There were 2 warnings)
+write$ -- 191
+(There was 1 error message)
