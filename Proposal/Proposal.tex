@@ -53,25 +53,25 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \begin{abstract}
 \singlespacing
-\noindent This paper studies the effect of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  Using simulations, I will explore differences produced by  
-\end{abstract}
+\noindent This paper studies the effect of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  \end{abstract}
 
 \section{Introduction}
-In applied microeconomics, identifying a common set of individuals appearing in two or more datasets is often complicated by the absence of unique identifying variables. For example,  \cite{aizer2016} link children listed on their mother's welfare program applications with their death records using individuals' names and dates of birth.  However, since name and date combinations are not necessarily unique (and may be prone to typographical error), the authors find that some individuals have multiple death records that seem equally likely to be the true match.  To avoid excluding these individuals from their analysis, they use estimation techniques from \cite{ahl2019}, which allow observations to have multiple linked outcomes.  
+In applied microeconomics, identifying a common set of individuals appearing in two or more datasets is often complicated by the absence of unique identifying variables. For example,  \cite{aizer2016} link children listed on their mother's welfare program applications with their death records using individuals' names and dates of birth.  However, since name and date combinations are not necessarily unique (and may be prone to typographical error), the authors identify cases where multiple death records seem to refer to the same individual.  Instead of dropping these observations from their analysis, they use estimation techniques from \cite{ahl2019} that allow for observations to have multiple linked outcomes.  
 
-The methods in \cite{ahl2019} assume that each observations' matches are equally likely to be the correct match; however the authors describe how to construct more efficient estimators if additional information about match quality is available.  Specifically, if the researcher can estimate the probability that each individual-outcome pair is a true match, then this knowledge can be used to achieve a reduction in mean-squared error.  Such probabilities are outputted by probabilistic record linkage procedures, first developed by \cite{fellegi69} in the statistics literature, but only recently applied to economics \cite{arp2018}. Hence, any discussion of best practices for using linked data should address how to choose matching algorithms and estimation procedures jointly.  
+The methods in \cite{ahl2019} assume that each of the linked outcomes is equally likely to be the true match; however, the authors describe how to construct more efficient estimators if additional information about match quality is available.  Specifically, if the researcher can estimate the probability that each individual-outcome pair is a true match, then this knowledge can be used to achieve a reduction in mean-squared error.  Such probabilities are outputted by probabilistic record linkage procedures, first developed by \cite{fellegi69} in the statistics literature, but only recently applied to economics \cite{arp2018}. Hence, any discussion of best practices for using linked data should address how to choose matching algorithms and estimation procedures jointly.  
 
-The goal of this paper is therefore to study the effects of different combinations of matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  First, I will implement a variety of matching algorithms to determine whether they produce different configurations of matched data as I vary the tolerance for type I and type II error.  Next, with multiple matched versions of the data in hand, I will compute point estimates and confidence intervals for the same parameter of interest using methods that vary by whether they allow for multiple matches, incorporate the matching probabilities, and are likelihood-based in their approach. 
+The goal of this paper is therefore to study the effects of different combinations of matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  First, I will compare how different matching algorithms perform in terms of the representativeness of the matched data they produce and their tolerance for type I and type II errors.  Next, with multiple matched versions of the data in hand, I will compute point estimates and confidence intervals for the same parameter of interest using methods that vary by whether they allow for multiple matches, incorporate the matching probabilities, and are likelihood-based in their approach.  In total, I will perform the above analysis twice -- with simulated data and with real data that the simulated data are generated to imitate.  
 
-In total, I will perform the above analysis twice -- with simulated data and with real data that the simulated data are generated to imitate.  The real data consists of the unmerged files from \cite{aizer2016}, which I will pre-process using the practices developed by \cite{arp2018}.  The parameter of interest is the average treatment effect of a conditional cash transfer program on recipients' children's longevity.   
+To the best of my knowledge, how data pre-processing impacts subsequent inference in economics research is not well understood.  This paper adds to a recent series of papers by \cite{arp2018} and \cite{abe2019}, who seek to understand how different matching algorithms impact the quality of inference.  This paper goes a step further, by testing also the effect of different estimation techniques that incorporate information from the matching process, and uses simulations to make more generalizable conclusions.  
 
-Matching techniques include deterministic record linkage as described in \cite{}, and multiple implementations of probabilistic record linkage -- the fastLink, machine learning, etc. Estimation techniques include \cite{ahl2019}, \cite{lahiri05}, and a fully Bayesian approach, that is described in this paper. 
+Matching techniques will include deterministic record linkage as described in \cite{ferrie}, and \cite{arp2018}, and multiple implementations of probabilistic record linkage, specifically the fastLink \cite{enamorado2019}, and machine learning approaches \cite{Feigenbaum2016AML}. Estimation techniques will include \cite{ahl2019}, \cite{lahiri05}, and a fully Bayesian approach that I will develop in this paper. 
 
-Currently, little is known about how data pre-processing impacts subsequent inference in the economics literature, and especially those projects that rely on matching historical datasets with imperfect identifiers.  This paper adds to a recent series of papers by \cite{abe2019}  in its effort to understand how matching decisions impact the quality of inference.   This paper goes a step further, by incorporating information obtained in the matching process in the estimation process.  
+The real data consists of the unmerged files from \cite{aizer2016}, which I will pre-process using the practices developed by \cite{arp2018}.  The parameter of interest is the average treatment effect of a conditional cash transfer program on recipients' children's longevity.   
 
-The general outline will be as follows:
-
-
+By Friday, I will write a description of the model, the parameter of interest, and the set of assumptions that I will use.   I will also provide a list of the matching and estimation techniques (with descriptions) that I will study, as well as a timeline for implementing each of them. 
+\bibliography{./proposal_bib} 
+\bibliographystyle{IEEEtranN}
+\newpage
 \section{Matching Methods}
 
 A matching procedure is a set of choices about (i) selecting which variables to use when matching, (ii) defining a ``distance" metric between said variables, (iii) blocking observations into non-overlapping groups for computational feasibility, and (iv) designating record pairs as matches if a one-to-one matching is desired.    
@@ -144,6 +144,5 @@ I will also allow for missing data.
 
 Overall, high variability in performance of matching methods depending on choice of variables, string comparators used. 
 
-\bibliography{./proposal_bib} 
-\bibliographystyle{IEEEtranN}
+
 \end{document}
