@@ -69,6 +69,19 @@ Matching techniques will include deterministic record linkage procedures develop
 The real data consists of the unmerged files from \cite{aizer2016}, which I will pre-process using the practices developed by \cite{arp2018}.  The parameter of interest is the average treatment effect of a conditional cash transfer program on recipients' children's longevity.   
 
 By Friday, I will write a description of the model, the parameter of interest, and the set of assumptions that I will use.   I will also provide a list of the matching and estimation techniques (with descriptions) that I will study, as well as a timeline for implementing each of them. 
+
+This paper is closest in spirit to \cite{bailey2017}, \cite{arp2018}, and \cite{abe2019}, which compare how different matching techniques vary in terms of representativeness, type I and type II errors.  This paper 
+
+ 
+I will also allow for missing data. 
+
+Bailey: ``In summary, existing linking methods involve multiple differing assumptions that may affect match
+rates but have unknown effects on linking errors. Which set of assumptions should researchers use in
+different contexts? What are the implications of using variations on these algorithms? This paper seeks to
+answer these questions by presenting a systematic comparison of methods in different records and periods."
+
+May be the case that if you allow for multiple matches, deterministic performs just as well as probabilstic linking! 
+
 \bibliography{./proposal_bib} 
 \bibliographystyle{IEEEtranN}
 \newpage
@@ -147,7 +160,8 @@ Data problems in practice \cite{bailey2017}
 
 String comparators: NYSIIS, Soundex, Jaro-Winkler, Levenstein, etc. 
 
-I will also allow for missing data. 
+
+
 
 \section{Annotated bibliography}
 \begin{itemize}
@@ -170,7 +184,11 @@ shorter first name in pension records than in the original Civil War enlistment 
 Overall, high variability in performance of matching methods depending on choice of variables, string comparators used. 
 
 
-\section*{Empirical Application}
+\section{Empirical Application}
+
+
+
+\subsection{Data}
 
 What are the long-run effects of cash transfers to poor families?  Specifically, are there lifelong benefits for children raised in poor families?  Transfers may not help poor children if the amounts are insufficent, parents mis-allocate funds, or the transfers induce behavioral changes that are detrimental to the child.  
 
@@ -183,6 +201,24 @@ Identification comes from comparing children of mothers who applied for transfer
 Data collected on over 16,000 boys from 11 states who were born between 1900 and 1925, and whose mothers applied to the MP program; find that transfers increased longevity by about 1 year.  Poorest families in the sample had longevity increased by 1.5 years of life.  Results are robust to alternative function form specifications, counterfactual comparisons, and treatment of attrition.  They interpret their results as the effect of cash transfers alone.  
 
 The authors match also a subset of the records to WWII enlistment and 1940 census records; cash transfers reduced the probability fo being underweight by half, increased educational attainment by 0.34 years, and increased income in early adulthood by 14 percent.  They say that these mechanisms are responsible for 75 percent of the increase in longevitiy
+
+\subsection{Empirical Model}
+
+\subsubsection*{Basic empirical model}
+\begin{equation}
+\log(\text{age at death})_{ifts} = \theta_0 +  \theta_1 MP_f + \theta_2 X_{if} + \theta_3 Z_{st} + \theta_c + \theta_t + \epsilon_{if} 
+\end{equation}
+\subsubsection*{Model to address attrition and mutliple matches}
+\begin{equation}
+P(\text{survived to age $a = 1$})_{iftcs} = f(\theta_0 + \theta_1 MP_f + \theta_2 X_{if} + \theta_3 Z_{st} + \theta_c + \theta_t + \epsilon_{if}) 
+\end{equation}
+
+(i) above using unique matches -- baseline , (ii) above using multiple matches -- ahl baseline, (iii) above in bayesian framework -- bayesian baseline, (iv) above using probabilities of matches (freq + bayesian versions)
+
+Replicate Table 4 with different matching; different estimation techniques 
+
+Do a basic Bayesian log normal model for different states -- pooled v. separate
+multiple matching
 
 
 \end{document}
