@@ -13,6 +13,8 @@ I was expecting a `,' or a `}'---line 101 of file ./proposal_bib.bib
  :  ISSN = {00223808, 1537534X},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "abe"
+Warning--I didn't find a database entry for "ferrie"
 Warning--I didn't find a database entry for "aizer2019"
 -- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
@@ -30,7 +32,7 @@ Warning--empty booktitle in Feigenbaum2016AML
 Done.
 You've used 13 entries,
             4855 wiz_defined-function locations,
-            1033 strings with 10490 characters,
+            1035 strings with 10499 characters,
 and the built_in function-call counts, 11051 in all, are:
 = -- 1022
 > -- 304
