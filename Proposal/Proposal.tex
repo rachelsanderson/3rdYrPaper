@@ -72,13 +72,6 @@ By Friday, I will write a description of the model, the parameter of interest, a
 
 This paper is closest in spirit to \cite{bailey2017}, \cite{arp2018}, and \cite{abe2019}, which compare how different matching techniques vary in terms of representativeness, type I and type II errors.  This paper 
 
- 
-I will also allow for missing data. 
-
-Bailey: ``In summary, existing linking methods involve multiple differing assumptions that may affect match
-rates but have unknown effects on linking errors. Which set of assumptions should researchers use in
-different contexts? What are the implications of using variations on these algorithms? This paper seeks to
-answer these questions by presenting a systematic comparison of methods in different records and periods."
 
 May be the case that if you allow for multiple matches, deterministic performs just as well as probabilstic linking! 
 
@@ -89,13 +82,51 @@ where $m(\cdot)$ is a moment function and $\mathbf{z_i} = (x_i, y_i)$ is the dat
 
 Suppose that instead of observing $(x_i, y_i)$ pairs directly, the researcher observes two datasets, recorded at distinct times.  The first dataset contains variables $x_i$ and identifiers $w_i$ for individuals $i = 1, \dots, N_0$ recorded at time 0.  The second dataset contains outcomes $y_j$ and identifiers $w_j$ for individuals $j=1,\dots, N_T$, observed at time $T$ far in the future.  
 
-To estimate ($\ref{model}$) with standard econometric methods, the researcher needs to recover the matching function $\varphi: \{1,\dots, N_0\} \to \{1,\dots, N_T\}$, such that if $\varphi(i) = j$, then individual $i$ observed at time 0 and individual $j$ observed at time $T$ refer to the same entity.  If $w_i$ and $w_j$ identify individuals uniquely and do not change over time, then $\varphi(i) = j$ if $w_i = w_j$.  However, if the identifiers are non-unique or prone to error, then $\varphi$ needs to be estimated, and it is unclear how uncertainty about $\varphi$ should impact estimates of $\theta_0$.  (Determining to what extent this is a problem -- for various methods of estimating $\varphi$ -- is exactly the goal of this paper. )  
+To estimate ($\ref{model}$) with standard econometric methods, the researcher needs to recover the matching function $\varphi: \{1,\dots, N_0\} \to \{1,\dots, N_T\}$, such that if $\varphi(i) = j$, then individual $i$ observed at time 0 and individual $j$ observed at time $T$ refer to the same entity.  If $w_i$ and $w_j$ identify individuals uniquely and do not change over time, then $\varphi(i) = j$ if $w_i = w_j$.  However, if the identifiers are non-unique or prone to error, then $\varphi$ needs to be estimated, and it is unclear how uncertainty about $\varphi$ should impact estimates of $\theta_0$.  
 
-Consider the case (example of why we care).  Hence the goal of this paper is to study how different techniques for estimating $\varphi$ impact estimates of $\theta$.  
+Formally, the methods used to recover $\varphi$ are called a record linkage procedure.  A record linkage procedure consists of a set of decisions about (i) selecting and standardizing the identifiers $w_i$, (ii) defining what patterns of $(w_i,w_j)$ pairs constitute (partial) agreements, (iii) implementing shortcuts for computational feasibility, and (iv) designating which observation pairs qualify as matches.   Since real data are messy, each of these steps has the potential to introduces bias by ignoring certain match possibilities or understating uncertainty about $\varphi$.  The goal of this paper is to ascertain the relative importance of each of these biases for a variety of record linkage procedures, and generally develop best practices for handling the nuisance parameter $\varphi$ when the goal is estimating $\theta$.  
 
-In statistics, techniques for recovering $\varphi$ are called \textit{record linkage} procedures; but for the purposes of this paper, I will use the term ``matching procedures" interchangeably.   A matching procedure is a set of decisions about (i) selecting and standardizing the identifiers $w_i$, (ii) defining what patterns of $(w_i,w_j)$ pairs constitute (partial) agreements, (iii) implementing shortcuts for computational feasibility that potentially ignore some matches, and (iv) designating which observation pairs qualify as matches. 
+To fix ideas, suppose that $\theta_0$ is the true long-run impact of cash transfers on the longevity of children raised in poor families.  The variables $x_i$ include family and child characteristics as observed in welfare program applications; and the outcomes $y_j$ are constructed by calculating (day of death $-$ day of birth) for all of the individuals observed in a set of death records.  Each $x_i$ and $y_j$ are associated with first and last names and a date of birth.  Additionally, some observations have middle initials, and the identifiers $w_i$ includes place of birth, while the identifiers $w_j$ include place of death.  
+
+In this case, an example of a (deterministic) record linkage procedure is: 
+\begin{enumerate}
+\item[(i)] match observations using phonetic spellings of first and last names, birth dates, and middle initials when available; 
+\item[(ii)] measure agreements between names using Jaro-Winkler string distances, and penalize disagreements in birth year more than differences in birth month;  
+\item[(iii)] consider as potential matches only $(i,j)$ pairs whose (phonetically standardized) initials match, and whose birth years are within $\pm$2 years;
+\item[(iv)] accept as matches all $(i,j)$ pairs with scores calculated using the metrics in (ii) that exceed a pre-specified cutoff; if a record $i$ has multiple possible matches $j$ that exceed the cut-off, then choose the match with the highest score (or pick a random match if there is a tie).  
+\end{enumerate}
+
+Another record linkage procedure could be defined identically for steps (i)-(iii), but use a probabilistic matching rule that does not enforce one-to-one matching:
+\begin{enumerate}
+\item[(iv*)]  use the Expectation Maximization algorithm to estimate the probability that each record pair is a match, and then  designate matches using the Fellegi-Sunter rule for pre-specified tolerances for Type I and Type II errors 
+\end{enumerate} 
+
+Except in very specific cases, the estimated $\varphi$ produced by the preceding procedures will be different.  In the first procedure, each $x_i$ associated with at most one matched $y_j$; however, in the second, a single $x_i$ may be associated  with multiple possible $y_j$.  In the latter case, the estimated $\varphi$ is a \textit{correspondence}, which needs to be addressed when deciding how to estimate of $\theta_0$. 
+
+As pointed out by \cite{bailey2017}, record linkage procedures differ according to the set of assumptions that motivate their use.  However, all of the procedures discussed in this paper will be studied under a unifying set of assumptions:
+
+%Bailey: ``In summary, existing linking methods involve multiple differing assumptions that may affect match
+%rates but have unknown effects on linking errors. Which set of assumptions should researchers use in
+%different contexts? What are the implications of using variations on these algorithms? This paper seeks to
+%answer these questions by presenting a systematic comparison of methods in different records and periods."
+
+
+\begin{enumerate}
+\item (De-duplication) Within a given dataset, each observation refers to a distinct entity.  That is, if two observations share the same identifier, they represent two different individuals.
+\item (No unobserved sample selection) The observed $x_i$ and $y_j$ are random samples conditional on $w_i$ and $w_j$, respectively.  This means that all individuals with the same identifying information have equal probability of appearing in the sample. 
+\item There exists a unique $\theta_0 \in \Theta$ that satisfies the relationship in (\ref{model}), that can be consistently estimated using standard econometric techniques if $\varphi_0$ is known.
+\end{enumerate}
+
+The next section discusses in detail the exact record linkage techniques that will be studied, and the corresponding assumptions.
+
+\section{Overview of matching techniques}
+In statistics, techniques for recovering $\varphi$ are called \textit{record linkage} procedures; but for the purposes of this paper, I will use the term ``matching procedures" interchangeably.   
 
 In the section that follows I talk about each of these. 
+
+
+
+
 
   which records to compare  data pre-processing, blocking/implementation, and match assignment.  Data pre-processing includes selecting and standardizing variables for matching (by applying phonetic algorithms to string variables for example), and defining a distance metric for string variables.  Implementation decisions include blocking rules to limit the number of comparisons for computational feasibility and picking relative weights for disagreements in different variables.   Finally, the review process involves designating record pairs as matches if a one-to-one matching is desired (or defining a cut-off for multiple matches). 
 
@@ -108,7 +139,6 @@ record linkage process is x y,z,
 
 
 
-To fix ideas, suppose the econometrician would like to estimate the impact of a single mother assistance program on participants' children's longevity (call this unknown parameter $\theta$).  The researcher collects two datasets; the first consists of aid program applications, with variables about mother and child characteristics $(x_i^*, z_i^*)$ and the child's first and last names, and place and year of birth $(w_i)$.  The second data set contains death records (used to construct $y_i^*$), and is indexed by the individual's first and last names, and place and year of birth $(w_i)$.    
 
 
 
