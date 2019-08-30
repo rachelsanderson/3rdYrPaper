@@ -82,20 +82,78 @@ answer these questions by presenting a systematic comparison of methods in diffe
 
 May be the case that if you allow for multiple matches, deterministic performs just as well as probabilstic linking! 
 
+\section{General problem}
+Suppose that the researcher would like to answer a question about life cycle dynamics, such as measuring the effect of a conditional cash transfer during a person's childhood on their expected longevity.  Specifically, she would like to estimate a parametric model of the form
+\begin{equation} E[m(\mathbf{z_i}; \theta_0)] = 0 \label{model} \end{equation}
+where $m(\cdot)$ is a moment function and $\mathbf{z_i} = (x_i, y_i)$ is the data associated with an individual $i$ sampled at random from the population of interest.  
+
+Suppose that instead of observing $(x_i, y_i)$ pairs directly, the researcher observes two datasets, recorded at distinct times.  The first dataset contains variables $x_i$ and identifiers $w_i$ for individuals $i = 1, \dots, N_0$ recorded at time 0.  The second dataset contains outcomes $y_j$ and identifiers $w_j$ for individuals $j=1,\dots, N_T$, observed at time $T$ far in the future.  
+
+To estimate ($\ref{model}$) with standard econometric methods, the researcher needs to recover the matching function $\varphi: \{1,\dots, N_0\} \to \{1,\dots, N_T\}$, such that if $\varphi(i) = j$, then individual $i$ observed at time 0 and individual $j$ observed at time $T$ refer to the same entity.  If $w_i$ and $w_j$ identify individuals uniquely and do not change over time, then $\varphi(i) = j$ if $w_i = w_j$.  However, if the identifiers are non-unique or prone to error, then $\varphi$ needs to be estimated, and it is unclear how uncertainty about $\varphi$ should impact estimates of $\theta_0$.  (Determining to what extent this is a problem -- for various methods of estimating $\varphi$ -- is exactly the goal of this paper. )  
+
+Consider the case (example of why we care).  Hence the goal of this paper is to study how different techniques for estimating $\varphi$ impact estimates of $\theta$.  
+
+In statistics, techniques for recovering $\varphi$ are called \textit{record linkage} procedures; but for the purposes of this paper, I will use the term ``matching procedures" interchangeably.   A matching procedure is a set of decisions about (i) selecting and standardizing the identifiers $w_i$, (ii) defining what patterns of $(w_i,w_j)$ pairs constitute (partial) agreements, (iii) implementing shortcuts for computational feasibility that potentially ignore some matches, and (iv) designating which observation pairs qualify as matches. 
+
+In the section that follows I talk about each of these. 
+
+  which records to compare  data pre-processing, blocking/implementation, and match assignment.  Data pre-processing includes selecting and standardizing variables for matching (by applying phonetic algorithms to string variables for example), and defining a distance metric for string variables.  Implementation decisions include blocking rules to limit the number of comparisons for computational feasibility and picking relative weights for disagreements in different variables.   Finally, the review process involves designating record pairs as matches if a one-to-one matching is desired (or defining a cut-off for multiple matches). 
+
+Matching procedures are either deterministic or probabilistic.   Deterministic methods are those like \cite{abe} and \cite{ferrie}, where a fixed set of rules determine which records are matching and which are not.  On the other hand, probabilistic methods attempt to ``let the data speak", at the cost of computational feasibility, as they involve estimating the probability that each record pair within a pre-specified block refer to a match.  In many instances, it is not clear which perform better (especially when the datasets are large!)
+
+
+record linkage process is x y,z, 
+
+
+
+
+
+To fix ideas, suppose the econometrician would like to estimate the impact of a single mother assistance program on participants' children's longevity (call this unknown parameter $\theta$).  The researcher collects two datasets; the first consists of aid program applications, with variables about mother and child characteristics $(x_i^*, z_i^*)$ and the child's first and last names, and place and year of birth $(w_i)$.  The second data set contains death records (used to construct $y_i^*$), and is indexed by the individual's first and last names, and place and year of birth $(w_i)$.    
+
+
+
+
+
+There are 44,000 files in Dataset A.  Dataset B consists of many, many million observations.  The goal is to find the matches for the 44,000 individuals... this is not an insignificant task.  Blocking is crucial. 
+Although individuals with distinct names are unlikely to appear on multiple death records, individuals with common names like ``John Smith" may be linked to multiple death records.  Similarly, if the econometrician matches individuals using a subset of the variables in $w_i$ (as in the case that females are matched by first name only, and place and year of birth), she is likely to find many possible links that are equally credible.  
+
+The following note formalizes the assumptions that are necessary to estimate the model ($\ref{model}$) without dropping observations with non-unique matches.
+
+
+\textbf{Assumption 1.} The observed $(x_i, z_i, w_i)$ is a random sample drawn from the marginal distribution $f(x^*, z^*, w^*)$.   The $\{y_{i\ell}\}_{\ell=1}^{L_i}$ is a random sample drawn from $f(y^* | w_i, L_i)$, so that $(x_i, z_i) = (x_i^*,z_i^*)$ and $y_{i\ell}$ are independent conditional on $w_i$ for $y_{i\ell} \neq y_i^*$. 
+
+\textbf{Assumption 2.}  There is exactly one $y_{i\ell} = y_i^*$, $\ell\in \{1, \dots, L_i\}$ for all $i.$ That is, we assume that one of the $\{y_{i\ell}\}_{\ell=1}^{L_i}$ is drawn from the marginal distribution $f(y_i^* | x_i^*, z_i^*) = f(y_i^* | x_i, z_i)$.   
+
+This assumption implies we can write $y_i^* = \sum_{\ell=1}^{L_i} s_{i\ell} y_{i\ell}$, where $s_{i\ell}$ is an unobserved latent variable that equals 1 if $(y_{i\ell}, x_i, z_i) = (y_i^*, x_i^*, z_i^*)$, and that equals 0 otherwise.  
+Also, $\sum_{\ell=1}^{L_i} s_{i\ell} = 1$ for all $i$, and we can rewrite \ref{model} as,
+\begin{equation} E\left[m(y_i^*, x_i^*, z_i^*)\right] = 0 \iff E\left[m(y_{i\ell},x_i,z_i; \theta_0) | s_{i\ell} =1 \right] = 0  \tag{$1^*$} \label{truemodel} \end{equation} 
+
+\textbf{Assumption 3}. The identifying variables $w_i$ in $(x_i, z_i, w_i)$ exactly match, or are sufficiently close to $w_i$ in $(\{y_{i\ell}\}_{\ell=1}^{L_i}, w_i)$, such that the researcher cannot distinguish which $y_{i\ell} = y_i^*$ for $\ell \in \{1, \dots, L_i\}$.  In other words, the researcher behaves as if,  
+$$P(s_{i\ell}=1 | w_i, L_i) = \frac{1}{L_i}$$ 
+Assumptions 1 and 3 rule out unobserved sample selection, in the sense that all individuals with the same identifying information have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample, unless $w_i$ includes income.   
+
+
+
+
 \bibliography{./proposal_bib} 
 \bibliographystyle{IEEEtranN}
 \newpage
 \section{Matching Methods}
 
-A matching procedure is a set of choices about (i) selecting which variables to use when matching, (ii) defining a ``distance" metric between said variables, (iii) blocking observations into non-overlapping groups for computational feasibility, and (iv) designating record pairs as matches if a one-to-one matching is desired.    
+For the purposes of this paper, I define a record linkage procedure as a set of rules about data pre-processing, blocking/implementation, and match assignment.  Data pre-processing includes selecting and standardizing variables for matching (by applying phonetic algorithms to string variables for example), and defining a distance metric for string variables.  Implementation decisions include blocking rules to limit the number of comparisons for computational feasibility and picking relative weights for disagreements in different variables.   Finally, the review process involves designating record pairs as matches if a one-to-one matching is desired (or defining a cut-off for multiple matches). 
 
-Matching procedures can be divided into two categories, (i) deterministic approaches, where a fixed set of rules determine which records are matching and which are not; and (ii) probabilistic methods, which involve estimating the probability that each record pair refers to a match.  COMPARE AND CONTRAST WEAKNESSES.   Deterministic approaches are susceptible to X YZ  see Enamorado, etc. 
+Matching procedures are either deterministic or probabilistic.   Deterministic methods are those like \cite{abe} and \cite{ferrie}, where a fixed set of rules determine which records are matching and which are not.  On the other hand, probabilistic methods attempt to ``let the data speak", at the cost of computational feasibility, as they involve estimating the probability that each record pair within a pre-specified block refer to a match.  In many instances, it is not clear which perform better (especially when the datasets are large!)
+
+In this paper I do two implementations of each type (not exhaustive!).   X YZ already review different types.   
+
 
 \begin{figure}[h!]
 \centering
 \caption{Overview of matching methods}
 \includegraphics[width=0.7\textwidth]{./RecordLinkageGraphics.pdf}
 \end{figure}
+
+I will do 4: ABE Code, FErrie (done already), ABE R CODE, AND FASTLINK. 
 
 INSERT A GRAPHIC WITH THE METHODS I WILL TEST
 
@@ -173,7 +231,11 @@ String comparators: NYSIIS, Soundex, Jaro-Winkler, Levenstein, etc.
 \item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) are deterministic.  Conservative methods require no other potential match with same name within a 5-year band
 \item Semi-automated Feigenbaum, Ruggles et al 
 \item Abramitzky, Boustan, Eriksson, Feigenbaum, P\`erez (2019): evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
-\item Bailey et al. (2017) review literature on historical record linkage in US and examines performance of automated record linkage algorithms with two high-quality historical datasets and one synthetic ground truth.  They conclude that no method consistently produces representative samples; machine linking has high number of false links and may introduce bias into analyses
+\item Bailey et al. (2017) review literature on historical record linkage in US and examines performance of automated record linkage algorithms with two high-quality historical datasets and one synthetic ground truth.  They conclude that no method consistently produces representative samples; machine linking has high number of false links and may introduce bias into analyses.  
+
+Treatment of equally likely -- equal probability weighting of tied candidates (Bleakley and Ferrie 2016); weighted combo of linking features to ehlp disambiguate potential matches.  Ferrie 96; Old ABE, new ABE, and Feigenbaum. 
+
+
 \item Survey paper from handbook of econometrics
 \item For example, Goeken et al. (2017) document that
 in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches,
