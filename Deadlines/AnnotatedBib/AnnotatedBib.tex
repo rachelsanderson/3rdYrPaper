@@ -51,10 +51,28 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 \maketitle
 
 
+\section*{Historical Matching Overview}
+Primary variable for matching is an individual's name, which are rarely unique within a given population.  Low literacy rates mean names are often misspelled.  Misspelling also arises due to geographical relocation and regional variation in names.  ``For example, an illiterateindividual from Louisiana with the surname of Thibideaux, who chooses to move to anotherstate, would likely have his name spelled phonetically as Tibido." (Nix and Qian 2015).  Researchers use phonetic algorithms to account for these differences 
+
 \section*{(Meta) Matching Papers}
 \cite{bailey2017} review literature on historical record linkage in US and examines performance of automated record linkage algorithms with two high-quality historical datasets and one synthetic ground truth.  They conclude that no method consistently produces representative samples; machine linking has high number of false links and may introduce bias into analyses.  
 
 \section*{Matching Methods}
+\cite{bailey2017} categorize historical linking algorithms (that match observations using name and age only) according to how they treat candidate pairs in the following four categories:
+\begin{itemize}
+\item M1: A perfect, unique match in terms of name and age similarity 
+\item M2: A single, similar match that is slightly different in terms of age, name, or both
+\item M3: Many perfect matches, leading to problems with match disambiguation
+\item M4:  Multiple similar matches that are slightly different in terms of age, name or both 
+\end{itemize}
+Historical linking algorithms generally treat M1 cases as matches, but differ in how they treat M2, M3, and M4 candidate pairs.   To account for differences in M2, \ref{ferrie} and \cite{arp} search within fixed-year bands.  Multiple matches are either (i) ignored, (ii) picked at random, or (iii) equally weighted; or used a weighted combination.
+
+Bleakley and Ferrie (2016)
+Nix and Qian (2015)
+AHL
+AMP (2018)
+
+
 \begin{itemize}
 \item Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
 \item Scheuren and Winkler (1993): propose method for adjusting for bias of mismatch error in OLS
@@ -80,6 +98,16 @@ shorter first name in pension records than in the original Civil War enlistment 
 
 \section*{Important Applications}
 
+\cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
+have match rates around 30, 24, 22, 11-34 percent respectively}, the authors develop methods for including individuals with multiple potential matches.  These methods include selecting one match at random, and selecting the match that produces an upper/lower bound for estimating the ``passing" rate.  
+
+\cite{nq2015} also use the unmatched individuals from their data to calculate absolute bounds for the population passing rates.  For a given algorithm, the absolute upper bound is obtained by using the ``upper bound" configuration of data, combined with assuming that all unmatched individuals passed.  The lower bound is obtained in the same way, assuming that none of the excluded individuals passed. 
+
+\cite{nq2015} argue that increasing the match rate improves the bounds around any true population statistic, even though their methods introduce random measurement error in the estimand.
+
+
+\section*{Simulation Idea}
+Could use only simulation data, with variety of possible biases, motivated by the applications above.  For example, motivated by  N-Q, introduce error with geographical relocation.  Then test which techniques are robust to these types of sample selection/error.   
 
 \bibliography{../proposal_bib} 
 \bibliographystyle{IEEEtranN}
