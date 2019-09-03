@@ -1,0 +1,86 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.1in]{geometry}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{enumitem}
+\usepackage{natbib}
+\usepackage{mathtools,xparse}
+\usepackage{graphics}
+\colorlet{shadecolor}{orange!15}
+% \definecolor{shadecolor}{rgb}{255,128,0}\
+\usepackage{float}
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{longtable}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+
+\tikzset{
+  basic/.style  = {draw, text width=2cm, drop shadow, font=\sffamily, rectangle},
+  root/.style   = {basic, rounded corners=2pt, thin, align=center,
+                   fill=green!30},
+  level 2/.style = {basic, rounded corners=6pt, thin,align=center, fill=green!60,
+                   text width=8em},
+  level 3/.style = {basic, thin, align=left, fill=pink!60, text width=6.5em}
+}
+
+%Allows multi-column tables 
+\input{../tcilatex}
+
+\setlength{\topmargin}{-0.4in} 
+\setlength{\textheight}{8.9in}
+\setlength{\parindent}{2em}
+% \setstretch{1.25}
+\doublespacing
+\title{\singlespacing Annotated bibliography}
+\author{Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building,
+Princeton, NJ 08544. Email: rachelsa@Princeton.edu.
+This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
+\date{This Version: \today}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{(Meta) Matching Papers}
+\cite{bailey2017} review literature on historical record linkage in US and examines performance of automated record linkage algorithms with two high-quality historical datasets and one synthetic ground truth.  They conclude that no method consistently produces representative samples; machine linking has high number of false links and may introduce bias into analyses.  
+
+\section*{Matching Methods}
+\begin{itemize}
+\item Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
+\item Scheuren and Winkler (1993): propose method for adjusting for bias of mismatch error in OLS
+\item SW (1997, 1991): iterative procedure that modifies regression and matching results for apparent outliers 
+\item Lahiri and Larsen (2005):   provides unbiased estimator directly instead of bias correction for OLS, by applying regression to transformed model 
+\item Abramitzky, Mill, P\'erez (2019): guide for researchers in the choice of which variables to use for linking, how to estimate probabilities, and then choose which records to use in the analysis.  Created R code and stata command to implement the method
+\item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) are deterministic.  Conservative methods require no other potential match with same name within a 5-year band
+\item Semi-automated Feigenbaum, Ruggles et al 
+\item Abramitzky, Boustan, Eriksson, Feigenbaum, P\`erez (2019): evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
+\item 
+
+Treatment of equally likely -- equal probability weighting of tied candidates (Bleakley and Ferrie 2016); weighted combo of linking features to ehlp disambiguate potential matches.  Ferrie 96; Old ABE, new ABE, and Feigenbaum. 
+
+
+\item Survey paper from handbook of econometrics
+\item For example, Goeken et al. (2017) document that
+in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches,
+and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a
+shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
+\end{itemize}
+
+\section*{Estimation Papers}
+
+\section*{Important Applications}
+
+
+\bibliography{../proposal_bib} 
+\bibliographystyle{IEEEtranN}
+\end{document}
