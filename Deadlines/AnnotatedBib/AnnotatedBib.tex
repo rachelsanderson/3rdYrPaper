@@ -42,7 +42,7 @@
 \doublespacing
 \title{\singlespacing Annotated bibliography}
 \author{Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building,
-Princeton, NJ 08544. Email: rachelsa@Princeton.edu.
+Princeton, NJ 08544. Email: rachelsa@princeton.edu.
 This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 \date{This Version: \today}
 
@@ -51,13 +51,25 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 \maketitle
 
 
-\section*{Historical Matching Overview}
+\section*{Historical Matching Challenges}
 Primary variable for matching is an individual's name, which are rarely unique within a given population.  Low literacy rates mean names are often misspelled.  Misspelling also arises due to geographical relocation and regional variation in names.  ``For example, an illiterateindividual from Louisiana with the surname of Thibideaux, who chooses to move to anotherstate, would likely have his name spelled phonetically as Tibido." (Nix and Qian 2015).  Researchers use phonetic algorithms to account for these differences 
+
+ For example, Goeken et al. (2017) document that
+in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches,
+and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a
+shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
+
+This is problem bc  Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
 
 \section*{(Meta) Matching Papers}
 \cite{bailey2017} review literature on historical record linkage in US and examines performance of automated record linkage algorithms with two high-quality historical datasets and one synthetic ground truth.  They conclude that no method consistently produces representative samples; machine linking has high number of false links and may introduce bias into analyses.  
 
+\cite{arp2018} have guide for researchers in the choice of which variables to use for linking, how to estimate probabilities, and then choose which records to use in the analysis.  Created R code and stata command to implement the method
+
+\cite{abe2019} evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
+
 \section*{Matching Methods}
+
 \cite{bailey2017} categorize historical linking algorithms (that match observations using name and age only) according to how they treat candidate pairs in the following four categories:
 \begin{itemize}
 \item M1: A perfect, unique match in terms of name and age similarity 
@@ -65,37 +77,45 @@ Primary variable for matching is an individual's name, which are rarely unique w
 \item M3: Many perfect matches, leading to problems with match disambiguation
 \item M4:  Multiple similar matches that are slightly different in terms of age, name or both 
 \end{itemize}
-Historical linking algorithms generally treat M1 cases as matches, but differ in how they treat M2, M3, and M4 candidate pairs.   To account for differences in M2, \ref{ferrie} and \cite{arp} search within fixed-year bands.  Multiple matches are either (i) ignored, (ii) picked at random, or (iii) equally weighted; or used a weighted combination.
+Historical linking algorithms generally treat M1 cases as matches, but differ in how they treat M2, M3, and M4 candidate pairs.   Generally, differences in M2 are solved deterministically by setting fixed-year band tolerances for matches, and probabilistically by estimating weights for the relative importance of age vs. name agreement.  Multiple matches in M3/M4 are ignored, picked at random, given equal weights, or given weights proportional to the probability of being the true match.  Table X below provides an overview of methods in literature based on these dimensions. 
 
-Bleakley and Ferrie (2016)
-Nix and Qian (2015)
-AHL
-AMP (2018)
+[Insert table here] 
+Table includes 
 
+Talk also about how to evaluate these matching methods -- what is desirable? How to estimate error rates ex post! 
 
 \begin{itemize}
-\item Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
-\item Scheuren and Winkler (1993): propose method for adjusting for bias of mismatch error in OLS
-\item SW (1997, 1991): iterative procedure that modifies regression and matching results for apparent outliers 
-\item Lahiri and Larsen (2005):   provides unbiased estimator directly instead of bias correction for OLS, by applying regression to transformed model 
-\item Abramitzky, Mill, P\'erez (2019): guide for researchers in the choice of which variables to use for linking, how to estimate probabilities, and then choose which records to use in the analysis.  Created R code and stata command to implement the method
-\item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) are deterministic.  Conservative methods require no other potential match with same name within a 5-year band
+\item Ferrie 1996, Abramitzky, BOustan and Eriksson (2012 2014 2017) Deterministic.  Conservative methods require no other potential match with same name within a 5-year band , Nix and Qian
 \item Semi-automated Feigenbaum, Ruggles et al 
-\item Abramitzky, Boustan, Eriksson, Feigenbaum, P\`erez (2019): evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
-\item 
 
-Treatment of equally likely -- equal probability weighting of tied candidates (Bleakley and Ferrie 2016); weighted combo of linking features to ehlp disambiguate potential matches.  Ferrie 96; Old ABE, new ABE, and Feigenbaum. 
-
-
-\item Survey paper from handbook of econometrics
-\item For example, Goeken et al. (2017) document that
-in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches,
-and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a
-shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
 \end{itemize}
 
-\section*{Estimation Papers}
 
+\section*{Estimation Methods}
+\begin{enumerate}
+\item Lahiri and Larsen (2005) adjustment for regression using estimated probabilities from E-M algorithm (can use ARP implementation)
+\item \cite{ahl2019} use all matches with weight 1/n 
+\item \cite{nq2015} pick one match at random, then upper/lower bounds
+\item  \cite{bleakley2016} weight treatment variable as 1/n
+\item exploratory methods (if time)
+\end{enumerate}
+
+
+% CHECK THESE OUT !!!!
+ Scheuren and Winkler (1993): propose method for adjusting for bias of mismatch error in OLS
+ SW (1997, 1991): iterative procedure that modifies regression and matching results for apparent outliers 
+ Enamorado procedures
+ Survey paper from handbook of econometrics
+ 
+ "However, the analytic estimates of precision in Lahiri
+and Larsen (2005) are poor for 1-1 probabilistic linkage (Chipperfield and Chambers
+2015)"   As a quality measure, Christen (2012) suggests precision, which is the proportion of
+links that are true matches. Winglee et al. (2005) use a simulation-based approach,
+Simrate to estimate linkage quality. Their method uses the observed distribution of
+data in matched and non-matched pairs to generate a large simulated set of record 
+
+FROM https://arxiv.org/pdf/1901.04779.pdf
+ 
 \section*{Important Applications}
 
 \cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
@@ -103,11 +123,31 @@ have match rates around 30, 24, 22, 11-34 percent respectively}, the authors dev
 
 \cite{nq2015} also use the unmatched individuals from their data to calculate absolute bounds for the population passing rates.  For a given algorithm, the absolute upper bound is obtained by using the ``upper bound" configuration of data, combined with assuming that all unmatched individuals passed.  The lower bound is obtained in the same way, assuming that none of the excluded individuals passed. 
 
-\cite{nq2015} argue that increasing the match rate improves the bounds around any true population statistic, even though their methods introduce random measurement error in the estimand.
+\cite{nq2015} argue that increasing the match rate improves the bounds around any true population statistic, even though their methods introduce random measurement error in the estimand.  Below is a visual of their complex blocking strategy.
 
+\begin{figure}[htbp]
+\begin{center}
+\caption{\cite{nq2015} blocking strategy}
+\includegraphics[width=\textwidth]{nq_method.png}
+\label{default}
+\end{center}
+\end{figure}
+
+\cite{bleakley2016} assign equal probability of winning (matched variable equal to $1/n$) to all $n$ individuals matched to the same winner.  The goal is to estimate the treatment effect of winning a parcel in the lottery by comparing mean outcomes for winners and losers in a simple bivariate regression with a dummy varialbe for winning a parcel on the right-hand side.   Here, winning the lottery is coded as $0$ or $1/n$, where $n$ is the number of matches for person $i$. [Think about how this compares to ahl method]
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\textwidth]{methods_table.pdf}
+\caption{default}
+\label{default}
+\end{center}
+\end{figure}
 
 \section*{Simulation Idea}
 Could use only simulation data, with variety of possible biases, motivated by the applications above.  For example, motivated by  N-Q, introduce error with geographical relocation.  Then test which techniques are robust to these types of sample selection/error.   
+
+I will compare estimates of Type I/ Type II error to ACTUAL Type I/ Type II error rates, and say that authors need to estimate their errors!! Not just report the match rate.   Use estimates from Chipperfield (2018) maybe https://onlinelibrary.wiley.com/doi/epdf/10.1111/insr.12246
 
 \bibliography{../proposal_bib} 
 \bibliographystyle{IEEEtranN}

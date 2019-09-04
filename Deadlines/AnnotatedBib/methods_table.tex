@@ -1,0 +1,29 @@
+\documentclass[border=10pt]{standalone}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}m{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash}p{#1}}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}m{#1}}
+\begin{document}
+% \setlength{\tabcolsep}{6pt}
+\begin{tabular}{L{5.5cm}C{3cm}C{3.5cm}L{4cm}L{3.5cm}L{10cm}}
+\toprule
+\textbf{Matching Method} & \textbf{Type} &  \textbf{Blocking Variables} & \textbf{Matching Variables}  & \textbf{String Distance} &  \textbf{Matching Rule}\\
+\midrule 
+ \hyperlink{https://ranabr.people.stanford.edu/sites/g/files/sbiybj5391/f/abe_basic_approach_1.pdf}{Ferrie (1996), Abramitzky, Boustan and Eriksson (2012, 2014, 2017)}& Deterministic & Year of birth & Any time-invariant characteristic & NYSIIS, Jaro-Winkler & Iteratively search for unique matches, increasing the tolerance for error with each iteration. Accept matches that are sufficiently unique.   \\ \midrule
+\hyperlink{https://assets.aeaweb.org/asset-server/articles-attachments/aer/app/10604/20140529_app.pdf}{Aizer et al. (2016)} & Deterministic & None & First/last name, middle initial, day, month, and year of birth & SOUNDEX, SPEDIS& Designate as a possible match any observation pair that satisfied pre-specified criteria.  Group matches based on quality, and retain only ``best" matches (can be multiple) \\
+\midrule
+\hyperlink{https://ranabr.people.stanford.edu/sites/g/files/sbiybj5391/f/matching_historicalmethod_march27.pdf}{Abramitzky, Mill, and P\'erez (2019)}  &   
+Probabilistic &
+&                   
+&                   
+&             \\
+\midrule \hyperlink{https://jamesfeigenbaum.github.io/research/pdf/census-link-ml.pdf}{Feigenbaum (2016)} & Machine Learning 
+\\
+\midrule
+Nix and Qian (2015) & Deterministic & Phonex-standardized name, age, birth state, parental birth states &  Name, age, race & SOUNDEX, Jaro-Winkler & 3 matching algorithms $\times$ 4 sample restrictions produce 12 samples used in analysis. analysis. Multiple matches handled by selecting one potential match at random, or choosing the match that induces an``upper"/``lower" bound for object of interest
+\end{tabular}
+\end{document}

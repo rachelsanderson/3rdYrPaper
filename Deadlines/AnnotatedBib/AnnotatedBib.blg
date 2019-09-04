@@ -14,6 +14,7 @@ I was expecting a `,' or a `}'---line 101 of file ../proposal_bib.bib
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "arp"
+Warning--I didn't find a database entry for "arp2019"
 -- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -23,45 +24,45 @@ Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 
 Done.
-You've used 2 entries,
+You've used 4 entries,
             4855 wiz_defined-function locations,
-            963 strings with 8594 characters,
-and the built_in function-call counts, 1472 in all, are:
-= -- 130
-> -- 46
-< -- 3
-+ -- 20
-- -- 12
-* -- 106
-:= -- 275
-add.period$ -- 4
-call.type$ -- 2
-change.case$ -- 4
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 96
-empty$ -- 85
-format.name$ -- 18
-if$ -- 286
+            979 strings with 9039 characters,
+and the built_in function-call counts, 3291 in all, are:
+= -- 304
+> -- 95
+< -- 17
++ -- 45
+- -- 22
+* -- 216
+:= -- 567
+add.period$ -- 8
+call.type$ -- 4
+change.case$ -- 8
+chr.to.int$ -- 34
+cite$ -- 4
+duplicate$ -- 213
+empty$ -- 202
+format.name$ -- 34
+if$ -- 690
 int.to.chr$ -- 1
-int.to.str$ -- 3
-missing$ -- 22
-newline$ -- 34
-num.names$ -- 6
-pop$ -- 46
+int.to.str$ -- 5
+missing$ -- 38
+newline$ -- 44
+num.names$ -- 12
+pop$ -- 82
 preamble$ -- 1
-purify$ -- 2
+purify$ -- 4
 quote$ -- 2
-skip$ -- 95
+skip$ -- 230
 stack$ -- 0
-substring$ -- 6
-swap$ -- 68
-text.length$ -- 2
+substring$ -- 82
+swap$ -- 160
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 32
+type$ -- 64
 warning$ -- 0
-while$ -- 4
+while$ -- 12
 width$ -- 0
-write$ -- 51
+write$ -- 80
 (There was 1 error message)
