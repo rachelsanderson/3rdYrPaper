@@ -3,6 +3,7 @@
 \usepackage{xcolor}
 \usepackage{framed}
 \usepackage{enumitem}
+\usepackage{pdflscape}
 \usepackage{natbib}
 \usepackage{mathtools,xparse}
 \usepackage{graphics}
@@ -48,26 +49,26 @@
 \doublespacing
 \maketitle
 
-\section{Challenges in matching historical datasets}
+\section{Challenges in historical record linkage}
 Record linkage in economics is most often studied by those who use historical U.S. data prior to the introduction of social security numbers \citep{abe2019,aizer2016,ferrie96}.  These data tend to lack unique identifiers, so that individuals are primarily identified by their first and last name, and age\footnote{Sometimes middle initial, birthplace, parent's name and birthplace, exact birthdate etc. are available; but data quality vary by application.}, which are rarely unique within a given population.   The non-uniqueness problem is exacerbated by typographical error, caused by low literacy rates and regional variations in names, as well as the record digitization process itself which introduces yet another possible source of error.    
 
 For example, \cite{nq2015} remark that an illiterate individual from Louisiana with the surname of Thibideaux, who chooses to move to another state, would likely have his name spelled phonetically as Tibido.  Goeken et al. (2017) document that in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches, and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
 
-
-
-Researchers use phonetic algorithms to account for differences in spelling.  
-
-
-
-This is problem bc  Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
-
-\section{Relevant Survey Papers}
-
-Record linkage is such an intricate and frequent challenge that there are several books devoted to its study, and dozens of commercial and freely available software devoted to the task \citep{christen2012, herzog07}.  The research and open source systems include those developed by census bureaus, computer scientists, epidemiologists, statisticians, political scientists, and -- only more recently -- economists.  A recent survey by \cite{kopcke2010} evaluates eleven such systems.  
+Researchers use a variety of techniques -- phonetic algorithms, string comparators, and probabilistic record linkage -- to link records from different files despite errors that arise in the record generating process.  
 
 Compared to other fields where record linkage is a research goal in itself, record linkage in economics is seen as prerequisite to answering economic questions.  Economists contribute to the record linkage literature by focusing on historic data; with care for the impact it has on subsequent inference.   
 
-\cite{christen2012} says ``Although individuals have introduced alternative classification methods based on Support Vector Machines, decision trees and other
+This is problem bc  Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
+
+\section{Matching Methods}
+
+\subsection{Survey Papers}
+
+Record linkage is such an intricate and frequent challenge that there are several books devoted to its study, and dozens of commercial and freely available software devoted to the task \citep{christen2012, herzog07}.  The research and open source systems include those developed by census bureaus, computer scientists, epidemiologists, statisticians, political scientists, and -- only more recently -- economists.  A recent survey by \cite{kopcke2010} evaluates eleven such systems.  
+
+The challenge in studying record linkage and its effects on inference, are magnified by the fact that research on the topic occurs in disparate fields.  Goldstein, Harron and Wade (2012) prove the same result that is published six years later in \cite{hirukawa2018}. 
+
+The father of modern record linkage, Winkler in \cite{christen2012} says: ``Although individuals have introduced alternative classification methods based on Support Vector Machines, decision trees and other
 methods from machine learning, no method has consistently outperformed methods
 based on the Fellegi?Sunter model, particularly with large day-to-day applications
 with tens of millions of records"
@@ -78,7 +79,11 @@ with tens of millions of records"
 
 \cite{abe2019} evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
 
-\section{Matching Methods}
+\subsection{Surveys on Estimation Methods}
+`` Evaluating bias due to data linkage error in
+electronic healthcare records" -- compares the highest probability match (nearest neighbor) with prior-induced imputation
+
+\subsection{Matching Methods}
 
 \cite{bailey2017} categorize historical linking algorithms (that match observations using name and age only) according to how they treat candidate pairs in the following four categories:
 \begin{itemize}
@@ -104,7 +109,7 @@ Talk also about how to evaluate these matching methods -- what is desirable? How
 \section{Estimation Methods}
 
 \subsection{\cite{lahiri05}}
-\cite{lahiri05} take as input two files are linked by a computerized record linkage technique.  The true data pairs $(x_i, y_i)$ are not observable; instead, the CRL produces pairs $(x_i, z_i)$ in which $z_i$ may or may not correspond to $y_i$.  The (true) regression model is:
+\cite{lahiri05} take as input two files are linked by a computerized record linkage technique (CRL).  The true data pairs $(x_i, y_i)$ are not observable; instead, the CRL produces pairs $(x_i, z_i)$ in which $z_i$ may or may not correspond to $y_i$.  The (true) regression model is:
 \begin{gather*}y_i = x_i'\beta + \epsilon_i,\ E[\epsilon_i] = 0,\\ \text{var}(\epsilon_i) = \sigma^2,\ \text{cov}(\epsilon_i \epsilon_j) = 0 \end{gather*}
 but the researcher estimates this model with $z_i$ as the dependent variable, where $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
 and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Define $\mathbf{q_i} = (q_{i1}, \dots, q_{in})'$.  The naive least squares estimator of $\beta$, which ignores mismatch errors, is given by:
@@ -124,19 +129,46 @@ SW give a truncated estimator of $B_i$ using the first and second highest elemen
 
 Using $E(z) = W\beta$, \cite{lahiri05} propose an exactly unbiased estimator of $\beta$:
 $$ \hat{\beta}_U = (W'W)^{-1} W'z$$ 
-that can be obtained by using a truncated version of $w_i$, $w_i^{TR} = q_{ij_1} x_{j_1} + q_{ij_2} x_{j_2}$.   \cite{lahiri05} use estimates of $Q$ obtained from applying the Fellegi-Sunter/EM procedure, and observe that replacing $Q$ with $\hat{Q}$ yields unbiased estimates of $\beta$ whenever $\hat{Q}$ can be assumed to be independent of $z$.  They argue that this is expected to be true in most applications, because the distribution of matching variables (e.g. first and last name, age), which determines the distribution of $\hat{Q}$, is usually independent of the response variable $y$ (e.g. income), and hence of $z$.  
+where $W = (w_1, \dots, w_N)'$, $w_i = q_i'X_i$ as above.  They suggest using a truncated version of $w_i$, $w_i^{TR} = q_{ij_1} x_{j_1} + q_{ij_2} x_{j_2}$.   \cite{lahiri05} use estimates of $Q$ obtained from applying the Fellegi-Sunter/EM procedure, and observe that replacing $Q$ with $\hat{Q}$ yields unbiased estimates of $\beta$ whenever $\hat{Q}$ can be assumed to be independent of $z$.  They argue that this is expected to be true in most applications, because the distribution of matching variables (e.g. first and last name, age), which determines the distribution of $\hat{Q}$, is usually independent of the response variable $y$ (e.g. income), and hence of $z$.  
 
 Importantly, this assumption does not hold in some economics applications, such as the racial ``passing" example from \cite{nq2015}. 
 
 \cite{lahiri05} conclude that in simulations, least median regression is not sufficient to guard against matching errors, whereas the method of SW (1003) made a useful adjustment.  Their method performed well across a range of situations,a nd the bootstrap procedure is useful for reflecting uncertainty due to matching.  
 
+\subsection{\cite{nq2015}}
 
-\begin{enumerate}
-\item \cite{ahl2019} use all matches with weight 1/n 
-\item \cite{nq2015} pick one match at random, then upper/lower bounds
-\item  \cite{bleakley2016} weight treatment variable as 1/n
-\item exploratory methods (if time)
-\end{enumerate}
+%TO DO: put their bounds idea into math! 
+
+\cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
+have match rates around 30, 24, 22, 11-34 percent respectively}, the authors develop methods for including individuals with multiple potential matches.  These methods include selecting one match at random, and selecting the match that produces an upper/lower bound for estimating the ``passing" rate.  
+
+\cite{nq2015} also use the unmatched individuals from their data to calculate absolute bounds for the population passing rates.  For a given algorithm, the absolute upper bound is obtained by using the ``upper bound" configuration of data, combined with assuming that all unmatched individuals passed.  The lower bound is obtained in the same way, assuming that none of the excluded individuals passed. 
+
+\cite{nq2015} argue that increasing the match rate improves the bounds around any true population statistic, even though their methods introduce random measurement error in the estimand.  Below is a visual of their complex blocking strategy.
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{\cite{nq2015} blocking strategy}
+\includegraphics[width=\textwidth]{nq_method.png}
+\label{default}
+\end{center}
+\end{figure}
+
+\subsection{Prior Informed Imputation \citep{Goldstein2012}}
+
+Use the usual FS/EM procedure to estimate probabilities of candidate pairs referring to a match.  The result is each record $i$ is associated with $\{y_{ij}\}$ and probabilities $p_{ij}$.  Assume, wlog, that all variables follow a joint multivariate normal distribution\footnote{If this is not the case for some of the observed variables, then a joint MVN distribution can be obtained using the latent MVN trick (for categorical variables, imputed values are back-transformed to their original scales.} A lower threshold can be chosen so that records with probabilities less than a threshold are ignored.  In practice, they recommend ignoring records that have no match on any matching variable; regard these records as having missing variables and use standard MI.
+
+Denote distribution of variables in linking datafile A ($y$ in ahl framework), conditional on variables in the file of interest B that they are linking to, by $f(Y^{A|B})$.   Conditioning is on responses and any covariates in the imputation model, includes variables from A that are treated as auxiliary predictor variables in the imputation model.  This conditional distribution is also multivariate normal.  
+
+For each record $i$, we compute a modified prior probability, which is the likelihood component $f(Y^{A|B})$ multiplied by the prior $p_{ij}$, so that $\pi_{ij} \propto f(Y^{A|B}) p_{ij}$. 
+
+\subsection{\cite{bleakley2016}}
+
+\cite{bleakley2016} assign equal probability of winning (matched variable equal to $1/n$) to all $n$ individuals matched to the same winner.  The goal is to estimate the treatment effect of winning a parcel in the lottery by comparing mean outcomes for winners and losers in a simple bivariate regression with a dummy varialbe for winning a parcel on the right-hand side.   Here, winning the lottery is coded as $0$ or $1/n$, where $n$ is the number of matches for person $i$. [Think about how this compares to ahl method]
+
+\subsection{Other ideas to include?}
+\cite{hirukawa2018} give OLS methods for nearest neighbor matched samples.  Not explicitly the probabilistic record linkage framework, although the authors use this term. Could apply their methods for an appropriately defined metric for matching variables (i.e. Jaro-Winkler string distance), and use a nearest neighbor matching rule to assign 1-1 matches (although some $y$ may get mapped to multiple $x$. 
+
 
 
 % CHECK THESE OUT !!!!
@@ -154,24 +186,6 @@ data in matched and non-matched pairs to generate a large simulated set of recor
 
 FROM https://arxiv.org/pdf/1901.04779.pdf
  
-\section*{Important Applications}
-
-\cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
-have match rates around 30, 24, 22, 11-34 percent respectively}, the authors develop methods for including individuals with multiple potential matches.  These methods include selecting one match at random, and selecting the match that produces an upper/lower bound for estimating the ``passing" rate.  
-
-\cite{nq2015} also use the unmatched individuals from their data to calculate absolute bounds for the population passing rates.  For a given algorithm, the absolute upper bound is obtained by using the ``upper bound" configuration of data, combined with assuming that all unmatched individuals passed.  The lower bound is obtained in the same way, assuming that none of the excluded individuals passed. 
-
-\cite{nq2015} argue that increasing the match rate improves the bounds around any true population statistic, even though their methods introduce random measurement error in the estimand.  Below is a visual of their complex blocking strategy.
-
-\begin{figure}[htbp]
-\begin{center}
-\caption{\cite{nq2015} blocking strategy}
-\includegraphics[width=\textwidth]{nq_method.png}
-\label{default}
-\end{center}
-\end{figure}
-
-\cite{bleakley2016} assign equal probability of winning (matched variable equal to $1/n$) to all $n$ individuals matched to the same winner.  The goal is to estimate the treatment effect of winning a parcel in the lottery by comparing mean outcomes for winners and losers in a simple bivariate regression with a dummy varialbe for winning a parcel on the right-hand side.   Here, winning the lottery is coded as $0$ or $1/n$, where $n$ is the number of matches for person $i$. [Think about how this compares to ahl method]
 
 
 \begin{figure}[htbp]
@@ -186,6 +200,20 @@ have match rates around 30, 24, 22, 11-34 percent respectively}, the authors dev
 Could use only simulation data, with variety of possible biases, motivated by the applications above.  For example, motivated by  N-Q, introduce error with geographical relocation.  Then test which techniques are robust to these types of sample selection/error.   
 
 I will compare estimates of Type I/ Type II error to ACTUAL Type I/ Type II error rates, and say that authors need to estimate their errors!! Not just report the match rate.   Use estimates from Chipperfield (2018) maybe https://onlinelibrary.wiley.com/doi/epdf/10.1111/insr.12246
+
+\newpage
+
+Matching surveys
+\begin{itemize}
+\item Books: \cite{christen2012, herzog07}
+\item Free software: \cite{kopcke2010}
+\item Economics world: \cite{bailey2017}, \cite{abe2019} 
+\item Winkler? 
+\end{itemize}
+
+Estimation papers
+\begin{itemize}
+\end{itemize}
 
 \bibliography{../proposal_bib} 
 \bibliographystyle{IEEEtranN}
