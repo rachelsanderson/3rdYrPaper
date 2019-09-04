@@ -41,27 +41,27 @@
 \setlength{\parindent}{2em}
 % \setstretch{1.25}
 \title{\singlespacing Annotated bibliography}
-\author{\singlespacing \vspace{-50pt}Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building,
-Princeton, NJ 08544. Email: rachelsa@princeton.edu.
-This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
+\author{\singlespacing \vspace{-50pt} Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building, Princeton, NJ 08544. Email: rachelsa@princeton.edu. This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 \date{\vspace{-40pt} This Version: \today}
 
 \begin{document}
 \doublespacing
 \maketitle
 
+\section{Challenges in matching historical datasets}
+Record linkage in economics is most often studied by those who use historical U.S. data prior to the introduction of social security numbers \citep{abe2019,aizer2016,ferrie96}.  These data tend to lack unique identifiers, so that individuals are primarily identified by their first and last name, and age\footnote{Sometimes middle initial, birthplace, parent's name and birthplace, exact birthdate etc. are available; but data quality vary by application.}, which are rarely unique within a given population.   The non-uniqueness problem is exacerbated by typographical error, caused by low literacy rates and regional variations in names, as well as the record digitization process itself which introduces yet another possible source of error.    
 
-\section*{Historical Matching Challenges}
-Primary variable for matching is an individual's name, which are rarely unique within a given population.  Low literacy rates mean names are often misspelled.  Misspelling also arises due to geographical relocation and regional variation in names.  ``For example, an illiterateindividual from Louisiana with the surname of Thibideaux, who chooses to move to anotherstate, would likely have his name spelled phonetically as Tibido." (Nix and Qian 2015).  Researchers use phonetic algorithms to account for these differences 
+For example, \cite{nq2015} remark that an illiterate individual from Louisiana with the surname of Thibideaux, who chooses to move to another state, would likely have his name spelled phonetically as Tibido.  Goeken et al. (2017) document that in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches, and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
 
- For example, Goeken et al. (2017) document that
-in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches,
-and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a
-shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
+
+
+Researchers use phonetic algorithms to account for differences in spelling.  
+
+
 
 This is problem bc  Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
 
-\section*{(Meta) Matching Papers}
+\section{Relevant Survey Papers}
 
 Record linkage is such an intricate and frequent challenge that there are several books devoted to its study, and dozens of commercial and freely available software devoted to the task \citep{christen2012, herzog07}.  The research and open source systems include those developed by census bureaus, computer scientists, epidemiologists, statisticians, political scientists, and -- only more recently -- economists.  A recent survey by \cite{kopcke2010} evaluates eleven such systems.  
 
@@ -78,7 +78,7 @@ with tens of millions of records"
 
 \cite{abe2019} evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
 
-\section*{Matching Methods}
+\section{Matching Methods}
 
 \cite{bailey2017} categorize historical linking algorithms (that match observations using name and age only) according to how they treat candidate pairs in the following four categories:
 \begin{itemize}
@@ -101,9 +101,37 @@ Talk also about how to evaluate these matching methods -- what is desirable? How
 \end{itemize}
 
 
-\section*{Estimation Methods}
+\section{Estimation Methods}
+
+\subsection{\cite{lahiri05}}
+\cite{lahiri05} take as input two files are linked by a computerized record linkage technique.  The true data pairs $(x_i, y_i)$ are not observable; instead, the CRL produces pairs $(x_i, z_i)$ in which $z_i$ may or may not correspond to $y_i$.  The (true) regression model is:
+\begin{gather*}y_i = x_i'\beta + \epsilon_i,\ E[\epsilon_i] = 0,\\ \text{var}(\epsilon_i) = \sigma^2,\ \text{cov}(\epsilon_i \epsilon_j) = 0 \end{gather*}
+but the researcher estimates this model with $z_i$ as the dependent variable, where $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
+and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Define $\mathbf{q_i} = (q_{i1}, \dots, q_{in})'$.  The naive least squares estimator of $\beta$, which ignores mismatch errors, is given by:
+$$\hat{\mathbf{\beta}}_N = (\mathbf{X'X})^{-1} \mathbf{X'z} $$ 
+An alternative to this naive estimator is one that minimizes the sum of absolute deviations, which decrease the influence of outliers and hence should decrease the impact of erroneously paired predictor and response values.  
+
+Note that $E(z_i) = \mathbf{w_i'\beta}$, with $\mathbf{w_i = q_i'X_i} = \sum_{j=1}^n q_{ij} x_j' $, and so the bias of $\hat{\mathbf{\beta}}_N $ is given by
+$$\text{bias}(\hat{\beta}_N) = [(X'X)^{-1} X'QX - I] \beta $$ 
+Hence, if $Q = I$, then $\hat{\beta}_N$ is unbiased.  This is equivalent to giving all potential matches the same weight (i.e. treating all matches as equally likely to be correct), as discussed in \cite{ahl2019}.  
+
+In order to reduce the bias of $\hat{\beta}_N$, Scheuren and Winkler (1993) %add citation
+observed that 
+$$\text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B,$$ 
+where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = \mathbf{q_i'y} - y_i$, which is the difference between a weighted average of responses from all observations and the actual response $y_i$.  Thus, if an estimator $\hat{B}$ is available, the SW estimator is given by:
+$$ \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}$$ 
+SW give a truncated estimator of $B_i$ using the first and second highest elements of the vector $q_i$, $\hat{B}_i^{TR} = (q_{ij_1} - 1) z_{j_1} + q_{ij_2} z_{j_2}$, that can also be written more generally for an arbitrary number of elements of $q_i$.  This means that $\hat{\beta}_{SW}$ is not unbiased, but, if the probability is high that the best candidate link is the true link, then the truncation might produce a very small bias. 
+
+Using $E(z) = W\beta$, \cite{lahiri05} propose an exactly unbiased estimator of $\beta$:
+$$ \hat{\beta}_U = (W'W)^{-1} W'z$$ 
+that can be obtained by using a truncated version of $w_i$, $w_i^{TR} = q_{ij_1} x_{j_1} + q_{ij_2} x_{j_2}$.   \cite{lahiri05} use estimates of $Q$ obtained from applying the Fellegi-Sunter/EM procedure, and observe that replacing $Q$ with $\hat{Q}$ yields unbiased estimates of $\beta$ whenever $\hat{Q}$ can be assumed to be independent of $z$.  They argue that this is expected to be true in most applications, because the distribution of matching variables (e.g. first and last name, age), which determines the distribution of $\hat{Q}$, is usually independent of the response variable $y$ (e.g. income), and hence of $z$.  
+
+Importantly, this assumption does not hold in some economics applications, such as the racial ``passing" example from \cite{nq2015}. 
+
+\cite{lahiri05} conclude that in simulations, least median regression is not sufficient to guard against matching errors, whereas the method of SW (1003) made a useful adjustment.  Their method performed well across a range of situations,a nd the bootstrap procedure is useful for reflecting uncertainty due to matching.  
+
+
 \begin{enumerate}
-\item Lahiri and Larsen (2005) adjustment for regression using estimated probabilities from E-M algorithm (can use ARP implementation)
 \item \cite{ahl2019} use all matches with weight 1/n 
 \item \cite{nq2015} pick one match at random, then upper/lower bounds
 \item  \cite{bleakley2016} weight treatment variable as 1/n
