@@ -49,7 +49,7 @@
 \doublespacing
 \maketitle
 
-\section{Challenges in historical record linkage}
+\section{Motivation: Challenges in historical record linkage}
 Record linkage in economics is most often studied by those who use historical U.S. data prior to the introduction of social security numbers \citep{abe2019,aizer2016,ferrie96}.  These data tend to lack unique identifiers, so that individuals are primarily identified by their first and last name, and age\footnote{Sometimes middle initial, birthplace, parent's name and birthplace, exact birthdate etc. are available; but data quality vary by application.}, which are rarely unique within a given population.   The non-uniqueness problem is exacerbated by typographical error, caused by low literacy rates and regional variations in names, as well as the record digitization process itself which introduces yet another possible source of error.    
 
 For example, \cite{nq2015} remark that an illiterate individual from Louisiana with the surname of Thibideaux, who chooses to move to another state, would likely have his name spelled phonetically as Tibido.  Goeken et al. (2017) document that in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches, and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
@@ -59,6 +59,8 @@ Researchers use a variety of techniques -- phonetic algorithms, string comparato
 Compared to other fields where record linkage is a research goal in itself, record linkage in economics is seen as prerequisite to answering economic questions.  Economists contribute to the record linkage literature by focusing on historic data; with care for the impact it has on subsequent inference.   
 
 This is problem bc  Neter, Maynes, and Ramanathan (1965): small mismatch errors in finite population sampling can lead to a substantial bias in estimating the relationship between response errors and true values
+
+Matching methods and estimation methods are studied separately, but really ought to be studied together. 
 
 \section{Matching Methods}
 
@@ -108,6 +110,10 @@ Talk also about how to evaluate these matching methods -- what is desirable? How
 
 \section{Estimation Methods}
 
+\subsection{\cite{sw1997}}
+
+Scheuren and Winkler (1993) give a bias adjustment -- use linkage probabilities to correct for failures in the matching step.  However, SW (1997) is the first paper to propose a unified approach between the linkage and the analysis.  But no theoretical results. lacks a convergence proof, etc. 
+
 \subsection{\cite{lahiri05}}
 \cite{lahiri05} take as input two files are linked by a computerized record linkage technique (CRL).  The true data pairs $(x_i, y_i)$ are not observable; instead, the CRL produces pairs $(x_i, z_i)$ in which $z_i$ may or may not correspond to $y_i$.  The (true) regression model is:
 \begin{gather*}y_i = x_i'\beta + \epsilon_i,\ E[\epsilon_i] = 0,\\ \text{var}(\epsilon_i) = \sigma^2,\ \text{cov}(\epsilon_i \epsilon_j) = 0 \end{gather*}
@@ -140,7 +146,9 @@ Importantly, this assumption does not hold in some economics applications, such 
 
 \cite{Goldstein2012}, among others \citep{hirukawa2018}, show that choosing the match with the highest probabilistic weight leads to biased estimates.  This bias increases as the threshold for acceptance increases, and when there is an association between the linkage error probabilities and the variables in the model of interest.   An example of this is Lariscy (YEAR). 
 
-Prior-informed imputation (PII), proposed in \cite{Goldstein2012}, aims to select thecorrect value for variables of interest, rather than accepting a single complete record as a link.  Information from match probabilities in candidate linking records (the prior) is combined with informationin unequivocally linked records.  
+Prior-informed imputation (PII), proposed in \cite{Goldstein2012}, aims to select the
+correct value for variables of interest, rather than accepting a single complete record as a link.  Information from match probabilities in candidate linking records (the prior) is combined with information
+in unequivocally linked records.  
 
 An example of PII in practice is \cite{harron et al}.
 
@@ -165,6 +173,8 @@ Proposed method for FIXING THIS ASSUMPTION! Thus far assumed true matching recor
 \subsection{\cite{nq2015}}
 
 %TO DO: put their bounds idea into math! 
+
+This is a perfect application for estimating the mean using our methods! That is the goal of \cite{nq2015}. 
 
 \cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
 have match rates around 30, 24, 22, 11-34 percent respectively}, the authors develop methods for including individuals with multiple potential matches.  These methods include selecting one match at random, and selecting the match that produces an upper/lower bound for estimating the ``passing" rate.  
@@ -221,16 +231,27 @@ I will compare estimates of Type I/ Type II error to ACTUAL Type I/ Type II erro
 
 \newpage
 
-Matching surveys
+\subsection*{Record linkage surveys and papers}
 \begin{itemize}
-\item Books: \cite{christen2012, herzog07}
-\item Free software: \cite{kopcke2010}
-\item Economics world: \cite{bailey2017}, \cite{abe2019} 
+\item Books on record linkage: \cite{christen2012, herzog07}
+\item Review of free software tools: \cite{kopcke2010}
+\item Survey of RL techniques in economics : \cite{bailey2017}, \cite{abe2019} 
 \item Winkler? 
 \end{itemize}
 
-Estimation papers
+\subsection*{(Pure) Estimation papers}
 \begin{itemize}
+\item \cite{sw2017}
+\item \cite{lahiri05}
+\item \cite{ahl2019}
+\end{itemize}
+
+\subsection*{Important applications}
+\begin{itemize}
+\item \cite{ferrie96}
+\item \cite{abe2012, abe2014, abe2017}
+\item \cite{nq2015}
+\item \cite{bleakley2016}
 \end{itemize}
 
 \bibliography{../proposal_bib} 

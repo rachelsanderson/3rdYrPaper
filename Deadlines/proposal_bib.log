@@ -325,4 +325,37 @@ Missing character: There is no 4 in font nullfont!
 Missing character: There is no 0 in font nullfont!
 Missing character: There is no 5 in font nullfont!
 Missing character: There is no 2 in font nullfont!
-Missi
+Missing character: There is no 9 in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 1--12
+[]
+ []
+
+
+./proposal_bib.bib:13: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 @
+      article{ahl2019,
+? 
+./proposal_bib.bib:13: Emergency stop.
+ ...                                              
+                                                  
+l.13 @
+      article{ahl2019,
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+ 
+Here is how much of TeX's memory you used:
+ 7 strings out of 492649
+ 284 string characters out of 6129622
+ 56655 words of memory out of 5000000
+ 3988 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 5i,0n,4p,102b,14s stack positions out of 5000i,500n,10000p,200000b,80000s
+./proposal_bib.bib:13:  ==> Fatal error occurred, no output PDF file produced!

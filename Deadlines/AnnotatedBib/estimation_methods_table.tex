@@ -9,26 +9,26 @@
 \newcolumntype{C}[1]{>{\PreserveBackslash\centering}m{#1}}
 \begin{document}
 % \setlength{\tabcolsep}{6pt}
-\begin{tabular}{L{4cm}C{3cm}L{3.5cm}L{8cm}L{12cm}}
+\begin{tabular}{L{3.5cm}C{3cm}L{4cm}L{8cm}L{12cm}}
 \toprule
-\textbf{Estimation Method} & \textbf{Model Type} & \textbf{Inputs} &  \textbf{Assumptions} & \textbf{Description}}\\
+\textbf{Estimation Method} & \textbf{Model/Parameter} & \textbf{Inputs} &  \textbf{Assumptions} & \textbf{Description}}\\
 \midrule 
-Anderson et al. (2019) & GMM & Linked dataset with multiple matches $(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i})_{i=1}^n$ & Datasets are random samples conditional on the matching variables; each $x_i$ has exactly one true link among its matched outcomes $\{y_{i\ell}\}_{\ell=1}^{L_i}$, and each $y_{i\ell}$ is equally likely to be the correct match& Rewrite the moments as a difference between the sum of the moments for all possible links and a conditional expectation of the moment function based on $i$'s identifying variables; estimation and variance estimation proceed as standard  2-step semiparametric GMM problem  \\
+Anderson et al. (2019) & GMM & Multiple outcomes $\{y_{i\ell}\}_{\ell=1}^{L_i}$ linked to same individual $x_i$ & Datasets are random samples conditional on the matching variables; each $x_i$ has exactly one true link among its matched outcomes $\{y_{i\ell}\}_{\ell=1}^{L_i}$, and each $y_{i\ell}$ is equally likely to be the correct match& Rewrite the moments as a difference between the sum of the moments for all possible links and a conditional expectation of the moment function based on $i$'s identifying variables; estimation and variance estimation proceed as standard  2-step semiparametric GMM problem  \\
 \midrule 
-Lahiri and Larsen (2005) & GLM & Files A and B, linked via Fellegi-Sunter/EM algorithm method  &  Each record in File A has exactly one true link in File B; distribution of matching variables is independent of the response variable &  Apply OLS to a transformed regression model constructed using parameter estimates from the Fellegi-Sunter/EM algorithm method; estimate the variance using parametric bootstrap  \\ 
+Lahiri and Larsen (2005) & GLM & Multiple outcomes $\{y_{i\ell}\}_{\ell=1}^{L_i}$ linked to same $x_i$ with probabilities $p_{i\ell}$    &  Each record in File A has exactly one true link in File B; distribution of matching variables is independent of the response variable &  Apply OLS to a transformed regression model constructed using parameter estimates from the Fellegi-Sunter/EM algorithm method; estimate the variance using parametric bootstrap  \\ 
 \midrule
-Scheuren and Winkler (1991, 1993, 1997) & GLM & tbd & & Propose a bias correction for OLS, using a weighted average of responses from all observations and the actual response $y_i$  \\
+Scheuren and Winkler (1997) & GLM & tbd & None -- they make no theoretical claims & Iterate over the following steps: (i) fit regression to a configuration of matched data; (ii) drop outliers and fit regression using only highest weight matches; (iii) use these updated estimates to impute values for dropped observations \\
 \midrule
-Nix and Qian (2015) \\ 
+Nix and Qian (2015)& Population Mean & Multiple $\{x_{i\ell}\}_{\ell=1}^{L_i}$ & True match is included among potential matches; multiple matches are equally likely to be correct & Construct bounds on parameters by estimating model with different configurations of matched data, then impute values for unmatched individuals to construct absolute bounds for the population statistic of interest  \\ 
 \midrule
-Bleakley and Hoyt (2016)  \\
+Bleakley and Ferrie (2016) & GLM/ATE & Multiple $\{x_{i\ell}\}_{\ell=1}^{L_i}$ linked to same treatment $T_i$  & True match is included among potential matches; each of the $\{x_{i\ell}\}_{\ell=1}^{L_i}$ is equally likely to be the true match; treatment $T_i$ is randomly assigned & For $\{x_{i\ell}\}_{\ell=1}^{L_i}$ linked to the same binary treatment $T_i$, impute $i\ell$'s treatment as $T_{i\ell} = T_i/L_i$; add a fixed effect for each surname, and use heteroskedasticity robust standard errors, clustered by $\{x_{i\ell}\}$ groups that share a common $T_i$ \\
 \midrule 
-Hirukawa and Prokhorov (2018) & GLM & Linked dataset using NN/highest probability matching & The samples jointly identify the regression models & Bias correction for nearest-neighbor matched samples; could be used if we define an appropriate metric for matching variables and use a nearest neighbor matching rule\\
+Hirukawa and Prokhorov (2018) & GLM & Linked dataset using NN/highest probability matching & The samples ``jointly identify" the regression models & Bias correction for nearest-neighbor matched samples; could be used if we define an appropriate metric for matching variables and use a nearest neighbor matching rule (i.e. the Fellegi-Sunter optimal matching rule)\\
 \midrule
 Goldstein et al. (2012) & GLM &  &  & Modify the match probabilities obtained from probabilistic record linkage by multiplying it with a likelihood component, then select as a match the record with the highest modified probability exceeding a threshold.  For records with no match, impute values of $y$ with standard methods, and estimate in standard way \\
 
 \midrule
-Anderson (2019) & GMM & Files A and B, linked via Fellegi-Sunter/EM  & Want to relax the assumption where matching variables are independent of the response variable, or the true link is not included among possible matches. & Compare PII with multiple matches vs. only one match; compare one match with weighted linear sum assignment vs. other 
+Anderson (2019) & GMM & Record pairs $(x_i, y_j)$ and probability $p_{ij}$ that $(i,j)$ refer to the same entity & Goals: (i) allow matching variables to be correlated with variables of interest; (ii) allow for true link to not be included among possible matches & Ideas: Combine techniques such as PII with multiple matches; use equal probability weights (exogenously determined)  
  \end{tabular}
  
 \end{document}

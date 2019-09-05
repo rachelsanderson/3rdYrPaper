@@ -1,6 +1,14 @@
 This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: AnnotatedBib.aux
+White space in argument---line 50 of file AnnotatedBib.aux
+ : \citation{harron
+ :                  et al}
+I'm skipping whatever remains of this command
+White space in argument---line 51 of file AnnotatedBib.aux
+ : \citation{11
+ :              in paper}
+I'm skipping whatever remains of this command
 The style file: IEEEtranN.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -13,6 +21,7 @@ I was expecting a `,' or a `}'---line 101 of file ../proposal_bib.bib
  :  ISSN = {00223808, 1537534X},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "sw2017"
 -- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -20,47 +29,51 @@ I'm skipping whatever remains of this entry
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Warning--empty author in abe2014
+Warning--empty title in abe2014
+Warning--empty journal in abe2014
+Warning--empty year in abe2014
 
 Done.
-You've used 14 entries,
+You've used 18 entries,
             4855 wiz_defined-function locations,
-            1047 strings with 10902 characters,
-and the built_in function-call counts, 12103 in all, are:
-= -- 1103
-> -- 341
-< -- 87
-+ -- 168
-- -- 74
-* -- 726
-:= -- 1942
-add.period$ -- 28
-call.type$ -- 14
-change.case$ -- 27
-chr.to.int$ -- 188
-cite$ -- 14
-duplicate$ -- 799
-empty$ -- 810
-format.name$ -- 110
-if$ -- 2677
-int.to.chr$ -- 1
-int.to.str$ -- 15
-missing$ -- 124
-newline$ -- 82
-num.names$ -- 42
-pop$ -- 282
+            1068 strings with 11434 characters,
+and the built_in function-call counts, 15235 in all, are:
+= -- 1395
+> -- 417
+< -- 109
++ -- 210
+- -- 90
+* -- 922
+:= -- 2426
+add.period$ -- 34
+call.type$ -- 18
+change.case$ -- 34
+chr.to.int$ -- 233
+cite$ -- 23
+duplicate$ -- 1015
+empty$ -- 1023
+format.name$ -- 134
+if$ -- 3377
+int.to.chr$ -- 2
+int.to.str$ -- 19
+missing$ -- 155
+newline$ -- 98
+num.names$ -- 51
+pop$ -- 357
 preamble$ -- 1
-purify$ -- 14
+purify$ -- 18
 quote$ -- 2
-skip$ -- 885
+skip$ -- 1116
 stack$ -- 0
-substring$ -- 435
-swap$ -- 616
-text.length$ -- 22
+substring$ -- 547
+swap$ -- 777
+text.length$ -- 29
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 208
-warning$ -- 0
-while$ -- 53
+type$ -- 272
+warning$ -- 4
+while$ -- 65
 width$ -- 0
-write$ -- 207
-(There was 1 error message)
+write$ -- 256
+(There were 3 error messages)
