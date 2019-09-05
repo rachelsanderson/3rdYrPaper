@@ -135,6 +135,33 @@ Importantly, this assumption does not hold in some economics applications, such 
 
 \cite{lahiri05} conclude that in simulations, least median regression is not sufficient to guard against matching errors, whereas the method of SW (1003) made a useful adjustment.  Their method performed well across a range of situations,a nd the bootstrap procedure is useful for reflecting uncertainty due to matching.  
 
+
+\subsection{Prior-Informed Imputation \citep{Goldstein2012}}
+
+\cite{Goldstein2012}, among others \citep{hirukawa2018}, show that choosing the match with the highest probabilistic weight leads to biased estimates.  This bias increases as the threshold for acceptance increases, and when there is an association between the linkage error probabilities and the variables in the model of interest.   An example of this is Lariscy (YEAR). 
+
+Prior-informed imputation (PII), proposed in \cite{Goldstein2012}, aims to select thecorrect value for variables of interest, rather than accepting a single complete record as a link.  Information from match probabilities in candidate linking records (the prior) is combined with informationin unequivocally linked records.  
+
+An example of PII in practice is \cite{harron et al}.
+
+NOTABLY, uses 1-1 matching (no multiple matches).  Also assume that the probability of matching on MV values is independent of the variable of interest.  They recognize this is not often the case; i.e. different hospitals may have different distributions of the variable of interest, quality of recorded identifying info may also different by center, creating lack of independence between probability of a match and variable of interest.  This is shown to be a problem in \cite{11 in paper} 
+
+Use the usual FS/EM procedure to estimate probabilities of candidate pairs referring to a match.  The result is each record $i$ is associated with $\{y_{ij}\}$ and probabilities $p_{ij}$.  Assume, wlog, that all variables follow a joint multivariate normal distribution\footnote{If this is not the case for some of the observed variables, then a joint MVN distribution can be obtained using the latent MVN trick (for categorical variables, imputed values are back-transformed to their original scales.} A lower threshold can be chosen so that records with probabilities less than a threshold are ignored.  In practice, they recommend ignoring records that have no match on any matching variable; regard these records as having missing variables and use standard MI.
+
+Denote distribution of variables in linking datafile A ($y$ in ahl framework), conditional on variables in the file of interest B that they are linking to, by $f(Y^{A|B})$.   Conditioning is on responses and any covariates in the imputation model, includes variables from A that are treated as auxiliary predictor variables in the imputation model.  This conditional distribution is also multivariate normal.  
+
+For each record $i$, we compute a modified prior probability $\pi_{ij}$ which is the likelihood component $f(Y^{A|B})$ multiplied by the prior $p_{ij}$, so that $\pi_{ij} \propto f(Y^{A|B}) p_{ij}$.  The normalized set $\pi_i$ comprises the modified probability distribution for each $i$ record in A.  
+
+Set a lower threshold for accepting a record as a true link, and if any records exceeds this, we choose that with the largest probability.  If no record exceeds the threshold, then we regard the data values as missing and use standard multiple imputation.  ``The largest gain can be expected to arise
+when the probability of a link is associated with the values of the variables to be transferred. When the
+MAR assumption discussed earlier holds, then given a high enough threshold, the proposed procedure
+will produce unbiased estimates" Incorporating the likelihood component can be expected to lead more often to the correct record exceeding a given threshold. 
+
+Proposed method for FIXING THIS ASSUMPTION! Thus far assumed true matching record is located within the B file.  But this may not be the case. Assume we have an estimate of mortality rate of individuals in A, $\pi_d$.  If a proportion of the A file $\pi_m < \pi_d$ are unequivocally matched, then the probability that a randomly chosen remaining record in B is not a death from the A file is $\pi_r = 1 - (\pi_d - \pi_m)$.  Therefore multiply $p_i$ by $1-\pi_r$ and add an extra pseudo-record with probability $\pi_r$ with an associated code for a surviving patient. 
+
+
+
+
 \subsection{\cite{nq2015}}
 
 %TO DO: put their bounds idea into math! 
@@ -153,15 +180,6 @@ have match rates around 30, 24, 22, 11-34 percent respectively}, the authors dev
 \label{default}
 \end{center}
 \end{figure}
-
-\subsection{Prior Informed Imputation \citep{Goldstein2012}}
-
-Use the usual FS/EM procedure to estimate probabilities of candidate pairs referring to a match.  The result is each record $i$ is associated with $\{y_{ij}\}$ and probabilities $p_{ij}$.  Assume, wlog, that all variables follow a joint multivariate normal distribution\footnote{If this is not the case for some of the observed variables, then a joint MVN distribution can be obtained using the latent MVN trick (for categorical variables, imputed values are back-transformed to their original scales.} A lower threshold can be chosen so that records with probabilities less than a threshold are ignored.  In practice, they recommend ignoring records that have no match on any matching variable; regard these records as having missing variables and use standard MI.
-
-Denote distribution of variables in linking datafile A ($y$ in ahl framework), conditional on variables in the file of interest B that they are linking to, by $f(Y^{A|B})$.   Conditioning is on responses and any covariates in the imputation model, includes variables from A that are treated as auxiliary predictor variables in the imputation model.  This conditional distribution is also multivariate normal.  
-
-For each record $i$, we compute a modified prior probability, which is the likelihood component $f(Y^{A|B})$ multiplied by the prior $p_{ij}$, so that $\pi_{ij} \propto f(Y^{A|B}) p_{ij}$. 
-
 \subsection{\cite{bleakley2016}}
 
 \cite{bleakley2016} assign equal probability of winning (matched variable equal to $1/n$) to all $n$ individuals matched to the same winner.  The goal is to estimate the treatment effect of winning a parcel in the lottery by comparing mean outcomes for winners and losers in a simple bivariate regression with a dummy varialbe for winning a parcel on the right-hand side.   Here, winning the lottery is coded as $0$ or $1/n$, where $n$ is the number of matches for person $i$. [Think about how this compares to ahl method]

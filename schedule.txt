@@ -1,5 +1,8 @@
-august 30 - description of model, parameter of interest, preliminary assumptions, list of matching methods I will implement and associated software.  have a date by when i need matching methods implemented (sept 14?) 
+sept 6 -- annotated biblio, fill out tables of matching and estimation methods
+
 september 11 -- list of estimation methods I will use; which means proposed new methodology as well
+sept 13 - proposed methodology
+sept 25 - empriical example (simulations or data work) 
 october 1 - first draft done
 october 5 week -- present results
 october 28 -- final draft done

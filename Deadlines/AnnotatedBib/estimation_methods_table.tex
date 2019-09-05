@@ -9,7 +9,7 @@
 \newcolumntype{C}[1]{>{\PreserveBackslash\centering}m{#1}}
 \begin{document}
 % \setlength{\tabcolsep}{6pt}
-\begin{tabular}{L{4cm}C{2.5cm}L{3.5cm}L{8cm}L{11cm}}
+\begin{tabular}{L{4cm}C{3cm}L{3.5cm}L{8cm}L{12cm}}
 \toprule
 \textbf{Estimation Method} & \textbf{Model Type} & \textbf{Inputs} &  \textbf{Assumptions} & \textbf{Description}}\\
 \midrule 
@@ -23,11 +23,12 @@ Nix and Qian (2015) \\
 \midrule
 Bleakley and Hoyt (2016)  \\
 \midrule 
-Hirukawa and Prokhorov (2018) & GLM & Nearest-neighbor matching (Unique matches only) & The samples jointly identify the regression models & Bias correction for nearest-neighbor matched samples; could be used if we define an appropriate metric for matching variables and use a nearest neighbor matching rule\\
+Hirukawa and Prokhorov (2018) & GLM & Linked dataset using NN/highest probability matching & The samples jointly identify the regression models & Bias correction for nearest-neighbor matched samples; could be used if we define an appropriate metric for matching variables and use a nearest neighbor matching rule\\
 \midrule
-Goldstein et al., 2012 & GLM  & & & Combine probabilistic record linkage with multiple imputation using a latent normal model that allows for unordered categorical variables  \\
+Goldstein et al. (2012) & GLM &  &  & Modify the match probabilities obtained from probabilistic record linkage by multiplying it with a likelihood component, then select as a match the record with the highest modified probability exceeding a threshold.  For records with no match, impute values of $y$ with standard methods, and estimate in standard way \\
+
 \midrule
-Anderson (2019) & GMM & Files A and B, linked via Fellegi-Sunter EM method & Want to relax the assumption where matching variables are independent of the response varaible
+Anderson (2019) & GMM & Files A and B, linked via Fellegi-Sunter/EM  & Want to relax the assumption where matching variables are independent of the response variable, or the true link is not included among possible matches. & Compare PII with multiple matches vs. only one match; compare one match with weighted linear sum assignment vs. other 
  \end{tabular}
  
 \end{document}
