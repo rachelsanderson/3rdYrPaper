@@ -1,11 +1,11 @@
 This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: AnnotatedBib.aux
-White space in argument---line 51 of file AnnotatedBib.aux
+White space in argument---line 50 of file AnnotatedBib.aux
  : \citation{harron
  :                  et al}
 I'm skipping whatever remains of this command
-White space in argument---line 52 of file AnnotatedBib.aux
+White space in argument---line 51 of file AnnotatedBib.aux
  : \citation{11
  :              in paper}
 I'm skipping whatever remains of this command
@@ -32,43 +32,43 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Done.
 You've used 25 entries,
             4855 wiz_defined-function locations,
-            1116 strings with 12598 characters,
-and the built_in function-call counts, 22007 in all, are:
-= -- 2064
-> -- 583
-< -- 168
-+ -- 295
-- -- 124
-* -- 1294
-:= -- 3506
+            1113 strings with 12489 characters,
+and the built_in function-call counts, 21241 in all, are:
+= -- 1985
+> -- 559
+< -- 155
++ -- 281
+- -- 120
+* -- 1251
+:= -- 3399
 add.period$ -- 50
 call.type$ -- 25
-change.case$ -- 49
-chr.to.int$ -- 345
+change.case$ -- 48
+chr.to.int$ -- 315
 cite$ -- 25
-duplicate$ -- 1466
-empty$ -- 1455
-format.name$ -- 192
-if$ -- 4910
+duplicate$ -- 1427
+empty$ -- 1433
+format.name$ -- 188
+if$ -- 4735
 int.to.chr$ -- 2
 int.to.str$ -- 26
-missing$ -- 217
-newline$ -- 125
+missing$ -- 212
+newline$ -- 123
 num.names$ -- 75
 pop$ -- 472
 preamble$ -- 1
 purify$ -- 25
 quote$ -- 2
-skip$ -- 1647
+skip$ -- 1587
 stack$ -- 0
-substring$ -- 827
-swap$ -- 1148
-text.length$ -- 46
+substring$ -- 756
+swap$ -- 1097
+text.length$ -- 43
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 384
+type$ -- 376
 warning$ -- 0
-while$ -- 97
+while$ -- 93
 width$ -- 0
-write$ -- 356
+write$ -- 349
 (There were 3 error messages)

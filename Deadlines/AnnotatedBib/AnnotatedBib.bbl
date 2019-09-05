@@ -35,13 +35,6 @@ A.~Aizer, S.~Eli, J.~Ferrie, and A.~Lleras-Muney, ``The long-run impact of cash
   \url{http://www.aeaweb.org/articles?id=10.1257/aer.20140529}
 \BIBentrySTDinterwordspacing
 
-\bibitem[Ferrie(1996)]{ferrie96}
-J.~P. Ferrie, ``\BIBforeignlanguage{English (US)}{A new sample of males linked
-  from the public use microdata sample of the 1850 u.s. federal census of
-  population to the 1860 u.s. federal census manuscript schedules},''
-  \emph{\BIBforeignlanguage{English (US)}{Historical Methods}}, vol.~29, no.~4,
-  pp. 141--156, 1 1996.
-
 \bibitem[Nix and Qian(2015)]{nq2015}
 \BIBentryALTinterwordspacing
 E.~Nix and N.~Qian, ``The fluidity of race: \enquote{Passing} in the united
@@ -124,18 +117,15 @@ H.~Bleakley and J.~Ferrie, ``Shocking behavior: Random wealth in antebellum
   \url{https://doi.org/10.1093/qje/qjw014}
 \BIBentrySTDinterwordspacing
 
+\bibitem[Harron et~al.(2015)Harron, Goldstein, and Dibben]{harron_book}
+K.~Harron, H.~Goldstein, and C.~Dibben,
+  \emph{\BIBforeignlanguage{Undefined/Unknown}{Methodological Developments in
+  Data Linkage}}.\hskip 1em plus 0.5em minus 0.4em\relax United States: John
+  Wiley & Sons Inc., 2015.
+
 \bibitem[Winkler(1999)]{winkler99}
 W.~Winkler, ``The state of record linkage and current research problems,''
   \emph{Statist. Med.}, vol.~14, 10 1999.
-
-\bibitem[Harron et~al.(2012)Harron, Wade, Muller-Pebody, Goldstein, and
-  Gilbert]{harron2012}
-\BIBentryALTinterwordspacing
-K.~Harron, A.~Wade, B.~Muller-Pebody, H.~Goldstein, and R.~Gilbert, ``Opening
-  the black box of record linkage,'' \emph{Journal of Epidemiology \& Community
-  Health}, vol.~66, no.~12, pp. 1198--1198, 2012. [Online]. Available:
-  \url{https://jech.bmj.com/content/66/12/1198.2}
-\BIBentrySTDinterwordspacing
 
 \bibitem[Doidge and Harron(2018)]{harron2018}
 J.~Doidge and K.~Harron, ``Demystifying probabilistic linkage,''
@@ -149,6 +139,13 @@ I.~P. Fellegi and A.~B. Sunter, ``A theory for record linkage,'' \emph{Journal
 M.~Sadinle, ``Bayesian estimation of bipartite matchings for record linkage,''
   \emph{Journal of the American Statistical Association}, vol. 112, no. 518, p.
   600?612, 2017.
+
+\bibitem[Ferrie(1996)]{ferrie96}
+J.~P. Ferrie, ``\BIBforeignlanguage{English (US)}{A new sample of males linked
+  from the public use microdata sample of the 1850 u.s. federal census of
+  population to the 1860 u.s. federal census manuscript schedules},''
+  \emph{\BIBforeignlanguage{English (US)}{Historical Methods}}, vol.~29, no.~4,
+  pp. 141--156, 1 1996.
 
 \bibitem[Abramitzky et~al.(2012)Abramitzky, Boustan, and Eriksson]{abe2012}
 \BIBentryALTinterwordspacing

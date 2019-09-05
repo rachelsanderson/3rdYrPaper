@@ -65,13 +65,13 @@ This is problem bc  Neter, Maynes, and Ramanathan (1965): small mismatch errors 
 
 Matching methods and estimation methods are studied separately, but really ought to be studied together. 
 
-\section{Matching Methods}
+\section{Record Linkage Methods}
 
-\subsection{Survey Papers}
+Record linkage is such a common yet difficult task that there are several books devoted to its study \citep{harron_book, christen2012, herzog07}, and dozens of commercial and open source systems software developed for its implementation \citep{kopcke2010}.  In economics, a recent series of working papers examine the effects of different record linkage techniques on subsequent inference \citep{abe2019, bailey2017}.  However, similar survey papers also exist in fields outside of economics, such as epidemiology and computer science \citep{harron2018, winkler99}.   In fact, that record linkage is studied by many fields makes writing (and reading!) such surveys difficult, because authors are constantly writing the same things.\footnote{\cite{Goldstein2012} prove similar results to those published in \cite{hirukawa2018}.}
 
-Record linkage is such an intricate and frequent challenge that there are several books devoted to its study, and dozens of commercial and freely available software devoted to the task \citep{christen2012, herzog07}.  The research and open source systems include those developed by census bureaus, computer scientists, epidemiologists, statisticians, political scientists, and -- only more recently -- economists.  A recent survey by \cite{kopcke2010} evaluates eleven such systems.  
+Disciplinary differences aside, record linkage methods can be broadly divided into deterministic and probabilistic techniques.  That said, the choice between using deterministic and probabilistic methods is a false dichotomy, since for every deterministic linkage method there is an equivalent probabilistic one \citep{harron2018}.  The main differences among record linkage methods differ in the choices they make about how to represent the data, which comparisons to consider as possible links, and whether to enforce one-to-one matching or allow multiple matches.  Common among all techniques is the necessity of (i) setting thresholds, (ii), blocking data, and (iii) . See existing paper. 
 
-The challenge in studying record linkage and its effects on inference, are magnified by the fact that research on the topic occurs in disparate fields.  Goldstein, Harron and Wade (2012) prove the same result that is published six years later in \cite{hirukawa2018}. 
+
 
 The father of modern record linkage, Winkler in \cite{christen2012} says: ``Although individuals have introduced alternative classification methods based on Support Vector Machines, decision trees and other
 methods from machine learning, no method has consistently outperformed methods
@@ -220,10 +220,10 @@ I will compare estimates of Type I/ Type II error to ACTUAL Type I/ Type II erro
 \section{Bird's eye view of literature}
 \subsection*{Record linkage surveys}
 \begin{itemize}
-\item Books on record linkage: \cite{christen2012, herzog07}
+\item Books on record linkage: \cite{christen2012, herzog07, harron_book}
 \item Review of free software tools: \cite{kopcke2010}
 \item Survey of RL techniques in economics : \cite{bailey2017}, \cite{abe2019} 
-\item Surveys by the``father" of modern record linkage \citep{winkler99} 
+\item Surveys by the``father" and ``mother" of modern record linkage \citep{winkler99} 
 \item Comparison of deterministic vs. probabilistic matching methods \citep{harron2018}
 \end{itemize}
 \subsection*{Matching methods}
