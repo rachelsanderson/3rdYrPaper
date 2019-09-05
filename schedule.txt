@@ -1,5 +1,5 @@
 sept 6 -- annotated biblio, fill out tables of matching and estimation methods
-
+septmeber 11 -- draft of paper (i.e. all but results more or less) - outline of everything
 september 11 -- list of estimation methods I will use; which means proposed new methodology as well
 sept 13 - proposed methodology
 sept 25 - empriical example (simulations or data work) 

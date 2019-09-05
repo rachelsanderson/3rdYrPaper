@@ -4,7 +4,8 @@
 \BOOKMARK [2][-]{subsection.3.1}{Steps of the record linkage task}{section.3}% 4
 \BOOKMARK [3][-]{subsubsection.3.1.1}{\(iv\) designating \(i,j\) pairs as matches}{subsection.3.1}% 5
 \BOOKMARK [2][-]{subsection.3.2}{Probabilistic Record Linkage}{section.3}% 6
-\BOOKMARK [1][-]{section.4}{Simplifying assumptions}{}% 7
-\BOOKMARK [2][-]{subsection.4.1}{Blocking}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.2}{Conditional independence}{section.4}% 9
-\BOOKMARK [2][-]{subsection.4.3}{Performance of different matching}{section.4}% 10
+\BOOKMARK [2][-]{subsection.3.3}{Simplifying assumptions}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.4}{Measuring record linkage performance}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Estimation Methods}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Standard assumptions}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Relaxed assumptions}{section.4}% 11

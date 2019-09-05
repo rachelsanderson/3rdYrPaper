@@ -1,0 +1,94 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.1in]{geometry}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{enumitem}
+\usepackage{pdflscape}
+\usepackage{natbib}
+\usepackage{mathtools,xparse}
+\usepackage{graphics}
+\colorlet{shadecolor}{orange!15}
+% \definecolor{shadecolor}{rgb}{255,128,0}\
+\usepackage{float}
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{tikz} % Package for drawing
+\usepackage{amsmath}
+\usepackage{csquotes}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{longtable}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+
+\tikzset{
+  basic/.style  = {draw, text width=2cm, drop shadow, font=\sffamily, rectangle},
+  root/.style   = {basic, rounded corners=2pt, thin, align=center,
+                   fill=green!30},
+  level 2/.style = {basic, rounded corners=6pt, thin,align=center, fill=green!60,
+                   text width=8em},
+  level 3/.style = {basic, thin, align=left, fill=pink!60, text width=6.5em}
+}
+
+%Allows multi-column tables 
+\input{../tcilatex}
+
+\setlength{\topmargin}{-0.4in} 
+\setlength{\textheight}{8.9in}
+\setlength{\parindent}{2em}
+% \setstretch{1.25}
+\title{\singlespacing Annotated bibliography}
+\author{\singlespacing \vspace{-50pt} Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building, Princeton, NJ 08544. Email: rachelsa@princeton.edu. This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
+\date{\vspace{-40pt} This Version: \today}
+
+\begin{document}
+%\doublespacing
+%\maketitle
+\singlespacing
+\section*{Bird's eye view of literature}
+\subsection*{Record linkage surveys}
+\begin{itemize}
+\item Books on record linkage: \cite{christen2012, herzog07, harron_book}
+\item Review of free software tools: \cite{kopcke2010}
+\item Survey of RL techniques in economics : \cite{bailey2017}, \cite{abe2019} 
+\item Surveys by the``father" and ``mother" of modern record linkage \citep{winkler99} 
+\item Comparison of deterministic vs. probabilistic matching methods \citep{harron2018}
+\end{itemize}
+\subsection*{Matching methods}
+\begin{itemize}
+\item Probabilistic Record Linkage \citep{fellegi69, arp2018}
+\item Prior-informed imputation \citep{Goldstein2012} 
+\item Bayesian ``Beta" Record Linkage \citep{sadinle2017} 
+\item Deterministic methods for economics  \citep{ferrie96, abe2012, abe2017}
+\item Deterministic methods for bounding parameter \citep{nq2015}
+\item Allow multiple matches by imputing equal weight values \citep{bleakley2016}
+
+
+\end{itemize}
+
+\subsection*{Estimation methods}
+\begin{itemize}
+\item Integrated matching and estimation procedures 
+\begin{itemize}
+\item Iterative matching, regression analysis, imputation \citep{sw1997}
+\item  Bayesian matching and population size \citep{tancredi_liseo_2015}
+\end{itemize}
+\item Bias corrections for regression with matched data 
+\begin{itemize}
+\item Bias correction for regression \citep{sw1993, lahiri05} 
+\item Weighted least squares-based bias correction for linear and logistic regression \citep{hof2012}
+\item Bias correction for NN-matching \citep{hirukawa2018}
+\end{itemize}
+\item GMM with multiple matches \citep{ahl2019}
+\end{itemize}
+
+
+\newpage
+\singlespacing
+\bibliography{../proposal_bib} 
+\bibliographystyle{IEEEtranN}
+\end{document}
