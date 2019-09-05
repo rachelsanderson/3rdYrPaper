@@ -1,11 +1,11 @@
 This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: AnnotatedBib.aux
-White space in argument---line 50 of file AnnotatedBib.aux
+White space in argument---line 51 of file AnnotatedBib.aux
  : \citation{harron
  :                  et al}
 I'm skipping whatever remains of this command
-White space in argument---line 51 of file AnnotatedBib.aux
+White space in argument---line 52 of file AnnotatedBib.aux
  : \citation{11
  :              in paper}
 I'm skipping whatever remains of this command
@@ -21,7 +21,6 @@ I was expecting a `,' or a `}'---line 101 of file ../proposal_bib.bib
  :  ISSN = {00223808, 1537534X},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "sw2017"
 -- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
@@ -29,51 +28,47 @@ Warning--I didn't find a database entry for "sw2017"
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
-Warning--empty author in abe2014
-Warning--empty title in abe2014
-Warning--empty journal in abe2014
-Warning--empty year in abe2014
 
 Done.
-You've used 18 entries,
+You've used 25 entries,
             4855 wiz_defined-function locations,
-            1068 strings with 11434 characters,
-and the built_in function-call counts, 15235 in all, are:
-= -- 1395
-> -- 417
-< -- 109
-+ -- 210
-- -- 90
-* -- 922
-:= -- 2426
-add.period$ -- 34
-call.type$ -- 18
-change.case$ -- 34
-chr.to.int$ -- 233
-cite$ -- 23
-duplicate$ -- 1015
-empty$ -- 1023
-format.name$ -- 134
-if$ -- 3377
+            1116 strings with 12598 characters,
+and the built_in function-call counts, 22007 in all, are:
+= -- 2064
+> -- 583
+< -- 168
++ -- 295
+- -- 124
+* -- 1294
+:= -- 3506
+add.period$ -- 50
+call.type$ -- 25
+change.case$ -- 49
+chr.to.int$ -- 345
+cite$ -- 25
+duplicate$ -- 1466
+empty$ -- 1455
+format.name$ -- 192
+if$ -- 4910
 int.to.chr$ -- 2
-int.to.str$ -- 19
-missing$ -- 155
-newline$ -- 98
-num.names$ -- 51
-pop$ -- 357
+int.to.str$ -- 26
+missing$ -- 217
+newline$ -- 125
+num.names$ -- 75
+pop$ -- 472
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 25
 quote$ -- 2
-skip$ -- 1116
+skip$ -- 1647
 stack$ -- 0
-substring$ -- 547
-swap$ -- 777
-text.length$ -- 29
+substring$ -- 827
+swap$ -- 1148
+text.length$ -- 46
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 272
-warning$ -- 4
-while$ -- 65
+type$ -- 384
+warning$ -- 0
+while$ -- 97
 width$ -- 0
-write$ -- 256
+write$ -- 356
 (There were 3 error messages)

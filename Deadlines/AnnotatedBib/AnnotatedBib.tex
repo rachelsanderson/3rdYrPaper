@@ -110,9 +110,9 @@ Talk also about how to evaluate these matching methods -- what is desirable? How
 
 \section{Estimation Methods}
 
-\subsection{\cite{sw1997}}
+\subsection{\cite{sw1993, sw1997}}
 
-Scheuren and Winkler (1993) give a bias adjustment -- use linkage probabilities to correct for failures in the matching step.  However, SW (1997) is the first paper to propose a unified approach between the linkage and the analysis.  But no theoretical results. lacks a convergence proof, etc. 
+Scheuren and Winkler (1993) give a bias adjustment -- use linkage probabilities to correct for failures in the matching step.  However, \cite{sw1997} (1997) is the first paper to propose a unified approach between the linkage and the analysis.  But no theoretical results. lacks a convergence proof, etc. 
 
 \subsection{\cite{lahiri05}}
 \cite{lahiri05} take as input two files are linked by a computerized record linkage technique (CRL).  The true data pairs $(x_i, y_i)$ are not observable; instead, the CRL produces pairs $(x_i, z_i)$ in which $z_i$ may or may not correspond to $y_i$.  The (true) regression model is:
@@ -198,10 +198,6 @@ have match rates around 30, 24, 22, 11-34 percent respectively}, the authors dev
 \cite{hirukawa2018} give OLS methods for nearest neighbor matched samples.  Not explicitly the probabilistic record linkage framework, although the authors use this term. Could apply their methods for an appropriately defined metric for matching variables (i.e. Jaro-Winkler string distance), and use a nearest neighbor matching rule to assign 1-1 matches (although some $y$ may get mapped to multiple $x$. 
 
 
-
-% CHECK THESE OUT !!!!
- Scheuren and Winkler (1993): propose method for adjusting for bias of mismatch error in OLS
- SW (1997, 1991): iterative procedure that modifies regression and matching results for apparent outliers 
  Enamorado procedures
  Survey paper from handbook of econometrics
  
@@ -215,45 +211,52 @@ data in matched and non-matched pairs to generate a large simulated set of recor
 FROM https://arxiv.org/pdf/1901.04779.pdf
  
 
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[width=\textwidth]{methods_table.pdf}
-\caption{default}
-\label{default}
-\end{center}
-\end{figure}
-
 \section*{Simulation Idea}
 Could use only simulation data, with variety of possible biases, motivated by the applications above.  For example, motivated by  N-Q, introduce error with geographical relocation.  Then test which techniques are robust to these types of sample selection/error.   
 
 I will compare estimates of Type I/ Type II error to ACTUAL Type I/ Type II error rates, and say that authors need to estimate their errors!! Not just report the match rate.   Use estimates from Chipperfield (2018) maybe https://onlinelibrary.wiley.com/doi/epdf/10.1111/insr.12246
 
 \newpage
-
-\subsection*{Record linkage surveys and papers}
+\singlespacing
+\section{Bird's eye view of literature}
+\subsection*{Record linkage surveys}
 \begin{itemize}
 \item Books on record linkage: \cite{christen2012, herzog07}
 \item Review of free software tools: \cite{kopcke2010}
 \item Survey of RL techniques in economics : \cite{bailey2017}, \cite{abe2019} 
-\item Winkler? 
+\item Surveys by the``father" of modern record linkage \citep{winkler99} 
+\item Comparison of deterministic vs. probabilistic matching methods \citep{harron2018}
 \end{itemize}
-
-\subsection*{(Pure) Estimation papers}
+\subsection*{Matching methods}
 \begin{itemize}
-\item \cite{sw2017}
-\item \cite{lahiri05}
-\item \cite{ahl2019}
+\item Probabilistic Record Linkage \citep{fellegi69, arp2018}
+\item Prior-informed imputation \citep{Goldstein2012} 
+\item Bayesian ``Beta" Record Linkage \citep{sadinle2017} 
+\item Deterministic methods for economics  \citep{ferrie96, abe2012, abe2017}
+\item Deterministic methods for bounding parameter \citep{nq2015}
+\item Allow multiple matches by imputing equal weight values \citep{bleakley2016}
+
+
 \end{itemize}
 
-\subsection*{Important applications}
+\subsection*{Estimation methods}
 \begin{itemize}
-\item \cite{ferrie96}
-\item \cite{abe2012, abe2014, abe2017}
-\item \cite{nq2015}
-\item \cite{bleakley2016}
+\item Integrated matching and estimation procedures 
+\begin{itemize}
+\item Iterative matching, regression analysis, imputation \citep{sw1997}
+\item  Bayesian matching and population size \citep{tancredi_liseo_2015}
+\end{itemize}
+\item Bias corrections for regression with matched data 
+\begin{itemize}
+\item Bias correction for regression \citep{sw1993, lahiri05} 
+\item Weighted least squares-based bias correction for linear and logistic regression \citep{hof2012}
+\item Bias correction for NN-matching \citep{hirukawa2018}
+\end{itemize}
+\item GMM with multiple matches \citep{ahl2019}
 \end{itemize}
 
+
+\newpage
 \bibliography{../proposal_bib} 
 \bibliographystyle{IEEEtranN}
 \end{document}
