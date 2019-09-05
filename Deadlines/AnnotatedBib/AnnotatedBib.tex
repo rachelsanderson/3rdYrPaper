@@ -49,11 +49,14 @@
 \doublespacing
 \maketitle
 
-\section{Motivation: Challenges in historical record linkage}
-Record linkage in economics is most often studied by those who use historical U.S. data prior to the introduction of social security numbers \citep{abe2019,aizer2016,ferrie96}.  These data tend to lack unique identifiers, so that individuals are primarily identified by their first and last name, and age\footnote{Sometimes middle initial, birthplace, parent's name and birthplace, exact birthdate etc. are available; but data quality vary by application.}, which are rarely unique within a given population.   The non-uniqueness problem is exacerbated by typographical error, caused by low literacy rates and regional variations in names, as well as the record digitization process itself which introduces yet another possible source of error.    
+\section{Challenges in historical record linkage}
+Historical U.S. data collected prior to the introduction of Social Security Numbers in 1935 often lack unique identifiers, so that identifying the set of individuals appearing in two or more datasets requires using characteristics such as name and reported age\footnote{Depending on the data source, additional variables such as middle name or initial, birthplace, parents' name and birthplace, are sometimes available.}.  However, common names, coupled with poor data quality -- caused by transcription and enumeration errors, age misreporting, mortality, under-enumeration, and migration between census years -- makes linking records across two or more datasets with full certainty impossible. \citep{abe2019}.
 
-For example, \cite{nq2015} remark that an illiterate individual from Louisiana with the surname of Thibideaux, who chooses to move to another state, would likely have his name spelled phonetically as Tibido.  Goeken et al. (2017) document that in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches, and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
+For example, while matching children listed on mother's welfare program applications with Social Security Administration death records recorded decades later, \cite{aizer2016} find X eprcent of indivdiauls without a match, and X cases wehre multiple death records seem to refer to the same individual.  Similarly, Goeken et al. (2017) document that in two enumerations of St. Louis in the 1880 Census, nearly 46 percent of first names are not exact matches, and the Early Indicators project notes that 11.5 percent of individuals in the Oldest Old sample have a shorter first name in pension records than in the original Civil War enlistment records (Costa et al. 2017). 
 
+If the researcher is willing to assume that errors produced by the record generating process are uncorrelated with the variable of interest, then standard record linkage techniques perform fine, so long as they account for uncertainty from the matching process.  More challenging is the case where errors in the record generating process are correlated with the variables of interest.  This is exactly the case in \cite{nq2015}  by low literacy rates and regional variations in names, as well as the record digitization process itself which introduces yet another possible source of error.    
+
+To illustrate this point, consider an illiterate individual from Louisiana with the surname of Thibideaux, who chooses to move to another state, would likely have his name spelled phonetically as Tibido.  
 Researchers use a variety of techniques -- phonetic algorithms, string comparators, and probabilistic record linkage -- to link records from different files despite errors that arise in the record generating process.  
 
 Compared to other fields where record linkage is a research goal in itself, record linkage in economics is seen as prerequisite to answering economic questions.  Economists contribute to the record linkage literature by focusing on historic data; with care for the impact it has on subsequent inference.   
@@ -80,10 +83,6 @@ with tens of millions of records"
 \cite{arp2018} have guide for researchers in the choice of which variables to use for linking, how to estimate probabilities, and then choose which records to use in the analysis.  Created R code and stata command to implement the method
 
 \cite{abe2019} evaluate different automated methods for record linkage, specifically deterministic (like Ferrie and ABE papers), machine learning Feigenbaum approach, and the AMP approach with the EM algorithm.  Document a frontier between type I and type II errors; cost of low false positive rates comes at cost of designating relatively fewer (true) matches.  Humans typically match more at a cost of more false positives.  They study how different linking methods affect inference -- sensitivity of regression estimates to the choice of linking algorithm.  They find that the parameter estimates are stable across linking methods.  Find effect of matching algorithm on inference is small. 
-
-\subsection{Surveys on Estimation Methods}
-`` Evaluating bias due to data linkage error in
-electronic healthcare records" -- compares the highest probability match (nearest neighbor) with prior-induced imputation
 
 \subsection{Matching Methods}
 
