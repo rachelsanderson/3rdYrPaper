@@ -15,7 +15,6 @@ I was expecting a `,' or a `}'---line 101 of file ./Deadlines/proposal_bib.bib
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "winkler90"
 Warning--I didn't find a database entry for "sadinle_2017"
-Warning--I didn't find a database entry for "fs1969"
 Warning--I didn't find a database entry for "bda3"
 Warning--I didn't find a database entry for "herzog2007"
 Warning--I didn't find a database entry for "larsen_rubin_2001"
@@ -33,45 +32,45 @@ Warning--empty year in abe2014
 Warning--empty booktitle in Feigenbaum2016AML
 
 Done.
-You've used 22 entries,
+You've used 26 entries,
             4855 wiz_defined-function locations,
-            1098 strings with 12024 characters,
-and the built_in function-call counts, 17874 in all, are:
-= -- 1630
-> -- 486
-< -- 115
-+ -- 241
-- -- 108
-* -- 1064
-:= -- 2847
-add.period$ -- 43
-call.type$ -- 22
-change.case$ -- 43
-chr.to.int$ -- 237
-cite$ -- 28
-duplicate$ -- 1218
-empty$ -- 1261
-format.name$ -- 159
-if$ -- 3977
+            1122 strings with 12729 characters,
+and the built_in function-call counts, 21125 in all, are:
+= -- 1942
+> -- 581
+< -- 135
++ -- 286
+- -- 130
+* -- 1260
+:= -- 3378
+add.period$ -- 51
+call.type$ -- 26
+change.case$ -- 51
+chr.to.int$ -- 271
+cite$ -- 32
+duplicate$ -- 1442
+empty$ -- 1471
+format.name$ -- 195
+if$ -- 4693
 int.to.chr$ -- 2
-int.to.str$ -- 23
-missing$ -- 186
-newline$ -- 108
-num.names$ -- 65
-pop$ -- 451
+int.to.str$ -- 27
+missing$ -- 223
+newline$ -- 124
+num.names$ -- 77
+pop$ -- 531
 preamble$ -- 1
-purify$ -- 22
+purify$ -- 26
 quote$ -- 2
-skip$ -- 1326
+skip$ -- 1567
 stack$ -- 0
-substring$ -- 572
-swap$ -- 893
-text.length$ -- 33
+substring$ -- 658
+swap$ -- 1062
+text.length$ -- 40
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 328
+type$ -- 392
 warning$ -- 5
-while$ -- 75
+while$ -- 88
 width$ -- 0
-write$ -- 297
+write$ -- 350
 (There was 1 error message)

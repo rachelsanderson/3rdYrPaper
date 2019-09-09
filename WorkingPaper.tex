@@ -55,7 +55,7 @@
 \setlength{\parindent}{2em}
 % \setstretch{1.25}
 \doublespacing
-\title{\singlespacing A unified approach to record linkage and estimation}
+\title{\singlespacing A unified approach to inference with linked data}
 \author{Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building,
 Princeton, NJ 08544. Email: rachelsa@Princeton.edu.
 This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
@@ -68,12 +68,16 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \begin{abstract}
 \singlespacing
-\noindent This paper studies the effect of different matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce. Ultimately, the goal of this paper is not to compare record linkage techniques, but to compare how linkage methods perform in combination with different estimation techniques -- that is, to develop a unified approach of tackling the data integration and estimation task.  \end{abstract}
+\noindent This paper studies the joint effects of matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  Specifically, I compare how different combinations of record linkage and estimation methods perform across a variety of data generating processes and research tasks (i.e. linking the dependent variable, independent variable, sample selection, GMM, linear regression) in order to develop a unified approach for doing empirical work with linked data.  \end{abstract}
 
 \section{Introduction}
-In applied microeconomics, identifying a common set of individuals appearing in two or more datasets is often complicated by the absence of unique identifying variables. For example,  \cite{aizer2016} link children listed on their mother's welfare program applications with their death records using individuals' names and dates of birth.  However, since name and date combinations are not necessarily unique (and may be prone to typographical error), the authors identify cases where multiple death records seem to refer to the same individual.  Instead of dropping these observations from their analysis, they use estimation techniques from \cite{ahl2019} that allow for observations to have multiple linked outcomes.  
+In empirical microeconomics, identifying a common set of individuals appearing in two or more datasets is often complicated by the absence of unique identifying variables.   For example, economic historians frequently use historical U.S. data that lack Social Security Numbers, so that matching observations across datasets requires using characteristics such as name and reported age\footnote{Depending on the data source, additional variables such as middle name or initial, birthplace, parents' name and birthplace, are sometimes available.}.  Yet the presence of common names, along with transcription and enumeration errors, age misreporting, mortality, under-enumeration, and migration between census years, makes performing an error-free one-to-one merge -- the most common data pre-processing step in such analyses -- virtually impossible \citep{abe2019}.
 
-The methods in \cite{ahl2019} assume that each of the linked outcomes is equally likely to be the true match; however, the authors describe how to construct more efficient estimators if additional information about match quality is available.  Specifically, if the researcher can estimate the probability that each individual-outcome pair is a true match, then this knowledge can be used to achieve a reduction in mean-squared error.  Such probabilities are outputted by probabilistic record linkage procedures, first developed by \cite{fellegi69} in the statistics literature, but only recently applied to economics \cite{arp2018}. Hence, any discussion of best practices for using linked data should address how to choose matching algorithms and estimation procedures jointly.  
+For example, \cite{aizer2016} link children listed on Mothers' Pension program welfare applications from 1911-1935 with records from the Social Security Death Master File, recorded between 1965 and 2012.  Using an automated matching procedure that links individuals based on their name and date of birth, the authors match 48 percent of individuals to a unique death record, and 4 percent to multiple possible records, leaving 48 percent of individuals unmatched.\footnote{The authors estimate that at least 32 percent of individuals in the Mothers' Pension program data died before 1965, and therefore should have no match in the 1965-2012 data.}  
+
+This example illustrates how inference using matched data requires deciding how to variably treat observations with unique, multiple, or zero matches.  \cite{aizer2016} use methods from \cite{ahl2019}, which assume that each of the linked death record is equally likely to be the true match; however other authors have approached the same problem by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, and constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}.   Alternatively, the authors could have used probabilistic record linkage methods to link the data, which would have allowed them to use the OLS bias correction from \cite{lahiri05} or the prior-informed imputation strategy for missing records proposed by \cite{Goldstein2012}.  
+
+While there are a number of papers that compare the performance of different matching algorithms  \citep{bailey2017, arp2018}, as well as the performance of different estimation methods for linked data \citep{harron2014}, there are few (if any) that study the joint impact of matching and estimation on inference.  The only exception is \cite{sw1997}, who suggest iterating between estimation, imputation, and record linkage steps when the goal is linear regression. 
 
 The goal of this paper is therefore to study the effects of different combinations of matching algorithms and estimation procedures for linked data on the quality of the estimates that they produce.  First, I will compare how different matching algorithms perform in terms of the representativeness of the matched data they produce and their tolerance for type I and type II errors.  Next, with multiple matched versions of the data in hand, I will compute point estimates and confidence intervals for the same parameter of interest using methods that vary by whether they allow for multiple matches, incorporate the matching probabilities, and are likelihood-based in their approach.  In total, I will perform the above analysis twice -- with simulated data and with real data that the simulated data are generated to imitate.  
 
@@ -84,6 +88,12 @@ The matching techniques that will be studied in this paper include deterministic
 The data used in this paper consist of the unmerged files from \cite{aizer2016}, which I will pre-process using the practices developed by \cite{arp2018}.  The parameter of interest is the average treatment effect of receiving a cash transfer on the long-term outcomes of children in poor families.   
 
 Section 2 describes the general problem that this paper seeks to address.  Section 3 provides an overview of the matching techniques that I will study.  Section 4 describes the estimation techniques.  Section 5 will have simulations and results.  Section 6 will have real data and results. 
+
+% old stuff potentially
+
+however, the authors describe how to construct more efficient estimators if additional information about match quality is available.  Specifically, if the researcher can estimate the probability that each individual-outcome pair is a true match, then this knowledge can be used to achieve a reduction in mean-squared error.  Such probabilities are outputted by probabilistic record linkage procedures, first developed by \cite{fellegi69} in the statistics literature, but only recently applied to economics \cite{arp2018}. Hence, any discussion of best practices for using linked data should address how to choose matching algorithms and estimation procedures jointly.  
+
+%old stuff ends
 
 \section{General problem}
 Suppose that the researcher would like to estimate $\theta_0$ in a parametric model of the form
