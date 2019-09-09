@@ -22,11 +22,6 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem[Abramitzky et~al.(2019{\natexlab{a}})Abramitzky, Boustan, Eriksson,
-  Feigenbaum, and Perez]{abe2019}
-R.~Abramitzky, L.~Boustan, K.~Eriksson, J.~Feigenbaum, and S.~Perez,
-  ``Automated linking of historical data,'' \emph{NBER Working Paper}, 2019.
-
 \bibitem[Aizer et~al.(2016)Aizer, Eli, Ferrie, and Lleras-Muney]{aizer2016}
 \BIBentryALTinterwordspacing
 A.~Aizer, S.~Eli, J.~Ferrie, and A.~Lleras-Muney, ``The long-run impact of cash
@@ -97,10 +92,6 @@ K.~Harron, A.~Wade, R.~Gilbert, B.~Muller-Pebody, and H.~Goldstein,
 F.~Scheuren and W.~Winkler, ``Regression analysis of data files that are
   computer matched - part ii,'' \emph{Survey Methodology}, vol.~23, 01 1997.
 
-\bibitem[Fellegi and Sunter(1969)]{fellegi69}
-I.~P. Fellegi and A.~B. Sunter, ``A theory for record linkage,'' \emph{Journal
-  of the American Statistical Association}, vol.~64, pp. 1183--1210, 1969.
-
 \bibitem[Ferrie(1996)]{ferrie96}
 J.~P. Ferrie, ``\BIBforeignlanguage{English (US)}{A new sample of males linked
   from the public use microdata sample of the 1850 u.s. federal census of
@@ -120,7 +111,7 @@ R.~Abramitzky, L.~P. Boustan, and K.~Eriksson, ``Europe's tired, poor, huddled
 \bibitem[abe()]{abe2014}
 
 
-\bibitem[Abramitzky et~al.(2019{\natexlab{b}})Abramitzky, Boustan, and
+\bibitem[Abramitzky et~al.(2019{\natexlab{a}})Abramitzky, Boustan, and
   Eriksson]{abe2017}
 \BIBentryALTinterwordspacing
 R.~Abramitzky, L.~P. Boustan, and K.~Eriksson, ``To the new world and back
@@ -137,6 +128,11 @@ T.~Enamorado, B.~Fifield, and K.~Imai, ``Using a probabilistic model to assist
 \bibitem[Feigenbaum(2016)]{Feigenbaum2016AML}
 J.~J. Feigenbaum, ``A machine learning approach to census record linking ?''
   2016.
+
+\bibitem[Abramitzky et~al.(2019{\natexlab{b}})Abramitzky, Boustan, Eriksson,
+  Feigenbaum, and Perez]{abe2019}
+R.~Abramitzky, L.~Boustan, K.~Eriksson, J.~Feigenbaum, and S.~Perez,
+  ``Automated linking of historical data,'' \emph{NBER Working Paper}, 2019.
 
 \bibitem[Doidge and Harron(2018)]{harron2018}
 J.~Doidge and K.~Harron, ``Demystifying probabilistic linkage,''
@@ -182,5 +178,9 @@ M.~Hirukawa and A.~Prokhorov, ``Consistent estimation of linear regression
   no.~2, pp. 344 -- 358, 2018. [Online]. Available:
   \url{http://www.sciencedirect.com/science/article/pii/S0304407617302464}
 \BIBentrySTDinterwordspacing
+
+\bibitem[Fellegi and Sunter(1969)]{fellegi69}
+I.~P. Fellegi and A.~B. Sunter, ``A theory for record linkage,'' \emph{Journal
+  of the American Statistical Association}, vol.~64, pp. 1183--1210, 1969.
 
 \end{thebibliography}
