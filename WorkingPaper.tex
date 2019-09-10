@@ -84,8 +84,7 @@ The methods used by \cite{aizer2016} illustrate how inference using linked data 
 
 Although there are a number of recent papers that separately compare the performance of different matching algorithms  \citep{bailey2017, arp2018} and estimation methods for linked data \citep{harron2014}, little is known about the \textit{joint} impact of matching and estimation on the quality of inference with linked data.  This paper seeks to fill this gap by comparing how different \textit{combinations} of matching and estimation techniques affect parameter estimates and their confidence intervals in standard econometric models.   More generally, my goal is to develop a unified approach to linkage and analysis that can help researchers choose which combination of methods best suits their projects' needs. 
 
- 
-This paper is most similar in spirit to \cite{sw1997}, in that the goal is to develop a unified approach toward linking and analyzing matched data.  But whereas \cite{sw1997} propose a single method for linear regression,\footnote{The authors advocate iterating between linkage, estimation, and imputation steps before arriving at a final, fitted, regression line.} this paper studies the impact of multiple methods across a variety of research scenarios.  First, I implement several of the most commonly used deterministic and probabilistic record linkage procedures to generate multiple matched versions of the data.  Then, for each matched version of the data, I estimate different types of econometric models, using different estimation methods, and compare the parameter estimates and confidence intervals that these combinations produce.  One iteration of each matching/model/estimation procedure is represented in Figure \ref{design}
+To be clear, the unit of analysis in this study is a matching/estimation/econometric model combination.   First, I implement several of the most commonly used deterministic and probabilistic record linkage procedures to generate multiple matched versions of the data.  Then, for each matched version of the data, I estimate different types of econometric models, using different estimation methods, and compare the parameter estimates and confidence intervals that these combinations produce.  One iteration of this process is represented in Figure \ref{design}, and Table \ref{methods} contains a comprehensive list of the methods that  are tested. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -95,11 +94,6 @@ This paper is most similar in spirit to \cite{sw1997}, in that the goal is to de
 \end{center}
 \end{figure}
 
-At first glance, it's not obvious that the methods studied in this paper should be directly comparable, or that certain combinations of matching and estimation techniques are possible to implement at the same time; however, I will show how, with a few adjustments, both of these tasks are possible.\footnote{maybe even a theoretical result showing equivalence across classes of matching methods and estimators?}  Although the matching algorithms studied in this paper according to whether they are deterministic or probabilistic, I will show that these methods can be made directly comparable by setting  thresholds for each method such that the Type I and Type II error rates are equalized.   
-
-Similarly, the estimation techniques studied in this paper differ according to whether they require estimating the probability that a record pair refers to a match.  When implementing methods that require this extra information in combination with deterministic matching techniques that \textit{do not} output match probabilities, I will treat the matches as being equally likely.  Similarly, if an estimation procedure does not use match probabilities, but a probabilistic matching algorithm outputs them, then the probabilities will be ignored.  
-
-Section 2 introduces the general problem that this paper seeks to address and outlines a common framework for analyzing the techniques listed in Table \ref{methods}.  Sections 3 and 4 describe each of the methods in detail. Section 4 describes the implementation of the methods and the data.  Section 5 contains the results.  Section 6 will be a real empirical application, and Section 7 will conclude.
 
 \begin{table}[h!]
 \centering
@@ -120,6 +114,13 @@ Deterministic        & Probabilistic      & Uses match weights      & No match w
                \bottomrule
 \end{tabular}}
 \end{table}
+
+
+At first glance, it's not obvious that the methods studied in this paper should be directly comparable, or whether certain combinations of matching and estimation techniques are possible to implement at the same time; however, I will show that, with a few adjustments, both of these tasks are possible.\footnote{maybe even a theoretical result showing equivalence across classes of matching methods and estimators?}   Specifically, I will show that it is possible to compare the performance of deterministic and probabilistic matching methods by setting thresholds for each method that make the Type I and Type II error rates equal. 
+
+Importantly, the estimation techniques studied in this paper differ according to whether they require estimating the probability that a record pair refers to a match.  When implementing methods that require this extra information in combination with deterministic matching techniques that \textit{do not} output match probabilities, I will treat the matches as being equally likely.  Similarly, if an estimation procedure does not use match probabilities, but a probabilistic matching algorithm outputs them, then the probabilities will be ignored.  
+
+Section 2 introduces the general problem that this paper seeks to address and outlines a common framework for comparing the techniques in Table \ref{methods}.  Sections 3 and 4 describe each of the methods in detail. Section 5 describes the implementation of the methods and the data.  Section 6 contains the results.  Section 7 will be a real empirical application, and Section 8 will conclude.
 
 \section{General problem}
 Suppose that the researcher would like to estimate $\theta_0$ in a parametric model of the form
@@ -159,7 +160,7 @@ The next section discusses in detail the exact record linkage techniques that wi
 
 \section{Record Linkage Methods}
 
-Research on record linkage appears in many fields, such as statistics, computer science, operations research, and epidemiology, under many names, such as data linkage, entity resolution, instance identication, de-duplication, merge/purge processing, and reconciliation.  As such, there are several books devoted to it study \citep{harron_book, christen2012, herzog07}, and dozens of commercial and open source systems software developed for its implementation \citep{kopcke2010}.  Although insights from other fields have been slow to reach economics, recent working papers examine the impact of different record linkage techniques on inference using historic U.S. census data \citep{abe2019, bailey2017}; and the most recent version of the Handbook of Econometrics includes a chapter on the ``Econometrics of Data Combination" \citep{RidderMoffitt}.\footnote{Similar survey papers also exist in fields outside of economics, such as epidemiology and computer science \citep{harron2018, winkler99}.  In fact, that record linkage is studied by many fields makes writing (and reading!) such surveys difficult, because authors are constantly writing the same things For example, \cite{Goldstein2012} prove similar results to those published in \cite{hirukawa2018}.}
+Research on record linkage appears in many fields, such as statistics, computer science, operations research, and epidemiology, under many names, such as data linkage, entity resolution, instance identication, de-duplication, merge/purge processing, and reconciliation.  As such, there are several books devoted to its study \citep{harron_book, christen2012, herzog07}, and dozens of commercial and open source systems software developed for its implementation \citep{kopcke2010}.  Although insights from other fields have been slow to reach economics, recent working papers examine the impact of different record linkage techniques on inference using historic U.S. census data \citep{abe2019, bailey2017}; and the most recent version of the Handbook of Econometrics includes a chapter on the ``Econometrics of Data Combination" \citep{RidderMoffitt}.\footnote{Similar survey papers also exist in fields outside of economics, such as epidemiology and computer science \citep{harron2018, winkler99}.  In fact, that record linkage is studied by many fields makes writing (and reading!) such surveys difficult, because authors are constantly writing the same things For example, \cite{Goldstein2012} prove similar results to those published in \cite{hirukawa2018}.}
 
 Record linkage techniques are broadly categorized as deterministic or probabilistic\footnote{define them here}; however, every deterministic linkage method has an equivalent probabilistic version \citep{harron2018}.  Furthermore, the first three steps of the record linkage task described above are identical for all procedures.  I begin by discussing these steps, then introduce the PRL framework, and show how it can be used to express deterministic linking rules. 
 
@@ -168,6 +169,10 @@ Record linkage techniques are broadly categorized as deterministic or probabilis
 See the table in the appendix for overview of methods and their assumptions. 
 
 \section{Timeline for completion}
+
+Tbd! 
+
+
 
 
 
