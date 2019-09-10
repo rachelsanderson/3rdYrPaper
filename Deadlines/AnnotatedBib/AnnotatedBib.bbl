@@ -43,6 +43,12 @@ E.~Nix and N.~Qian, ``The fluidity of race: \enquote{Passing} in the united
   \url{http://www.nber.org/papers/w20828}
 \BIBentrySTDinterwordspacing
 
+\bibitem[Harron et~al.(2015)Harron, Goldstein, and Dibben]{harron_book}
+K.~Harron, H.~Goldstein, and C.~Dibben,
+  \emph{\BIBforeignlanguage{Undefined/Unknown}{Methodological Developments in
+  Data Linkage}}.\hskip 1em plus 0.5em minus 0.4em\relax United States: John
+  Wiley & Sons Inc., 2015.
+
 \bibitem[Christen(2012)]{christen2012}
 P.~Christen, \emph{Data Matching: Concepts and Techniques for Record Linkage,
   Entity Resolution, and Duplicate Detection}.\hskip 1em plus 0.5em minus
@@ -57,20 +63,33 @@ T.~N. Herzog, F.~J. Scheuren, and W.~E. Winkler, \emph{Data Quality and Record
 H.~K{\"o}pcke and E.~Rahm, ``Frameworks for entity matching: A comparison,''
   \emph{Data & Knowledge Engineering}, vol.~69, pp. 197--210, 02 2010.
 
-\bibitem[Hirukawa and Prokhorov(2018)]{hirukawa2018}
-\BIBentryALTinterwordspacing
-M.~Hirukawa and A.~Prokhorov, ``Consistent estimation of linear regression
-  models using matched data,'' \emph{Journal of Econometrics}, vol. 203,
-  no.~2, pp. 344 -- 358, 2018. [Online]. Available:
-  \url{http://www.sciencedirect.com/science/article/pii/S0304407617302464}
-\BIBentrySTDinterwordspacing
-
 \bibitem[Bailey et~al.(2017)Bailey, Cole, Henderson, and Massey]{bailey2017}
 \BIBentryALTinterwordspacing
 M.~Bailey, C.~Cole, M.~Henderson, and C.~Massey, ``How well do automated
   linking methods perform? lessons from u.s. historical data,'' National Bureau
   of Economic Research, Working Paper 24019, November 2017. [Online].
   Available: \url{http://www.nber.org/papers/w24019}
+\BIBentrySTDinterwordspacing
+
+\bibitem[Doidge and Harron(2018)]{harron2018}
+J.~Doidge and K.~Harron, ``Demystifying probabilistic linkage,''
+  \emph{International Journal for Population Data Science}, vol.~3, 01 2018.
+
+\bibitem[Winkler(1999)]{winkler99}
+W.~Winkler, ``The state of record linkage and current research problems,''
+  \emph{Statist. Med.}, vol.~14, 10 1999.
+
+\bibitem[Goldstein et~al.(2012)Goldstein, Harron, and Wade]{Goldstein2012}
+H.~Goldstein, K.~L. Harron, and A.~M. Wade, ``The analysis of record-linked
+  data using multiple imputation with data value priors.'' \emph{Statistics in
+  medicine}, vol. 31 28, pp. 3481--93, 2012.
+
+\bibitem[Hirukawa and Prokhorov(2018)]{hirukawa2018}
+\BIBentryALTinterwordspacing
+M.~Hirukawa and A.~Prokhorov, ``Consistent estimation of linear regression
+  models using matched data,'' \emph{Journal of Econometrics}, vol. 203,
+  no.~2, pp. 344 -- 358, 2018. [Online]. Available:
+  \url{http://www.sciencedirect.com/science/article/pii/S0304407617302464}
 \BIBentrySTDinterwordspacing
 
 \bibitem[Abramitzky et~al.(2018)Abramitzky, Mill, and Perez]{arp2018}
@@ -104,11 +123,6 @@ R.~Anderson, B.~Honore, and A.~Lleras-Muney, ``Estimation and inference using
   Available: \url{http://www.github.com/rachelsanderson/ImperfectMatching}
 \BIBentrySTDinterwordspacing
 
-\bibitem[Goldstein et~al.(2012)Goldstein, Harron, and Wade]{Goldstein2012}
-H.~Goldstein, K.~L. Harron, and A.~M. Wade, ``The analysis of record-linked
-  data using multiple imputation with data value priors.'' \emph{Statistics in
-  medicine}, vol. 31 28, pp. 3481--93, 2012.
-
 \bibitem[Bleakley and Ferrie(2016)]{bleakley2016}
 \BIBentryALTinterwordspacing
 H.~Bleakley and J.~Ferrie, ``Shocking behavior: Random wealth in antebellum
@@ -116,20 +130,6 @@ H.~Bleakley and J.~Ferrie, ``Shocking behavior: Random wealth in antebellum
   of Economics}, vol. 131, no.~3, pp. 1455--1495, 2016. [Online]. Available:
   \url{https://doi.org/10.1093/qje/qjw014}
 \BIBentrySTDinterwordspacing
-
-\bibitem[Harron et~al.(2015)Harron, Goldstein, and Dibben]{harron_book}
-K.~Harron, H.~Goldstein, and C.~Dibben,
-  \emph{\BIBforeignlanguage{Undefined/Unknown}{Methodological Developments in
-  Data Linkage}}.\hskip 1em plus 0.5em minus 0.4em\relax United States: John
-  Wiley & Sons Inc., 2015.
-
-\bibitem[Winkler(1999)]{winkler99}
-W.~Winkler, ``The state of record linkage and current research problems,''
-  \emph{Statist. Med.}, vol.~14, 10 1999.
-
-\bibitem[Doidge and Harron(2018)]{harron2018}
-J.~Doidge and K.~Harron, ``Demystifying probabilistic linkage,''
-  \emph{International Journal for Population Data Science}, vol.~3, 01 2018.
 
 \bibitem[Fellegi and Sunter(1969)]{fellegi69}
 I.~P. Fellegi and A.~B. Sunter, ``A theory for record linkage,'' \emph{Journal

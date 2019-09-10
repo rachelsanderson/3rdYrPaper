@@ -25,52 +25,48 @@ Warning--I didn't find a database entry for "larsen_rubin_2001"
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
-Warning--empty author in abe2014
-Warning--empty title in abe2014
-Warning--empty journal in abe2014
-Warning--empty year in abe2014
 Warning--empty booktitle in Feigenbaum2016AML
 
 Done.
-You've used 26 entries,
+You've used 22 entries,
             4855 wiz_defined-function locations,
-            1122 strings with 12729 characters,
-and the built_in function-call counts, 21125 in all, are:
-= -- 1942
-> -- 581
-< -- 135
-+ -- 286
-- -- 130
-* -- 1260
-:= -- 3378
-add.period$ -- 51
-call.type$ -- 26
-change.case$ -- 51
-chr.to.int$ -- 271
-cite$ -- 32
-duplicate$ -- 1442
-empty$ -- 1471
-format.name$ -- 195
-if$ -- 4693
-int.to.chr$ -- 2
-int.to.str$ -- 27
-missing$ -- 223
-newline$ -- 124
-num.names$ -- 77
-pop$ -- 531
+            1099 strings with 12120 characters,
+and the built_in function-call counts, 17849 in all, are:
+= -- 1627
+> -- 513
+< -- 110
++ -- 247
+- -- 116
+* -- 1064
+:= -- 2884
+add.period$ -- 45
+call.type$ -- 22
+change.case$ -- 44
+chr.to.int$ -- 223
+cite$ -- 23
+duplicate$ -- 1210
+empty$ -- 1251
+format.name$ -- 176
+if$ -- 3951
+int.to.chr$ -- 1
+int.to.str$ -- 23
+missing$ -- 191
+newline$ -- 110
+num.names$ -- 68
+pop$ -- 458
 preamble$ -- 1
-purify$ -- 26
+purify$ -- 22
 quote$ -- 2
-skip$ -- 1567
+skip$ -- 1316
 stack$ -- 0
-substring$ -- 658
-swap$ -- 1062
-text.length$ -- 40
+substring$ -- 527
+swap$ -- 882
+text.length$ -- 31
 text.prefix$ -- 0
 top$ -- 6
-type$ -- 392
-warning$ -- 5
-while$ -- 88
+type$ -- 328
+warning$ -- 1
+while$ -- 74
 width$ -- 0
-write$ -- 350
+write$ -- 302
 (There was 1 error message)
