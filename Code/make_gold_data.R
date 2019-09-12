@@ -30,8 +30,8 @@ wDay <- as.numeric(format(birth_dates, format = "%d"))
 
 # ground truth data
 gold_data <- data.frame(id = ids, x = x, y = y, 
-                        first = wFirst, 
-                        last = wLast, 
+                        first = as.character(wFirst), 
+                        last = as.character(wLast), 
                         year = wYear, 
                         month = wMonth, 
                         day = wDay, 
