@@ -1,9 +1,12 @@
 # import libraries
 library(generator)
+library(foreign)
+
 # set up local directories, dictionaries, etc. here
-workingDir = "~/Desktop/3rdYrPaper/Code/"
-firstNameDict =  "first_names.csv"
-lastNameDict = "last_names.txt"
+workingDir = "~/Desktop/3rdYrPaper/Code/Simulated_Data/"
+firstNameDict =  "Dictionaries/first_names_short.csv"
+lastNameDict = "Dictionaries/last_names_short.txt"
+setwd(workingDir)
 
 # read in dictionary of male/female names
 firstNames <-read.csv(paste0(workingDir,firstNameDict), header=FALSE)
@@ -41,3 +44,4 @@ gold_data <- data.frame(id = ids, x = x, y = y,
 plot(gold_data$x, gold_data$y, type='p')
 
 save(gold_data, file = "gold_data.RData")
+write.dta(gold_data, "gold_data.dta")
