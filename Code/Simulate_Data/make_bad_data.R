@@ -4,15 +4,16 @@ require(lubridate)
 require(stringr)
 require(pracma)
 require(foreign)
-source("gen_fake_dates.R")
-source("gen_fake_names.R")
+source("~/Desktop/3rdYrPaper/Code/Simulate_Data/gen_fake_dates.R")
+source("~/Desktop/3rdYrPaper/Code/Simulate_Data/gen_fake_names.R")
 
 # load in clean dataset
-setwd("~/Desktop/3rdYrPaper/Code/Simulated_Data/")
-load("gold_data.RData")
+load("~/Desktop/3rdYrPaper/Code/Data/FakeData/gold_data.RData")
 
 ##############################
 ### USER SET PARAMS HERE ######
+
+outputDir = "~/Desktop/3rdYrPaper/Code/Data/FakeData/"
 
 # choose favorite random seed 
 set.seed(1989)
@@ -42,13 +43,13 @@ y_raw_data <- select(gold_data, -x)
 y_raw_data$first <- as.character(y_raw_data$first)
 y_raw_data$last <- as.character(y_raw_data$last)
 y_raw_data$name <- paste(y_raw_data$first,y_raw_data$last )
-save(y_raw_data, file="y_raw_data.RData")
-write.dta(y_raw_data, "y_data.dta")
+save(y_raw_data, file=paste(outputDir, "y_raw_data.RData"))
+write.dta(y_raw_data, paste(outputDir,"y_data.dta"))
             
 # select random subset of x data
 x_raw_data <- gold_data[sample(nrow(gold_data), numX, replace=F),]
 x_raw_data <- select(x_raw_data, -y)
-save(x_raw_data, file="x_data_raw.RData")     
+save(x_raw_data, file=paste(outputDir,"x_data_raw.RData"))     
 x_data <- select(x_raw_data, id, x)
 
 # introduce random typos for each variable
@@ -68,8 +69,8 @@ x_data$last <- newNames$lNew
 x_data$x_name <- paste(newNames$fNew,newNames$lNew)
 
 # save corrupted x_data in R and STATA
-save(x_data, file = "x_data.RData")
-write.dta(x_data, "x_data.dta")
+save(x_data, file = paste(outputDir,"x_data.RData"))
+write.dta(x_data, paste(outputDir, "x_data.dta"))
 
 # check your work
 compare_vars <- data.frame(true_date = as.Date(x_raw_data$bday), 
@@ -85,4 +86,4 @@ gold_data_aug <- gold_data %>% mutate(name = paste(first, last)) %>%
                 full_join(x_data[, c("id", "x_bday", "x_name")], by="id") %>%
                 select(-c("first","last", "month","day","year"))
 
-save(gold_data_aug, file = "gold_data_aug.RData")
+save(gold_data_aug, file = paste(outputDir, "gold_data_aug.RData"))

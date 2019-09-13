@@ -3,15 +3,14 @@ library(generator)
 library(foreign)
 
 # set up local directories, dictionaries, etc. here
-workingDir = "~/Desktop/3rdYrPaper/Code/Simulated_Data/"
-firstNameDict =  "Dictionaries/first_names_short.csv"
-lastNameDict = "Dictionaries/last_names_short.txt"
-setwd(workingDir)
+outputDir = "~/Desktop/3rdYrPaper/Code/Data/FakeData/"
+firstNameDict =  "~/Desktop/3rdYrPaper/Code/Simulate_Data/Dictionaries/first_names_short.csv"
+lastNameDict = "~/Desktop/3rdYrPaper/Code/Simulate_Data/Dictionaries/last_names_short.txt"
 
 # read in dictionary of male/female names
-firstNames <-read.csv(paste0(workingDir,firstNameDict), header=FALSE)
+firstNames <-read.csv(firstNameDict, header=FALSE)
 # firstNames <- read.delim(paste0(workingDir,firstNameDict), header=FALSE, sep="\n")
-lastNames <- read.delim(paste0(workingDir,lastNameDict), header=FALSE,sep="\n")
+lastNames <- read.delim(lastNameDict, header=FALSE,sep="\n")
 
 # set params for generating data
 numObs <- 500
@@ -19,9 +18,9 @@ beta <- 2
 
 # simulate ground truth data
 ids <- 1:numObs
-x <- 2*rnorm(numObs)
+x1 <- 2*rnorm(numObs)
 eps <- rnorm(numObs)
-y <- x*beta + eps
+y <- x1*beta + eps
 
 # create random w_i 
 wFirst <- as.character(firstNames[round(nrow(firstNames)*runif(numObs))+1,])
@@ -32,7 +31,7 @@ wMonth <- as.numeric(format(birth_dates, format = "%m"))
 wDay <- as.numeric(format(birth_dates, format = "%d"))
 
 # ground truth data
-gold_data <- data.frame(id = ids, x = x, y = y, 
+gold_data <- data.frame(id = ids, x1 = x1, y = y, 
                         first = as.character(wFirst), 
                         last = as.character(wLast), 
                         year = wYear, 
@@ -41,7 +40,7 @@ gold_data <- data.frame(id = ids, x = x, y = y,
                         bday = as.character(birth_dates))
 
 # plot the true data points
-plot(gold_data$x, gold_data$y, type='p')
+plot(gold_data$x1, gold_data$y, type='p')
 
-save(gold_data, file = "gold_data.RData")
-write.dta(gold_data, "gold_data.dta")
+save(gold_data, file = paste(outputDir, "gold_data.RData"))
+write.dta(gold_data, paste(outputDir, "gold_data.dta"))
