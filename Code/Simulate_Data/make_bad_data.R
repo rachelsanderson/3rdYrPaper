@@ -39,18 +39,20 @@ numObs <- max(gold_data$id)
 numX <- propX*numObs
 
 # split gold data into x and y datasets
-y_raw_data <- select(gold_data, -x)
+y_raw_data <- select(gold_data, -x1)
 y_raw_data$first <- as.character(y_raw_data$first)
 y_raw_data$last <- as.character(y_raw_data$last)
 y_raw_data$name <- paste(y_raw_data$first,y_raw_data$last )
-save(y_raw_data, file=paste(outputDir, "y_raw_data.RData"))
-write.dta(y_raw_data, paste(outputDir,"y_data.dta"))
+y_raw_data$id_y <- y_raw_data$id
+save(y_raw_data, file=paste0(outputDir, "y_raw_data.RData"))
+write.dta(y_raw_data, paste0(outputDir,"y_data.dta"))
             
 # select random subset of x data
 x_raw_data <- gold_data[sample(nrow(gold_data), numX, replace=F),]
 x_raw_data <- select(x_raw_data, -y)
-save(x_raw_data, file=paste(outputDir,"x_data_raw.RData"))     
-x_data <- select(x_raw_data, id, x)
+save(x_raw_data, file=paste0(outputDir,"x_data_raw.RData"))     
+x_data <- select(x_raw_data, id, x1)
+x_data$id_x <- x_data$id
 
 # introduce random typos for each variable
 # note that typos follow conditional independence assumption
@@ -69,8 +71,8 @@ x_data$last <- newNames$lNew
 x_data$x_name <- paste(newNames$fNew,newNames$lNew)
 
 # save corrupted x_data in R and STATA
-save(x_data, file = paste(outputDir,"x_data.RData"))
-write.dta(x_data, paste(outputDir, "x_data.dta"))
+save(x_data, file = paste0(outputDir,"x_data.RData"))
+write.dta(x_data, paste0(outputDir, "x_data.dta"))
 
 # check your work
 compare_vars <- data.frame(true_date = as.Date(x_raw_data$bday), 
@@ -86,4 +88,5 @@ gold_data_aug <- gold_data %>% mutate(name = paste(first, last)) %>%
                 full_join(x_data[, c("id", "x_bday", "x_name")], by="id") %>%
                 select(-c("first","last", "month","day","year"))
 
-save(gold_data_aug, file = paste(outputDir, "gold_data_aug.RData"))
+save(gold_data_aug, file = paste0(outputDir, "gold_data_aug.RData"))
+

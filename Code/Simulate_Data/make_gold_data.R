@@ -42,5 +42,5 @@ gold_data <- data.frame(id = ids, x1 = x1, y = y,
 # plot the true data points
 plot(gold_data$x1, gold_data$y, type='p')
 
-save(gold_data, file = paste(outputDir, "gold_data.RData"))
-write.dta(gold_data, paste(outputDir, "gold_data.dta"))
+save(gold_data, file = paste0(outputDir, "gold_data.RData"))
+write.dta(gold_data, paste0(outputDir, "gold_data.dta"))
