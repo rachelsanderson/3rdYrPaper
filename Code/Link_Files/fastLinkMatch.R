@@ -13,21 +13,30 @@ load("y_raw_data.RData")
 setwd("~/Desktop/3rdYrPaper/Code/Data/MatchedData/")
 data_gold <- gold_data_aug[complete.cases(gold_data_aug),]
 save(data_gold, file = "data_gold.RData")
+y_data <- y_raw_data
+
+### SET PARAMETERS HERE
+thresh = 0.4
 
 # Code for doing PRL with one-to-one matching -- saved in unique_links
-y_data <- y_raw_data
-prl <- fastLink(x_data, y_data, varnames = c("first","last", "year", "month", "day"),
-                strsingdist.match = c("first","last"),
-                numeric.match = c("year", "month","day"))
 
-unique_links<- cbind(x_data[prl$matches[,1],c("id_x", "x1","x_name","x_bday")], y_data[prl$matches[,2],c("id_y", "y","name","bday")])
-unique_links <- unique_links %>% mutate(trueMatch = (id_x == id_y)) 
+prl <- fastLink(x_data, y_data, varnames = c("first","last", "year", "month", "day"),
+                stringdist.match = c("first","last"),
+                numeric.match = c("year", "month","day"), threshold.match = thresh, return.all=FALSE)
+
+# threshold is somehow different? these produce different things and idk why
+prl.matches <- getMatches(x_data,y_data, prl, threshold.match = thresh) %>% mutate(trueMatch = (id_x == id_y))
+prl.matches.user <- cbind(x_data[prl$matches$inds.a, c("id_x", "x1", "x_name")], y_data[prl$matches$inds.b,c("id_y","y","name")])%>% mutate(trueMatch = (id_x == id_y)) 
+
+# why don't prl.matches equal prl.matches.user   
+print(nrow(prl.matches) == nrow(prl.matches.user))
+print(sum(prl.matches$trueMatch)==sum(prl.matches.user$trueMatch))
 
 # Analyze goodness of matching
-disp(paste0("fastLink gets ", sum(unique_links$trueMatch == TRUE)/nrow(x_data), " of the possible matches correct"))
-disp(paste0("fastLink has a false match rate of ", sum(unique_links$trueMatch == FALSE)/nrow(unique_links), " of all matches made"))
+print(paste0("fastLink gets ", sum(prl.matches$trueMatch == TRUE)/nrow(x_data), " of the possible matches correct"))
+print(paste0("fastLink has a false match rate of ", sum(prl.matches$trueMatch == FALSE)/nrow(prl.matches), " of all matches made"))
 plot(data_gold$x1, data_gold$y, col="black", type='p')
-points(unique_links$x1, unique_links$y, col="red")
+points(prl.matches$x1, prl.matches$y, col="red")
 
 # save for analysis file 
 data_prl_singleMatch <- select(unique_links, c("x1", "y", "trueMatch"))
@@ -37,19 +46,18 @@ save(data_prl_singleMatch, file = "data_prl_singleMatch.RData")
 x_data <- x_data[order(x_data$id),]
 multi_prl <- fastLink(x_data, y_data, varnames = c("first","last", "year", "month", "day"),
                 stringdist.match = c("first","last"),
-                numeric.match = c("year", "month","day"), dedupe.matches = FALSE, threshold.match = 0.95 )
+                numeric.match = c("year", "month","day"), dedupe.matches = FALSE, return.all=TRUE)
 multi_links <- data.frame(i = multi_prl$matches$inds.a, j = multi_prl$matches$inds.b)
 multi_links<- multi_links[order(multi_links$i),]
-multi_link_data <- cbind(x_data[multi_links$i, ], y_data[multi_links$j, ]) %>%
+multi_link_data <- cbind(x_data[multi_links$i, cbind("id_x", "x1", "x_name","x_bday")], y_data[multi_links$j,cbind("id_y", "y", "name","bday")]) %>%
                     mutate(trueMatch = (id_x == id_y)) %>%
-                    add_count(id)
+                    add_count(id_x) %>% View()
 
 # Analyze goodness of matching
 # disp(paste0("fastLink gets ", sum(unique_links$trueMatch == TRUE)/nrow(x_data), " of the possible matches correct"))
 disp(paste0("fastLink w/multi matches has a false match rate of ", sum(multi_link_data$trueMatch == FALSE)/nrow(multi_link_data), " of all matches made"))
 plot(data_gold$x1, data_gold$y, col="black", type='p')
 points(multi_link_data$x1, multi_link_data$y, col="red") # adds so much noise!!!
-
 
 # save for analysis file 
 data_prl_multiMatch <- select(multi_link_data, c("id", "x1", "y", "trueMatch", "n"))
