@@ -69,5 +69,5 @@ plot(data_gold$x1, data_gold$y, col="black", type='p')
 points(multi_link_data$x1, multi_link_data$y, col="red") # adds much noise!!!
 
 # save for analysis file 
-data_prl_multiMatch <- select(multi_link_data, c("id_x", "x1", "y", "trueMatch", "n"))
+data_prl_multiMatch <- select(multi_link_data, c("id_x", "id_y", "x1", "y", "trueMatch", "n", "posterior"))
 save(data_prl_multiMatch, file = "data_prl_multiMatch.RData")
