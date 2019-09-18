@@ -46,19 +46,28 @@ save(data_prl_singleMatch, file = "data_prl_singleMatch.RData")
 x_data <- x_data[order(x_data$id),]
 multi_prl <- fastLink(x_data, y_data, varnames = c("first","last", "year", "month", "day"),
                 stringdist.match = c("first","last"),
-                numeric.match = c("year", "month","day"), dedupe.matches = FALSE, return.all=TRUE)
+                numeric.match = c("year", "month","day"), dedupe.matches = FALSE, threshold.match = thresh)
 multi_links <- data.frame(i = multi_prl$matches$inds.a, j = multi_prl$matches$inds.b)
-multi_links<- multi_links[order(multi_links$i),]
-multi_link_data <- cbind(x_data[multi_links$i, cbind("id_x", "x1", "x_name","x_bday")], y_data[multi_links$j,cbind("id_y", "y", "name","bday")]) %>%
-                    mutate(trueMatch = (id_x == id_y)) %>%
-                    add_count(id_x) %>% View()
+# multi_links<- multi_links[order(multi_links$i),]
+multi_link_data_raw <- cbind(x_data[multi_links$i, cbind("id_x", "x1", "x_name","x_bday")], y_data[multi_links$j,cbind("id_y", "y", "name","bday")]) %>%
+                    mutate(trueMatch = (id_x == id_y),
+                           posterior =  multi_prl$posterior) %>%
+                    add_count(id_x) %>%
+                    arrange(id_x, desc(posterior))
+
+truncate_links <- function(df, thresh){
+  df.truncated <- df %>% select(-n) %>% filter(posterior >= thresh ) %>% add_count(id_x)
+  return(df.truncated)
+}
+
+multi_link_data <- truncate_links(multi_link_data_raw, thresh)
 
 # Analyze goodness of matching
 # disp(paste0("fastLink gets ", sum(unique_links$trueMatch == TRUE)/nrow(x_data), " of the possible matches correct"))
-disp(paste0("fastLink w/multi matches has a false match rate of ", sum(multi_link_data$trueMatch == FALSE)/nrow(multi_link_data), " of all matches made"))
+print(paste0("fastLink w/multi matches has a false match rate of ", sum(multi_link_data$trueMatch == FALSE)/nrow(multi_link_data), " of all matches made"))
 plot(data_gold$x1, data_gold$y, col="black", type='p')
-points(multi_link_data$x1, multi_link_data$y, col="red") # adds so much noise!!!
+points(multi_link_data$x1, multi_link_data$y, col="red") # adds much noise!!!
 
 # save for analysis file 
-data_prl_multiMatch <- select(multi_link_data, c("id", "x1", "y", "trueMatch", "n"))
+data_prl_multiMatch <- select(multi_link_data, c("id_x", "x1", "y", "trueMatch", "n"))
 save(data_prl_multiMatch, file = "data_prl_multiMatch.RData")
