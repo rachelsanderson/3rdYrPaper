@@ -462,21 +462,21 @@ program define abematch
 
 	
 	/* drop if more than one match */
-	
-	* e.g. 1 to 1
-	replace `exactmatch1'=1 if `count_A'==1 & `count_B'==1
-	
-	* throw out 1 to 2+, but keep 2+ to 1+ in case they are an issue later
-	drop if `count_B'>1  & `count_A'==1  & `File_A'==1
-	drop `count_B' `count_A' 
-
-	/* tag individuals with 1 match */
-	replace `matched_at_A' = 0 if `exactmatch1' == 1 & `File_A' == 1
-
-	if "`uniquestub_match'"!=""{
-		bysort `match_vars' `timevar' : egen  `uniquestub_match'0 = sum(`File_B')
-	}
-	
+//	
+// 	* e.g. 1 to 1
+// 	replace `exactmatch1'=1 if `count_A'==1 & `count_B'==1
+//	
+// 	* throw out 1 to 2+, but keep 2+ to 1+ in case they are an issue later
+// 	drop if `count_B'>1  & `count_A'==1  & `File_A'==1
+// 	drop `count_B' `count_A' 
+//
+// 	/* tag individuals with 1 match */
+// 	replace `matched_at_A' = 0 if `exactmatch1' == 1 & `File_A' == 1
+//
+// 	if "`uniquestub_match'"!=""{
+// 		bysort `match_vars' `timevar' : egen  `uniquestub_match'0 = sum(`File_B')
+// 	}
+//	
 	if `timeband'>0{
 		tempvar already 
 		gen `already' = `exactmatch1'

@@ -45,7 +45,11 @@ y_raw_data$last <- as.character(y_raw_data$last)
 y_raw_data$name <- paste(y_raw_data$first,y_raw_data$last )
 y_raw_data$id_y <- y_raw_data$id
 save(y_raw_data, file=paste0(outputDir, "y_raw_data.RData"))
-write.dta(y_raw_data, paste0(outputDir,"y_data.dta"))
+
+# duplicate each row
+y_data<- y_raw_data[rep(seq_len(nrow(y_raw_data)), each=2),]
+y_data$id_y <- 1:nrow(y_data)
+write.dta(y_data, paste0(outputDir,"y_data.dta"))
             
 # select random subset of x data
 x_raw_data <- gold_data[sample(nrow(gold_data), numX, replace=F),]
