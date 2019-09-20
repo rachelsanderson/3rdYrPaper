@@ -1,6 +1,6 @@
 require(dplyr)
 
-abe_match <- function(x.df, y.df, age_band=2, unique=TRUE, twoway=TRUE){
+abe_match <- function(x.df, y.df, match_vars, age_band=2, unique=TRUE, twoway=TRUE){
   
   # de duplicate files in file A 
   x_unique <- x.df %>% distinct(f_name_nysiis, l_name_nysiis, year, x1, .keep_all = TRUE)
