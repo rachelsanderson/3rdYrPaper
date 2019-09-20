@@ -1,12 +1,16 @@
 require(dplyr)
+# input are name_vars <-- all string variables for matching
+# x/yVar is vector of variables of interest in x/yFile 
 
-abe_match <- function(x.df, y.df, match_vars, age_band=2, unique=TRUE, twoway=TRUE){
+abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE, twoway=TRUE){
+  
+  match_vars <- c(name_vars, 'year')
   
   # de duplicate files in file A 
-  x_unique <- x.df %>% distinct(f_name_nysiis, l_name_nysiis, year, x1, .keep_all = TRUE)
+  x_unique <- x.df %>% distinct_(.dots = c(match_vars, xVar), .keep_all = TRUE)
   
   # look for exact matches w/in +- age band in file B 
-  x_matches <- x_unique %>%  inner_join(y.df, by = c("f_name_nysiis", "l_name_nysiis")) %>%
+  x_matches <- x_unique %>%  inner_join(y.df, by = name_vars) %>%
     mutate(age_diff = abs(year.x - year.y)) %>% 
     filter(age_diff <= age_band) %>% 
     group_by(id_x, age_diff) %>% 
@@ -18,8 +22,8 @@ abe_match <- function(x.df, y.df, match_vars, age_band=2, unique=TRUE, twoway=TR
   }
   
   if (twoway){
-    y_unique <- y.df %>% distinct(f_name_nysiis, l_name_nysiis, year, y, .keep_all = TRUE)
-    y_matches <- y_unique %>%  inner_join(x.df, by = c("f_name_nysiis", "l_name_nysiis")) %>%
+    y_unique <- y.df %>% distinct_(.dots = c(match_vars, yVar), .keep_all = TRUE)
+    y_matches <- y_unique %>%  inner_join(x.df, by = name_vars) %>%
       mutate(age_diff = abs(year.x - year.y)) %>% 
       filter(age_diff <= age_band) %>% 
       group_by(id_y, age_diff) %>% 
@@ -27,9 +31,10 @@ abe_match <- function(x.df, y.df, match_vars, age_band=2, unique=TRUE, twoway=TR
     if(unique){
       y_matches <- y_name_matches %>% group_by(id_y) %>% filter(n == 1 & age_diff == min(age_diff))
     }
-  matches <- inner_join(x_matches, y_matches, by = c("x1", "y", "f_name_nysiis", "l_name_nysiis", "id_x", "id_y", "age_diff")) %>%
+  matches <- inner_join(x_matches, y_matches, by = c(xVar, yVar, name_vars, "id_x", "id_y", "age_diff")) %>%
       select(-c("n.x", "n.y"))
   }
-  matches <- matches %>% group_by(id_x) %>% add_count() %>% mutate(posterior = 1/n)
+  matches <- matches %>% group_by(id_x) %>% add_count() %>% mutate(posterior = 1/n) %>% 
+      mutate(true_match = (id_x == id_y))
   return(matches)
 }
