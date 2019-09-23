@@ -1,5 +1,3 @@
-require(dplyr)
-require(fastLink)
 prl_match <- function(x.df, y.df, name_vars, num_vars, unique=TRUE, thresh=0.85){
   if (unique){ 
       # uses year only, but using month and day as well creates much better results

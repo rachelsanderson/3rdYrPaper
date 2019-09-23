@@ -4,6 +4,8 @@ require(dplyr)
 
 abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE, twoway=TRUE){
   
+  id_x <- xVar[1]
+  id_y <- yVar[1]
   match_vars <- c(name_vars, 'year')
   
   # de duplicate files in file A 
@@ -29,7 +31,7 @@ abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE
       group_by(id_y, age_diff) %>% 
       add_count() 
     if(unique){
-      y_matches <- y_name_matches %>% group_by(id_y) %>% filter(n == 1 & age_diff == min(age_diff))
+      y_matches <- y_matches %>% group_by(id_y) %>% filter(n == 1 & age_diff == min(age_diff))
     }
   matches <- inner_join(x_matches, y_matches, by = c(xVar, yVar, name_vars, "id_x", "id_y", "age_diff")) %>%
       select(-c("n.x", "n.y"))

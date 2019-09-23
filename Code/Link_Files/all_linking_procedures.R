@@ -1,27 +1,26 @@
 require(dplyr)
-require(scales)
+require(fastLink)
+source("~/Desktop/3rdYrPaper/Code/Link_Files/link_files.R")
 source("~/Desktop/3rdYrPaper/Code/Link_Files/abe_matching.R")
 source("~/Desktop/3rdYrPaper/Code/Link_Files/prl_match.R")
 
-
+### LOAD IN STANDARDIZED DATA FRAMES #######
 load("~/Desktop/3rdYrPaper/Code/Data/FakeData/gold_data_aug.RData")
 x.df <- read.dta("~/Desktop/3rdYrPaper/Code/Data/FakeData/x_data_ready2link.dta")
 x.df <- select(x.df, x1, id_x, year, f_name_nysiis, l_name_nysiis)
 y.df <- read.dta("~/Desktop/3rdYrPaper/Code/Data/FakeData/y_data_ready2link.dta")
 y.df <- select(y.df, y, id_y, year, f_name_nysiis, l_name_nysiis)
 
+### Declare names of variables #######
 name_vars <- c("f_name_nysiis", "l_name_nysiis")
 num_vars <- c("year")
-xVars <- c("x1")
-yVars <- c("y")
+x_vars <- c("id_x", "x1")
+y_vars <- c("id_y", "y")
+outDir <- "~/Desktop/3rdYrPaper/Code/Data/MatchedData/"
 
-abe_single <-  abe_match(x.df, y.df, name_vars, xVars, yVars, age_band = 2, unique = TRUE, twoway=TRUE)
-abe_multi <- abe_match(x.df, y.df, name_vars, xVars, yVars, age_band = 2, unique = FALSE, twoway=TRUE)
-print(paste0("Switching from multiple to single ABE matching drops ", nrow(abe_multi) - nrow(abe_single), " observations"))
-
-prl_single <- prl_match(x.df, y.df, name_vars, num_vars, unique = TRUE, thresh = 0.85)
-prl_multi <-  prl_match(x.df, y.df, name_vars, num_vars, unique = FALSE, thresh = 0.85)
-
+### Master linking function returns list of matched datasets #######
+match_list <- link_files(x.df, y.df, x_vars, y_vars, name_vars, num_vars, 
+                       age_band=2, twoway=TRUE, thresh=0.85, outputDir=outDir, saveOut=TRUE)
 
 ## MAKE THIS INTO A FUNCTION?
 par(mfrow = c(2,2))
