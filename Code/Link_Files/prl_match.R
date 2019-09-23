@@ -16,5 +16,8 @@ prl_match <- function(x.df, y.df, name_vars, num_vars, unique=TRUE, thresh=0.85)
            posterior =  multi_prl$posterior) %>%
     filter(posterior >= thresh ) %>% add_count(id_x)
   }
+  
+  colnames(matches) <- gsub('.','_', colnames(matches), fixed=TRUE)
+
   return(matches)
 }

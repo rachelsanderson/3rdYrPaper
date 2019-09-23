@@ -22,21 +22,13 @@ outDir <- "~/Desktop/3rdYrPaper/Code/Data/MatchedData/"
 match_list <- link_files(x.df, y.df, x_vars, y_vars, name_vars, num_vars, 
                        age_band=2, twoway=TRUE, thresh=0.85, outputDir=outDir, saveOut=TRUE)
 
-## MAKE THIS INTO A FUNCTION?
+###  Plot output of all matchings 
 par(mfrow = c(2,2))
-plot(gold_data_aug$x1, gold_data_aug$y, col="black", type='p', main="abe single")
-points(abe_single$x1, abe_single$y, col="red") 
-abline(lm(abe_single$y ~ abe_single$x1), col="blue")
+for (i in seq_along(match_list)){
+  m <- match_list[[i]]
+  name <- names(match_list)[i]
+  plot(gold_data_aug$x1, gold_data_aug$y, col="black", type='p', main=name)
+  points(m$x1, m$y, col="red") 
+  abline(lm(m$y ~ m$x1), col="blue")
+}
 
-plot(gold_data_aug$x1, gold_data_aug$y, col="black", type='p', main="abe multi")
-points(abe_multi$x1, abe_multi$y, col="red") 
-abline(lm(abe_multi$y ~ abe_multi$x1), col="blue")
-
-plot(gold_data_aug$x1, gold_data_aug$y, col="black", type='p', main="prl single")
-points(prl_single$x1, prl_single$y, col="red") 
-abline(lm(prl_single$y ~ prl_single$x1), col="blue")
-
-plot(gold_data_aug$x1, gold_data_aug$y, col="black", type='p', main="prl multi")
-points(prl_multi$x1, prl_multi$y, col=alpha("red",1))
-abline(lm(prl_multi$y ~ prl_multi$x1), col="blue")
-       

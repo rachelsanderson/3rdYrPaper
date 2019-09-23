@@ -1,7 +1,3 @@
-require(dplyr)
-# input are name_vars <-- all string variables for matching
-# x/yVar is vector of variables of interest in x/yFile 
-
 abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE, twoway=TRUE){
   
   id_x <- xVar[1]
@@ -29,7 +25,8 @@ abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE
       mutate(age_diff = abs(year.x - year.y)) %>% 
       filter(age_diff <= age_band) %>% 
       group_by(id_y, age_diff) %>% 
-      add_count() 
+      add_count() %>%
+      select(-c("year.x", "year.y"))
     if(unique){
       y_matches <- y_matches %>% group_by(id_y) %>% filter(n == 1 & age_diff == min(age_diff))
     }
@@ -37,6 +34,9 @@ abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE
       select(-c("n.x", "n.y"))
   }
   matches <- matches %>% group_by(id_x) %>% add_count() %>% mutate(posterior = 1/n) %>% 
-      mutate(true_match = (id_x == id_y))
+      mutate(true_match = (id_x == id_y)) %>%
+      rename(year_x = year.x,
+             year_y = year.y)
   return(matches)
 }
+

@@ -18,9 +18,6 @@
 # 
 ####################################################################################
 
-require(dplyr)
-load("~/Desktop/3rdYrPaper/Code/Data/MatchedData/data_prl_multiMatch.RData")
-
 lahiri_larsen <- function(df){
   
   # normalize probabilities
