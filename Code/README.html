@@ -1055,7 +1055,55 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="readme-for-a-unified-approach-to-analyzing-linked-data">README for &ldquo;A unified approach to analyzing linked data&rdquo;<a class="headerlink" href="#readme-for-a-unified-approach-to-analyzing-linked-data" title="Permanent link"></a></h1>
+</style><title>README</title></head><body><article class="markdown-body"><h1 id="readme-for-linked-data-paper">README for linked data paper<a class="headerlink" href="#readme-for-linked-data-paper" title="Permanent link"></a></h1>
+<h2 id="september-23-2019">September 23, 2019<a class="headerlink" href="#september-23-2019" title="Permanent link"></a></h2>
+<h2 id="by-rachel-anderson">by Rachel Anderson<a class="headerlink" href="#by-rachel-anderson" title="Permanent link"></a></h2>
+<p>=====================================================================</p>
+<h2 id="what-ive-done">What I&rsquo;ve done<a class="headerlink" href="#what-ive-done" title="Permanent link"></a></h2>
+<ol>
+<li>
+<p>Simulated fake datasets.   Randomly introduced errors in names (either typographical errors or missing variables) and birthdays (adding years, months, days, according to draws from a normal distribution).</p>
+</li>
+<li>
+<p>Applied ABE and probabilistic record linkage (PRL) matching procedures, with either unique/multi matching, to obtain 4 matched versions of the fake datasets.</p>
 <ul>
-<li>this is a list</li>
+<li>PRL is implemented using fastLink package in R. </li>
+</ul>
+</li>
+<li>
+<p>Began writing code for AHL (2019) and Lahiri &amp; Larsen (2005) estimation procedures (this is where I am stuck).</p>
+</li>
+<li>
+<p>Applied for 1940 Census data &ndash; there are 2 transcriptions, which I will link to each other. </p>
+</li>
+</ol>
+<p>=====================================================================</p>
+<h2 id="workflow-overview">Workflow Overview<a class="headerlink" href="#workflow-overview" title="Permanent link"></a></h2>
+<h3 id="1-simulate-fake-data">1.  Simulate fake data<a class="headerlink" href="#1-simulate-fake-data" title="Permanent link"></a></h3>
+<p>In &ldquo;Simulate_Data&rdquo; folder, the files</p>
+<ul>
+<li>make_gold_data.R </li>
+<li>make_bad_data.R</li>
+</ul>
+<p>save datasets in ./Data/FakeData/ folder</p>
+<h3 id="2-link-data">2.  Link data<a class="headerlink" href="#2-link-data" title="Permanent link"></a></h3>
+<p>In &ldquo;Link_Files&rdquo; folder, </p>
+<ul>
+<li>Run all_linking_procedures.R</li>
+</ul>
+<p>This file calls the link_files.R helper function, which implements, for two input datasets,</p>
+<ul>
+<li>abe_matching.R</li>
+<li>prl_match.R</li>
+</ul>
+<p>and outputs linked dataset as CSV files in ./Data/MatchedData</p>
+<h3 id="3-estimate-using-linked-data">3. Estimate using linked data<a class="headerlink" href="#3-estimate-using-linked-data" title="Permanent link"></a></h3>
+<p>In &ldquo;Estimation&rdquo; folder, </p>
+<ul>
+<li>Run all_estimation.R</li>
+</ul>
+<p>using linked datasets.  This file calls the functions</p>
+<ul>
+<li>ahl19.R</li>
+<li>lahiri_larsen.R </li>
 </ul></article></body></html>

@@ -1,9 +1,23 @@
-# README for "A unified approach to analyzing linked data" 
+## README for linked data project 
 
-September 23, 2019
+###  September 23, 2019
+### by Rachel Anderson
 
-by Rachel Anderson
 
+================
+## What I've done
+
+1. Simulated fake datasets. Randomly introduced errors in names (either typographical errors or missing variables) and birthdays (adding years, months, days, according to draws from a normal distribution).
+
+2. Applied ABE and probabilistic record linkage (PRL) matching procedures, with either unique/multi matching, to obtain 4 matched versions of the fake datasets.
+
+	- PRL is implemented using fastLink package in R.
+
+3. Began writing code for AHL (2019) and Lahiri & Larsen (2005) estimation procedures (this is where I am stuck).
+
+4. Applied for 1940 Census data – there are 2 transcriptions, which I will link to each other.
+
+================
 
 ## Workflow Overview 
 ### 1.  Simulate fake data 
@@ -38,4 +52,4 @@ using linked datasets.  This file calls the functions
 - ahl19.R
 - lahiri_larsen.R 
 
-## Simulating fake data
+
