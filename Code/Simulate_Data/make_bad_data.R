@@ -2,6 +2,7 @@
 require(dplyr)
 require(lubridate)
 require(stringr)
+library(gridExtra)
 require(pracma)
 require(foreign)
 source("~/Desktop/3rdYrPaper/Code/Simulate_Data/gen_fake_dates.R")
@@ -12,14 +13,15 @@ load("~/Desktop/3rdYrPaper/Code/Data/FakeData/gold_data.RData")
 
 ##############################
 ### USER SET PARAMS HERE ######
+##############################
 
 outputDir = "~/Desktop/3rdYrPaper/Code/Data/FakeData/"
-
+figDir = "~/Desktop/3rdYrPaper/Figures/"
 # choose favorite random seed 
 set.seed(1989)
 
 # set size of X dataset to include
-propX <- 0.7  
+propX <- 0.7
 
 # prob of normally distributed error
 pErrorDay <- 0.02
@@ -39,7 +41,7 @@ numObs <- max(gold_data$id)
 numX <- propX*numObs
 
 # split gold data into x and y datasets
-y_raw_data <- select(gold_data, -x1)
+y_raw_data <- select(gold_data, -x2)
 y_raw_data$first <- as.character(y_raw_data$first)
 y_raw_data$last <- as.character(y_raw_data$last)
 y_raw_data$name <- paste(y_raw_data$first,y_raw_data$last )
@@ -55,7 +57,7 @@ write.dta(y_data, paste0(outputDir,"y_data.dta"))
 x_raw_data <- gold_data[sample(nrow(gold_data), numX, replace=F),]
 x_raw_data <- select(x_raw_data, -y)
 save(x_raw_data, file=paste0(outputDir,"x_data_raw.RData"))     
-x_data <- select(x_raw_data, id, x1)
+x_data <- select(x_raw_data, id, x2, x1)
 x_data$id_x <- x_data$id
 
 # introduce random typos for each variable
@@ -94,3 +96,17 @@ gold_data_aug <- gold_data %>% mutate(name = paste(first, last)) %>%
 
 save(gold_data_aug, file = paste0(outputDir, "gold_data_aug.RData"))
 
+gold.plot <- ggplot(data = gold_data, mapping=aes(x2, y, group=x1, colour=x1)) + 
+  geom_point() + 
+  scale_colour_discrete(name = "x1", labels=c("0","1")) + 
+  labs(title = "Full 'gold' dataset", x = "x2", y = "y") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(legend.position = c(0.8, 0.2))
+first_best.plot <- ggplot(data = na.omit(gold_data), mapping=aes(x2, y, group=x1, colour=x1)) + 
+  geom_point() + 
+  scale_colour_discrete(name = "x1", labels=c("0","1")) + 
+  labs(title = "First best 'gold' dataset", x = "x2", y = "y") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(legend.position = c(0.8, 0.2))
+l <- grid.arrange(gold.plot,first_best.plot, nrow=1)
+ggsave(paste0(figDir,"gold_data_compare.pdf"), plot = l)

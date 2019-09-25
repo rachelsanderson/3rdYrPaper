@@ -108,8 +108,8 @@ To be clear, the unit of analysis in this study is a matching/estimation/econome
 \cmidrule(lr){1-2} \cmidrule(lr){3-4}
 Deterministic        & Probabilistic      & Uses match weights      & No match weights          \\
 \midrule
-\cite{abe2012} & \cite{arp2018} & \cite{lahiri05} & \cite{ahl2019}                \\
-\cite{aizer2016} & \cite{Feigenbaum2016AML}     & \cite{Goldstein2012} & \cite{nq2015}        \\
+\cite{abe2012} & \cite{enamorado} & \cite{lahiri05} & \cite{ahl2019}                \\
+&   & \cite{Goldstein2012} & \cite{nq2015}        \\
                      &                      & Anderson (2019)         & \cite{bleakley2016} \\
                \bottomrule
 \end{tabular}}
@@ -119,6 +119,21 @@ Deterministic        & Probabilistic      & Uses match weights      & No match w
 At first glance, it's not obvious that the methods studied in this paper should be directly comparable, or whether certain combinations of matching and estimation techniques are possible to implement at the same time; however, I will show that, with a few adjustments, both of these tasks are possible.\footnote{maybe even a theoretical result showing equivalence across classes of matching methods and estimators?}   Specifically, I will show that it is possible to compare the performance of deterministic and probabilistic matching methods by setting thresholds for each method that make the Type I and Type II error rates equal. 
 
 Importantly, the estimation techniques studied in this paper differ according to whether they require estimating the probability that a record pair refers to a match.  When implementing methods that require this extra information in combination with deterministic matching techniques that \textit{do not} output match probabilities, I will treat the matches as being equally likely.  Similarly, if an estimation procedure does not use match probabilities, but a probabilistic matching algorithm outputs them, then the probabilities will be ignored.  
+
+\textbf{Example.} To illustrate the techniques studied in this paper, I will use a running example.  As my ``gold" dataset, I generate 500 observations $(y_i, x_{1i}, x_{2i}, w_i)$ according to the model:
+\begin{equation}
+y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i , \hspace{5pt} \  \varepsilon_i \independent x_{1i}, x_{2i} 
+\end{equation}
+with $(\beta_0, \beta_1, \beta_2) = (2, 0.5, 1)$, $x_{1i} \overset{i.i.d}{\sim} \text{Bernoulli}(0.5)$, $x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, 2)$, and $\varepsilon_i \overset{i.i.d}{\sim} \matchal{N}{(0, 2)}$.   The values of $x_{1i}$ and $x_{2i}$ are mutually independent.   The correctly specified linear regression model yields an $R^2$ value of approximately 0.50.  
+To construct $w_i$, I randomly assign each observation a first and last name drawn independently from dictionaries\footnote{Please refer to online appendix for details} of length 41 and 24, respectively, and use an \texttt{R} package to generate random birthdates between January 1, 1900, and December 31, 1925.  These points are plotted in Figure 1(a).  
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/gold_data_compare.pdf}
+\caption{default}
+\label{default}
+\end{center}
+\end{figure}
 
 Section 2 introduces the general problem that this paper seeks to address and outlines a common framework for comparing the techniques in Table \ref{methods}.  Sections 3 and 4 describe each of the methods in detail. Section 5 describes the implementation of the methods and the data.  Section 6 contains the results.  Section 7 will be a real empirical application, and Section 8 will conclude.
 
