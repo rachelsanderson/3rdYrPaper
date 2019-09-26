@@ -8,12 +8,13 @@
 \usepackage{chngpage}
 \usepackage{mathtools,xparse}
 \usepackage{graphics}
+\usepackage{tikz}
+\usepackage{tikz-cd}
 \colorlet{shadecolor}{orange!15}
 % \definecolor{shadecolor}{rgb}{255,128,0}\
 \usepackage{float}
 \usepackage{fullpage} % Package to use full page
 \usepackage{parskip} % Package to tweak paragraph skipping
-\usepackage{tikz} % Package for drawing
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{hyperref}
@@ -23,7 +24,6 @@
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{longtable}
 \usepackage{indentfirst}
-\usepackage{tikz}
 \usetikzlibrary{arrows,shapes,positioning,shadows,trees}
 \usepackage{array}
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
@@ -96,10 +96,13 @@ y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i, \hspace{10pt}
 \end{gather}
 with $(\beta_0, \beta_1, \beta_2, \sigma^2) = (2, 0.5, 1, 2)$.  Given these parameter values, estimating a correctly specified linear regression model yields an $R^2$ value of approximately 0.50 (see Figure 1(a)).  Each observation is associated with a vector of identifying variables, $w_i$, that consists of a first and last name drawn randomly from a list of first and last names\footnote{The first and last name lists contain 41 and 24 names, respectively, and can be found in the replication files.}, and a random birthday between January 1, 1900, and December 31, 1925, so that the full synthetic dataset resembles Table \ref{sample_dta}.  The number of possible names is smaller than the number of observations to ensure that there are multiple observations with the same name. 
  
- \begin{table}[htdp]
-\caption{``Ground Truth" Dataset}
+ % Massive latex Figure of synthetic dataset -- put in new file ideally
+\begin{figure}
+\caption{Creation of Synthetic Datasets}
 \vspace{5pt}
-\begin{center}
+ \begin{adjustwidth}{-.5in}{-.5in}  
+\begin{tikzpicture}
+\node (a) at (0,0){
 \begin{tabular}{ccccccc}
 \toprule
 ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
@@ -112,20 +115,12 @@ ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
 \mc{7}{c}\vdots \\ 
 1000 & $y_{500}$ & $x_{1,500}$ & $x_{2,500}$ & Vicky & Anderson & 1915-04-14\\
 \bottomrule
-\end{tabular}
-\end{center}
-\label{sample_dta}
-\end{table}%
-
-Next, I split the ``ground truth" dataset into an $x$- and $y$-datafile, which contain $(x_{1i},x_{2i}, w_i)$ and $(y_j, w_j)$ values respectively.  The $x$-datafile contains values for 400 observations, selected at random from the ground truth dataset; the $y$-datafile includes all 1,000 observations, with $w_j$ identical to the ground truth data.   For each $w_i$ in the $x$-datafile, I randomly add noise to the original names, by deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), or swapping English phonetic equivalents (e.g. ``Ellie` becomes ``Elie") according to pre-specified probabilities.   I also add normally distributed errors to the birth day, month, and year, according to pre-specified probabilities.  These files are represented in Figure 2. 
-
-
-\begin{table}
-  \begin{adjustwidth}{-.5in}{-.5in}  
-\footnotesize
-
-\caption{Construction of $x$- and $y$-datafiles}
-\begin{center\vspace{5pt}}
+\end{tabular}};
+\\
+\vspace{20pt}
+\\
+\footnotesize{
+\node[yshift=-3cm] (b) at (a.south){
 \begin{tabular}{ cc }   % top level tables, with 2 rows
 $x$-Datafile & $y$-Datafile \\  
 % bottom left of the top level table: table 1 
@@ -154,10 +149,14 @@ ID & $y$ & Name & Birthday \\
 1000 & $y_{1000}$ & Vicky Anderson & 1915-04-14\\
 \bottomrule
 \end{tabular} \\
-\end{tabular}
-\end{center}
+\end{tabular}};
+\draw[->, ultra thick](a)--(b);
+\end{tikzpicture}
 \end{adjustwidth}
-\end{table}
+\label{sample_dta}
+\end{figure}%
+
+Next, I split the ``ground truth" dataset into an $x$- and $y$-datafile, which contain $(x_{1i},x_{2i}, w_i)$ and $(y_j, w_j)$ values respectively.  The $x$-datafile contains values for 400 observations, selected at random from the ground truth dataset; the $y$-datafile includes all 1,000 observations, with $w_j$ identical to the ground truth data.   For each $w_i$ in the $x$-datafile, I randomly add noise to the original names, by deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), or swapping English phonetic equivalents (e.g. ``Ellie` becomes ``Elie") according to pre-specified probabilities.   I also add normally distributed errors to the birth day, month, and year, according to pre-specified probabilities.  These files are represented in Figure 2. 
 
 To be clear, the unit of analysis in this study is a matching/estimation/econometric model combination.   First, I implement several of the most commonly used deterministic and probabilistic record linkage procedures to generate multiple matched versions of the data.  Then, for each matched version of the data, I estimate different types of econometric models, using different estimation methods, and compare the parameter estimates and confidence intervals that these combinations produce.  One iteration of this process is represented in Figure \ref{design}, and Table \ref{methods} contains a comprehensive list of the methods that  are tested. 
 

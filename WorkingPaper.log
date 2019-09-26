@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  25 SEP 2019 22:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  26 SEP 2019 11:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -425,34 +425,19 @@ Package: xparse 2018/02/21 L3 Experimental document command parser
 \l__xparse_mandatory_args_int=\count267
 \l__xparse_v_nesting_int=\count268
 )
-(/usr/local/texlive/2018/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count269
-\float@exts=\toks24
-\float@box=\box46
-\@float@everytoks=\toks25
-\@floatcapt=\box47
-)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/preprint/fullpage.sty
-Package: fullpage 1999/02/23 1.1 (PWD)
-\FP@margin=\skip60
-)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/parskip/parskip.sty
-Package: parskip 2001/04/09 non-zero parskip adjustments
-)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 (/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
 x
-\pgfutil@everybye=\toks26
+\pgfutil@everybye=\toks24
 \pgfutil@tempdima=\dimen181
 \pgfutil@tempdimb=\dimen182
 
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-li
 sts.tex))
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box48
+\pgfutil@abb=\box46
 (/usr/local/texlive/2018/texmf-dist/tex/latex/ms/everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
 ))
@@ -465,12 +450,12 @@ Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks27
-\pgfkeys@temptoks=\toks28
+\pgfkeys@pathtoks=\toks25
+\pgfkeys@temptoks=\toks26
 
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.c
 ode.tex
-\pgfkeys@tmptoks=\toks29
+\pgfkeys@tmptoks=\toks27
 ))
 \pgf@x=\dimen183
 \pgf@y=\dimen184
@@ -482,13 +467,13 @@ ode.tex
 \pgf@yc=\dimen190
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
-\c@pgf@counta=\count270
-\c@pgf@countb=\count271
-\c@pgf@countc=\count272
-\c@pgf@countd=\count273
-\t@pgf@toka=\toks30
-\t@pgf@tokb=\toks31
-\t@pgf@tokc=\toks32
+\c@pgf@counta=\count269
+\c@pgf@countb=\count270
+\c@pgf@countc=\count271
+\c@pgf@countd=\count272
+\t@pgf@toka=\toks28
+\t@pgf@tokb=\toks29
+\t@pgf@tokc=\toks30
 
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
@@ -506,8 +491,8 @@ File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
 code.tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count274
-\pgfsyssoftpath@bigbuffer@items=\count275
+\pgfsyssoftpath@smallbuffer@items=\count273
+\pgfsyssoftpath@bigbuffer@items=\count274
 )
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
 code.tex
@@ -520,11 +505,11 @@ Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen191
-\pgfmath@count=\count276
-\pgfmath@box=\box49
-\pgfmath@toks=\toks33
-\pgfmath@stack@operand=\toks34
-\pgfmath@stack@operation=\toks35
+\pgfmath@count=\count275
+\pgfmath@box=\box47
+\pgfmath@toks=\toks31
+\pgfmath@stack@operand=\toks32
+\pgfmath@stack@operation=\toks33
 )
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
 tex
@@ -545,7 +530,7 @@ code.tex)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integ
 erarithmetics.code.tex)))
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count277
+\c@pgfmathroundto@lastzeros=\count276
 ))
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
 de.tex
@@ -580,10 +565,10 @@ File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.co
 de.tex
 File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
-\pgfpic=\box50
-\pgf@hbox=\box51
-\pgf@layerbox@main=\box52
-\pgf@picture@serial@count=\count278
+\pgfpic=\box48
+\pgf@hbox=\box49
+\pgf@layerbox@main=\box50
+\pgf@picture@serial@count=\count277
 )
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
 ate.code.tex
@@ -618,7 +603,7 @@ File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
 e.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
 \pgf@max=\dimen271
-\pgf@sys@shading@range@num=\count279
+\pgf@sys@shading@range@num=\count278
 )
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
 e.tex
@@ -627,7 +612,7 @@ File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.
 code.tex
 File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
-\pgfexternal@startupbox=\box53
+\pgfexternal@startupbox=\box51
 ))
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.co
 de.tex
@@ -644,7 +629,7 @@ File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.cod
 e.tex
 File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
-\pgfnodeparttextbox=\box54
+\pgfnodeparttextbox=\box52
 )
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.
 tex
@@ -671,8 +656,8 @@ Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
 \pgffor@iter=\dimen274
 \pgffor@skip=\dimen275
-\pgffor@stack=\toks36
-\pgffor@toks=\toks37
+\pgffor@stack=\toks34
+\pgffor@toks=\toks35
 ))
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.cod
 e.tex
@@ -681,7 +666,7 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
 dlers.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count280
+\pgf@plot@mark@count=\count279
 \pgfplotmarksize=\dimen276
 )
 \tikz@lastx=\dimen277
@@ -690,28 +675,61 @@ File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \tikz@lastysaved=\dimen280
 \tikzleveldistance=\dimen281
 \tikzsiblingdistance=\dimen282
-\tikz@figbox=\box55
-\tikz@figbox@bg=\box56
-\tikz@tempbox=\box57
-\tikz@tempbox@bg=\box58
-\tikztreelevel=\count281
-\tikznumberofchildren=\count282
-\tikznumberofcurrentchild=\count283
-\tikz@fig@count=\count284
+\tikz@figbox=\box53
+\tikz@figbox@bg=\box54
+\tikz@tempbox=\box55
+\tikz@tempbox@bg=\box56
+\tikztreelevel=\count280
+\tikznumberofchildren=\count281
+\tikznumberofcurrentchild=\count282
+\tikz@fig@count=\count283
 
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
 e.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count285
-\pgfmatrixcurrentcolumn=\count286
-\pgf@matrix@numberofcolumns=\count287
+\pgfmatrixcurrentrow=\count284
+\pgfmatrixcurrentcolumn=\count285
+\pgf@matrix@numberofcolumns=\count286
 )
-\tikz@expandcount=\count288
+\tikz@expandcount=\count287
 
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 )))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+Package: tikz-cd 2014/10/30 v0.9e Commutative diagrams with tikz
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/tikz-cd/tikzlibrarycd.code.tex
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarymatrix.code.tex
+File: tikzlibrarymatrix.code.tex 2013/07/12 v3.0.1a (rcs-revision 1.4)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryquotes.code.tex
+File: tikzlibraryquotes.code.tex 2014/03/21 v3.0.1a (rcs-revision 1.4)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
+meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
+\pgfarrowinset=\dimen283
+\pgfarrowlength=\dimen284
+\pgfarrowwidth=\dimen285
+\pgfarrowlinewidth=\dimen286
+))) (/usr/local/texlive/2018/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count288
+\float@exts=\toks36
+\float@box=\box57
+\@float@everytoks=\toks37
+\@floatcapt=\box58
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip60
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/parskip/parskip.sty
+Package: parskip 2001/04/09 non-zero parskip adjustments
+)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
@@ -774,7 +792,7 @@ Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen283
+\@linkdim=\dimen287
 \Hy@linkcounter=\count289
 \Hy@pagecounter=\count290
 
@@ -802,10 +820,10 @@ Package hyperref Info: Bookmarks ON on input line 4762.
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5115.
-\XeTeXLinkMargin=\dimen284
+\XeTeXLinkMargin=\dimen288
 \Fld@menulength=\count293
-\Field@Width=\dimen285
-\Fld@charsize=\dimen286
+\Field@Width=\dimen289
+\Fld@charsize=\dimen290
 Package hyperref Info: Hyper figures OFF on input line 6369.
 Package hyperref Info: Link nesting OFF on input line 6374.
 Package hyperref Info: Hyper index ON on input line 6377.
@@ -846,23 +864,23 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
-\heavyrulewidth=\dimen287
-\lightrulewidth=\dimen288
-\cmidrulewidth=\dimen289
-\belowrulesep=\dimen290
-\belowbottomsep=\dimen291
-\aboverulesep=\dimen292
-\abovetopsep=\dimen293
-\cmidrulesep=\dimen294
-\cmidrulekern=\dimen295
-\defaultaddspace=\dimen296
+\heavyrulewidth=\dimen291
+\lightrulewidth=\dimen292
+\cmidrulewidth=\dimen293
+\belowrulesep=\dimen294
+\belowbottomsep=\dimen295
+\aboverulesep=\dimen296
+\abovetopsep=\dimen297
+\cmidrulesep=\dimen298
+\cmidrulekern=\dimen299
+\defaultaddspace=\dimen300
 \@cmidla=\count299
 \@cmidlb=\count300
-\@aboverulesep=\dimen297
-\@belowrulesep=\dimen298
+\@aboverulesep=\dimen301
+\@belowrulesep=\dimen302
 \@thisruleclass=\count301
 \@lastruleclass=\count302
-\@thisrulewidth=\dimen299
+\@thisrulewidth=\dimen303
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
@@ -871,7 +889,7 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTpre=\skip64
 \LTpost=\skip65
 \LTchunksize=\count303
-\LTcapwidth=\dimen300
+\LTcapwidth=\dimen304
 \LT@head=\box59
 \LT@firsthead=\box60
 \LT@foot=\box61
@@ -892,7 +910,7 @@ File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
 code.tex
 File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
-\arrowsize=\dimen301
+\arrowsize=\dimen305
 ))
 (/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibraryshapes.code.tex
@@ -988,9 +1006,9 @@ File: tikzlibrarytrees.code.tex 2008/02/24 v3.0.1a (rcs-revision 1.2)
 )
 (/usr/local/texlive/2018/texmf-dist/tex/latex/tools/array.sty
 Package: array 2018/04/07 v2.4g Tabular extension package (FMi)
-\col@sep=\dimen302
+\col@sep=\dimen306
 \ar@mcellbox=\box83
-\extrarowheight=\dimen303
+\extrarowheight=\dimen307
 \NC@list=\toks39
 \extratabsurround=\skip66
 \backup@length=\skip67
@@ -1008,7 +1026,7 @@ uted.
 \@msidraft=\count312
 \dispkind=\count313
 \c@chapter=\count314
-\theight=\dimen304
+\theight=\dimen308
 LaTeX Info: Redefining \rm on input line 653.
 LaTeX Info: Redefining \sf on input line 654.
 LaTeX Info: Redefining \tt on input line 655.
@@ -1081,13 +1099,13 @@ LaTeX Font Info:    ... okay on input line 67.
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count322
-\scratchdimen=\dimen305
+\scratchdimen=\dimen309
 \scratchbox=\box85
 \nofMPsegments=\count323
 \nofMParguments=\count324
 \everyMPshowfont=\toks43
 \MPscratchCnt=\count325
-\MPscratchDim=\dimen306
+\MPscratchDim=\dimen310
 \MPnumerator=\count326
 \makeMPintoPDFobject=\count327
 \everyMPtoPDFconversion=\toks44
@@ -1156,134 +1174,119 @@ ists of 1000 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m
 /n/12 )$,
  []
 
-
-./WorkingPaper.tex:99: LaTeX Error: Unknown float option `d'.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.99  \begin{table}[htdp]
-                         
-? 
-./WorkingPaper.tex:110: Missing $ inserted.
+./WorkingPaper.tex:113: Missing $ inserted.
 <inserted text> 
                 $
-l.110 195 & $y_{195} &
+l.113 195 & $y_{195} &
                       $x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:110: Missing $ inserted.
+./WorkingPaper.tex:113: Missing $ inserted.
 <inserted text> 
                 $
-l.110 195 & $y_{195} &$x_{1,195} &
+l.113 195 & $y_{195} &$x_{1,195} &
                                    $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:111: Missing $ inserted.
+./WorkingPaper.tex:114: Missing $ inserted.
 <inserted text> 
                 $
-l.111 196 & $y_{196}$ & $x_{1,196}&
+l.114 196 & $y_{196}$ & $x_{1,196}&
                                     $x_{2,196}$ & Victoria & Andersen & 1918...
 
 ? 
+./WorkingPaper.tex:154: Missing } inserted.
+<inserted text> 
+                }
+l.154 \end{tikzpicture}
+                       
+? 
 [3]
-./WorkingPaper.tex:128: Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.128 \begin{center\vspace{5pt}}
-                                
-? 
-./WorkingPaper.tex:128: Extra \endcsname.
-\@ifundefined #1->\ifcsname #1\endcsname 
-                                         \@ifundefin@d@i \else \@ifundefin@d...
-l.128 \begin{center\vspace{5pt}}
-                                
-? 
-./WorkingPaper.tex:128: Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.128 \begin{center\vspace{5pt}}
-                                
-? 
-./WorkingPaper.tex:128: Missing \endcsname inserted.
-<to be read again> 
-                   \protect 
-l.128 \begin{center\vspace{5pt}}
-                                
-? 
-./WorkingPaper.tex:128: Extra \endcsname.
-\reserved@a ...name center\vspace {5pt}\endcsname 
-                                                  
-l.128 \begin{center\vspace{5pt}}
-                                
-? 
-
-./WorkingPaper.tex:158: LaTeX Error: \begin{center\vspace {5pt}} on input line 
-128 ended by \end{center}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.158 \end{center}
-                  
-? 
-[4]
-<./Figures/fig1.pdf, id=180, 590.35736pt x 234.12148pt>
+<./Figures/fig1.pdf, id=173, 590.35736pt x 234.12148pt>
 File: ./Figures/fig1.pdf Graphic file (type pdf)
 <use ./Figures/fig1.pdf>
-Package pdftex.def Info: ./Figures/fig1.pdf  used on input line 167.
+Package pdftex.def Info: ./Figures/fig1.pdf  used on input line 166.
 (pdftex.def)             Requested size: 469.75502pt x 186.29715pt.
 
 
-Package natbib Warning: Citation `enamorado' on page 5 undefined on input line 
-190.
+Package natbib Warning: Citation `enamorado' on page 4 undefined on input line 
+189.
 
-[5 <./Figures/fig1.pdf>]
-<./Figures/gold_data_compare.pdf, id=230, 700.6175pt x 410.53375pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[4] [5 <./Figures/fig1.pdf>]
+<./Figures/gold_data_compare.pdf, id=229, 700.6175pt x 410.53375pt>
 File: ./Figures/gold_data_compare.pdf Graphic file (type pdf)
 <use ./Figures/gold_data_compare.pdf>
 Package pdftex.def Info: ./Figures/gold_data_compare.pdf  used on input line 20
-5.
+4.
 (pdftex.def)             Requested size: 469.75502pt x 275.2629pt.
- [6 <./Figures/gold_data_compare.pdf>] [7] [8] [9]
-[10]
+ [6 <./Figures/gold_data_compare.pdf>] [7] [8]
+[9]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 265.
- [11]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 264.
+ [10] [11]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 291.
+(hyperref)                removing `math shift' on input line 290.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 291.
+(hyperref)                removing `math shift' on input line 290.
 
 [12]
 
 Package natbib Warning: Citation `winkler90' on page 13 undefined on input line
- 303.
+ 302.
 
 
 Package natbib Warning: Citation `sadinle_2017' on page 13 undefined on input l
-ine 303.
+ine 302.
 
 [13]
 
-Package natbib Warning: Citation `bda3' on page 14 undefined on input line 315.
+Package natbib Warning: Citation `bda3' on page 14 undefined on input line 314.
 
 
 
 Package natbib Warning: Citation `herzog2007' on page 14 undefined on input lin
-e 319.
+e 318.
 
 [14]
 
 Package natbib Warning: Citation `larsen_rubin_2001' on page 15 undefined on in
-put line 335.
+put line 334.
 
 [15]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\begingroup' on input line 351.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 351.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\NAT@ctype' on input line 351.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\z@' on input line 351.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\let' on input line 351.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\let' on input line 351.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 351.
+
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\begingroup' on input line 352.
@@ -1314,52 +1317,180 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 353.
+(hyperref)                removing `\begingroup' on input line 358.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 353.
+(hyperref)                removing `\<let>-command' on input line 358.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 353.
+(hyperref)                removing `\NAT@ctype' on input line 358.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 353.
+(hyperref)                removing `\z@' on input line 358.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 353.
+(hyperref)                removing `\let' on input line 358.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 353.
+(hyperref)                removing `\let' on input line 358.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 353.
+(hyperref)                removing `\new@ifnextchar' on input line 358.
+
+[16]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\begingroup' on input line 362.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 359.
+(hyperref)                removing `\<let>-command' on input line 362.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 359.
+(hyperref)                removing `\NAT@ctype' on input line 362.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 359.
+(hyperref)                removing `\z@' on input line 362.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 359.
+(hyperref)                removing `\let' on input line 362.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 359.
+(hyperref)                removing `\let' on input line 362.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing 
+(hyperref)                removing `\new@ifnextchar' on input line 362.
+
+[17] [18]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\begingroup' on input line 390.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\<let>-command' on input line 390.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\NAT@ctype' on input line 390.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\z@' on input line 390.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\let' on input line 390.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\let' on input line 390.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 390.
+
+[19] [20] [21] (./WorkingPaper.bbl
+./WorkingPaper.bbl:50: Undefined control sequence.
+l.50 ... N.~Qian, ``The fluidity of race: \enquote
+                                                  {Passing} in the united
+? 
+** WARNING: IEEEtranN.bst: No hyphenation pattern has been
+** loaded for the language `Undefined/Unknown'. Using the pattern for
+** the default language instead.
+./WorkingPaper.bbl:113: Misplaced alignment tab character &.
+l.113   Wiley &
+                Sons Inc., 2015.
+? 
+[22]
+./WorkingPaper.bbl:127: Misplaced alignment tab character &.
+<argument> Data &
+                  Knowledge Engineering
+l.127   \emph{Data & Knowledge Engineering}
+                                           , vol.~69, pp. 197--210, 02 2010.
+? 
+)
+
+Package natbib Warning: There were undefined citations.
+
+[23]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 426.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 426.
+ (./WorkingPaper.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 426.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 426.
+Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
+(rerunfilecheck)             Checksum: E35ED5A8282C70F0E853ADCA61419722;1195.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 426.
+ ) 
+Here is how much of TeX's memory you used:
+ 30855 strings out of 492649
+ 625070 string characters out of 6129622
+ 706972 words of memory out of 5000000
+ 34171 multiletter control sequences out of 15000+600000
+ 545272 words of font info for 78 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 56i,18n,84p,10384b,868s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exi
+st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.7} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.6} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
+, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
+
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
+/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
+r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
+local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/loc
+al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
+/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/t
+exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
+live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive
+/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
+18/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on WorkingPaper.pdf (23 pages, 773472 bytes).
+PDF statistics:
+ 528 PDF objects out of 1000 (max. 8388607)
+ 451 compressed objects within 5 object streams
+ 88 named destinations out of 1000 (max. 500000)
+ 271 words of extra memory for PDF output out of 10000 (max. 10000000)
+
