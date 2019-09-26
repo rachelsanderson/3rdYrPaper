@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: WorkingPaper.aux
+The style file: IEEEtranN.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ./Deadlines/proposal_bib.bib
+I was expecting a `,' or a `}'---line 101 of file ./Deadlines/proposal_bib.bib
+ :  
+ :  ISSN = {00223808, 1537534X},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "enamorado"
+Warning--I didn't find a database entry for "winkler90"
+Warning--I didn't find a database entry for "sadinle_2017"
+Warning--I didn't find a database entry for "bda3"
+Warning--I didn't find a database entry for "herzog2007"
+Warning--I didn't find a database entry for "larsen_rubin_2001"
+-- IEEEtranN.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+** Natbib version - not for normal IEEE work.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+
+Done.
+You've used 20 entries,
+            4855 wiz_defined-function locations,
+            1090 strings with 11887 characters,
+and the built_in function-call counts, 16751 in all, are:
+= -- 1526
+> -- 490
+< -- 107
++ -- 236
+- -- 110
+* -- 1010
+:= -- 2701
+add.period$ -- 41
+call.type$ -- 20
+change.case$ -- 40
+chr.to.int$ -- 221
+cite$ -- 20
+duplicate$ -- 1124
+empty$ -- 1152
+format.name$ -- 165
+if$ -- 3708
+int.to.chr$ -- 1
+int.to.str$ -- 21
+missing$ -- 178
+newline$ -- 104
+num.names$ -- 62
+pop$ -- 418
+preamble$ -- 1
+purify$ -- 20
+quote$ -- 2
+skip$ -- 1228
+stack$ -- 0
+substring$ -- 521
+swap$ -- 840
+text.length$ -- 30
+text.prefix$ -- 0
+top$ -- 6
+type$ -- 296
+warning$ -- 0
+while$ -- 70
+width$ -- 0
+write$ -- 282
+(There was 1 error message)
