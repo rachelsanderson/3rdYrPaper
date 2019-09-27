@@ -1,19 +1,15 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{General problem}{}% 2
 \BOOKMARK [1][-]{section.3}{Record Linkage Methods}{}% 3
-\BOOKMARK [1][-]{section.4}{Estimation Methods}{}% 4
-\BOOKMARK [1][-]{section.5}{Timeline for completion}{}% 5
-\BOOKMARK [2][-]{subsection.5.1}{Steps of the record linkage task}{section.5}% 6
-\BOOKMARK [3][-]{subsubsection.5.1.1}{\(iv\) designating \(i,j\) pairs as matches}{subsection.5.1}% 7
-\BOOKMARK [2][-]{subsection.5.2}{Probabilistic Record Linkage}{section.5}% 8
-\BOOKMARK [2][-]{subsection.5.3}{Simplifying assumptions}{section.5}% 9
-\BOOKMARK [2][-]{subsection.5.4}{Measuring record linkage performance}{section.5}% 10
-\BOOKMARK [1][-]{section.6}{Estimation Methods}{}% 11
-\BOOKMARK [2][-]{subsection.6.1}{ahl2019}{section.6}% 12
-\BOOKMARK [2][-]{subsection.6.2}{nq2015}{section.6}% 13
-\BOOKMARK [2][-]{subsection.6.3}{bleakley2016}{section.6}% 14
-\BOOKMARK [2][-]{subsection.6.4}{lahiri05}{section.6}% 15
-\BOOKMARK [2][-]{subsection.6.5}{Goldstein2012}{section.6}% 16
-\BOOKMARK [2][-]{subsection.6.6}{This paper}{section.6}% 17
-\BOOKMARK [1][-]{section.7}{Data and Implementation}{}% 18
-\BOOKMARK [1][-]{section.8}{Results}{}% 19
+\BOOKMARK [2][-]{subsection.3.1}{Deterministic}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Probabilistic Record Linkage}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Estimation Methods}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{OLS Bias Correction}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Multiple match WLS}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{nq2015}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.4}{bleakley2016}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.5}{lahiri05}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.6}{Goldstein2012}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.7}{This paper}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Data and Implementation}{}% 14
+\BOOKMARK [1][-]{section.6}{Results}{}% 15
