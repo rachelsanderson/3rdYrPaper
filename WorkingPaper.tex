@@ -267,48 +267,46 @@ and the number of parameters used to describe each mixture class is reduced to $
 \textbf{Example 1 (cont'd)}.  Errors are constructed to satisfy this assumption
 
 \section{Estimation Methods}
+This section provides an overview of the estimation methods I compare for analyzing the matched datasets. 
 \subsection{OLS Bias Correction}
-\cite{lahiri05} take as input two files are linked by a computerized record linkage technique (CRL).  The true data pairs $(x_i, y_i)$ are not observable; instead, the CRL produces pairs $(x_i, z_i)$ in which $z_i$ may or may not correspond to $y_i$.  The (true) regression model is:
-\begin{gather*}y_i = x_i'\beta + \epsilon_i,\ E[\epsilon_i] = 0,\\ \text{var}(\epsilon_i) = \sigma^2,\ \text{cov}(\epsilon_i \epsilon_j) = 0 \end{gather*}
-but the researcher estimates this model with $z_i$ as the dependent variable, where $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
-and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Define $\mathbf{q_i} = (q_{i1}, \dots, q_{in})'$.  The naive least squares estimator of $\beta$, which ignores mismatch errors, is given by:
-$$\hat{\mathbf{\beta}}_N = (\mathbf{X'X})^{-1} \mathbf{X'z} $$ 
-An alternative to this naive estimator is one that minimizes the sum of absolute deviations, which decrease the influence of outliers and hence should decrease the impact of erroneously paired predictor and response values.  
-
-Note that $E(z_i) = \mathbf{w_i'\beta}$, with $\mathbf{w_i = q_i'X_i} = \sum_{j=1}^n q_{ij} x_j' $, and so the bias of $\hat{\mathbf{\beta}}_N $ is given by
+ \cite{sw1993} and \cite{lahiri05} propose techniques for correcting the bias from mismatched pairs in linear regression.  They assume that the matching procedure produces $n$ pairs $(x_i, z_i)$, where $z_i$ may or may not correspond to $y_i$, yet the true $y_i$ is included among the matches.   Hence, 
+$$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
+and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
+\begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
+which is biased.   Denoting $q_i = (q_{i1}, \dots, q_{in})'$ and $Q = (q_1, \dots, q_n)'$, we can write the bias of $\hat{\beta}_N $ as
 $$\text{bias}(\hat{\beta}_N) = [(X'X)^{-1} X'QX - I] \beta $$ 
-Hence, if $Q = I$, then $\hat{\beta}_N$ is unbiased.  This is equivalent to giving all potential matches the same weight (i.e. treating all matches as equally likely to be correct), as discussed in \cite{ahl2019}.  
+ since $E[z_i] = E[q_i'y]  = q_i'X\beta =  \sum_{j=1}^{n} q_{ij} x_j'\beta $.  
 
-In order to reduce the bias of $\hat{\beta}_N$, Scheuren and Winkler (1993) %add citation
-observed that 
-$$\text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B,$$ 
-where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = \mathbf{q_i'y} - y_i$, which is the difference between a weighted average of responses from all observations and the actual response $y_i$.  Thus, if an estimator $\hat{B}$ is available, the SW estimator is given by:
-$$ \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}$$ 
-SW give a truncated estimator of $B_i$ using the first and second highest elements of the vector $q_i$, $\hat{B}_i^{TR} = (q_{ij_1} - 1) z_{j_1} + q_{ij_2} z_{j_2}$, that can also be written more generally for an arbitrary number of elements of $q_i$.  This means that $\hat{\beta}_{SW}$ is not unbiased, but, if the probability is high that the best candidate link is the true link, then the truncation might produce a very small bias. 
+To reduce the bias of $\hat{\beta}_N$, \cite{sw1993} observed that 
+\begin{equation} \text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B \label{bias} \end{equation}
+where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the actual response $y_i$.  The authors suggest estimating \ref{bias} using the first and second highest elements of the vector $q_i$, so that $\hat{B}_i^{TR} = (q_{ij_1} - 1) z_{j_1} + q_{ij_2} z_{j_2}$, and 
+\begin{equation} \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}^{TR} \label{sw}\end{equation}
+The estimator can incorporate any number of elements of $q_i$, but, if the probability is high that the best candidate link is the true link, then the truncation might produce a very small bias. 
 
-Using $E(z) = W\beta$, \cite{lahiri05} propose an exactly unbiased estimator of $\beta$:
+Using $E(z_i) = w_i'\beta$, where $w_i = q_i'X_i\beta$, \cite{lahiri05} propose the unbiased estimator:
 $$ \hat{\beta}_U = (W'W)^{-1} W'z$$ 
-where $W = (w_1, \dots, w_N)'$, $w_i = q_i'X_i$ as above.  They suggest using a truncated version of $w_i$, $w_i^{TR} = q_{ij_1} x_{j_1} + q_{ij_2} x_{j_2}$.   \cite{lahiri05} use estimates of $Q$ obtained from applying the Fellegi-Sunter/EM procedure, and observe that replacing $Q$ with $\hat{Q}$ yields unbiased estimates of $\beta$ whenever $\hat{Q}$ can be assumed to be independent of $z$.  They argue that this is expected to be true in most applications, because the distribution of matching variables (e.g. first and last name, age), which determines the distribution of $\hat{Q}$, is usually independent of the response variable $y$ (e.g. income), and hence of $z$.  
+where $W = (w_1, \dots, w_N)'$.  They also suggest using a truncated version of $W$, with $w_i^{TR} = q_{ij_1} x_{j_1} + q_{ij_2} x_{j_2}$, where values of $q_{ij}$ are estimated by using a probabilistic record linkage procedure.  
 
-Importantly, this assumption does not hold in some economics applications, such as the racial ``passing" example from \cite{nq2015}. 
+For both methods, standard errors are calculated according to a parametric bootstrap procedure/formulas in the appendix. 
 
-\cite{lahiri05} conclude that in simulations, least median regression is not sufficient to guard against matching errors, whereas the method of SW (1003) made a useful adjustment.  Their method performed well across a range of situations,a nd the bootstrap procedure is useful for reflecting uncertainty due to matching.  
-
+These procedures are valid if the estimated probabilities in $\hat{Q}$ are independent of $z$.  They argue that this is expected to be true in most applications, because the distribution of matching variables (e.g. first and last name, age), which determines the distribution of $\hat{Q}$, is usually independent of the response variable $y$ (e.g. income), and hence of $z$.  However, this assumption is unlikely to hold in important economics applications, such as the racial ``passing" example from \cite{nq2015}. 
 
 \subsection{Multiple match WLS}
 
-subsection{\cite{ahl2019}}
+\cite{ahl2019} consider the case where the researcher has a dataset $(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i}, w_i)$.  That is, each $x_i$ is linked to many possible $L_i$, each of which is considered to be equally likely.  They suggest estimating $\beta$ in the smoothed regression:
+
+\begin{equation} 
+\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1)g(w_i, L_i) = x_i'\beta + \epsilon_i \end{equation}
+
+\noindent where $g(w_i, L_i) = E[y_{i\ell} | w_i, L_i ]$, which can be estimated nonparametrically.   This results in a weighted least squares setup.  
+
+\subsection{This paper}
+Both methods described before assumed that the true match was included among the possible matches (either linked on accident to the wrong datafile, or included among the multiple matches).  They also assume no sample selection. I come up with the following method to correct for some of these issues. 
 \subsection{\cite{nq2015}}
 \cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
 have match rates around 30, 24, 22, 11-34 percent respectively}, the authors develop methods for including individuals with multiple potential matches.  These methods include selecting one match at random, and selecting the match that produces an upper/lower bound for estimating the ``passing" rate.  
 
 \cite{nq2015} also use the unmatched individuals from their data to calculate absolute bounds for the population passing rates.  For a given algorithm, the absolute upper bound is obtained by using the ``upper bound" configuration of data, combined with assuming that all unmatched individuals passed.  The lower bound is obtained in the same way, assuming that none of the excluded individuals passed. 
-
-\subsection{\cite{bleakley2016}}
-
-\cite{bleakley2016} assign equal probability of winning (matched variable equal to $1/n$) to all $n$ individuals matched to the same winner.  The goal is to estimate the treatment effect of winning a parcel in the lottery by comparing mean outcomes for winners and losers in a simple bivariate regression with a dummy varialbe for winning a parcel on the right-hand side.   Here, winning the lottery is coded as $0$ or $1/n$, where $n$ is the number of matches for person $i$. [Think about how this compares to ahl method]
-
-\subsection{\cite{lahiri05}}
 
 \subsection{\cite{Goldstein2012}}
 
@@ -330,20 +328,13 @@ will produce unbiased estimates" Incorporating the likelihood component can be e
 
 For missing observation: Assume we have an estimate of mortality rate of individuals in A, $\pi_d$.  If a proportion of the A file $\pi_m < \pi_d$ are unequivocally matched, then the probability that a randomly chosen remaining record in B is not a death from the A file is $\pi_r = 1 - (\pi_d - \pi_m)$.  Therefore multiply $p_i$ by $1-\pi_r$ and add an extra pseudo-record with probability $\pi_r$ with an associated code for a surviving patient. 
 
+\section{Simulation Results}
 
-
-\subsection{This paper}
-
-
-\section{Data and Implementation}
-
-\section{Results}
-
-
+\section{Conclusion}
 
 \newpage
 \singlespacing
 \bibliography{./Deadlines/proposal_bib} 
-\bibliographystyle{IEEEtranN}
+\bibliographystyle{aer}
 
 \end{document}

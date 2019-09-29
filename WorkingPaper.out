@@ -5,10 +5,8 @@
 \BOOKMARK [1][-]{section.3}{Estimation Methods}{}% 5
 \BOOKMARK [2][-]{subsection.3.1}{OLS Bias Correction}{section.3}% 6
 \BOOKMARK [2][-]{subsection.3.2}{Multiple match WLS}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{nq2015}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.4}{bleakley2016}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.5}{lahiri05}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.6}{Goldstein2012}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.7}{This paper}{section.3}% 12
-\BOOKMARK [1][-]{section.4}{Data and Implementation}{}% 13
-\BOOKMARK [1][-]{section.5}{Results}{}% 14
+\BOOKMARK [2][-]{subsection.3.3}{This paper}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{nq2015}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{Goldstein2012}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Simulation Results}{}% 11
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 12
