@@ -1,15 +1,14 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{General problem}{}% 2
-\BOOKMARK [1][-]{section.3}{Record Linkage Methods}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Deterministic}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Probabilistic Record Linkage}{section.3}% 5
-\BOOKMARK [1][-]{section.4}{Estimation Methods}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{OLS Bias Correction}{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Multiple match WLS}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.3}{nq2015}{section.4}% 9
-\BOOKMARK [2][-]{subsection.4.4}{bleakley2016}{section.4}% 10
-\BOOKMARK [2][-]{subsection.4.5}{lahiri05}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.6}{Goldstein2012}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.7}{This paper}{section.4}% 13
-\BOOKMARK [1][-]{section.5}{Data and Implementation}{}% 14
-\BOOKMARK [1][-]{section.6}{Results}{}% 15
+\BOOKMARK [1][-]{section.2}{Record Linkage Methods}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Deterministic}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Probabilistic Record Linkage}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Estimation Methods}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{OLS Bias Correction}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Multiple match WLS}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{nq2015}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{bleakley2016}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{lahiri05}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.6}{Goldstein2012}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.7}{This paper}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Data and Implementation}{}% 13
+\BOOKMARK [1][-]{section.5}{Results}{}% 14

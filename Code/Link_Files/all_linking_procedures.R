@@ -1,6 +1,8 @@
 require(dplyr)
 require(fastLink)
 require(phonics)
+require(ggplot2)
+require(gridExtra)
 source("~/Desktop/3rdYrPaper/Code/Link_Files/link_files.R")
 source("~/Desktop/3rdYrPaper/Code/Link_Files/abe_matching.R")
 source("~/Desktop/3rdYrPaper/Code/Link_Files/prl_match.R")
@@ -13,14 +15,14 @@ load("~/Desktop/3rdYrPaper/Code/Data/FakeData/y_data.RData")
 
 ### STANDARDIZE NAMES #########################################
 x.df <- x_data %>% mutate(f_name_nysiis = nysiis(first, modified=TRUE), l_name_nysiis = nysiis(last, modified=TRUE)) %>% 
-    select(id_x, x2, f_name_nysiis, l_name_nysiis, year)
+    select(id_x, x1, x2, f_name_nysiis, l_name_nysiis, year)
 y.df <- y_data %>% mutate(f_name_nysiis = nysiis(first, modified=TRUE), l_name_nysiis =nysiis(last, modified=TRUE)) %>% 
   select(id_y, y, f_name_nysiis, l_name_nysiis, year)
 
 #### Declare names of variables #####################
 name_vars <- c("f_name_nysiis", "l_name_nysiis")
 num_vars <- c("year")
-x_vars <- c("id_x", "x2")
+x_vars <- c("id_x", "x1", "x2")
 y_vars <- c("id_y", "y")
 outDir <- "~/Desktop/3rdYrPaper/Code/Data/MatchedData/"
 
@@ -39,3 +41,12 @@ for (i in seq_along(match_list)){
   abline(lm(m$y ~ m$x2), col="blue")
 }
 
+
+plot_matches <- function(df){
+  p <- ggplot(df, mapping = aes(x = x2, y = y, colour = x1)) + geom_point() +
+    geom_smooth(method=lm, formula = y~x, se=false) + 
+    labs(title=deparse(substitute(df)))
+  return(p)
+}
+
+grid.arrange(grobs=lapply(match_list, plot_matches),ncol=2)

@@ -18,15 +18,16 @@ lastNames <- read.delim(lastNameDict, header=FALSE,sep="\n")
 
 # set params for generating data
 set.seed(1454)
-numObs <- 500
+numObs <- 1000
 pDummy <- 0.5
 beta <- c(2, 0.5, 1)
+sig2 <- 2
 
 # simulate ground truth data
 ids <- 1:numObs
 male <- rbernoulli(numObs, p=pMale)
-x2 <- sqrt(2)*rnorm(numObs)
-eps <- sqrt(2)*rnorm(numObs)
+x2 <- sqrt(sig2)*rnorm(numObs)
+eps <- sqrt(sig2)*rnorm(numObs)
 y <- beta[1] + beta[2]*x1 + beta[3]*x2 + eps
 ols <- lm(y~ x1 + x2)
 summary(ols)
@@ -41,7 +42,7 @@ wFirst <- as.character(firstNames[round(nrow(firstNames)*runif(numObs))+1,])
 wLast <- as.character(lastNames[round(nrow(lastNames)*runif(numObs))+1,])
 birth_dates <- r_date_of_births(numObs, start = as.Date("1900-01-01"), end = as.Date("1925-12-31"))
 wYear <- as.numeric(format(birth_dates, format = "%Y"))
-wMonth <- as.numeric(format(biDecerth_dates, format = "%m"))
+wMonth <- as.numeric(format(birth_dates, format = "%m"))
 wDay <- as.numeric(format(birth_dates, format = "%d"))
 
 # ground truth data
@@ -52,6 +53,9 @@ gold_data <- data.frame(id = ids, x1 = x1, x2= x2, y = y,
                         month = wMonth, 
                         day = wDay, 
                         bday = as.character(birth_dates))
+
+print(paste0("gold data has ", nrow(distinct(gold_data, first, last)), " unique first-last name combos"))
+print(paste0("gold data has ", nrow(distinct(gold_data, first, last, year)), " unique first-last-year combos"))
 
 # plot the true data points
 gold.plot <- ggplot(data = gold_data, mapping=aes(x2, y, group=x1, colour=x1)) + 
