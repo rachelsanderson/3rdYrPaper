@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 SEP 2019 16:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 SEP 2019 22:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1167,65 +1167,54 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
  [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-./WorkingPaper.tex:83: Package inputenc Error: Invalid UTF-8 byte 160.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.83 ...ctly, the researcher observes one dataset 
-                                                  with observations $\{x_i, ...
-
-? 
-[2] [3] [4]
-Overfull \hbox (1.33241pt too wide) in paragraph at lines 121--122
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+ [4]
+Overfull \hbox (1.33241pt too wide) in paragraph at lines 119--120
 []\OT1/cmr/bx/n/12 Example 1. \OT1/cmr/m/n/12 The ``ground truth" dataset con-s
 ists of 1000 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m
 /n/12 )$,
  []
 
 [5]
-<./Figures/gold_data_compare.pdf, id=172, 785.93625pt x 634.37pt>
+<./Figures/gold_data_compare.pdf, id=173, 785.93625pt x 634.37pt>
 File: ./Figures/gold_data_compare.pdf Graphic file (type pdf)
 <use ./Figures/gold_data_compare.pdf>
 Package pdftex.def Info: ./Figures/gold_data_compare.pdf  used on input line 13
-2.
+0.
 (pdftex.def)             Requested size: 469.75502pt x 379.17297pt.
 
-./WorkingPaper.tex:152: Missing $ inserted.
+./WorkingPaper.tex:150: Missing $ inserted.
 <inserted text> 
                 $
-l.152 195 & $y_{195} &
+l.150 195 & $y_{195} &
                       $x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:152: Missing $ inserted.
+./WorkingPaper.tex:150: Missing $ inserted.
 <inserted text> 
                 $
-l.152 195 & $y_{195} &$x_{1,195} &
+l.150 195 & $y_{195} &$x_{1,195} &
                                    $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:153: Missing $ inserted.
+./WorkingPaper.tex:151: Missing $ inserted.
 <inserted text> 
                 $
-l.153 196 & $y_{196}$ & $x_{1,196}&
+l.151 196 & $y_{196}$ & $x_{1,196}&
                                     $x_{2,196}$ & Victoria & Andersen & 1918...
 
 ? 
-./WorkingPaper.tex:193: Missing } inserted.
+./WorkingPaper.tex:191: Missing } inserted.
 <inserted text> 
                 }
-l.193 \end{tikzpicture}
+l.191 \end{tikzpicture}
                        
 ? 
 
-LaTeX Warning: Reference `methods' on page 6 undefined on input line 201.
+LaTeX Warning: Reference `methods' on page 6 undefined on input line 199.
 
 [6] [7 <./Figures/gold_data_compare.pdf>]
-Overfull \hbox (30.99228pt too wide) in paragraph at lines 209--210
+Overfull \hbox (30.99228pt too wide) in paragraph at lines 207--208
 []\OT1/cmr/m/n/12 In to-tal, I im-ple-ment four types of record link-age tech-n
 iques. I vary prob-a-bilis-tic/deterministic,
  []
@@ -1233,10 +1222,10 @@ iques. I vary prob-a-bilis-tic/deterministic,
 [8] [9] [10]
 
 Package natbib Warning: Citation `winkler90' on page 11 undefined on input line
- 239.
+ 237.
 
 [11] [12] [13]
-Overfull \hbox (12.39333pt too wide) in paragraph at lines 296--297
+Overfull \hbox (12.39333pt too wide) in paragraph at lines 294--295
 [][]\OT1/cmr/m/n/12 Anderson et al.[] ([]2019[]) con-sider the case where the r
 e-searcher has a dataset $(\OML/cmm/m/it/12 x[]; \OMS/cmsy/m/n/12 f\OML/cmm/m/i
 t/12 y[]\OMS/cmsy/m/n/12 g[]\OML/cmm/m/it/12 ; w[]\OT1/cmr/m/n/12 )$.
@@ -1245,60 +1234,60 @@ t/12 y[]\OMS/cmsy/m/n/12 g[]\OML/cmm/m/it/12 ; w[]\OT1/cmr/m/n/12 )$.
 [14]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 305.
+(hyperref)                removing `\begingroup' on input line 303.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 305.
+(hyperref)                removing `\<let>-command' on input line 303.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 305.
+(hyperref)                removing `\NAT@ctype' on input line 303.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 305.
+(hyperref)                removing `\z@' on input line 303.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 305.
+(hyperref)                removing `\let' on input line 303.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 305.
+(hyperref)                removing `\let' on input line 303.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 305.
+(hyperref)                removing `\new@ifnextchar' on input line 303.
 
 [15]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 311.
+(hyperref)                removing `\begingroup' on input line 309.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 311.
+(hyperref)                removing `\<let>-command' on input line 309.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 311.
+(hyperref)                removing `\NAT@ctype' on input line 309.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 311.
+(hyperref)                removing `\z@' on input line 309.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 311.
+(hyperref)                removing `\let' on input line 309.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 311.
+(hyperref)                removing `\let' on input line 309.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 311.
+(hyperref)                removing `\new@ifnextchar' on input line 309.
 
 [16] [17] (./WorkingPaper.bbl
 ./WorkingPaper.bbl:72: Undefined control sequence.
@@ -1310,22 +1299,22 @@ l.72 ...cy Qian}, ``The Fluidity of Race: \enquote
 Package natbib Warning: There were undefined citations.
 
 [18]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 356.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 356.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 354.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 354.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 356.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 356.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 354.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 354.
 Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
 (rerunfilecheck)             Checksum: 9D1289D387DC35503E6D1F3A9BA13921;708.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 356.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 354.
  ) 
 Here is how much of TeX's memory you used:
- 30803 strings out of 492649
- 624071 string characters out of 6129622
+ 30804 strings out of 492649
+ 624084 string characters out of 6129622
  706858 words of memory out of 5000000
  34134 multiletter control sequences out of 15000+600000
  545272 words of font info for 78 fonts, out of 8000000 for 9000
@@ -1373,10 +1362,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (18 pages, 293546 bytes).
+Output written on WorkingPaper.pdf (18 pages, 293177 bytes).
 PDF statistics:
- 387 PDF objects out of 1000 (max. 8388607)
- 324 compressed objects within 4 object streams
- 74 named destinations out of 1000 (max. 500000)
+ 388 PDF objects out of 1000 (max. 8388607)
+ 325 compressed objects within 4 object streams
+ 75 named destinations out of 1000 (max. 500000)
  210 words of extra memory for PDF output out of 10000 (max. 10000000)
 

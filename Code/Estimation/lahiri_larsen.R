@@ -103,3 +103,12 @@ calc_beta_ll <- function(df){
   return(list(beta = beta_ll))
 }
 
+calc_var_bU <- function(){
+  Sigma <- calc_sigma(W)
+  WW <- solve(t(W)%*%W)
+  var_bU <- WW %*% t(W) %*% Sigma %*% W %*% WW
+}
+
+calc_sigma <- function(){
+  
+}
