@@ -41,12 +41,24 @@ for (i in seq_along(match_list)){
   abline(lm(m$y ~ m$x2), col="blue")
 }
 
-
-plot_matches <- function(df){
-  p <- ggplot(df, mapping = aes(x = x2, y = y, colour = x1)) + geom_point() +
-    geom_smooth(method=lm, formula = y~x, se=false) + 
-    labs(title=deparse(substitute(df)))
-  return(p)
+# need to make true match for the prl as well
+names <- c("abe_single", "abe_multi", "prl_single", "prl_multi")
+t <- NULL
+for (i in 1:length(match_list)){
+  data <- match_list[[i]]
+  t <- rbind(t, data.frame(method = as.character(names[i]), 
+                           nMatches = nrow(data), 
+                           pCorrect = round(sum(data$true_match)/nrow(data),3),
+                           nUniqueX = nrow(distinct(data,id_x))))
 }
 
-grid.arrange(grobs=lapply(match_list, plot_matches),ncol=2)
+# 
+# plot_matches <- function(df){
+#   p <- ggplot(df, mapping = aes(x = x2, y = y, colour = x1)) + geom_point() +
+#     geom_smooth(method=lm, formula = y~x, se=false) + 
+#     labs(title=deparse(substitute(df)))
+#   return(p)
+# }
+# 
+# grid.arrange(grobs=lapply(match_list, plot_matches),ncol=2)
+# 

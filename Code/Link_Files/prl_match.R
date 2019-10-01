@@ -5,7 +5,7 @@ prl_match <- function(x.df, y.df, name_vars, num_vars, unique=TRUE, thresh=0.85)
                   stringdist.match = name_vars,
                   numeric.match = num_vars, threshold.match = thresh, return.all=FALSE)
   
-      matches <- getMatches(x.df,y.df, prl, threshold.match = thresh) %>% mutate(trueMatch = (id_x == id_y))
+      matches <- getMatches(x.df,y.df, prl, threshold.match = thresh) %>% mutate(true_match = (id_x == id_y))
   }else{ # return multiple matches, exceeding the threshold
   multi_prl <- fastLink(x.df, y.df, varnames = c(name_vars, num_vars),
                         stringdist.match = name_vars,
