@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  1 OCT 2019 11:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  1 OCT 2019 14:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1044,7 +1044,14 @@ LaTeX Info: Redefining \sc on input line 659.
 \temptoksa=\toks40
 \temptoksb=\toks41
 \temptoksc=\toks42
-) (./WorkingPaper.aux)
+) (./WorkingPaper.aux
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+)
 \openout1 = `WorkingPaper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
@@ -1167,65 +1174,68 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
  [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- [4]
-Overfull \hbox (1.33241pt too wide) in paragraph at lines 126--127
-[]\OT1/cmr/bx/n/12 Example 1. \OT1/cmr/m/n/12 The ``ground truth" dataset con-s
-ists of 1000 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m
-/n/12 )$,
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Overfull \hbox (8.27962pt too wide) in paragraph at lines 96--97
+[]\OT1/cmr/m/n/12 Designate as matches all $(\OML/cmm/m/it/12 x; y\OT1/cmr/m/n/
+12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
-[5]
-<./Figures/gold_data_compare.pdf, id=172, 785.93625pt x 634.37pt>
+[3] [4]
+<./Figures/gold_data_compare.pdf, id=139, 785.93625pt x 634.37pt>
 File: ./Figures/gold_data_compare.pdf Graphic file (type pdf)
 <use ./Figures/gold_data_compare.pdf>
-Package pdftex.def Info: ./Figures/gold_data_compare.pdf  used on input line 13
-7.
+Package pdftex.def Info: ./Figures/gold_data_compare.pdf  used on input line 12
+4.
 (pdftex.def)             Requested size: 469.75502pt x 379.17297pt.
 
-./WorkingPaper.tex:157: Missing $ inserted.
+./WorkingPaper.tex:144: Missing $ inserted.
 <inserted text> 
                 $
-l.157 195 & $y_{195} &
+l.144 195 & $y_{195} &
                       $x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:157: Missing $ inserted.
+./WorkingPaper.tex:144: Missing $ inserted.
 <inserted text> 
                 $
-l.157 195 & $y_{195} &$x_{1,195} &
+l.144 195 & $y_{195} &$x_{1,195} &
                                    $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:158: Missing $ inserted.
+./WorkingPaper.tex:145: Missing $ inserted.
 <inserted text> 
                 $
-l.158 196 & $y_{196}$ & $x_{1,196}&
+l.145 196 & $y_{196}$ & $x_{1,196}&
                                     $x_{2,196}$ & Victoria & Andersen & 1918...
 
 ? 
-./WorkingPaper.tex:198: Missing } inserted.
+./WorkingPaper.tex:185: Missing } inserted.
 <inserted text> 
                 }
-l.198 \end{tikzpicture}
+l.185 \end{tikzpicture}
                        
 ? 
+[5] [6 <./Figures/gold_data_compare.pdf>] [7]
 
-LaTeX Warning: Reference `methods' on page 6 undefined on input line 206.
+LaTeX Warning: Reference `methods' on page 8 undefined on input line 204.
 
-[6] [7 <./Figures/gold_data_compare.pdf>] [8] [9] [10]
+[8] [9] [10]
 
 Package natbib Warning: Citation `winkler90' on page 11 undefined on input line
- 244.
+ 242.
 
-[11] [12] [13]
-Overfull \hbox (12.39333pt too wide) in paragraph at lines 301--302
-[][]\OT1/cmr/m/n/12 Anderson et al.[] ([]2019[]) con-sider the case where the r
-e-searcher has a dataset $(\OML/cmm/m/it/12 x[]; \OMS/cmsy/m/n/12 f\OML/cmm/m/i
-t/12 y[]\OMS/cmsy/m/n/12 g[]\OML/cmm/m/it/12 ; w[]\OT1/cmr/m/n/12 )$.
- []
+[11] [12] [13] [14] [15]
 
-[14] [15] [16] (./WorkingPaper.bbl
+./WorkingPaper.tex:351: LaTeX Error: Unknown float option `d'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.351 \begin{table}[htdp]
+                         
+? 
+[16] (./WorkingPaper.bbl
 ./WorkingPaper.bbl:72: Undefined control sequence.
 l.72 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
@@ -1235,30 +1245,27 @@ l.72 ...cy Qian}, ``The Fluidity of Race: \enquote
 Package natbib Warning: There were undefined citations.
 
 [17]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 342.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 371.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 371.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 342.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 342.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 371.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 371.
+Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
+(rerunfilecheck)             Checksum: 6C74A91169777001CAD7F285FE968F8B;713.
 
-
-Package rerunfilecheck Warning: File `WorkingPaper.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `WorkingPaper.out':
-(rerunfilecheck)             Before: 9D1289D387DC35503E6D1F3A9BA13921;708
-(rerunfilecheck)             After:  EFF6D6DE6DD8456B8F56DCA46F479121;529.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 342.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 371.
  ) 
 Here is how much of TeX's memory you used:
- 30799 strings out of 492649
- 624030 string characters out of 6129622
- 706858 words of memory out of 5000000
- 34132 multiletter control sequences out of 15000+600000
+ 30804 strings out of 492649
+ 624069 string characters out of 6129622
+ 706956 words of memory out of 5000000
+ 34133 multiletter control sequences out of 15000+600000
  545272 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10384b,868s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1276,15 +1283,6 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.5} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.4} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.3.3} has been referenced but does not ex
-ist, replaced by a fixed one
 
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
 /usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
@@ -1307,10 +1305,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (17 pages, 287869 bytes).
+Output written on WorkingPaper.pdf (17 pages, 289245 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 304 compressed objects within 4 object streams
- 72 named destinations out of 1000 (max. 500000)
+ 371 PDF objects out of 1000 (max. 8388607)
+ 309 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 500000)
  210 words of extra memory for PDF output out of 10000 (max. 10000000)
 

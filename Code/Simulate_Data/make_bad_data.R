@@ -56,6 +56,7 @@ save(y_raw_data, file=paste0(outputDir, "y_data.RData"))
             
 # select random subset of x data
 x_raw_data <- gold_data[sample(nrow(gold_data), numX, replace=F),]
+save(x_raw_data, file="~/Desktop/3rdYrPaper/Code/Data/MatchedData/first_best_data.RData")     
 x_raw_data <- select(x_raw_data, -y)
 save(x_raw_data, file=paste0(outputDir,"x_data_raw.RData"))     
 x_data <- select(x_raw_data, id, x2, x1)

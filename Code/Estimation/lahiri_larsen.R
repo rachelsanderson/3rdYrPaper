@@ -19,11 +19,9 @@
 ####################################################################################
 
 lahiri_larsen <- function(df){
-  
   # normalize probabilities
   df <- df %>% group_by(id_x) %>%
     mutate(q = posterior/sum(posterior)) 
-  
   return(list(beta_n = calc_beta_naive(df), beta_sw = calc_beta_sw(df, beta_n$beta), beta_ll = calc_beta_ll(df)))
 }
 
@@ -38,8 +36,7 @@ calc_beta_naive <- function(df){
   se_naive <- diag(as.numeric(sig2)*XX)
   return(list(beta = beta_naive, se = se_naive))
 }
-
-calc_beta_sw <- function(df, beta_naive){
+calc_beta_sw <- function(df, beta){
   # B = (q_ij1 - 1) z_j1 + q_ij2 z_j2
   
   # Code for constructing B
@@ -58,9 +55,8 @@ calc_beta_sw <- function(df, beta_naive){
   X <- cbind(rep(1, nrow(x_vals)), x_vals$x1, x_vals$x2)
   XX <- solve(t(X)%*%X)
   B <- as.matrix(Bhat)
-  z <- as.matrix(z$y)
   N <- nrow(df)
-  beta_sw <- beta_naive - XX %*% t(X) %*% B
+  beta_sw <- beta - XX %*% t(X) %*% B
   sig2 <- (t(z)%*%z - 2*t(B)%*%z + t(B)%*%B - t(beta_sw)%*%t(X)%*%X%*%beta_sw)/(N-3)
   se_sw <- diag(as.numeric(sig2) * XX)
   return(list(beta = beta_sw, se = se_sw))
@@ -70,18 +66,10 @@ make_z <- function(df){
   z <- df %>% group_by(id_x) %>% 
     arrange(id_x) %>% 
     filter(q == max(q)) %>%
-    sample_n(size=1) %>% ungroup %>% select(y)
+    sample_n(size=1) %>% ungroup() %>% select(y)
   return(as.matrix(z))
 }
-
-calc_beta_ll <- function(df){
- # need to alter
-  
-  z <- df %>% group_by(id_x) %>% 
-    arrange(id_x) %>% 
-    filter(q == max(q)) %>%
-    sample_n(size=1) %>% ungroup %>% select(y, id_y, id_x, q)
-  
+make_W <- function(df){
   qij <- df %>% group_by(id_x) %>% arrange(id_x, desc(q)) %>% slice(1:2) %>% select(id_x, id_y, q)
   
   x12 <- df %>% group_by(id_y) %>% 
@@ -96,19 +84,43 @@ calc_beta_ll <- function(df){
     mutate(w1 = sum(q*x1), w2=sum(q*x2)) %>%
     distinct(id_x, w1, w2)
   
+  # do ols with W instead of X
   W <- as.matrix(cbind(rep(1, nrow(merged)), merged$w1, merged$w2))
-  WW <- solve(t(W)%*%W)
-  beta_ll <-WW%*%t(W)%*%as.matrix(z$y)
-  
-  return(list(beta = beta_ll))
+  return(W)
 }
 
-calc_var_bU <- function(){
-  Sigma <- calc_sigma(W)
+
+calc_beta_ll <- function(df){
+  
+  z <- make_z(df)
+  W <- make_W(df)
   WW <- solve(t(W)%*%W)
-  var_bU <- WW %*% t(W) %*% Sigma %*% W %*% WW
+  beta_ll <-WW%*%t(W)%*%z
+  
+  # Sigma <- get_var_z(z, W)
+  # var <- WW %*% t(W) %*% Sigma %*% W %*% WW
+  # se <- bootstrap_ll(df, beta_ll, B)
+
+  # calculate the variance
+  se_ll <- c(0,0,0) 
+  return(list(beta= beta_ll, se=se_ll))
 }
 
-calc_sigma <- function(){
-  
-}
+# bootstrap_ll <- function(df, beta_ll, B){
+#   eVar <- 0 
+#   varB <- 0 
+#   for (b in 1:B){
+#     data_b <- do_something()
+#     beta_b <- calc_beta_ll(df)
+#     Sigma <- get_var_z(z, W)
+#     eVar <- eVar + WW %*% t(W) %*% Sigma %*% W %*% WW
+#     varB <- t()
+#   }
+#  
+
+# calc_Sigma <- function(z,W){
+#   WW <- solve(t(W)%*%W)
+#   S2 <- t(z)%*%(diag(nrow(W))-W%*%WW%*%t(W))%*%z
+#   
+#   sig2 <- max(0, S2 - )
+# }

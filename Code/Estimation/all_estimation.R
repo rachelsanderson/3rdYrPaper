@@ -9,7 +9,7 @@ dataDir <- "~/Desktop/3rdYrPaper/Code/Data/MatchedData/"
 ############ Import data and fix variable names ###############
 setwd(dataDir)
 myFiles <- list.files(pattern=".*csv")
-estimates <- NULL
+estimates <- data.frame()
 for (f in myFiles){
   data <- read.csv(f) %>% select(-X)
   ############ Fix variable names ###############
@@ -20,9 +20,7 @@ for (f in myFiles){
     data$L <- 1
   }
   ############ Run estimation procedures, save in df ###############
-  estOut <- estimate_everything(data)
-  names(estOut) <- c("est_method", "dataset", "beta1", "se")
-  estimates <- estimates %>% rbind(estOut)
+  estimates <- rbind(estimates, estimate_everything(data))
   rownames(estimates) <- NULL
 }
 
@@ -30,19 +28,32 @@ for (f in myFiles){
 ############ Helper function for running all estimation procedures ###############
 ##########################################################################################
 estimate_everything <- function(data){
-  estOut <- NULL
-  fileName <- strsplit(f, '.csv')[1]
+  estOut <- data.frame()
+  fileName <- as.character(strsplit(f, '.csv')[1])
   ############### AHL (2019) ###############
   ahl <- run_ahl(data)
-  estOut <- rbind(estOut, data.frame(est_method = "ahl", dataset = fileName, beta1 = ahl$coefficients[2], se = 0))
+  # estOut <- rbind(estOut, data.frame(est_method = "ahl", dataset = fileName, beta1 = ahl$coefficients[2], se = 0))
   ############### Larsen (2005) ###############
   ll <- lahiri_larsen(data)
-  estOut <- rbind(estOut, data.frame(est_method = "ols", dataset = fileName, beta1 = ll$naive_ols[2], se = 0))
-  estOut <- rbind(estOut, data.frame(est_method = "sw", dataset = fileName, beta1 = ll$sw_ols[2], se=0))
-  estOut <- rbind(estOut, data.frame(est_method = "ll", dataset = fileName, beta1 = ll$ll_ols[2], se=0))
+  estOut <- rbind(estOut, make_rows("ols", fileName, ll$beta_n$beta, ll$beta_n$se))
+  estOut <- rbind(estOut, make_rows("sw", fileName, ll$beta_sw$beta, ll$beta_sw$se))
+  estOut <- rbind(estOut,  make_rows("ll", fileName, ll$beta_ll$beta, ll$beta_ll$se))
   ############### Goldstein ###############
   
   
   return(estOut)
 }
+
+make_rows <- function(method_name, file, betas, se){
+  rows <- data.frame()
+  for (i in 1:length(betas)){
+    rows <- rbind(rows, data.frame(est_method = method_name, 
+                           matching = file, 
+                           param = paste0("beta", i), 
+                           value = betas[i], 
+                           se=se[i]))
+  }
+  return(rows)
+}
+
 
