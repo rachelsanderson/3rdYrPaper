@@ -84,7 +84,7 @@ Perhaps the most straightforward way to estimate $\beta$ in this setting involve
 
 To fix ideas, suppose that $\beta$ is the long-run impact of cash transfers on the longevity of children raised in poor families.  The $x$ variables include the characteristics of family and children who are listed in welfare program applications.  The outcome variable $y$ is age at death, which is recorded for all individuals in a universal database of death records.  Both data sources contain the variables $w$, which include the first and last name, and place and date of birth, but the realizations of $w$ that appear in the $x$- and $y$-datafiles may contain auxiliary variables such as place of death or ethnicity that are potentially correlated with other elements in $w$.
 
-In this case, ,,, When data quality is an issue, estimating $\varphi$ becomes more challenging.  In this case, $\varphi$ may be extended to allow for multiple possible matches or probabilistic matching.  In statistics, the task of recovering $\varphi$ is called \textit{record linkage}.  A record linkage procedure consists of a set of decisions about (i) selecting and standardizing observations $w_i$ and $w_j$, (ii) choosing which $(x,y)$ pairs to consider as potential matches\footnote{This is primarily to reduce computation when $N_x \times N_y$ is large}, (iii) defining which patterns of $(w_i,w_j)$ constitute (partial) agreements, and (iv) designating $(x,y)$ pairs as matches.
+In this scenario, estimating $\varphi$ becomes more challenging if multiple observations have identical $w$.  In this case, $\varphi$ may be extended to allow for multiple possible matches or probabilistic matching.  In statistics, the task of recovering $\varphi$ is called \textit{record linkage}.  A record linkage procedure consists of a set of decisions about (i) selecting and standardizing observations $w_i$ and $w_j$, (ii) choosing which $(x,y)$ pairs to consider as potential matches\footnote{This is primarily to reduce computation when $N_x \times N_y$ is large}, (iii) defining which patterns of $(w_i,w_j)$ constitute (partial) agreements, and (iv) designating $(x,y)$ pairs as matches.
 
 %\footnote{Note that this is the author's own definition.  By contrast, \cite{bailey2017} categorize historical linking algorithms (that match observations using name and age only) according to how they treat candidate pairs in the following four categories: (M1) a perfect, unique match in terms of name and age similarity; (M2) a single, similar match that is slightly different in terms of age, name, or both; (M3) many perfect matches, leading to problems with match disambiguation; (M4) multiple similar matches that are slightly different in terms of age, name or both.} 
 
@@ -211,7 +211,7 @@ Section 2 introduces the general problem that this paper seeks to address and ou
 
 
 \section{Record Linkage Methods}
-In total, I implement four types of record linkage techniques. I vary probabilistic/deterministic, and allow for unique or multiple matches.  Here I provide an overview of those techniques. 
+In total, I implement two record linkage techniques, each of which I implement while allowing multiple or enforcing single matches.  Here I provide an overview of those techniques. 
 \subsection{Deterministic}
 The deterministic matching algorithm described herein is based upon \cite{abe2012}.  It consists of the following steps
 \begin{enumerate}
@@ -305,33 +305,14 @@ These procedures are valid if the estimated probabilities in $\hat{Q}$ are indep
 
 \noindent where $g(w_i, L_i) = E[y_{i\ell} | w_i, L_i ]$, which can be estimated nonparametrically.   This results in a weighted least squares setup.  
 
-\subsection{This paper}
-Both methods described before assumed that the true match was included among the possible matches (either linked on accident to the wrong datafile, or included among the multiple matches).  They also assume no sample selection. I come up with the following method to correct for some of these issues. 
-\subsection{\cite{nq2015}}
-\cite{nq2015} study racial passing by linking individual U.S. census records to determine whether an individual's recorded race changed from one census to the next.  To achieve higher match rates than those of previous studies\footnote{The authors match 61-67 percent of individuals.   ABE (2012), Hornbeck and Naidu (2014), Long and Ferrie (2013), Mill and Stein (2012)
-have match rates around 30, 24, 22, 11-34 percent respectively}, the authors develop methods for including individuals with multiple potential matches.  These methods include selecting one match at random, and selecting the match that produces an upper/lower bound for estimating the ``passing" rate.  
+Let $M_i = \{y_{i\ell}\}_{\ell=1}^{L_i}$, the set of outcomes linked to observation $x_i$.  If $M_i$ contains the true match $y_i$,  then the estimator is unbiased:  
 
-\cite{nq2015} also use the unmatched individuals from their data to calculate absolute bounds for the population passing rates.  For a given algorithm, the absolute upper bound is obtained by using the ``upper bound" configuration of data, combined with assuming that all unmatched individuals passed.  The lower bound is obtained in the same way, assuming that none of the excluded individuals passed. 
+\begin{align*} E[\hat{\beta}] &= E[x_ix_i']^{-1}E\left[x_i\left( \sum_{\ell = 1}^{L_i} y_{i\ell}- (L_i-1)g(w_i,L_i) \right) \right] \\
+&=\beta + E[x_ix_i']^{-1} E\left[ x_i \left(\sum_{M_i / y_i} y_{i\ell} - (L_i -1) g(w_i, L_i)\right)\right] \\ 
+&= \beta +  E[x_ix_i']^{-1} E\left[ E[x_i |w_i, L_i] E\left[\sum_{M_i / y_i} y_{i\ell} - (L_i -1) g(w_i, L_i) | w_i, L_i \right] \right]  \\
+&= \beta \end{align*} 
 
-\subsection{\cite{Goldstein2012}}
-
-
-Prior-informed imputation (PII), proposed in \cite{Goldstein2012}, aims to select the
-correct value for variables of interest, rather than accepting a single complete record as a link.  Information from match probabilities in candidate linking records (the prior) is combined with information
-from unequivocally linked records.  
-
-The method is more or less as follows: use the usual FS/EM procedure to estimate probabilities of candidate pairs referring to a match.  The result is each record $i$ is associated with $\{y_{ij}\}$ and probabilities $p_{ij}$.  Assume, wlog, that all variables follow a joint multivariate normal distribution\footnote{If this is not the case for some of the observed variables, then a joint MVN distribution can be obtained using the latent MVN trick (for categorical variables, imputed values are back-transformed to their original scales.} A lower threshold can be chosen so that records with probabilities less than a threshold are ignored.  In practice, they recommend ignoring records that have no match on any matching variable; regard these records as having missing variables and use standard MI.
-
-Denote distribution of variables in linking datafile A ($y$ in ahl framework), conditional on variables in the file of interest B that they are linking to, by $f(Y^{A|B})$.   Conditioning is on responses and any covariates in the imputation model, includes variables from A that are treated as auxiliary predictor variables in the imputation model.  This conditional distribution is also multivariate normal.  
-
-For each record $i$, we compute a modified prior probability $\pi_{ij}$ which is the likelihood component $f(Y^{A|B})$ multiplied by the prior $p_{ij}$, so that $\pi_{ij} \propto f(Y^{A|B}) p_{ij}$.  The normalized set $\pi_i$ comprises the modified probability distribution for each $i$ record in A.  
-
-Set a lower threshold for accepting a record as a true link, and if any records exceeds this, we choose that with the largest probability.  If no record exceeds the threshold, then we regard the data values as missing and use standard multiple imputation.  ``The largest gain can be expected to arise
-when the probability of a link is associated with the values of the variables to be transferred. When the
-MAR assumption discussed earlier holds, then given a high enough threshold, the proposed procedure
-will produce unbiased estimates" Incorporating the likelihood component can be expected to lead more often to the correct record exceeding a given threshold. 
-
-For missing observation: Assume we have an estimate of mortality rate of individuals in A, $\pi_d$.  If a proportion of the A file $\pi_m < \pi_d$ are unequivocally matched, then the probability that a randomly chosen remaining record in B is not a death from the A file is $\pi_r = 1 - (\pi_d - \pi_m)$.  Therefore multiply $p_i$ by $1-\pi_r$ and add an extra pseudo-record with probability $\pi_r$ with an associated code for a surviving patient. 
+The second to last line follows from the assumption that $x_i$ and $y_{i\ell}$ are random samples conditional on $w_i, L_i$.  
 
 \section{Simulation Results}
 
