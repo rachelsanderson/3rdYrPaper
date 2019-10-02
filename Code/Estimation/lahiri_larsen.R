@@ -22,7 +22,8 @@ lahiri_larsen <- function(df){
   # normalize probabilities
   df <- df %>% group_by(id_x) %>%
     mutate(q = posterior/sum(posterior)) 
-  return(list(beta_n = calc_beta_naive(df), beta_sw = calc_beta_sw(df, beta_n$beta), beta_ll = calc_beta_ll(df)))
+  beta_n <- calc_beta_naive(df)
+  return(list(beta_n=beta_n, beta_sw = calc_beta_sw(df, beta_n$beta), beta_ll = calc_beta_ll(df)))
 }
 
 calc_beta_naive <- function(df){

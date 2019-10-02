@@ -80,29 +80,15 @@ writeLines(capture.output(stargazer(ols.best, lmObjects, omit.stat=c("f", "ser",
 
 ###  Plot output of all matchings #### #### #### #### #### #### #### 
 pdf(paste0(outDir, "match_plots.pdf"))
-plot.new()
 par(oma = c(2, 0, 0, 0))
 par(mfrow=c(2,2))
 for (i in seq_along(match_list)){
   m <- match_list[[i]]
   plot(first_best$x2, first_best$y, col=rgb(1,0,0,0.6), pch=16,cex=0.5, main=dataList[i], xlab="X2", ylab="y")
   points(m$x2, m$y, col=rgb(0,0,1,0.6), pch=16,cex=0.5) 
-  # abline(lm(m$y ~ m$x2), col="blue", lty='longdash')
 }
 par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
 plot(0, 0, type = "n", bty = "n", xaxt = "n", yaxt = "n")
 legend("bottom", c("first best", "automated method"), xpd = TRUE, horiz = TRUE, 
        inset = c(0, 0), bty = "n", fill = c(rgb(1,0,0,0.6),rgb(0,0,1,0.6)))
 dev.off()
-
-
-# 
-# plot_matches <- function(df){
-#   p <- ggplot(df, mapping = aes(x = x2, y = y, colour = x1)) + geom_point() +
-#     geom_smooth(method=lm, formula = y~x, se=false) + 
-#     labs(title=deparse(substitute(df)))
-#   return(p)
-# }
-# 
-# grid.arrange(grobs=lapply(match_list, plot_matches),ncol=2)
-# 

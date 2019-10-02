@@ -41,6 +41,7 @@ estimate_everything <- function(data){
   ############### Goldstein ###############
   
   
+  
   return(estOut)
 }
 
@@ -56,4 +57,21 @@ make_rows <- function(method_name, file, betas, se){
   return(rows)
 }
 
+
+make_table <- function(estimates){
+  params <- c("beta1", "beta2", "beta3")
+
+  
+  estimates %>% filter(param == x & matching == ) %>% 
+  
+}
+
+make_table_row <- function(x){
+  dataList <- c("abe_single", "abe_multi", "prl_single", "prl_multi")
+  apply(dataList, )
+ 
+}
+make_table_entry <- function(x){
+  estimates %>% filter(param == "beta1" & matching == ) %>% select()
+}
 

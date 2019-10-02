@@ -10,46 +10,45 @@ I was expecting a `,' or a `}'---line 101 of file ./Deadlines/proposal_bib.bib
  :  ISSN = {00223808, 1537534X},
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "larsen_rubin_2001"
-You've used 15 entries,
+You've used 18 entries,
             2984 wiz_defined-function locations,
-            749 strings with 6826 characters,
-and the built_in function-call counts, 13853 in all, are:
-= -- 2119
-> -- 922
-< -- 250
-+ -- 318
-- -- 178
-* -- 985
-:= -- 3096
-add.period$ -- 15
-call.type$ -- 15
-change.case$ -- 105
-chr.to.int$ -- 15
-cite$ -- 15
-duplicate$ -- 165
-empty$ -- 351
-format.name$ -- 460
-if$ -- 3412
+            758 strings with 7170 characters,
+and the built_in function-call counts, 15897 in all, are:
+= -- 2414
+> -- 1039
+< -- 277
++ -- 351
+- -- 196
+* -- 1094
+:= -- 3579
+add.period$ -- 18
+call.type$ -- 18
+change.case$ -- 127
+chr.to.int$ -- 18
+cite$ -- 18
+duplicate$ -- 199
+empty$ -- 426
+format.name$ -- 517
+if$ -- 3904
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 12
-newline$ -- 51
-num.names$ -- 182
-pop$ -- 203
+missing$ -- 18
+newline$ -- 60
+num.names$ -- 216
+pop$ -- 258
 preamble$ -- 1
-purify$ -- 120
+purify$ -- 144
 quote$ -- 0
 skip$ -- 0
 stack$ -- 0
-substring$ -- 326
-swap$ -- 57
-text.length$ -- 5
+substring$ -- 389
+swap$ -- 61
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 60
+type$ -- 66
 warning$ -- 0
-while$ -- 161
+while$ -- 191
 width$ -- 0
-write$ -- 253
+write$ -- 294
 (There was 1 error message)
