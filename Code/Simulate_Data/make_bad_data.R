@@ -1,7 +1,8 @@
 # load libraries
-require(dplyr)
+require(tidyverse)
 require(lubridate)
 require(stringr)
+library(stargazer)
 library(gridExtra)
 require(pracma)
 require(foreign)
@@ -46,21 +47,17 @@ y_raw_data$first <- as.character(y_raw_data$first)
 y_raw_data$last <- as.character(y_raw_data$last)
 y_raw_data$name <- paste(y_raw_data$first,y_raw_data$last )
 y_raw_data$id_y <- y_raw_data$id
-y_data <- y_raw_data
+y_data <- y_raw_data %>% select(-id)
 save(y_raw_data, file=paste0(outputDir, "y_data.RData"))
 
-# duplicate each row
-# y_data<- y_raw_data[rep(seq_len(nrow(y_raw_data)), each=2),]
-# y_data$id_y <- 1:nrow(y_data)
-# write.dta(y_data, paste0(outputDir,"y_data.dta"))
-            
 # select random subset of x data
-x_raw_data <- gold_data[sample(nrow(gold_data), numX, replace=F),]
-save(x_raw_data, file="~/Desktop/3rdYrPaper/Code/Data/MatchedData/first_best_data.RData")     
-x_raw_data <- select(x_raw_data, -y)
+indices <- sample(nrow(gold_data), numX, replace=F) 
+first_best <- gold_data[sample(nrow(gold_data), numX, replace=F),]
+save(first_best, file="~/Desktop/3rdYrPaper/Code/Data/MatchedData/first_best_data.RData")     
+x_raw_data <- select(first_best, -y)
 save(x_raw_data, file=paste0(outputDir,"x_data_raw.RData"))     
-x_data <- select(x_raw_data, id, x2, x1)
-x_data$id_x <- x_data$id
+x_data <- select(x_raw_data, x2, x1)
+x_data$id_x <- x_raw_data$id
 
 # introduce random typos for each variable
 # note that typos follow conditional independence assumption
@@ -104,7 +101,7 @@ gold.plot <- ggplot(data = gold_data, mapping=aes(x2, y, group=x1, colour=x1)) +
   labs(title = "Full 'gold' dataset", x = "x2", y = "y") +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(legend.position = c(0.8, 0.2))
-first_best.plot <- ggplot(data = na.omit(gold_data_aug), mapping=aes(x2, y, group=x1, colour=x1)) + 
+first_best.plot <- ggplot(data = first_best, mapping=aes(x2, y, group=x1, colour=x1)) + 
   geom_point() + 
   scale_colour_discrete(name = "x1", labels=c("0","1")) + 
   labs(title = "First best 'gold' dataset", x = "x2", y = "y") +

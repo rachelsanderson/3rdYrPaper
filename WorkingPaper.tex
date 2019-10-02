@@ -363,7 +363,36 @@ I test three DGPs. The first was described above.  The second allows for correla
 The $y$ are generated according to the same DGP described above; that is the true $\beta_0 = (2, 0.5, 1)$.  I compare my results to an oracle linkage method (``first best"), which would successfully link all 400 $x$ observations to their correct $y$.  This produces $\hat{\beta}_{FB}$, which is shown in the table below:
 % results here
 
+%% Matching Algorithm Comparison
+% Match Rate Table 
+\begin{table}[h!]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Match rate for matching algorithms}
+\vspace{10pt}
+\resizebox{0.6\textwidth}{!}{\input{./Figures/match_rates.tex}}
+\end{table}
 
+% Distribution of  L_i
+\begin{figure}[h!]
+\begin{center}
+\caption{Distribution of number of matches produced by multi-matching algorithms}
+\vspace{-20pt}
+\includegraphics[width=0.7\textwidth]{./Figures/match_hist.pdf}
+\caption{default}
+\label{default}
+\end{center}
+\end{figure}
+
+% Naive OLS Table
+\begin{table}[h!]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Naive OLS for all of the matchings}
+\resizebox{\textwidth}{!}{\input{./Figures/naive_ols.tex}}
+\end{table}
 
 \subsection{Matching step}
 \begin{figure}[htbp]
@@ -379,7 +408,7 @@ The $y$ are generated according to the same DGP described above; that is the tru
 % Mon Sep 30 16:31:01 2019
 \begin{table}[ht]
 \centering
-\caption{Match rate for matching algorithms}
+\caption{}
 \vspace{5pt}
 \begin{tabular}{rlrrr}
   \hline

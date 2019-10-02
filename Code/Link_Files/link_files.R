@@ -20,8 +20,8 @@ link_files <- function(x.df, y.df, x_vars, y_vars, name_vars, num_vars,
   abe_single <-  abe_match(x.df, y.df, name_vars, x_vars, y_vars, age_band, unique = TRUE, twoway)
   abe_multi <- abe_match(x.df, y.df, name_vars, x_vars, y_vars, age_band, unique = FALSE, twoway)
   print(paste0("Switching from multiple to single ABE matching drops ", nrow(abe_multi) - nrow(abe_single), " observations"))
-  prl_single <- prl_match(x.df, y.df, name_vars, num_vars, unique = TRUE, thresh = 0.85)
-  prl_multi <-  prl_match(x.df, y.df, name_vars, num_vars, unique = FALSE, thresh = 0.85)
+  prl_single <- prl_match(x.df, y.df, name_vars, num_vars, unique = TRUE, thresh = thresh)
+  prl_multi <-  prl_match(x.df, y.df, name_vars, num_vars, unique = FALSE, thresh = thresh)
   print(paste0("Switching from multiple to single PRL matching drops ", nrow(prl_multi) - nrow(prl_single), " observations"))
   
   match_list <- list(abe_single = abe_single, 
