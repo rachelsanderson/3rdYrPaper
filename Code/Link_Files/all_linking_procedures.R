@@ -71,20 +71,29 @@ dev.off()
 lmObjects <- lapply(match_list, FUN = function(x) lm(y~x1+x2, data=x))
 ols.best <- lm(y~x1+x2, data=first_best)
 
-writeLines(capture.output(stargazer(ols.best, lmObjects, omit.stat=c("f", "ser"), 
+writeLines(capture.output(stargazer(ols.best, lmObjects, omit.stat=c("f", "ser", "adj.rsq"), 
                                     float = FALSE, 
                                     column.labels = c("First Best", dataList),
-                                    model.numbers=FALSE)), paste0(outDir,"naive_ols.tex"))
+                                    covariate.labels = c("$\\beta_0$", "$\\beta_1$", "$\\beta_2$"),
+                                    model.numbers=FALSE,
+                                    intercept.bottom=FALSE)), paste0(outDir,"naive_ols.tex"))
 
 ###  Plot output of all matchings #### #### #### #### #### #### #### 
-par(mfrow = c(2,2))
+pdf(paste0(outDir, "match_plots.pdf"))
+plot.new()
+par(oma = c(2, 0, 0, 0))
+par(mfrow=c(2,2))
 for (i in seq_along(match_list)){
   m <- match_list[[i]]
   plot(first_best$x2, first_best$y, col=rgb(1,0,0,0.6), pch=16,cex=0.5, main=dataList[i], xlab="X2", ylab="y")
   points(m$x2, m$y, col=rgb(0,0,1,0.6), pch=16,cex=0.5) 
-  abline(lm(m$y ~ m$x2), col="blue", lty='longdash')
+  # abline(lm(m$y ~ m$x2), col="blue", lty='longdash')
 }
-
+par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
+plot(0, 0, type = "n", bty = "n", xaxt = "n", yaxt = "n")
+legend("bottom", c("first best", "automated method"), xpd = TRUE, horiz = TRUE, 
+       inset = c(0, 0), bty = "n", fill = c(rgb(1,0,0,0.6),rgb(0,0,1,0.6)))
+dev.off()
 
 
 # 

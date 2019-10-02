@@ -71,7 +71,7 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \begin{abstract}
 \singlespacing
-\noindent This paper studies what happens when the goal is to estimate a parametric model using observations $(x,y)$, but $x$ and $y$ are observed in distinct datasets with imperfect identifiers.  This setup requires that the researcher must attempt to identify which observations in the $x$- and $y$-datafiles refer to the same individual, prior to performing inference about the joint or conditional distributions of $x$ and $y$.  At a minimum, random errors in this matching step introduce measurement error that must be accounted for in subsequent analyses; however, concerns about sample selection arise when these errors are correlated with unobservables that affect $x$ or $y$.  \end{abstract}
+\noindent This paper studies what happens when the goal is to estimate a parametric model using observations $(x,y)$, but $x$ and $y$ are observed in distinct datasets with imperfect identifiers.  This setup requires that the researcher must attempt to identify which observations in the $x$- and $y$-datafiles refer to the same individual, prior to performing inference about the joint or conditional distributions of $x$ and $y$.  At a minimum, random errors in the matching step introduce measurement error that must be accounted for in subsequent inference; however, additional concerns about sample selection arise when these errors are correlated with unobservables that affect $x$ or $y$.  \end{abstract}
 
 % Using matched data requires estimation techniques that incorporate information from the matching process to improve efficiency and accurately reflect uncertainty. 
 
@@ -80,54 +80,38 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 Consider estimating $\beta$ in a linear regression model, \begin{equation} y_i = x_i'\beta + \varepsilon_i, \ E[\varepsilon | x_i] = 0, \ E[\epsilon_i^2] = \sigma^2  \label{model} \end{equation}
 but, instead of observing $(x, y)$ pairs directly,  $x$ and $y$ are recorded in separate datasets.  Additionally, both datasets contain a set of common variables $w$, that can be used to learn about the joint distribution of $(x,y)$.
 
-Perhaps the most straightforward way to estimate $\beta$ in this setting involves first identifying which $(x,y)$ pairs refer to the same underlying units -- the matching step -- and then applying standard methods to estimate (\ref{model}) using the matched pairs.   Formally, for data $\{x_i, w_i\}_{i=1}^{N_x}$ and $\{y_j, w_j\}_{j=1}^{N_y}$, the matching step consists of estimating a function, \begin{equation} \varphi: \{1,\dots, N_x\} \to \{1,\dots, N_y\} \cup \varnothing \end{equation} where $\varphi(i) = j$ if individual $i$ in the $x$-datafile and individual $j$ in the $y$-datafile refer to the same entity, and $\varphi(i) = \varnothing$ if $i$ does not have a match in $y$-datafile.  Note that if $w$ identifies individuals uniquely and without error, then $\varphi(i) = j$ if and only if $w_i = w_j$, and $\varphi(i) = \varnothing$ otherwise.  However, if $w$ is not unique or recorded with error, then $\varphi$ needs to be estimated, and inference about $\beta$ may need to be adjusted accordingly.   
+Perhaps the most straightforward way to estimate $\beta$ in this setting involves first identifying which $(x,y)$ pairs refer to the same underlying units, and then applying standard methods to estimate (\ref{model}) using the matched pairs.   Formally, for data $\{x_i, w_i\}_{i=1}^{N_x}$ and $\{y_j, w_j\}_{j=1}^{N_y}$, the matching step consists of estimating a function, \begin{equation} \varphi: \{1,\dots, N_x\} \to \{1,\dots, N_y\} \cup \varnothing \end{equation} where $\varphi(i) = j$ if individual $i$ in the $x$-datafile and individual $j$ in the $y$-datafile refer to the same entity, and $\varphi(i) = \varnothing$ if $i$ does not have a match in $y$-datafile.  Note that if $w$ identifies individuals uniquely and without error, then $\varphi(i) = j$ if and only if $w_i = w_j$, and $\varphi(i) = \varnothing$ otherwise.  However, if $w$ is not unique or recorded with error, then $\varphi$ needs to be estimated, and inference about $\beta$ may need to be adjusted accordingly.   
 
-To fix ideas, suppose that the goal is to estimate the effect of providing cash transfers to single mothers on the life expectancy of their children.  Mathematically, the parameter of interest is $\beta_1$ in the regression model,
+To fix ideas, suppose that the goal is to estimate the effect of providing cash transfers to single mothers on the life expectancy of their children.  Mathematically, the parameter of interest can be represented as $\beta_1$ in the regression model,
 \begin{equation}
 y_i = \beta_0 + x_{1i}  \beta_1+ x_{2i}'\beta_2 + \varepsilon_i
 \end{equation}
-where $x_{1i}$ is a binary variable equal to 1 if person $i$'s mother received a cash transfer, and $x_{2i}$ includes all other demographic variables that are recorded on the welfare program applications (the $x$-datafile).  The outcome $y_i$ is person $i$'s age at death, as reported in a universal database of death records (the $y$-datafile).  The two data sources  contain a common set of variables $w$, which include first and last name, and date of birth; however, the $x$- or $y$-datafile may contain additional variables such as place of death or ethnicity that are potentially correlated with elements in $w$, but only appear in one of the files.  Since $w$ contains only a few variables, individuals with common names are likely to be linked with multiple $y$; and so the estimated $\varphi$ may need to allow for multiple possible matches.   
+where $x_{1i}$ is a binary variable equal to 1 if person $i$'s mother received a cash transfer, and $x_{2i}$ includes all other demographic variables that are recorded on the welfare program applications (the $x$-datafile).  The outcome $y_i$ is person $i$'s age at death, as reported in a universal database of death records (the $y$-datafile).  The two data sources additionally contain a common set of variables $w$, including first and last name, and year of birth.  Since no combination of these variables is necessarily unique, estimating $\varphi$ in this setting would likely require distinguishing among multiple observations with identical $w$.
 
-In statistics, the task of recovering $\varphi$ is called \textit{record linkage}.  A standard record linkage procedure consists of a set of decisions about (i) selecting and standardizing observations $w_i$ and $w_j$, (ii) choosing which $(x,y)$ pairs to consider as potential matches\footnote{This is primarily to reduce computation when $N_x \times N_y$ is large}, (iii) defining which patterns of $(w_i,w_j)$ constitute (partial) agreements, and (iv) designating $(x,y)$ pairs as matches.  For example, the following steps constitute a (deterministic) record linkage procedure for the setting above: 
-\begin{enumerate}
-\item[(i)] Use a phonetic algorithm to standardize the first and last names in both datasets; 
-\item[(ii)] Consider as potential matches all $(x, y)$ pairs whose phonetically standardized names begin with the same letter, and whose birth years are within $\pm$2 years;
-\item[(iii)] Measure the distance between any two names using Jaro-Winkler string distance, and the distance between any two birth dates as a difference in months;
-\item[(iv)] Designate as matches all $(x,y)$ pairs with Jaro-Winkler scores exceeding a pre-determined cut-off; and, if a record $x$ has multiple possible matches that exceed the cut-off, then choose the corresponding $y$ with the highest score (or pick one match at random if there is a tie).  
-\end{enumerate}
+Although the previous example is motivated by a specific research question in \cite{aizer2016}, the ``imperfect identifier problem" is by no means unique.  In statistics, the task of recovering $\varphi$ is known as \textit{record linkage}, but  this problem also appears frequently in computer science, operations research, and epidemiology, under names such as data linkage, entity resolution, instance identication, de-duplication, merge/purge processing, and reconciliation.  In economics, a strong interest in record linkage has emerged as the result of newly available, large administrative datasets; and, a number of recent papers compare the performance of popular matching techniques used in economic history on the representativeness and accuracy of the datasets that they produce \citep{abe2019,arp2018,bailey2017}.
 
-Another record linkage procedure could be defined using the same rules for steps (i)-(iii), but replacing (iv) with a probabilistic matching rule that does not enforce one-to-one matching, such as
-\begin{enumerate}
-\item[(iv*)]  Use the Expectation-Maximization algorithm to compute ``match weights" for each $(x,y)$ pair; then, designate as matches all pairs with match weights exceeding a threshold that is set to reflect specific tolerances for Type I and Type II error. 
-\end{enumerate} 
-Except in rare cases, the estimated matching functions obtained by using (iv) and (iv$^*$) will differ, if only because the former matches each $x$ with at most one $y$, while the latter potentially matches the same $x$ with multiple $y$.  The second method also produces estimates of the probability that each of the associated $y$ values refers to the true match, which can be combined with estimation techniques such as those in \cite{lahiri05}. 
+% good until here
+These reviews illustrate how each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  However, the impact of data pre-processing choices on estimation is still not well understood.  Furthermore, inference using linked data requires joint assumptions for the matching and estimation steps.  
 
-Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error), and there is generally a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  However, the above example shows that not only do the estimates of $\beta$ likely depend on the estimates of $\varphi$, but also the \textit{methods} for estimating $\beta$ may also differ.  It is henceforth the goal of this paper to study the \textit{joint} impact of matching and estimation on the quality of inference with linked data.
+In particular, whether to allow for multiple matches?  When using multiple matches, authors have generated a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructed bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or used methods  that allow for multiple, equally likely outcomes by \cite{ahl2019}.   This example also shows how the outputs of the matching process determine which estimation tools are available.  Had the authors used probabilistic record linkage methods to link the data, they could have used the robust OLS estimators from \cite{lahiri05}, or prior-informed imputation for missing records proposed by \cite{Goldstein2012}.   
 
-A number of recent papers compare the performance of different matching algorithms  \citep{bailey2017, arp2018} and estimation methods for linked data \citep{harron2014}.  This paper adds to this literature by comparing how different \textit{combinations} of matching and estimation techniques affect parameter estimates and their confidence intervals in standard econometric models.  It also makes practical suggestions for choosing which methods best suit a given setting. 
-
-In order to illustrate the techniques studied in this paper, the next section introduces a running example based on synthetic datasets that imitate historical U.S. Census data, yet offer the benefit that each observation's true match is known.   I will then use this synthetic data set to illustrate the matching and estimation techniques described in Sections 3 and 4. Section 5 describes the implementation of the methods and the data.  Section 6 contains the results.  Section 7 will be a real empirical application, and Section 8 will conclude.
+This paper adds to this literature by comparing how different \textit{combinations} of matching and estimation techniques affect parameter estimates and their confidence intervals in standard econometric models.  It also makes practical suggestions for choosing which methods best suit a given setting. 
+% fix above 
+In order to illustrate the techniques studied in this paper, Section 2 introduces a numerical example that is used to demonstrate the matching and estimation techniques described in Sections 3 and 4.  Section 5 provides details about the implementation of the methods and data generating processes.  Section 6 contains the results, and Section 7 concludes.
 
 \section{Empirical Example}
+
+The purpose of this section is to introduce a synthetic dataset that will be referenced throughout this paper.  The benefits of using a synthetic dataset are twofold:  first, I can control which variables in (\ref{model}) are correlated with errors in the identifiers $w$; and second, I can compare the performance of the matching algorithms and estimation techniques to a ``ground truth" dataset containing all of the true matches.  To make the data as real as possible, the identifiers and their transcription error rates are chosen to mimic those of the 1940 Census data, as reported in \cite{abe2019}. 
+
 The ``ground truth" dataset consists of 1000 observations of $(x_{1i}, x_{2i}, y_i, w_i)$, where $x_{1i}$ and $x_{2i}$ are mutually independent, $x_{1i} \overset{i.i.d}{\sim} \text{Bernoulli}(0.5)$, and $x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, 2)$.  The $y_i$ values are generated according to the linear relationship,
 \begin{gather}
 y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i, \hspace{10pt} 
 \varepsilon_i\  |\  x_{1i}, x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, \sigma^2) 
 \end{gather}
-with $(\beta_0, \beta_1, \beta_2, \sigma^2) = (2, 0.5, 1, 2)$.  Given these parameter values, estimating a correctly specified linear regression model yields an $R^2$ value of approximately 0.50 (see Figure 1(a)).  Each observation is associated with a vector of identifying variables, $w_i$, that consists of a first and last name drawn randomly from a list of first and last names\footnote{The first and last name lists contain 41 and 24 names, respectively, and can be found in the replication files.}, and a random birthday between January 1, 1900, and December 31, 1925, so that the full synthetic dataset resembles the top panel in Figure \ref{sample_dta}.  Note that the number of possible names is smaller than the number of observations to ensure that there are multiple observations with the same name. 
+with $(\beta_0, \beta_1, \beta_2, \sigma^2) = (2, 0.5, 1, 2)$, so that estimating the correctly specified linear regression model yields an $R^2$ value of approximately 0.50.  Each observation is also assigned the identifiers, $w_i$, which include include a first and last name drawn at random from a list of first and last names\footnote{The first and last name lists contain 41 and 24 names, respectively, and can be found in the replication files.  Note that the number of possible names is smaller than the number of observations to ensure that there are multiple observations with the same name.}, and a random birthday between January 1, 1900, and December 31, 1925.   The resulting dataset looks like the observations in the top panel of Figure \ref{sample_dta}.  
  
- 
- 
-\begin{figure}[htbp]
-\begin{center}
-\caption{From full data set to $x$ dataset}
-\includegraphics[height = 300pt, width=\textwidth]{./Figures/gold_data_compare.pdf}
-\label{default}
-\end{center}
-\end{figure}
-
  % Massive latex Figure of synthetic dataset -- put in new file ideally
-\begin{figure}
+\begin{figure}[h!]
 \caption{Creation of Synthetic Datasets}
 \vspace{5pt}
  \begin{adjustwidth}{-.5in}{-.5in}  
@@ -186,16 +170,36 @@ ID & $y$ & Name & Birthday \\
 \label{sample_dta}
 \end{figure}%
 
-Next, I split the ``ground truth" dataset into the $x$- and $y$-datafiles, which contain $(x_1,x_2, w_x)$ and $(y, w_y)$ values respectively.  The $y$-datafile is identical to the ground truth data, except that it excludes the variables $x_1$ and $x_2$.   The $x$-datafile contains values for 400 observations, selected at random from the full dataset. To construct $w_x$, I modify the corresponding $w_y$ by deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), or swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  I also add normally distributed errors to the birth day, month, and year.  The probability of introducing an error to any one element of $w_x$ is set to mimic real-world data \footnote{add a footnote here}.  Figure \ref{sample_dta} illustrates how the $x$- and $y$-datafiles are split visually. 
+Next, I split the ground truth dataset into an $x$- and $y$-datafile, which contain $(x_1,x_2, w)$ and $(y, w)$ values respectively.  To construct the $x$-datafile, I select 400 observations at random from the ground truth dataset, and introduce random errors in their corresponding identifiers.  These errors include deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), and swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  I also add normally distributed errors to the birth day, month, and year.   The probabilities of introducing an error are set to match the transcription error rates reported in the 1940 Census by \cite{abe2019}; for example, 7\% of observations have misreported first names and 17\% of observations have misreported last names.  The bottom panel of Figure \ref{sample_dta} illustrates how the $x$- and $y$-datafiles are split visually.  
 
-%Research on record linkage appears in many fields, such as statistics, computer science, operations research, and epidemiology, under many names, such as data linkage, entity resolution, instance identication, de-duplication, merge/purge processing, and reconciliation.  As such, there are several books devoted to its study \citep{harron_book, christen2012, herzog07}, and dozens of commercial and open source systems software developed for its implementation \citep{kopcke2010}.  Although insights from other fields have been slow to reach economics, recent working papers examine the impact of different record linkage techniques on inference using historic U.S. census data \citep{abe2019, bailey2017}; and the most recent version of the Handbook of Econometrics includes a chapter on the ``Econometrics of Data Combination" \citep{RidderMoffitt}.\footnote{Similar survey papers also exist in fields outside of economics, such as epidemiology and computer science \citep{harron2018, winkler99}.  In fact, that record linkage is studied by many fields makes writing (and reading!) such surveys difficult, because authors are constantly writing the same things For example, \cite{Goldstein2012} prove similar results to those published in \cite{hirukawa2018}.}
-
-%Record linkage techniques are broadly categorized as deterministic or probabilistic\footnote{define them here}; however, every deterministic linkage method has an equivalent probabilistic version \citep{harron2018}.  Furthermore, the first three steps of the record linkage task described above are identical for all procedures.  I begin by discussing these steps, then introduce the PRL framework, and show how it can be used to express deterministic linking rules. 
+The $y$-datafile includes all 1,000 values from the ground truth data, and does not contain any errors in the identifiers $w$.  As a result, it will be likely that  some $x$ will be matched to multiple $y$.  In later sections, I will consider versions of this synthetic dataset, where errors in $w$ are correlated with $x_{1}$ or $y$. 
 
 
 \section{Record Linkage Methods}
 
 
+
+
+
+
+A standard record linkage procedure consists of a set of decisions about (i) selecting and standardizing observations $w_i$ and $w_j$, (ii) choosing which $(x,y)$ pairs to consider as potential matches\footnote{This is primarily to reduce computation when $N_x \times N_y$ is large}, (iii) defining which patterns of $(w_i,w_j)$ constitute (partial) agreements, and (iv) designating $(x,y)$ pairs as matches.  For example, the following steps constitute a (deterministic) record linkage procedure for the setting above: 
+\begin{enumerate}
+\item[(i)] Use a phonetic algorithm to standardize the first and last names in both datasets; 
+\item[(ii)] Consider as potential matches all $(x, y)$ pairs whose phonetically standardized names begin with the same letter, and whose birth years are within $\pm$2 years;
+\item[(iii)] Measure the distance between any two names using Jaro-Winkler string distance, and the distance between any two birth dates as a difference in months;
+\item[(iv)] Designate as matches all $(x,y)$ pairs with Jaro-Winkler scores exceeding a pre-determined cut-off; and, if a record $x$ has multiple possible matches that exceed the cut-off, then choose the corresponding $y$ with the highest score (or pick one match at random if there is a tie).  
+\end{enumerate}
+
+Another record linkage procedure could be defined using the same rules for steps (i)-(iii), but replacing (iv) with a probabilistic matching rule that does not enforce one-to-one matching, such as
+\begin{enumerate}
+\item[(iv*)]  Use the Expectation-Maximization algorithm to compute ``match weights" for each $(x,y)$ pair; then, designate as matches all pairs with match weights exceeding a threshold that is set to reflect specific tolerances for Type I and Type II error. 
+\end{enumerate} 
+Except in rare cases, the estimated matching functions obtained by using (iv) and (iv$^*$) will differ, if only because the former matches each $x$ with at most one $y$, while the latter potentially matches the same $x$ with multiple $y$.  The second method also produces estimates of the probability that each of the associated $y$ values refers to the true match, which can be combined with estimation techniques such as those in \cite{lahiri05}. 
+
+
+Some introduction about record linkage here.  
+
+Record linkage techniques are broadly categorized as deterministic or probabilistic\footnote{define them here}; however, every deterministic linkage method has an equivalent probabilistic version \citep{harron2018}.  Furthermore, the first three steps of the record linkage task described above are identical for all procedures.  I begin by discussing these steps, then introduce the PRL framework, and show how it can be used to express deterministic linking rules. 
 
 As observed by \cite{bailey2017}, record linkage procedures differ by the set of assumptions that motivate their use.  However, all of the procedures discussed in this paper will be studied under the following, common set of assumptions (with some departures later on):
 \begin{enumerate}
@@ -358,7 +362,7 @@ Standard errors for $\hat{\beta}_{LL}$ are calculated via the parametric bootstr
 For AHL (2019), I use nearest neighbors applied to the datasets $\{x_i, \{y_{i\ell}\}_\ell, w_i \}$ that are outputted by the matching algorithms above.  That means, I implement the method as if the researcher only observes the matched dataset.  
 
 \section{Results}
-I test three DGPs. The first was described above.  The second allows for correlation  between $x_1$ and the probability of an error.  The third will allow for correlation between $y$ and the probability of an error. 
+In total, I test three DGPs. The first was described above.  The second allows for correlation  between $x_1$ and the probability of an error.  The third will allow for correlation between $y$ and the probability of an error. 
 
 The $y$ are generated according to the same DGP described above; that is the true $\beta_0 = (2, 0.5, 1)$.  I compare my results to an oracle linkage method (``first best"), which would successfully link all 400 $x$ observations to their correct $y$.  This produces $\hat{\beta}_{FB}$, which is shown in the table below:
 % results here
@@ -396,10 +400,9 @@ The $y$ are generated according to the same DGP described above; that is the tru
 
 \subsection{Matching step}
 \begin{figure}[htbp]
-\caption{Matches}
+\caption{$(x,y)$ pairs produced by different matching algorithms}
 \begin{center}
-
-
+\includegraphics[width=\textwidth]{./Figures/match_plots.pdf}
 \label{default}
 \end{center}
 \end{figure}
@@ -438,9 +441,6 @@ The $y$ are generated according to the same DGP described above; that is the tru
 Borrow from the Bayesian Record Linkage. 
 
 
-Merging datasets with imperfect identifiers occurs frequently in projects that use historical U.S. data sources prior to the introduction of Social Security Numbers.  For example, \cite{aizer2016} link children listed on Mothers' Pension program welfare applications from 1911-1935 with Social Security Death Master File records from 1965-2012 using individuals' names and dates of birth.  Although the authors match 48 percent of children to a unique death record, and 4 percent to multiple possible records, 48 percent of observations remain unmatched\footnote{The authors estimate that at least 32 percent of individuals in the Mothers' Pension program data died before 1965, and therefore should have no match in the 1965-2012 data.}.  To avoid dropping the 52 percent of observations with zero or multiple matches, \cite{aizer2016} estimate hazard models using methods from \cite{ahl2019} that allow observations to be associated with multiple, equally likely, outcomes.  
-
-The methods used by \cite{aizer2016} illustrate how inference using linked data requires joint assumptions for the matching and estimation steps.  Under different assumptions, the authors could have generated a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, or constructed bounds on the parameter of interest using different configurations of matched data \citep{nq2015}.   This example also shows how the outputs of the matching process determine which estimation tools are available.  Had the authors used probabilistic record linkage methods to link the data, they could have used the robust OLS estimators from \cite{lahiri05}, or prior-informed imputation for missing records proposed by \cite{Goldstein2012}.   
 
 
 \newpage
