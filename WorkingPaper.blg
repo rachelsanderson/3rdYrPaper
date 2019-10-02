@@ -1,0 +1,54 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: WorkingPaper.aux
+The style file: aer.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: ./Deadlines/proposal_bib.bib
+I was expecting a `,' or a `}'---line 101 of file ./Deadlines/proposal_bib.bib
+ :  
+ :  ISSN = {00223808, 1537534X},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You've used 14 entries,
+            2984 wiz_defined-function locations,
+            738 strings with 6620 characters,
+and the built_in function-call counts, 12833 in all, are:
+= -- 1940
+> -- 868
+< -- 231
++ -- 302
+- -- 168
+* -- 920
+:= -- 2869
+add.period$ -- 14
+call.type$ -- 14
+change.case$ -- 98
+chr.to.int$ -- 14
+cite$ -- 14
+duplicate$ -- 150
+empty$ -- 321
+format.name$ -- 432
+if$ -- 3144
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 11
+newline$ -- 48
+num.names$ -- 168
+pop$ -- 185
+preamble$ -- 1
+purify$ -- 112
+quote$ -- 0
+skip$ -- 0
+stack$ -- 0
+substring$ -- 315
+swap$ -- 51
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 56
+warning$ -- 0
+while$ -- 150
+width$ -- 0
+write$ -- 233
+(There was 1 error message)
