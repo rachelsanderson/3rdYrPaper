@@ -91,12 +91,13 @@ where $x_{1i}$ is a binary variable equal to 1 if person $i$'s mother received a
 Although the previous example is motivated by a specific research question in \cite{aizer2016}, the ``imperfect identifier problem" is by no means unique.  In statistics, the task of recovering $\varphi$ is known as \textit{record linkage}, but  this problem also appears frequently in computer science, operations research, and epidemiology, under names such as data linkage, entity resolution, instance identication, de-duplication, merge/purge processing, and reconciliation.  In economics, a strong interest in record linkage has emerged as the result of newly available, large administrative datasets; and, a number of recent papers compare the performance of popular matching techniques used in economic history on the representativeness and accuracy of the datasets that they produce \citep{abe2019,arp2018,bailey2017}.
 
 % good until here
-These reviews illustrate how each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  However, the impact of data pre-processing choices on estimation is still not well understood.  Furthermore, inference using linked data requires joint assumptions for the matching and estimation steps.  
+%Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  However, the impact of data pre-processing choices on estimation is still not well understood.  
 
-In particular, whether to allow for multiple matches?  When using multiple matches, authors have generated a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructed bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or used methods  that allow for multiple, equally likely outcomes by \cite{ahl2019}.   This example also shows how the outputs of the matching process determine which estimation tools are available.  Had the authors used probabilistic record linkage methods to link the data, they could have used the robust OLS estimators from \cite{lahiri05}, or prior-informed imputation for missing records proposed by \cite{Goldstein2012}.   
+The purpose of this paper is show that inference using linked data requires making joint assumptions for the matching and estimation steps, such as whether multiple matches are allowed, and, if so, how these matches should be accounted for when using standard estimation techniques.  In the past, authors have handled multiple matches by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or using methods that allow for multiple, equally likely outcomes by \cite{ahl2019} using weighted least squares.   Alternatively, if probabilistic record linkage methods are used, the bias introduced during the matching step may be removed using robust OLS estimators in \cite{lahiri05}, or prior-informed imputation in \cite{Goldstein2012}.   
 
 This paper adds to this literature by comparing how different \textit{combinations} of matching and estimation techniques affect parameter estimates and their confidence intervals in standard econometric models.  It also makes practical suggestions for choosing which methods best suit a given setting. 
-% fix above 
+
+
 In order to illustrate the techniques studied in this paper, Section 2 introduces a numerical example that is used to demonstrate the matching and estimation techniques described in Sections 3 and 4.  Section 5 provides details about the implementation of the methods and data generating processes.  Section 6 contains the results, and Section 7 concludes.
 
 \section{Empirical Example}
@@ -306,8 +307,16 @@ Here I will talk about all the nit-picky stuff, like
 \section{Results}
 In total, I will test three DGPs (two now; more in Monte Carlo). The first is exactly as described in Section 2.  The second allows for correlation  between $x_1$ and the probability of an error.  The third will allow for correlation between $y$ and the probability of an error. 
 
-The $y$ are generated according to the same DGP described above; that is the true $\beta_0 = (2, 0.5, 1)$.  I compare my results to an oracle linkage method (``first best"), which would successfully link all 400 $x$ observations to their correct $y$.  This produces $\hat{\beta}_{FB}$, which is shown in the table below:
-% results here
+The $y$ are generated according to the same DGP described above; that is the true $\beta_0 = (2, 0.5, 1)$.  I compare my results to an oracle linkage method (``first best"), which would successfully link all 400 $x$ observations to their correct $y$.  
+
+I haven't finished coding, but here is an overview of the figures and tables so far:
+\begin{itemize}
+\item Table \ref{match_rate} shows the number of matches, percent correct, and number of uniquely matched $x_i$ for each matching method.  We see that no method is able to match every observation in the $x$ datafile.  The ABE method performs the best, but I also use a small threshold for PRL that could potentially be adjusted in order to achieve similar performance. 
+\item Table \ref{naive} shows the OLS results applied naively (without any corrections for double counting $x$ with multiple $y$) to each of the matched datasets.  The First Best estimator is the benchmark case, produced by perfectly matched data. 
+\item Another way to view the output of the matching algorithms is Figure \ref{match_plot} (but this is kind of messy and maybe a QQ plot is better?)
+\item Figure \ref{nMatches} shows the distribution of $L_i$ for methods that create multiple matches.  
+\item Table \ref{estimates} contains parameter estimates and standard errors (not always correcT) for different estimation methods on different datasets that can be compared to the naive OLS.
+\end{itemize}% results here
 
 %% Matching Algorithm Comparison
 % Match Rate Table 
@@ -318,6 +327,7 @@ The $y$ are generated according to the same DGP described above; that is the tru
 \caption{Match rate for matching algorithms}
 \vspace{10pt}
 \resizebox{0.6\textwidth}{!}{\input{./Figures/match_rates.tex}}
+\label{match_rate}
 \end{table}
 
 % Distribution of  L_i
@@ -327,7 +337,7 @@ The $y$ are generated according to the same DGP described above; that is the tru
 \vspace{-20pt}
 \includegraphics[width=0.7\textwidth]{./Figures/match_hist.pdf}
 \caption{default}
-\label{default}
+\label{nMatches}
 \end{center}
 \end{figure}
 
@@ -338,9 +348,12 @@ The $y$ are generated according to the same DGP described above; that is the tru
 \centering
 \caption{Naive OLS for all of the matchings}
 \resizebox{\textwidth}{!}{\input{./Figures/naive_ols.tex}}
+\label{naive}
 \end{table}
 
+% match plot
 \begin{figure}[htbp]
+\label{match_plot}
 \caption{$(x,y)$ pairs produced by different matching algorithms}
 \begin{center}
 \includegraphics[width=\textwidth]{./Figures/match_plots.pdf}
@@ -349,18 +362,21 @@ The $y$ are generated according to the same DGP described above; that is the tru
 \end{figure}
 
 \begin{table}[htdp]
+\label{estimates}
+\let\center\empty
+\let\endcenter\relax
+\centering
 \caption{Parameter estimates for different matched datasets and estimation procedures}
-\begin{center}
-\begin{tabular}{|c|c|}
-
-\end{tabular}
-\end{center}
-\label{default}
-\end{table}%
+\vspace{10pt}
+ \addtolength{\leftskip} {-1.5cm} 
+ \addtolength{\rightskip}{-1cm}
+\resizebox{1.2\textwidth}{!}{\input{./Figures/estimates.tex}}
+\end{table}
 
 
 \section{Conclusion}
-Borrow from the Bayesian Record Linkage. 
+Will write when I have results. 
+
 
 
 
