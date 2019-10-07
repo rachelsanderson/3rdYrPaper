@@ -71,18 +71,21 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \begin{abstract}
 \singlespacing
-\noindent This paper studies what happens when the goal is to estimate a parametric model using observations $(x,y)$, but $x$ and $y$ are observed in distinct datasets with imperfect identifiers.  This setup requires that the researcher must attempt to identify which observations in the $x$- and $y$-datafiles refer to the same individual, prior to performing inference about the joint or conditional distributions of $x$ and $y$.  At a minimum, random errors in the matching step introduce measurement error that must be accounted for in subsequent inference; however, additional concerns about sample selection arise when these errors are correlated with unobservables that affect $x$ or $y$.  \end{abstract}
+\noindent This paper compares different methods for estimating parametric models with linked data, i.e. when $x$ and $y$ are observed in distinct datasets with imperfect identifiers.  This setup requires that the researcher must attempt to identify which observations in the $x$- and $y$-datafiles refer to the same individual, prior to performing inference about the joint or conditional distributions of $x$ and $y$.  At a minimum, random errors in the matching step introduce measurement error that must be accounted for in subsequent inference; however, additional concerns about sample selection arise when these errors are correlated with unobservables that affect $x$ or $y$.  \end{abstract}
 
 % Using matched data requires estimation techniques that incorporate information from the matching process to improve efficiency and accurately reflect uncertainty. 
 
 \section{Introduction}
 
+Fix this
+
+\section{Setup} 
 Consider estimating $\beta$ in a linear regression model, \begin{equation} y_i = x_i'\beta + \varepsilon_i, \ E[\varepsilon | x_i] = 0, \ E[\epsilon_i^2] = \sigma^2  \label{model} \end{equation}
-but, instead of observing $(x, y)$ pairs directly,  $x$ and $y$ are recorded in separate datasets.  Additionally, both datasets contain a set of common variables $w$, that can be used to learn about the joint distribution of $(x,y)$.
+but, instead of observing $(x, y)$ pairs directly,  $x$ and $y$ are recorded in separate datasets.  Additionally, both datasets contain a set of common variables $w$, that can be used to link observations in order to learn about the joint distribution of $(x,y)$.
 
 Perhaps the most straightforward way to estimate $\beta$ in this setting involves first identifying which $(x,y)$ pairs refer to the same underlying units, and then applying standard methods to estimate (\ref{model}) using the matched pairs.   Formally, for data $\{x_i, w_i\}_{i=1}^{N_x}$ and $\{y_j, w_j\}_{j=1}^{N_y}$, the matching step consists of estimating a function, \begin{equation} \varphi: \{1,\dots, N_x\} \to \{1,\dots, N_y\} \cup \varnothing \end{equation} where $\varphi(i) = j$ if individual $i$ in the $x$-datafile and individual $j$ in the $y$-datafile refer to the same entity, and $\varphi(i) = \varnothing$ if $i$ does not have a match in $y$-datafile.  Note that if $w$ identifies individuals uniquely and without error, then $\varphi(i) = j$ if and only if $w_i = w_j$, and $\varphi(i) = \varnothing$ otherwise.  However, if $w$ is not unique or recorded with error, then $\varphi$ needs to be estimated, and inference about $\beta$ may need to be adjusted accordingly.   
 
-To fix ideas, suppose that the goal is to estimate the effect of providing cash transfers to single mothers on the life expectancy of their children.  Mathematically, the parameter of interest can be represented as $\beta_1$ in the regression model,
+To fix ideas, consider the setup of \cite{aizer2016}, where the goal is to estimate the effect of providing cash transfers to single mothers on the life expectancy of their children.  Mathematically, the parameter of interest can be represented as $\beta_1$ in the regression model,
 \begin{equation}
 y_i = \beta_0 + x_{1i}  \beta_1+ x_{2i}'\beta_2 + \varepsilon_i
 \end{equation}
@@ -93,14 +96,14 @@ Although the previous example is motivated by a specific research question in \c
 % good until here
 %Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  However, the impact of data pre-processing choices on estimation is still not well understood.  
 
-The purpose of this paper is show that inference using linked data requires making joint assumptions for the matching and estimation steps, such as whether multiple matches are allowed, and, if so, how these matches should be accounted for when using standard estimation techniques.  In the past, authors have handled multiple matches by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or using methods that allow for multiple, equally likely outcomes by \cite{ahl2019} using weighted least squares.   Alternatively, if probabilistic record linkage methods are used, the bias introduced during the matching step may be removed using robust OLS estimators in \cite{lahiri05}, or prior-informed imputation in \cite{Goldstein2012}.   
+The purpose of this paper is to show that inference using linked data requires making joint assumptions for the matching and estimation steps, such as whether multiple matches are allowed, and, if so, how these matches should be accounted for when using standard estimation techniques.  In the past, authors have handled multiple matches by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or using methods that allow for multiple outcomes by \cite{ahl2019} using weighted least squares.   Alternatively, if probabilistic record linkage methods are used, the bias introduced during the matching step may be removed using robust OLS estimators in \cite{lahiri05}, or prior-informed imputation in \cite{Goldstein2012}.   
 
 This paper adds to this literature by comparing how different \textit{combinations} of matching and estimation techniques affect parameter estimates and their confidence intervals in standard econometric models.  It also makes practical suggestions for choosing which methods best suit a given setting. 
 
 
 In order to illustrate the techniques studied in this paper, Section 2 introduces a numerical example that is used to demonstrate the matching and estimation techniques described in Sections 3 and 4.  Section 5 provides details about the implementation of the methods and data generating processes.  Section 6 contains the results, and Section 7 concludes.
 
-\section{Empirical Example}
+\section{Numerical Example}
 
 The purpose of this section is to introduce a synthetic dataset that will be referenced throughout this paper.  The benefits of using a synthetic dataset are threefold:  first, I can control which variables in (\ref{model}) are correlated with errors in the identifiers $w$; second, I can compare the performance of the matching algorithms and estimation techniques to a ``ground truth" dataset containing all of the true matches; third, I can control the degree of overlap and similarity among observations, which is imporrtant for manipulating the number of possible matches if multiple matches are desired.  To make the data as real as possible, I choose the identifiers and their corresponding transcription error rates to mimic those reported in the 1940 Census data, as reported by \cite{abe2019}. 
 

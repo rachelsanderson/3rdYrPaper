@@ -14,20 +14,21 @@ source("~/Desktop/3rdYrPaper/Code/Link_Files/prl_match.R")
 
 ### LOAD IN GOLD, X AND Y DATA SETS ###################################
 load("~/Desktop/3rdYrPaper/Code/Data/FakeData/gold_data_aug.RData")
-load("~/Desktop/3rdYrPaper/Code/Data/FakeData/x_data.RData")
+load("~/Desktop/3rdYrPaper/Code/Data/FakeData/x_data_g.RData")
 load("~/Desktop/3rdYrPaper/Code/Data/FakeData/y_data.RData")
+load("~/Desktop/3rdYrPaper/Code/Data/MatchedData/first_best_data.RData")
 y_data <- y_raw_data
 
 ### STANDARDIZE NAMES #########################################
 x.df <- x_data %>% mutate(f_name_nysiis = nysiis(first, modified=TRUE), l_name_nysiis = nysiis(last, modified=TRUE)) %>% 
-    select(id_x, x1, x2, f_name_nysiis, l_name_nysiis, year)
+    select(id_x, x1, x2, f_name_nysiis, l_name_nysiis, year, g)
 y.df <- y_data %>% mutate(f_name_nysiis = nysiis(first, modified=TRUE), l_name_nysiis =nysiis(last, modified=TRUE)) %>% 
   select(id_y, y, f_name_nysiis, l_name_nysiis, year)
 
 #### Declare names of variables #####################
 name_vars <- c("f_name_nysiis", "l_name_nysiis")
 num_vars <- c("year")
-x_vars <- c("id_x", "x1", "x2")
+x_vars <- c("id_x", "x1", "x2", "g")
 y_vars <- c("id_y", "y")
 outDir <- "~/Desktop/3rdYrPaper/Code/Data/MatchedData/"
 
