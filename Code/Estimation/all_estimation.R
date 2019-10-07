@@ -29,7 +29,7 @@ for (f in myFiles){
 addtorow <- list()
 addtorow$pos <- list(0)
 addtorow$command <- c(paste0("& \\multicolumn{4}{c}{AHL} & \\multicolumn{4}{c}{SW} & \\multicolumn{4}{c}{LL} \\\\\n
-                             \cmidrule(lr){2-6}\cmidrule(lr){7-11}\cmidrule(lr){12-16} Parameter",
+                             \\cmidrule(lr){2-5}\\cmidrule(lr){6-9}\\cmidrule(lr){10-13} Parameter",
                     paste(rep("& ABE-M & ABE-S & PRL-M & PRL-S",3), sep="",collapse=""), "\\\\\n"))
 
 writeLines(capture.output(print(xtable(make_table(estimates)), add.to.row=addtorow, floating=FALSE, include.colnames=FALSE, 
