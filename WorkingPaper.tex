@@ -254,7 +254,29 @@ Since membership to $M$ or $U$ is not actually observed, a convenient way of sim
 
 \section{Estimation Methods}
 This section provides an overview of the estimation methods I compare for analyzing the matched datasets. 
+
+
+% NOTES HERe
+\subsection{SW 93 Notes}
+Presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status of each pair.  Link, nonlink, and potential links would all be included and identified as such.\footnote{They conjecture that it will suffice to keep no more than 2-3 pair of matches in y file for each x file record. Two/three pairs with highest matching weights would be retained}  In particular, they assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some of cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations.  They do not deal with settings where more than one true link could occur, hence (link link) combinations are ruled out.
+
+Data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.
+
+Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.
+
+Motivated by Neter, Maynes and Ramanathan (1965):  assume the set of records from one file could always be matched, always had the same probability p of being correctly matched, and (3) had the same probability q of being mismatched to any remaining records in the second file. i.e. $p + (N-1)q = 1$ where N is file size.  Their result says if matching errors are moderate then regression coefficeints can be severely biased.     SW change assumption (3), argue that it is unlikely to hold. 
+
+Simple regresion
+
+$$ y = a_0 + a_1 x +\varepsilon$$ 
+
+Unadjusted estimator fo $a_1$ is biased if some $y$ are not the same unit as $x$.   Under assumptions s.t. x and y are independent when a mismatch occurs, it can be shown that if we know the mismatch rate $h$, an unbiased adjusted estimator can be obtained by multiplying $a_1$ by $1/(1-h)$ (like measurement error formula).   
+
+Their methods do not require one-ton-one matching (it's only for computational tractability).  They assume that they can accurately estimate the true probabilities of a match $p_i$ (see Rubin and Belin, 1991) .  The second is that the true $Y_i$ associated with $X_i$ is the pair with the highest matching weight, and the false value $Y_{\varphi(i)$ is associated with the second highest matching weight. .  From simulations the first assumption is very important.  
+
 \subsection{OLS Bias Correction}
+
+
  \cite{sw1993} and \cite{lahiri05} propose techniques for correcting the bias from mismatched pairs in linear regression.  They assume that the matching procedure produces $n$ pairs $(x_i, z_i)$, where $z_i$ may or may not correspond to $y_i$, yet the true $y_i$ is included among the matches.   Hence, 
 $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
 and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
