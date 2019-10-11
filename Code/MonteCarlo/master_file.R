@@ -35,7 +35,7 @@ lastNameDict = "~/Desktop/3rdYrPaper/Code/Simulate_Data/Dictionaries/last_names_
 ########################################################################
 
 set.seed(1989)
-nDatasets <- 100
+nDatasets <- 1000
 nObs <- 1000
 pX1 <- 0.5
 pX <- 0.5 
