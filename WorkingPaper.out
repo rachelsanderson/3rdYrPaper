@@ -5,8 +5,7 @@
 \BOOKMARK [2][-]{subsection.4.1}{Deterministic}{section.4}% 5
 \BOOKMARK [2][-]{subsection.4.2}{Probabilistic Record Linkage}{section.4}% 6
 \BOOKMARK [1][-]{section.5}{Estimation with linked data }{}% 7
-\BOOKMARK [2][-]{subsection.5.1}{OLS Bias Correction}{section.5}% 8
-\BOOKMARK [2][-]{subsection.5.2}{Multiple match WLS}{section.5}% 9
-\BOOKMARK [1][-]{section.6}{Implementation Notes}{}% 10
-\BOOKMARK [1][-]{section.7}{Results}{}% 11
-\BOOKMARK [1][-]{section.8}{Conclusion}{}% 12
+\BOOKMARK [1][-]{section.6}{Estimation with linked data and probabilities}{}% 8
+\BOOKMARK [1][-]{section.7}{Implementation Notes}{}% 9
+\BOOKMARK [1][-]{section.8}{Results}{}% 10
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 11

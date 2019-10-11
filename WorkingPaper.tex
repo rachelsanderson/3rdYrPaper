@@ -253,7 +253,8 @@ but the parameters $\mathbf{\delta_M}$ and $\mathbf{\delta_U}$ may be high-dimen
 Since membership to $M$ or $U$ is not actually observed, a convenient way of simultaneously estimating $p_M, p_U$ and classifying record pairs as matches or non-matches is via mixture modeling, with mixture distributions $P(\gamij | M)$ and $P(\gamij | U)$.  The parameters can be estimated using the expectation-maximization (EM), first applied to record linakge by \cite{larsen_rubin_2001}.  For this paper, I use the \texttt{fastLink} algorithm developed by \cite{enamorado2019}. 
 
 \section{Estimation with linked data }
-A few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
+
+When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
 
 Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
 
@@ -261,18 +262,7 @@ Some methods specifically attempt to correct for the bias introduced by the matc
 
 The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
 
-SW consider
-
-$$ y = a_0 + a_1 x +\varepsilon$$ 
-
-Unadjusted estimator fo $a_1$ is biased if some $y$ are not the same unit as $x$.   Under assumptions s.t. x and y are independent when a mismatch occurs, it can be shown that if we know the mismatch rate $h$, an unbiased adjusted estimator can be obtained by multiplying $a_1$ by $1/(1-h)$ (like measurement error formula).   
-
-Their methods do not require one-ton-one matching (it's only for computational tractability).  They assume that they can accurately estimate the true probabilities of a match $p_i$ (see Rubin and Belin, 1991) .  The second is that the true $Y_i$ associated with $X_i$ is the pair with the highest matching weight, and the false value $Y_{\varphi(i)$ is associated with the second highest matching weight. .  From simulations the first assumption is very important.  
-
-\subsection{OLS Bias Correction}
-
-
- \cite{sw1993} and \cite{lahiri05} propose techniques for correcting the bias from mismatched pairs in linear regression.  They assume that the matching procedure produces $n$ pairs $(x_i, z_i)$, where $z_i$ may or may not correspond to $y_i$, yet the true $y_i$ is included among the matches.   Hence, 
+Formally \cite{sw1993} assume that the matching procedure produces $n$ pairs $(x_i, z_i)$, where $z_i$ may or may not correspond to $y_i$, yet the true $y_i$ is included among the potential matches.   Hence, 
 $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
 and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
 \begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
@@ -292,9 +282,7 @@ where $W = (w_1, \dots, w_N)'$.  To construct $\hat{\beta}_U$ in practice, they 
 
 For both methods, the values $q_{ij}$ are typically calculated using (\ref{bayes}) and parameter values $\psi = \{p_M, P(\gamij | M)$, and $P(\gamij |U)\}$. Thus, we can write the estimators $\hat{\beta}_{SW} = \hat{\beta}_{SW}(\psi)$ and $\hat{\beta}_U = \hat{\beta_U}(\psi)$.  In practice, $\psi$ is unknown, and a reasonable estimator $\hat{\psi}$ must be used.   Details on how to estimate $\hat{\psi}$ are provided in the next section.   Importantly, $\hat{\beta}_U(\hat{\psi})$ is unbiased whenever $\hat{\psi}$ is independent of $z$, which occurs if errors in the matching variables (which determine the distribution of $\hat{\psi}$ are independent of the response variable $y$.  Unfortunately, this assumption is unlikely to hold in many economic applications, such as \cite{nq2015}, where $y$ indicates whether a person's recorded ethnicity changes between survey years, but data quality significantly differs for individuals with different values of $y$.  
 
-\subsection{Multiple match WLS}
-
- \cite{ahl2019} propose a GMM estimator that uses data where each observation $x_i$ is linked to $L_i$ equally likely, potential outcomes, denoted $\{y_{i\ell}\}_{\ell=1}^{L_i}$.  Importantly, their methods require that (i) the true outcome is included among the set of possible matches, (ii) each of the possible matches is equally likely to be the true match, and (iii) that the observations $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are random samples from their marginal distributions conditional on $(w_i, L_i)$.  
+The work of \cite{ahl2019} is like a generalized version of \cite{sw1993}.  They propose a GMM estimator that uses data where each observation $x_i$ is linked to $L_i$ equally likely, potential outcomes, denoted $\{y_{i\ell}\}_{\ell=1}^{L_i}$.  Importantly, their methods require that (i) the true outcome is included among the set of possible matches, (ii) each of the possible matches is equally likely to be the true match, and (iii) that the observations $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are random samples from their marginal distributions conditional on $(w_i, L_i)$.  
  
 Under these assumptions, the authors show how to construct an unbiased and consistent estimator $\hat{\beta}$ by considering the smoothed regression:
 \begin{equation} 
@@ -311,6 +299,10 @@ which can be estimated in two-steps, where the first step involves estimating $\
 Assumption (iii) rules out the possibility of unobserved sample selection, in the sense that all individuals with the same identifying information have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample (unless $w_i$ includes income).   However, unlike the OLS bias correction estimators, the methods here explicitly correct for any dependence between the outcome variable and the matching variables $w_i$ and the parameters of the matching procedure, insofar as they are captured by $L_i$.  
 
 [This suggests that the AHL (2019) estimator may be more robust when $L_i$ is correlated with $x_i$..]
+
+\section{Estimation with linked data and probabilities} 
+
+Here we consider the possibility of incorporating probabilities of matches in the AHL framework.  The interesting result is that the minimum variance unbiased estimator depends on the ratio of the structural error in the model to the variance in the reduced form estimation for $y$, which also depends on the precision of the estimator $\hat{g}$.  This is an interesting result because it connects to the Horwitz-Thompson estimator, and work on inverse propensity score weighting. 
 
 \section{Implementation Notes}
 Here I will talk about all the nit-picky stuff, like 

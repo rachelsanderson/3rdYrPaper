@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  11 OCT 2019 08:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  11 OCT 2019 08:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1218,30 +1218,18 @@ Overfull \hbox (4.98752pt too wide) in paragraph at lines 199--200
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
-[7] [8] [9] [10] [11] [12]
-./WorkingPaper.tex:270: Missing } inserted.
-<inserted text> 
-                }
-l.270 ...ight, and the false value $Y_{\varphi(i)$
-                                                   is associated with the se...
-
-? 
-
-Overfull \hbox (3.96089pt too wide) in paragraph at lines 270--271
-[]\OT1/cmr/m/n/12 Their meth-ods do not re-quire one-ton-one match-ing (it's on
-ly for com-pu-ta-tional tractabil-
- []
-
-[13] [14] [15]
+[7] [8] [9] [10] [11] [12] [13] [14] [15]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 318.
- [16] [17] (./Figures/match_rates.tex)
-<./Figures/match_hist.pdf, id=296, 505.89pt x 505.89pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 309.
+ [16] (./Figures/match_rates.tex)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<./Figures/match_hist.pdf, id=289, 505.89pt x 505.89pt>
 File: ./Figures/match_hist.pdf Graphic file (type pdf)
 <use ./Figures/match_hist.pdf>
-Package pdftex.def Info: ./Figures/match_hist.pdf  used on input line 358.
+Package pdftex.def Info: ./Figures/match_hist.pdf  used on input line 349.
 (pdftex.def)             Requested size: 328.82707pt x 328.8323pt.
-
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -1249,28 +1237,28 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<./Figures/match_plots.pdf, id=297, 505.89pt x 505.89pt>
+<./Figures/match_plots.pdf, id=290, 505.89pt x 505.89pt>
 File: ./Figures/match_plots.pdf Graphic file (type pdf)
 <use ./Figures/match_plots.pdf>
-Package pdftex.def Info: ./Figures/match_plots.pdf  used on input line 379.
+Package pdftex.def Info: ./Figures/match_plots.pdf  used on input line 370.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
-./WorkingPaper.tex:384: LaTeX Error: Unknown float option `d'.
+./WorkingPaper.tex:375: LaTeX Error: Unknown float option `d'.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.384 \begin{table}[htdp]
+l.375 \begin{table}[htdp]
                          
 ? 
 (./Figures/estimates.tex)
-Overfull \hbox (22.86697pt too wide) in paragraph at lines 393--394
+Overfull \hbox (22.86697pt too wide) in paragraph at lines 384--385
  [][] 
  []
 
-[18] (./WorkingPaper.bbl [19 <./Figures/match_hist.pdf>] [20 <./Figures/match_p
-lots.pdf>] [21]
+[17] [18 <./Figures/match_hist.pdf>] [19 <./Figures/match_plots.pdf>]
+(./WorkingPaper.bbl [20]
 ./WorkingPaper.bbl:73: Misplaced alignment tab character &.
 l.73 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
@@ -1279,25 +1267,25 @@ l.73 ...Data Linkage}, United States: John Wiley &
 l.91 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
-) [22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 409.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 409.
+) [21]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 400.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 400.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 409.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 409.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 400.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 400.
 Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
-(rerunfilecheck)             Checksum: EA319FF56D3985F9119DE116927B1537;678.
+(rerunfilecheck)             Checksum: B65F16C9201EEB4DE1EC6DA143563AC0;622.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 409.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 400.
  ) 
 Here is how much of TeX's memory you used:
- 30845 strings out of 492649
- 624793 string characters out of 6129622
- 714273 words of memory out of 5000000
- 34156 multiletter control sequences out of 15000+600000
+ 30842 strings out of 492649
+ 624746 string characters out of 6129622
+ 715290 words of memory out of 5000000
+ 34155 multiletter control sequences out of 15000+600000
  545441 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10384b,868s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1332,10 +1320,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (22 pages, 466153 bytes).
+Output written on WorkingPaper.pdf (21 pages, 463636 bytes).
 PDF statistics:
- 434 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 83 named destinations out of 1000 (max. 500000)
- 215 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 428 PDF objects out of 1000 (max. 8388607)
+ 359 compressed objects within 4 object streams
+ 81 named destinations out of 1000 (max. 500000)
+ 207 words of extra memory for PDF output out of 10000 (max. 10000000)
 

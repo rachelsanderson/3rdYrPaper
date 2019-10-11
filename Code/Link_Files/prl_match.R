@@ -1,4 +1,7 @@
 prl_match <- function(x.df, y.df, name_vars, num_vars, unique=TRUE, thresh=0.85){
+  x.df[num_vars] <- as.numeric(unlist(x.df[num_vars]))
+  y.df[num_vars] <- as.numeric(unlist(y.df[num_vars]))
+  
   if (unique){ 
       # uses year only, but using month and day as well creates much better results
       prl <- fastLink(x.df, y.df, varnames = c(name_vars, num_vars),
