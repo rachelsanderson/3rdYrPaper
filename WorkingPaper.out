@@ -4,7 +4,7 @@
 \BOOKMARK [1][-]{section.4}{Record Linkage Methods}{}% 4
 \BOOKMARK [2][-]{subsection.4.1}{Deterministic}{section.4}% 5
 \BOOKMARK [2][-]{subsection.4.2}{Probabilistic Record Linkage}{section.4}% 6
-\BOOKMARK [1][-]{section.5}{Estimation Methods}{}% 7
+\BOOKMARK [1][-]{section.5}{Estimation with linked data }{}% 7
 \BOOKMARK [2][-]{subsection.5.1}{OLS Bias Correction}{section.5}% 8
 \BOOKMARK [2][-]{subsection.5.2}{Multiple match WLS}{section.5}% 9
 \BOOKMARK [1][-]{section.6}{Implementation Notes}{}% 10

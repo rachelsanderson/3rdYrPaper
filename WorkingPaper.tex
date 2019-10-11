@@ -252,21 +252,16 @@ but the parameters $\mathbf{\delta_M}$ and $\mathbf{\delta_U}$ may be high-dimen
  
 Since membership to $M$ or $U$ is not actually observed, a convenient way of simultaneously estimating $p_M, p_U$ and classifying record pairs as matches or non-matches is via mixture modeling, with mixture distributions $P(\gamij | M)$ and $P(\gamij | U)$.  The parameters can be estimated using the expectation-maximization (EM), first applied to record linakge by \cite{larsen_rubin_2001}.  For this paper, I use the \texttt{fastLink} algorithm developed by \cite{enamorado2019}. 
 
-\section{Estimation Methods}
-This section provides an overview of the estimation methods I compare for analyzing the matched datasets. 
+\section{Estimation with linked data }
+A few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
 
+Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
 
-% NOTES HERe
-\subsection{SW 93 Notes}
-Presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status of each pair.  Link, nonlink, and potential links would all be included and identified as such.\footnote{They conjecture that it will suffice to keep no more than 2-3 pair of matches in y file for each x file record. Two/three pairs with highest matching weights would be retained}  In particular, they assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some of cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations.  They do not deal with settings where more than one true link could occur, hence (link link) combinations are ruled out.
+Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
 
-Data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.
+The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
 
-Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.
-
-Motivated by Neter, Maynes and Ramanathan (1965):  assume the set of records from one file could always be matched, always had the same probability p of being correctly matched, and (3) had the same probability q of being mismatched to any remaining records in the second file. i.e. $p + (N-1)q = 1$ where N is file size.  Their result says if matching errors are moderate then regression coefficeints can be severely biased.     SW change assumption (3), argue that it is unlikely to hold. 
-
-Simple regresion
+SW consider
 
 $$ y = a_0 + a_1 x +\varepsilon$$ 
 

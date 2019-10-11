@@ -1,5 +1,5 @@
 estimate_g <- function(x.df, y.df, name_vars, num_vars, num_neighbors){
-  g <- apply(x.df, 1, nearest_neighbors, y = y.df, name_vars = name_vars, num_vars = num_vars, num_neighbors = nn)
+  g <- apply(x.df, 1, nearest_neighbors, y = y.df, name_vars = name_vars, num_vars = num_vars, num_neighbors = num_neighbors)
   return(g)
 }
 

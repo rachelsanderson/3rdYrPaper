@@ -44,7 +44,7 @@ estimate_everything <- function(data){
   fileName <- as.character(strsplit(f, '.csv')[1])
   ############### AHL (2019) ###############
   ahl <- run_ahl(data)
-  estOut <- rbind(estOut, make_rows("ahl", fileName, ahl$betas, ahl$se))
+  estOut <- rbind(estOut, make_rows("ahl", fileName, ahl$beta, ahl$se))
   ############### Larsen (2005) ###############
   ll <- lahiri_larsen(data)
   estOut <- rbind(estOut, make_rows("ols", fileName, ll$beta_n$beta, ll$beta_n$se))
