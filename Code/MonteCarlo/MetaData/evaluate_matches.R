@@ -13,11 +13,13 @@ options(qwraps2_markup = "latex")
 
 row_names <- c("ABE (Single)","ABE (Multi)", "PRL (Single)", "PRL (Multi)")
 method_names <- c(
-  'abe_single' = "ABE (Single)",
-  'abe_multi' = "ABE (Multi)", 
-  'prl_single' = "PRL (Single)", 
-  'prl_multi' = "PRL (Multi)"
+  'abe_single' = "ABE Single",
+  'abe_multi' = "ABE Multi", 
+  'prl_single' = "PRL Single", 
+  'prl_multi' = "PRL Multi"
 )
+
+footnote_text = "Based on 1,000 simulations. Standard deviations are reported in parentheses."
 
 mean.sd <- function(x){
   return(mean_sd(x, denote_sd="paren"))
@@ -37,26 +39,60 @@ colnames(table1) <- c("Method", "Match Rate",
                       "P(Contains True)")
 table1 <- round(table1[,-1], 3)
 
-k <- kable(table1, "latex", booktabs=T,align=("c")) 
+k <- kable(table1, "latex", booktabs=T,align=("c")) %>% 
+  footnote(general = footnote_text,
+           footnote_as_chunk = T)
 writeLines(k,paste0(figureDir,"match_rates.tex"))
 
 ### Match Rate histogram
+match_rate_mean <- metaMatch %>% group_by(method) %>% summarise(mean_match = mean(pMatchedX))
+
 match_rates <- ggplot(metaMatch, aes(x=pMatchedX, fill=method, color=method)) + 
   geom_histogram(position = "identity", alpha=0.5, bins=50, show.legend=FALSE) +
-  facet_grid(method ~ ., labeller=as_labeller(method_labeller)) + 
+  geom_vline(aes(xintercept = mean_match), linetype="dashed",
+             data=match_rate_mean,
+             show.legend=FALSE) +
+  facet_grid(method ~ ., labeller=as_labeller(method_names)) + 
   labs(x = "Match Rate", y = "Frequency") +
-  labs(caption = "*Based on 1,000 replications")
+  labs(caption = "*Based on 1,000 simulations. Vertical line indicates the sample mean.") +
+  theme(plot.caption =element_text(hjust=0))
 
 ggsave(paste0(figureDir,"match_rate.pdf"), plot = match_rates)
 
 ### Multi Match Table
+table2 <- metaMultiMatch %>% group_by(method,mc_id) %>% mutate(totMatches = sum(counts),
+                                                               propL = counts/totMatches)
 
-table2 %>% group_by(method, L) %>% summarise(pContainsTrue=mean(pContainsTrue),
-                                             meanCounts = mean(counts))
+## merge L = 6,7,8 for ease of exposition
+ind <- (table2$L >= 6)
+table2[ind,]$L <- rep("6+", sum(ind))
+
+t <- table2 %>% group_by(method, L) %>% select(pContainsTrue, propL)%>% 
+  summarise_all(mean.sd)
+
+t1 <- t %>% select(-propL) %>% spread(key = L, value = pContainsTrue) %>%
+  add_column(var = "Pr(Contains True)", .after="method")
+t2 <- t %>% select(-pContainsTrue) %>% spread(key = L, value = propL, fill="0.00") %>%
+  add_column(var = "Pr(L=$\\ell$)", .after="method")
+
+tab2 <- rbind(t1,t2) %>% arrange(method)
+tab2 <- tab2[, -1]
+colnames(tab2)[1] <- c("L")
+
+multi_tab <- kable(tab2, "latex", booktabs = T, 
+                   align=c("l", rep("c", ncol(tab2)-1)),
+                   escape=FALSE) %>%
+  pack_rows("ABE Multi", 1,2) %>%
+  pack_rows("PRL Multi", 3, 4) %>%
+  footnote(general = footnote_text,
+           footnote_as_chunk = T)
+
+writeLines(multi_tab,paste0(figureDir,"multi_tab.tex"))
 
 ### Num Match histogram 
-ggplot(metaMultiMatch, aes(x=L, fill=method, color=method)) + 
-  geom_histogram(position = "identity", alpha=0.5,bins=8, show.legend=FALSE) +
-  facet_grid(method ~ .) + 
-  labs(x = "Match Rate", y = "Frequency") +
-  labs(caption = "*Based on 1,000 replications")
+ggplot(table2, aes(x=L, y=propL, fill=method, color=method)) +
+  geom_bar(stat="identity", alpha=0.5, show.legend=FALSE) + 
+  facet_grid(method ~ ., labeller=as_labeller(method_names[c(2,4)])) 
+
+  # labs(x = "L", y = "Proportion") +
+  # labs(caption = "*Based on 1,000 replications")
