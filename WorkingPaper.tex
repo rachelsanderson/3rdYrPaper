@@ -9,6 +9,7 @@
 \usepackage{mathtools,xparse}
 \usepackage{graphics}
 \usepackage{tikz}
+\usepackage{tabu}
 \usepackage{tikz-cd}
 \colorlet{shadecolor}{orange!15}
 % \definecolor{shadecolor}{rgb}{255,128,0}\
@@ -26,6 +27,12 @@
 \usepackage{indentfirst}
 \usetikzlibrary{arrows,shapes,positioning,shadows,trees}
 \usepackage{array}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\usepackage{threeparttable}
+\usepackage{makecell}
+\usepackage[normalem]{ulem}
 \newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
 \newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}m{#1}}
 \newcolumntype{R}[1]{>{\PreserveBackslash}p{#1}}
@@ -304,6 +311,27 @@ Assumption (iii) rules out the possibility of unobserved sample selection, in th
 
 Here we consider the possibility of incorporating probabilities of matches in the AHL framework.  The interesting result is that the minimum variance unbiased estimator depends on the ratio of the structural error in the model to the variance in the reduced form estimation for $y$, which also depends on the precision of the estimator $\hat{g}$.  This is an interesting result because it connects to the Horwitz-Thompson estimator, and work on inverse propensity score weighting. 
 
+\section{Monte Carlo Study}
+
+I generate 1,000 random $x$- and $y$- dataset pairs using the DGP and parameter values described in Section 2.  I apply four types of matching procedures to each dataset pair: (i) deterministic matching with unique matches, (ii) deterministic matching with multiple matches, (iii) probabilistic matching with unique matches, and (iv) probabilistic matching with multiple matches.  Allowing for multiple matches means that one observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  Each method produces a distinct matched dataset, so that the matching step outputs four matched datasets for each dataset pair.   I then compute three estimates of $\beta$ for each matched dataset: (i) the SW estimator, (ii) the AHL estimator, and (iii) an OLS estimator that uses only observations that are assigned a single match by the record linking procedure.  The benchmark estimator is $\hat{\beta}^{opt}$, which is the OLS estimator applied to the correctly linked version of the $x$- and $y$-dataset pair. 
+
+To evaluate the matching procedures, I calculate the match rate (the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile), the type I and type II error rates, and the proportion of linked observations whose links include the true match.  Additionally, I compute the total number of links (so that multiple matches count multiple times), and the  proportion of linked observations whose links include the true match conditional on the number of matches $L_i$.  Table X contains the averages and standard deviations of these statistics. 
+
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Match Rates by Linking Procedure }
+\includegraphics[width=\textwidth]{./Figures/match_rate.pdf}
+\label{default}
+\end{center}
+\end{figure}
+
+
+I evaluate the performance of the matching procedures and estimation procedures using the following criteria.  For the matching procedures, I calculate
+
+I compare estimators according to median absolute deviation.  I plot a histogram of the estimators. 
+
+
 \section{Implementation Notes}
 Here I will talk about all the nit-picky stuff, like 
 \begin{itemize}
@@ -336,9 +364,9 @@ I haven't finished coding, but here is an overview of the figures and tables so 
 \let\center\empty
 \let\endcenter\relax
 \centering
-\caption{Match rate for matching algorithms}
+\caption{Average performance and SD for matching algorithms}
 \vspace{10pt}
-\resizebox{0.6\textwidth}{!}{\input{./Figures/match_rates.tex}}
+\resizebox{\textwidth}{!}{\input{./Figures/match_rates.tex}}
 \label{match_rate}
 \end{table}
 
