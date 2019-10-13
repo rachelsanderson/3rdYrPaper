@@ -7,6 +7,9 @@
 \BOOKMARK [1][-]{section.5}{Estimation with linked data }{}% 7
 \BOOKMARK [1][-]{section.6}{Estimation with linked data and probabilities}{}% 8
 \BOOKMARK [1][-]{section.7}{Monte Carlo Study}{}% 9
-\BOOKMARK [1][-]{section.8}{Implementation Notes}{}% 10
-\BOOKMARK [1][-]{section.9}{Results}{}% 11
-\BOOKMARK [1][-]{section.10}{Conclusion}{}% 12
+\BOOKMARK [2][-]{subsection.7.1}{Matching results}{section.7}% 10
+\BOOKMARK [2][-]{subsection.7.2}{Estimation Results}{section.7}% 11
+\BOOKMARK [1][-]{section.8}{Discussion}{}% 12
+\BOOKMARK [1][-]{section.9}{Implementation Notes}{}% 13
+\BOOKMARK [1][-]{section.10}{Results}{}% 14
+\BOOKMARK [1][-]{section.11}{Conclusion}{}% 15
