@@ -10,6 +10,7 @@ figureDir <- "~/Desktop/3rdYrPaper/Figures/"
 load(paste0(metaDataDir,"estimates.RData"))
 options(qwraps2_markup = "latex")
 
+
 # Code for plotting the histogram of the estimators
 levels(estimates$matching) <- c("ABE~Single","ABE~Multi","PRL~Single","PRL~Multi")
 levels(estimates$param) <- c(expression(beta[0]==2), expression(beta[1]==0.5), expression(beta[2]==1))
@@ -43,8 +44,22 @@ plot_estimate_hist <- function(method){
 }
 lapply(est_methods, plot_estimate_hist)
 
-# Code for making table of meta information about the estimators
+# Plot comparing (L=1) vs. True Matches 
+t <- estimates %>% filter(est_method=="OLSTrue" | est_method=="OLS(L=1)")
+tPlot <- ggplot(t, aes(x=value, fill=est_method, color=est_method)) +
+  geom_histogram(position = "identity", alpha=0.5, bins = 50) + 
+  facet_grid(rows = vars(matching), cols = vars(param),
+             labeller=label_parsed,
+             scales="free") +
+  labs(x = "Parameter Estimate", y = "Frequency", 
+       fill = "", color="") +
+  scale_fill_discrete(labels=c("True Matches", "L=1 Matches")) + 
+  scale_color_discrete(labels=c("True Matches", "L=1 Matches")) +
+  theme(legend.position="bottom")
 
+ggsave(paste0(figureDir,"compare.pdf"), plot=tPlot)
+
+# Code for making table of meta information about the estimators
 est_tab <- estimates %>% group_by(est_method, param, matching) %>% 
   summarise(mad = mad(value))
 

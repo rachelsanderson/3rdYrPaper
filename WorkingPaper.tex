@@ -314,15 +314,27 @@ Here we consider the possibility of incorporating probabilities of matches in th
 
 \section{Monte Carlo Study}
 
-I generate 1,000 random $x$- and $y$- dataset pairs using the DGP and parameter values described in Section 2.  I apply four types of matching procedures to each dataset pair: (i) deterministic matching with unique matches (ABE Single), (ii) deterministic matching with multiple matches (ABE Multi), (iii) probabilistic matching with unique matches (PRL Single), and (iv) probabilistic matching with multiple matches (PRL Multi).  Allowing for multiple matches means that one observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  Each method produces a distinct matched dataset, so that the matching step outputs four matched datasets for each dataset pair.  
-I then compute three estimates of $\beta$ for each matched dataset: (i) the SW estimator, (ii) the AHL estimator, and (iii) an OLS estimator that uses only observations that are assigned a single match by the record linking procedure.  The benchmark estimator is $\hat{\beta}^{opt}$, which is the OLS estimator applied to the correctly linked version of the $x$- and $y$-dataset pair.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
+Following the same procedure for simulating the empirical example described in Section 2, I generate 1,000 random $x$- and $y$- dataset pairs.  I implement four types of matching procedures using each dataset pair: (i) deterministic matching with unique matches (ABE Single), (ii) deterministic matching with multiple matches (ABE Multi), (iii) probabilistic matching with unique matches (PRL Single), and (iv) probabilistic matching with multiple matches (PRL Multi).  Allowing for multiple matches means that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  
+
+Each matching method produces a distinct matched dataset, so that the matching step produces a total of 4,000 linked datasets.  For each of these datasets, I then compute a variety of estimates of $\beta$, primarily the Scheuren-Winkler bias-correction estimator,  and the AHL estimator that allows for multiple matches.  I additionally compute three standard OLS estimators; the first using only observations that are assigned a single match by the record linking procedure, and the second using only the correctly matched pairs.  The third OLS estimator is the benchmark estimator is $\hat{\beta}^{opt}$, which is calculated using the correctly linked version of the $x$- and $y$-dataset pair.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
 
 \subsection{Matching results}
-To evaluate the matching procedures, I calculate the match rate (the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile), the type I and type II error rates, and the proportion of linked observations whose links include the true match.  Additionally, I compute the total number of links (so that multiple matches count multiple times), and the  proportion of linked observations whose links include the true match conditional on the number of matches $L_i$.  Table \ref{match_rate} contains the averages and standard deviations of these statistics. 
+To evaluate the matching procedures, I compute the following statistics for each linked dataset, reported in Table \ref{match_rate}:
 
+\begin{itemize}
+\item the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile (match rate), 
+\item the total number of links made by the matching algorithm, 
+\item the proportion of links that are incorrect (Type I error rate), 
+\item the proportion of correct $(x,y)$ links that are not found by the matching algorithm (Type II error rate), 
+\item the proportion of observations whose links include the true match
+\end{itemize}
+
+\noindent For the linked datasets that contain multiple matches per observation, I report also the average number of links per observation, and how often those links include the true match (Table \ref{multi_L}). 
 
 %% Matching Algorithm Comparison
 % Match Rate Table 
+
+
 \begin{table}[h!]
 \let\center\empty
 \let\endcenter\relax
@@ -340,26 +352,31 @@ To evaluate the matching procedures, I calculate the match rate (the proportion 
 \caption{Average performance and SD for multiple match procedures}
 \vspace{10pt}
 \resizebox{1.1\textwidth}{!}{\input{./Figures/multi_tab.tex}}
-\label{multi_tab}
+\label{multi_L}
 \end{table}
-
-The match rates range between 71 and 79 percent on average across the various matching procedures.  The full distribution of match rates is plotted in Figure \ref{match_hist}.  In some sense, ABE Multi seems to be the best performing match procedure, if multiple matches are desired.  The match rates produced by ABE Multi are significantly greater than those produced by the other procedures; as a result, ABE Multi also results in a higher Type I error rate.  However, the set of matches it produces contain the right match 99 percent of the time.  The question is how much noise will the extra matches produce.  
-
-It is important to note that Type I error is not necessarily useful.   By definition, there is only one correct match, so any method that allows multiple matches will increase the Type I error rate so long as multiple matches are assigned.  A better comparison metric is the probability that the true match is contained among multiple matches.  Potentially one could construct an objective function that optimizes one of these quantities. 
-
 
 %  Match Rate Histograms 
 \begin{figure}[htbp]
 \begin{center}
 \caption{Match Rates by Linking Procedure } 
-\includegraphics[width=\textwidth]{./Figures/match_rate.pdf}
+\includegraphics[width=0.9\textwidth]{./Figures/match_rate.pdf}
 \label{match_hist}
 \end{center}
 \end{figure}
 
 
-
-I compare also ABE Multi and PRL Multi to determine whether the probability of containing a true match increases by allowing for multiple matches (Table \ref{multi_tab}).   In both procedures, more than half of observations are matched to a unique outcome, and those outcomes are correct 99 and 97 percent of the time for ABE Multi and PRL Multi, respectively.   Essentially, allowing for multiple matches in the deterministic procedure increases the probability that the true match is contained among the possible matches.  
+Here are some observations that need to be turned into paragraphs: 
+\begin{itemize}
+\item As seen in Table \ref{match_rate}, the average match rates range between 71 and 79 percent across the various matching procedures.  I also plot the distribution of match rates across replications in Figure \ref{match_hist}.   The distribution for ABE Multi lies almost entirely to the right of the mean match rate for the other procedures.  The PRL Single and PRL Multi have about the same match rate, which suggests that allowing for multiple matches does not match new individuals, but instead adds additional noise.  ABE Multi, on the other hand, increases match rates by matching new observations.  
+\item ABE Multi appears to be the least discriminating of the matching procedures, with higher match rates across all replications, and with the highest number of matches.
+\item PRL Single matches more observations than ABE Single, but those extra matches seem more often to be wrong (check with a regression?) because the Type I error rate is higher. 
+\item The multi-match methods have higher Type I error rates by construction; despite adding false matches, they seem to improve upon the unique-match methods because they are more likely to include the true match among the possible matches. 
+\item  ABE Single is the most conservative of all the matching algorithms, with the lowest match rate and lowest type I error.  Of course, the tradeoff is that it fails to identify a quarter of all possible matches. 
+\item  It seems like PRL Single is the worst performing algorithm -- despite higher match rates than ABE single it seems that those matches are not likely to be correct.  This may be an artifact of the threshold used to assign the matches.  A higher threshold may result in matches more similar to ABE Single.  It may be interesting to calculate whether these two algorithms are systematically matching different types of record pairs. 
+\item In Table \ref{multi_L}, we see that PRL Multi is more likely to match observations to a unique outcome; at the price of sometimes excluding the true match.  ABE Multi is more likely to assign more matches, however the true match is contained with high probability.   Few observations are matched with more than three different outcomes.  %% FIX THIS BECAUSE THE PR(L=l) does not add up to one!!!
+\item Based on these results, I hypothesize that ABE Multi seems to be the best performing match procedure, if multiple matches are desired.  This is because the methods described in this paper typically require that the true match be included among the matches.  But another question is how much noise do extra matches introduce.  
+\item I compare also ABE Multi and PRL Multi to determine whether the probability of containing a true match increases by allowing for multiple matches (Table \ref{multi_tab}).   In both procedures, more than half of observations are matched to a unique outcome, and those outcomes are correct 99 and 97 percent of the time for ABE Multi and PRL Multi, respectively.   Essentially, allowing for multiple matches in the deterministic procedure increases the probability that the true match is contained among the possible matches.  
+\end{itemize}
 
 \subsection{Estimation Results}
 
@@ -380,6 +397,15 @@ When only a single matching is allowed, it is not possible to use SW method beca
 \resizebox{0.9\textwidth}{!}{\input{./Figures/est_tab.tex}}
 \label{multi_tab}
 \end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Comparing OLS with true matches produced by matching algorithm vs. matches with L=1}
+\includegraphics[width=1.1\textwidth]{./Figures/compare.pdf}
+\label{default}
+\end{center}
+\end{figure}
+
 
 \section{Discussion}
 To what extent my results generalize beyond the simulated data is unclear.  Many arbitrary choices -- name dictionary choice, uniform probability over those names -- and how I introduced error in the identifying variables may impact my results in important ways.  This needs to be studied in more detail, ideally with real data where a ground truth is also available. 
