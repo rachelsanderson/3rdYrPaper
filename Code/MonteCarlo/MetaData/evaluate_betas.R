@@ -12,7 +12,7 @@ options(qwraps2_markup = "latex")
 
 # Code for plotting the histogram of the estimators
 levels(estimates$matching) <- c("ABE~Single","ABE~Multi","PRL~Single","PRL~Multi")
-levels(estimates$param) <- c(expression(beta[1]==2), expression(beta[2]==0.5), expression(beta[3]==1))
+levels(estimates$param) <- c(expression(beta[0]==2), expression(beta[1]==0.5), expression(beta[2]==1))
 levels(estimates$est_method) <- c("AHL", "SW", "NaiveOLS", "OLSTrue","OLS(L=1)")
 est_methods <- levels(estimates$est_method)
 plot_estimate_hist <- function(method){
@@ -44,3 +44,23 @@ plot_estimate_hist <- function(method){
 lapply(est_methods, plot_estimate_hist)
 
 # Code for making table of meta information about the estimators
+
+est_tab <- estimates %>% group_by(est_method, param, matching) %>% 
+  summarise(mad = mad(value))
+
+est_tab <- spread(est_tab, key = est_method, value = mad) %>% arrange(matching)
+levels(est_tab$param) <- c("$\\beta_0$", "$\\beta_1$", "$\\beta_2$")
+names(est_tab)[1] <- "Parameter"
+est_tab[, 3:ncol(est_tab)] <- round(est_tab[, 3:ncol(est_tab)], 3)
+
+est_tab_out <- kable(est_tab[,-2], "latex", booktabs = T, 
+                   align=c("l", rep("c", ncol(est_tab)-1)),
+                   escape=FALSE) %>%
+  pack_rows("ABE Single", 1,3) %>%
+  pack_rows("ABE Multi", 4,6) %>%
+  pack_rows("PRL Single", 7, 9) %>%
+  pack_rows("PRL Multi", 10, 12) %>%
+  column_spec(1, width = "5cm")
+
+writeLines(est_tab_out,paste0(figureDir,"est_tab.tex"))
+

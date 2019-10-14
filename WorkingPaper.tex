@@ -371,6 +371,15 @@ OLS with (L=1)
 
 When only a single matching is allowed, it is not possible to use SW method because it requires that we carry over multiple matches for each observation.   
 
+\begin{table}[h!]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Median Absolute Deviations for Estimators}
+\vspace{10pt}
+\resizebox{0.9\textwidth}{!}{\input{./Figures/est_tab.tex}}
+\label{multi_tab}
+\end{table}
 
 \section{Discussion}
 To what extent my results generalize beyond the simulated data is unclear.  Many arbitrary choices -- name dictionary choice, uniform probability over those names -- and how I introduced error in the identifying variables may impact my results in important ways.  This needs to be studied in more detail, ideally with real data where a ground truth is also available. 
