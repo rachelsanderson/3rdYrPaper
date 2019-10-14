@@ -9,6 +9,7 @@ require(stringr)
 source("~/Desktop/3rdYrPaper/Code/MonteCarlo/make_datasets.R")
 source("~/Desktop/3rdYrPaper/Code/MonteCarlo/match_datasets.R")
 source("~/Desktop/3rdYrPaper/Code/MonteCarlo/do_estimation.R")
+source("~/Desktop/3rdYrPaper/Code/MonteCarlo/make_perfect_data.R")
 
 source("~/Desktop/3rdYrPaper/Code/Link_Files/link_files.R")
 source("~/Desktop/3rdYrPaper/Code/Link_Files/abe_matching.R")
@@ -27,6 +28,7 @@ source("~/Desktop/3rdYrPaper/Code/Estimation/ahl19.R")
 dataDir = "~/Desktop/3rdYrPaper/Code/MonteCarlo/Datasets/"
 matchDataDir <- "~/Desktop/3rdYrPaper/Code/MonteCarlo/Linked_Datasets/"
 metaDataDir <-  "~/Desktop/3rdYrPaper/Code/MonteCarlo/MetaData/"
+perfectDataDir <- "~/Desktop/3rdYrPaper/Code/MonteCarlo/GoldData/"
 firstNameDict =  "~/Desktop/3rdYrPaper/Code/Simulate_Data/Dictionaries/first_names.txt"
 lastNameDict = "~/Desktop/3rdYrPaper/Code/Simulate_Data/Dictionaries/last_names_short.txt"
 
@@ -75,6 +77,9 @@ make_datasets(nDatasets, nObs, pX1, pX, dataDir, firstNameDict, lastNameDict, be
 
 matching.metadata <- match_datasets(est_g, nDatasets, dataDir, matchDataDir, thresh, age_band) 
 save(matching.metadata, file = paste0(metaDataDir,"matching_metadata.RData"))
+
+# Step 2.5 Create also the ground truth linked dataset
+make_perfect_data(dataDir, perfectDataDir, nDatasets)
 
 # Step 3. Estimate using linked datasets
 

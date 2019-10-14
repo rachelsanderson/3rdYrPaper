@@ -8,8 +8,8 @@ require(qwraps2)
 metaDataDir <- "~/Desktop/3rdYrPaper/Code/MonteCarlo/MetaData/"
 figureDir <- "~/Desktop/3rdYrPaper/Figures/"
 load(paste0(metaDataDir,"estimates.RData"))
+load(paste0(metaDataDir,"beta_opt.RData"))
 options(qwraps2_markup = "latex")
-
 
 # Code for plotting the histogram of the estimators
 levels(estimates$matching) <- c("ABE~Single","ABE~Multi","PRL~Single","PRL~Multi")
@@ -79,3 +79,11 @@ est_tab_out <- kable(est_tab[,-2], "latex", booktabs = T,
 
 writeLines(est_tab_out,paste0(figureDir,"est_tab.tex"))
 
+# Benchmark stuff
+beta_opt %>% group_by(param) %>% summarise(mad=mad(val),
+                                           mean = mean(val),
+                                           sd = sqrt(var(val)))
+ggplot(beta_opt, aes(x=val,color=param,fill=param)) +
+  geom_histogram(position = "identity", alpha=0.5, show.legend=FALSE, bins = 50) +
+  facet_grid(rows = vars(param), scales="free") 
+  

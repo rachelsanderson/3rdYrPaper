@@ -373,7 +373,7 @@ Here are some observations that need to be turned into paragraphs:
 \item The multi-match methods have higher Type I error rates by construction; despite adding false matches, they seem to improve upon the unique-match methods because they are more likely to include the true match among the possible matches. 
 \item  ABE Single is the most conservative of all the matching algorithms, with the lowest match rate and lowest type I error.  Of course, the tradeoff is that it fails to identify a quarter of all possible matches. 
 \item  It seems like PRL Single is the worst performing algorithm -- despite higher match rates than ABE single it seems that those matches are not likely to be correct.  This may be an artifact of the threshold used to assign the matches.  A higher threshold may result in matches more similar to ABE Single.  It may be interesting to calculate whether these two algorithms are systematically matching different types of record pairs. 
-\item In Table \ref{multi_L}, we see that PRL Multi is more likely to match observations to a unique outcome; at the price of sometimes excluding the true match.  ABE Multi is more likely to assign more matches, however the true match is contained with high probability.   Few observations are matched with more than three different outcomes.  %% FIX THIS BECAUSE THE PR(L=l) does not add up to one!!!
+\item In Table \ref{multi_L}, we see that PRL Multi is more likely to match observations to a unique outcome; at the price of sometimes excluding the true match.  ABE Multi is more likely to assign more matches, however the true match is contained with high probability.   Few observations are matched with more than three different outcomes.   \footnote{Note PR(L=l) does not add up to one because these are average of the proportions, not the average proportions -- i.e. I calculate what proportion L = l for each monte carlo rep, and then take the average of the proportions.}  
 \item Based on these results, I hypothesize that ABE Multi seems to be the best performing match procedure, if multiple matches are desired.  This is because the methods described in this paper typically require that the true match be included among the matches.  But another question is how much noise do extra matches introduce.  
 \item I compare also ABE Multi and PRL Multi to determine whether the probability of containing a true match increases by allowing for multiple matches (Table \ref{multi_tab}).   In both procedures, more than half of observations are matched to a unique outcome, and those outcomes are correct 99 and 97 percent of the time for ABE Multi and PRL Multi, respectively.   Essentially, allowing for multiple matches in the deterministic procedure increases the probability that the true match is contained among the possible matches.  
 \end{itemize}
@@ -420,66 +420,7 @@ I evaluate the performance of the matching procedures and estimation procedures 
 I compare estimators according to median absolute deviation.  I plot a histogram of the estimators. 
 
 
-\section{Implementation Notes}
-Here I will talk about all the nit-picky stuff, like 
-\begin{itemize}
-\item what threshold level I use for the fastLink algorithm (0.6)
-\item what nonparametric technique I use for AHL (nearest neighbor) 
-\item how I choose z in LL when there are multiple matches (randomly)
-\item how I calculate standard errors for all of the estimators (using formulas for now)
-\item how I standardize the variables for matching (nysiis function in R)
-\item I change Step 2 in the ABE algorithm to restrict the all observations with unique first name, last name, date of birth, and $(x_1, x_2)$ combinations. 
-\item  When allowing for multiple matches, I count as matches all record pairs with the same name, and the difference in recorded birth years is within two (or five) years.  That is, I designate all potential matches that arise in Step 3 as matches. 
-\end{itemize}
 
-\section{Results}
-In total, I will test three DGPs (two now; more in Monte Carlo). The first is exactly as described in Section 2.  The second allows for correlation  between $x_1$ and the probability of an error.  The third will allow for correlation between $y$ and the probability of an error. 
-
-The $y$ are generated according to the same DGP described above; that is the true $\beta_0 = (2, 0.5, 1)$.  I compare my results to an oracle linkage method (``first best"), which would successfully link all 400 $x$ observations to their correct $y$.  
-
-I haven't finished coding, but here is an overview of the figures and tables so far:
-\begin{itemize}
-\item Table \ref{match_rate} shows the number of matches, percent correct, and number of uniquely matched $x_i$ for each matching method.  We see that no method is able to match every observation in the $x$ datafile.  The ABE method performs the best, but I also use a small threshold for PRL that could potentially be adjusted in order to achieve similar performance. 
-\item Table \ref{naive} shows the OLS results applied naively (without any corrections for double counting $x$ with multiple $y$) to each of the matched datasets.  The First Best estimator is the benchmark case, produced by perfectly matched data. 
-\item Another way to view the output of the matching algorithms is Figure \ref{match_plot} (but this is kind of messy and maybe a QQ plot is better?)
-\item Figure \ref{nMatches} shows the distribution of $L_i$ for methods that create multiple matches.  
-\item Table \ref{estimates} contains parameter estimates and standard errors (not always correcT) for different estimation methods on different datasets that can be compared to the naive OLS.
-\end{itemize}% results here
-
-
-% Naive OLS Table
-\begin{table}[h!]
-\let\center\empty
-\let\endcenter\relax
-\centering
-\caption{Naive OLS for all of the matchings}
-\resizebox{\textwidth}{!}{\input{./Figures/naive_ols.tex}}
-\label{naive}
-\end{table}
-
-% match plot
-\begin{figure}[htbp]
-\label{match_plot}
-\caption{$(x,y)$ pairs produced by different matching algorithms}
-\begin{center}
-\includegraphics[width=\textwidth]{./Figures/match_plots.pdf}
-\label{default}
-\end{center}
-\end{figure}
-
-\begin{table}[htdp]
-\label{estimates}
-\let\center\empty
-\let\endcenter\relax
-\centering
-\caption{Parameter estimates for different matched datasets and estimation procedures}
-\vspace{10pt}
- \addtolength{\leftskip} {-1.5cm} 
- \addtolength{\rightskip}{-1cm}
-\resizebox{1.2\textwidth}{!}{\input{./Figures/estimates.tex}}
-\end{table}
-
-\newpage
 % distribution of estimators
 \begin{figure}[htbp]
 \label{ahl_hist}
@@ -506,6 +447,27 @@ I haven't finished coding, but here is an overview of the figures and tables so 
 \end{center}
 \end{figure}
 
+
+
+\newpage
+
+\section{Appendix:  Implementation Notes}
+Exact matching procedure.
+
+Formulas for estimators.
+
+Implementation of fastLink algorithm. 
+
+Here I will talk about all the nit-picky stuff, like 
+\begin{itemize}
+\item what threshold level I use for the fastLink algorithm (0.6)
+\item what nonparametric technique I use for AHL (nearest neighbor) 
+\item how I choose z in LL when there are multiple matches (randomly)
+\item how I calculate standard errors for all of the estimators (using formulas for now)
+\item how I standardize the variables for matching (nysiis function in R)
+\item I change Step 2 in the ABE algorithm to restrict the all observations with unique first name, last name, date of birth, and $(x_1, x_2)$ combinations. 
+\item  When allowing for multiple matches, I count as matches all record pairs with the same name, and the difference in recorded birth years is within two (or five) years.  That is, I designate all potential matches that arise in Step 3 as matches. 
+\end{itemize}
 
 
 
