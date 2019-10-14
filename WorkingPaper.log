@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  14 OCT 2019 11:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  14 OCT 2019 12:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1110,6 +1110,15 @@ LaTeX Info: Redefining \sc on input line 659.
 
 LaTeX Warning: Label `naive' multiply defined.
 
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
+
+LaTeX Warning: Label `default' multiply defined.
+
 )
 \openout1 = `WorkingPaper.aux'.
 
@@ -1298,10 +1307,10 @@ LaTeX Warning: Float too large for page by 28.62042pt on input line 358.
 
 [18] [19 <./Figures/match_rate.pdf>]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 382.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 385.
  [20]
 
-LaTeX Warning: Reference `nMatches' on page 21 undefined on input line 401.
+LaTeX Warning: Reference `nMatches' on page 21 undefined on input line 404.
 
 (./Figures/naive_ols.tex)
 
@@ -1310,38 +1319,57 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 <./Figures/match_plots.pdf, id=337, 505.89pt x 505.89pt>
 File: ./Figures/match_plots.pdf Graphic file (type pdf)
 <use ./Figures/match_plots.pdf>
-Package pdftex.def Info: ./Figures/match_plots.pdf  used on input line 421.
+Package pdftex.def Info: ./Figures/match_plots.pdf  used on input line 424.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 
-./WorkingPaper.tex:426: LaTeX Error: Unknown float option `d'.
+./WorkingPaper.tex:429: LaTeX Error: Unknown float option `d'.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.426 \begin{table}[htdp]
+l.429 \begin{table}[htdp]
                          
 ? 
 (./Figures/estimates.tex)
-Overfull \hbox (22.86697pt too wide) in paragraph at lines 435--436
+Overfull \hbox (22.86697pt too wide) in paragraph at lines 438--439
  [][] 
  []
 
-[21] [22 <./Figures/match_plots.pdf>] (./WorkingPaper.bbl [23]
+[21] [22 <./Figures/match_plots.pdf>]
+<./Figures/ahl_hist.pdf, id=357, 549.05125pt x 524.96124pt>
+File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
+<use ./Figures/ahl_hist.pdf>
+Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 446.
+(pdftex.def)             Requested size: 469.75502pt x 449.15892pt.
+<./Figures/sw_hist.pdf, id=358, 549.05125pt x 524.96124pt>
+File: ./Figures/sw_hist.pdf Graphic file (type pdf)
+<use ./Figures/sw_hist.pdf>
+Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 454.
+(pdftex.def)             Requested size: 469.75502pt x 449.15892pt.
+<./Figures/OLS(L=1)_hist.pdf, id=359, 549.05125pt x 524.96124pt>
+File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
+<use ./Figures/OLS(L=1)_hist.pdf>
+Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 463.
+(pdftex.def)             Requested size: 469.75502pt x 449.15892pt.
+ [23] [24 <./Figures/ahl_hist.pdf>]
+[25 <./Figures/sw_hist.pdf>] [26 <./Figures/OLS(L=1)_hist.pdf>]
+(./WorkingPaper.bbl
 ./WorkingPaper.bbl:73: Misplaced alignment tab character &.
 l.73 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
+[27]
 ./WorkingPaper.bbl:91: Undefined control sequence.
 l.91 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
-) [24]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 451.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 451.
+) [28]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 484.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 484.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 451.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 451.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 484.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 484.
 Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
 (rerunfilecheck)             Checksum: 048F0795ECB9B822A93ACADE43DE0EFC;857.
 
@@ -1351,13 +1379,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 451.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 484.
  ) 
 Here is how much of TeX's memory you used:
- 31896 strings out of 492649
- 639037 string characters out of 6129622
- 734119 words of memory out of 5000000
- 35174 multiletter control sequences out of 15000+600000
+ 31918 strings out of 492649
+ 639543 string characters out of 6129622
+ 734161 words of memory out of 5000000
+ 35189 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10384b,870s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1392,10 +1420,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (24 pages, 471962 bytes).
+Output written on WorkingPaper.pdf (28 pages, 501626 bytes).
 PDF statistics:
- 459 PDF objects out of 1000 (max. 8388607)
- 387 compressed objects within 4 object streams
- 88 named destinations out of 1000 (max. 500000)
- 239 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 508 PDF objects out of 1000 (max. 8388607)
+ 425 compressed objects within 5 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 254 words of extra memory for PDF output out of 10000 (max. 10000000)
 

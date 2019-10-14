@@ -363,6 +363,15 @@ I compare also ABE Multi and PRL Multi to determine whether the probability of c
 
 \subsection{Estimation Results}
 
+Benchmark is ... 
+
+AHL Estimator performs well.... 
+
+OLS with (L=1)
+
+When only a single matching is allowed, it is not possible to use SW method because it requires that we carry over multiple matches for each observation.   
+
+
 \section{Discussion}
 To what extent my results generalize beyond the simulated data is unclear.  Many arbitrary choices -- name dictionary choice, uniform probability over those names -- and how I introduced error in the identifying variables may impact my results in important ways.  This needs to be studied in more detail, ideally with real data where a ground truth is also available. 
 
@@ -434,6 +443,36 @@ I haven't finished coding, but here is an overview of the figures and tables so 
  \addtolength{\rightskip}{-1cm}
 \resizebox{1.2\textwidth}{!}{\input{./Figures/estimates.tex}}
 \end{table}
+
+\newpage
+% distribution of estimators
+\begin{figure}[htbp]
+\label{ahl_hist}
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/ahl_hist.pdf}
+\label{default}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\label{sw_hist}
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/sw_hist.pdf}
+\label{default}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\label{ols_hist}
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/OLS(L=1)_hist.pdf}
+\label{default}
+\end{center}
+\end{figure}
+
+
+
 
 
 \section{Conclusion}
