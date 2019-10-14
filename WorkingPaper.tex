@@ -333,6 +333,16 @@ To evaluate the matching procedures, I calculate the match rate (the proportion 
 \label{match_rate}
 \end{table}
 
+\begin{table}[h!]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Average performance and SD for multiple match procedures}
+\vspace{10pt}
+\resizebox{1.1\textwidth}{!}{\input{./Figures/multi_tab.tex}}
+\label{multi_tab}
+\end{table}
+
 The match rates range between 71 and 79 percent on average across the various matching procedures.  The full distribution of match rates is plotted in Figure \ref{match_hist}.  In some sense, ABE Multi seems to be the best performing match procedure, if multiple matches are desired.  The match rates produced by ABE Multi are significantly greater than those produced by the other procedures; as a result, ABE Multi also results in a higher Type I error rate.  However, the set of matches it produces contain the right match 99 percent of the time.  The question is how much noise will the extra matches produce.  
 
 It is important to note that Type I error is not necessarily useful.   By definition, there is only one correct match, so any method that allows multiple matches will increase the Type I error rate so long as multiple matches are assigned.  A better comparison metric is the probability that the true match is contained among multiple matches.  Potentially one could construct an objective function that optimizes one of these quantities. 
@@ -347,15 +357,7 @@ It is important to note that Type I error is not necessarily useful.   By defini
 \end{center}
 \end{figure}
 
-\begin{table}[h!]
-\let\center\empty
-\let\endcenter\relax
-\centering
-\caption{Average performance and SD for multiple match procedures}
-\vspace{10pt}
-\resizebox{1.1\textwidth}{!}{\input{./Figures/multi_tab.tex}}
-\label{multi_tab}
-\end{table}
+
 
 I compare also ABE Multi and PRL Multi to determine whether the probability of containing a true match increases by allowing for multiple matches (Table \ref{multi_tab}).   In both procedures, more than half of observations are matched to a unique outcome, and those outcomes are correct 99 and 97 percent of the time for ABE Multi and PRL Multi, respectively.   Essentially, allowing for multiple matches in the deterministic procedure increases the probability that the true match is contained among the possible matches.  
 
