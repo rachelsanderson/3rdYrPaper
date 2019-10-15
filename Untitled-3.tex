@@ -39,43 +39,56 @@ Compare these to an estimator that uses both $X_1$ and $X_2$,
 \begin{equation}
 \hat{\mu} = a_1X_{1} + a_2 X_2 -  a_3 \kappa \label{mu} \end{equation}
 which has the following expectation,
-$$ E[\hat{\mu}] = (a_1 \pi + a_2 (1-\pi))\mu + (a_1(1-\pi)+a_2\pi - a_3)\kappa $$
+$$ E[\hat{\mu}] = (a_1 \pi + a_2 (1-\pi))\mu + (a_1(1-\pi)+a_2\pi - a_3)\kappa $$
 so that unbiased, requires
 \begin{gather}
     a_1\pi + a_2(1-\pi) = 1 \implies a_2(a_1) = \frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi} \\
     a_1 (1-\pi) + a_2 \pi = a_3 \implies a_3(a_1) = \frac{\pi}{1-\pi}  + \frac{a_1 - 2a_1 \pi}{1-\pi} 
 \end{gather}
+Hence we can write $\hat{\mu}$ as a function of $a_1$,  
+ $$\hat{\mu}(a_1) = a_1 X_1 +  \left(\frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi}\right)  X_2 - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa $$ 
+When $a_1 = \frac{1}{\pi}$, then $\hat{\mu} = \hat{\mu}_1$; and if $a_1 = 0$ then $\hat{\mu}=\hat{\mu_2}$. 
 
+We can write:
+\begin{align*}
+\hat{\mu} &= (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 + a_1(1-\pi)\kappa  + \frac{\pi}{1-\pi}(1-a_1)\kappa - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa  \\
+&=  (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 - (a_1\pi)\kappa
+\end{align*}
 
-Any unbiased estimator of the form CITE $\hat{\mu}$ can be written as a linear combination of $\hat{\mu}_1$ and $\hat{\mu}_2$ :
+Hence any unbiased estimator $\hat{\mu}$ that uses $X_1$ and $X_2$ can be written as a linear combination of estimators using only $X_1$ or $X_2$.  The problem of finding the minimum variance, unbiased estimator $\hat{\mu}$ reduces to finding $d^*$ that solves 
+$$\min_d\  \Var{d \hat{\mu}_1 + (1-d) \hat{\mu}_2}$$
+which is solved by $d^*= 0$ or $d^* = 1$ depending on whether $\Var{\hat{\mu}_1}$ or $\Var{\hat{\mu}_2}$ is smaller.  
 
-$$\hat{\mu} = d_1 \hat{\mu}_1 + d_2 \hat{\mu_2}$$
-
-The variance of $\hat{\mu}$ depends on:
-
+I now show that $\Var{\hat{\mu}_1} > \Var{\hat{\mu}_2}$, without loss of generality, except when $\pi = 0.5$, or $\sigma^2 = \omega^2 = (\mu-\kappa)^2$.  Observe that,
 \begin{align*} \Var{\hat{\mu}_1} &=  \frac{\text{Var}(X_1)}{\pi^2} = \frac{1}{\pi^2}\left(\pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) \\
 \Var{\hat{\mu}_2} &= \frac{\Var{X_2}}{(1-\pi)^2} = \frac{1}{(1-\pi)^2}\left((1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) 
 \end{align*}
 
-This follows from the law of total variance, with the random variable $D = 1$ if $X_1$ is drawn from the correct distribution and $D=0$ otherwise. 
-
+This follows from the law of total variance, with the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise. 
 \begin{align*} \Var{X_1} &= E[\Var{X_1 | D}] + \Var{E[X_1| D]} \\ 
-&= P(D=1)\sigma^2 +  P(D=0)\omega^2 + \Var(\mu D + \kappa (1-D)) \\
+&= P(D=1)\sigma^2 +  P(D=0)\omega^2 + \Var{\mu D + \kappa (1-D)} \\
 &= \pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2
 \end{align*}
-
-and similarly 
+Similarly,
 $$\Var{X_2} = (1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2 $$ 
-
-The important observation is that the variances are functions parameterized by $(\sigma^2, \omega^2, (\mu-\kappa)^2)$, and we can write: 
-
-\begin{align*} \Var{\hat{\mu}_1} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, \pi) \\
-\Var{\hat{\mu}_2} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, 1-\pi)
+Thus, $\Var{\hat{\mu}_1}$ and $\Var{\hat{\mu}_2}$ can be written as functions of $\sigma^2, \omega^2,$ and $(\mu-\kappa)^2$,
+\begin{align*} 
+g(\sigma^2, \omega^2, (\mu-\kappa)^2, x) &\equiv  \frac{1}{x^2}\left(x \sigma^2 + (1-x)\omega^2 + x (1-x) (\mu -\kappa)^2\right)\\
+\Var{\hat{\mu}_1} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, \pi) \\
+\Var{\hat{\mu}_2} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, 1-\pi) 
 \end{align*}
+Importantly, $\frac{\partial g}{\partial x} < 0$ for $x \in [0,1]$; so there is a unique  crossing $\Var{\hat{\mu}_1} = \Var{\hat{\mu}_2}$ when $\pi = 0.5$.   The variance is decreasing in the probability that the observation is correct; hence the minimum variance unbiased estimator assigns $d=1$ to the observation that has the highest probability of being correct, and applies inverse probability weighting accordingly.  
+
+This result holds for $L > 2$.   Pick the $\pi_{i\ell}$ that is maximal and give it full weight.  However, there are problems with weighting, especially if no observation has particularly high $\pi_{i\ell}$. Apply threshold
+
+
+\newpage
+
+So unless $\pi = 0.5$ you always weight the more likely match and give it the proper weights.  Could do this for every single $i$ in the sample?  Divide by $\pi_i$ and you get the Horwitz Thompson.    
 
 They are exactly equal when $\pi = 1-\pi$; otherwise they are quadratic as in the plot below.   But they are exactly symmetric, so that the optimal estimator will always assign $d_1 = 1, d_2= 0$ or $d_1=0, d_2=1$ depending on whether $\pi > 1-\pi$.  However, if $\pi$ is not estimated precisely, the resulting variance explodes.  The most conservative way is by treating $\pi = 0.5$, which gives the estimate of the mean!  Which is the AHL estimator. .
 
-Also $\frac{\partial g}{\partial \pi} < 0$ on $\pi \in [0,1]$ so that there is a single crossing at $\pi=0.5$!!! So unless $\pi = 0.5$ you always weight the more likely match and give it the proper weights.  Could do this for every single $i$ in the sample?  Divide by $\pi_i$ and you get the Horwitz Thompson.    
+Also 
 
 
 
