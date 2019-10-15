@@ -312,6 +312,29 @@ Assumption (iii) rules out the possibility of unobserved sample selection, in th
 
 Here we consider the possibility of incorporating probabilities of matches in the AHL framework.  The interesting result is that the minimum variance unbiased estimator depends on the ratio of the structural error in the model to the variance in the reduced form estimation for $y$, which also depends on the precision of the estimator $\hat{g}$.  This is an interesting result because it connects to the Horwitz-Thompson estimator, and work on inverse propensity score weighting. 
 
+To simplify ideas, consider the case of estimating the mean $\mu$ of a random variable $X \sim F_X(\mu; \sigma^2)$ using two observations $X_{i1}$ and $X_{i2}$.  The first observation is drawn from the true distribution $ F_X(\mu; \sigma^2)$ with probability $\pi$, and from the nuisance distribution $F_N(\kappa, \omega^2)$ with probability $1-\pi$.  One of the observations is drawn from the correct distribution, so that $\pi$ of the time, $X_{i1}$ is correct, and $1-\pi$ of the time $X_{i2}$ is correct.
+
+Consider the estimator of the mean
+
+$$\hat{\mu} = \frac{a_1}{n}\sumN X_{i1} + \frac{a_2}{n}\sumN X_{i2} - a_3 \kappa $$
+
+ and
+
+$$ E[\hat{\mu}] = (a_1 \pi + a_2 (1-\pi))\mu + (a_1(1-\pi)+a_2\pi - a_3)\kappa $$
+
+So for $\hat{\mu}$ to be unbiased, we need
+\begin{gather}
+    a_1\pi + a_2(1-\pi) = 1 \\
+    a_1 (1-\pi) + a_2 \pi = a_3 
+\end{gather}
+
+A simpler way to solve the problem is to consider estimating the mean with just $X_{i1}$:
+
+\begin{align*} 
+\hat{\mu}_1 = b_1 X_{1} + b_3 \kappa 
+
+\end{align*}
+
 \section{Monte Carlo Study}
 
 Following the same procedure for simulating the empirical example described in Section 2, I generate 1,000 random $x$- and $y$- dataset pairs.  I implement four types of matching procedures using each dataset pair: (i) deterministic matching with unique matches (ABE Single), (ii) deterministic matching with multiple matches (ABE Multi), (iii) probabilistic matching with unique matches (PRL Single), and (iv) probabilistic matching with multiple matches (PRL Multi).  Allowing for multiple matches means that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  
