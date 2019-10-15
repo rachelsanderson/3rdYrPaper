@@ -15,7 +15,6 @@
 %\date{}                                           % Activate to display a given date or no date
 
 \begin{document}
-\maketitle
 %\section{}
 %\subsection{}
 \doublespacing
@@ -77,18 +76,19 @@ g(\sigma^2, \omega^2, (\mu-\kappa)^2, x) &\equiv  \frac{1}{x^2}\left(x \sigma^2 
 \Var{\hat{\mu}_1} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, \pi) \\
 \Var{\hat{\mu}_2} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, 1-\pi) 
 \end{align*}
-Importantly, $\frac{\partial g}{\partial x} < 0$ for $x \in [0,1]$; so there is a unique  crossing $\Var{\hat{\mu}_1} = \Var{\hat{\mu}_2}$ when $\pi = 0.5$.   The variance is decreasing in the probability that the observation is correct; hence the minimum variance unbiased estimator assigns $d=1$ to the observation that has the highest probability of being correct, and applies inverse probability weighting accordingly.  
+Importantly, 
+$$\frac{\partial g(\sigma^2, \omega^2, (\mu-\kappa)^2, x)}{\partial x} = \frac{\omega^2 (x-2) - x (\sigma^2 + (\mu-\kappa)^2)}{x^3}< 0,  \ x \in (0,1)$$
+and so $\Var{\hat{\mu}_{\ell}}$ is strictly decreasing in the probability that the observation $\ell$ is drawn from the correct distribution, and $\Var{\hat{\mu}_1} \neq \Var{\hat{\mu}_2}$ unless $\pi = 0.5$.   Thus, the minimum variance unbiased estimator is equal to $\hat{\mu}_{\ell}$ for the observation $\ell$ that has the highest probability of being correct.
 
-This result holds for $L > 2$.   Pick the $\pi_{i\ell}$ that is maximal and give it full weight.  However, there are problems with weighting, especially if no observation has particularly high $\pi_{i\ell}$. Apply threshold
+The above result holds also for $L$ observations $X_1, \dots, X_{L}$ with corresponding probabilities $\pi_1,\dots, \pi_L$; that is, the minimum variance unbiased estimator $\hat{\mu}$ will use only $X_{\ell}$ with the highest $\pi_{\ell}$ and apply inverse probability weighting. 
 
+Now consider a sample of $N$ sets of i.i.d. observations, $\left\{\{X_{i\ell}\}_{\ell=1}^{L_i}\right\}_{i=1}^N$.  If the values $$\pi_{i\ell} = \text{Pr}(X_{i\ell}\text{ is drawn from the correct distribution}),   \sum_{\ell=1}^{L_i} \pi_{i\ell} = 1$$ are known for all $i$, then the optimal estimator is 
+$$\hat{\mu} = \frac{1}{N} \sum_{i=1}^N \hat{\mu}_i  = \frac{1}{N}\sum_{i=1}^N \frac{X_{i\ell_i}}{\pi_{i\ell_i}} - \frac{1-\pi_{i\ell_i}}{\pi_{i\ell_i}}\kappa$$
+where $\hat{\mu}_i$ is the minimum variance estimator constructed for observations $\{X_{i\ell}\}_{\ell=1}^{L_i}$. 
 
-\newpage
+Since $\hat{\mu}$ is an inverse probability weighting estimator, small values of $\pi_{i\ell}$ may be detrimental for its finite sample performance.  Rather than dropping observations whose maximal $\pi_{i\ell}$ is small, however, it is possible to give these observations equal weights for all $\{X_{i\ell}\}$, as in the AHL estimator.  I hypothesize that if $\pi_{i\ell} < 0.5$ (or another threshold) for all $\ell$, then it is better to give equal weights to all $X_{i\ell}$ associated with $i$, even when the $\pi_{i\ell}$ are known.
 
-So unless $\pi = 0.5$ you always weight the more likely match and give it the proper weights.  Could do this for every single $i$ in the sample?  Divide by $\pi_i$ and you get the Horwitz Thompson.    
-
-They are exactly equal when $\pi = 1-\pi$; otherwise they are quadratic as in the plot below.   But they are exactly symmetric, so that the optimal estimator will always assign $d_1 = 1, d_2= 0$ or $d_1=0, d_2=1$ depending on whether $\pi > 1-\pi$.  However, if $\pi$ is not estimated precisely, the resulting variance explodes.  The most conservative way is by treating $\pi = 0.5$, which gives the estimate of the mean!  Which is the AHL estimator. .
-
-Also 
+In practice, $\pi_{i\ell}$ needs to be estimated. If $\hat{\pi}_{i\ell}$ is imprecise, the bias may potentially be very large.  This can be seen via simulation.  By contrast, the AHL estimator does not require knowledge about $\pi_{i\ell}$, and has (possibly optimal) worst case performance in terms of MSE. 
 
 
 

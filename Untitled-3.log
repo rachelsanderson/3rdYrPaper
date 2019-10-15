@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 OCT 2019 12:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 OCT 2019 14:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -296,30 +296,32 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
-[3] [4] (./Untitled-3.aux) ) 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
+[4] (./Untitled-3.aux) ) 
 Here is how much of TeX's memory you used:
- 3328 strings out of 492649
- 43852 string characters out of 6129622
+ 3326 strings out of 492649
+ 43828 string characters out of 6129622
  120167 words of memory out of 5000000
- 7007 multiletter control sequences out of 15000+600000
- 11087 words of font info for 43 fonts, out of 8000000 for 9000
+ 7006 multiletter control sequences out of 15000+600000
+ 10779 words of font info for 42 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
- 42i,11n,31p,523b,198s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb>
-Output written on Untitled-3.pdf (4 pages, 112552 bytes).
+ 42i,11n,31p,554b,171s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb>
+Output written on Untitled-3.pdf (4 pages, 101790 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 53 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
