@@ -22,34 +22,30 @@
 
 \section{Optimality of the AHL Estimator}
 
-Here we consider the possibility of incorporating probabilities of matches in the AHL framework.  The interesting result is that the minimum variance unbiased estimator depends on the ratio of the structural error in the model to the variance in the reduced form estimation for $y$, which also depends on the precision of the estimator $\hat{g}$.  This is an interesting result because it connects to the Horwitz-Thompson estimator, and work on inverse propensity score weighting. 
+% To show optimality of the AHL consider the possibility of incorporating probabilities of matches in the AHL framework.  The interesting result is that the minimum variance unbiased estimator depends on the ratio of the structural error in the model to the variance in the reduced form estimation for $y$, which also depends on the precision of the estimator $\hat{g}$.  This is an interesting result because it connects to the Horwitz-Thompson estimator, and work on inverse propensity score weighting. 
 
-To simplify ideas, consider the case of estimating the mean $\mu$ of a random variable $X \sim F_X(\mu; \sigma^2)$ using two observations $X_{i1}$ and $X_{i2}$.  The first observation is drawn from the true distribution $ F_X(\mu; \sigma^2)$ with probability $\pi$, and from the nuisance distribution $F_N(\kappa, \omega^2)$ with probability $1-\pi$.  One of the observations is drawn from the correct distribution, so that $\pi$ of the time, $X_{i1}$ is correct, and $1-\pi$ of the time $X_{i2}$ is correct.
+Consider the problem of estimating the mean of a random variable $X \sim F_X(\mu; \sigma^2)$ using two observations $X_{1}$ and $X_{2}$.  With probability $\pi$, $X_1$ is drawn from the true distribution $F_X$ and $X_2$ is noise drawn from the distribution $F_Y(\kappa, \omega^2)$.  With probability $1-\pi$, $X_2$ is drawn from the correct distribution and $X_1$ is noise.  Under this specification, exactly one of $X_1$ or $X_2$ is drawn from the distribution of interest at all times.  
 
-Consider the estimator of the mean
+Observe that if $\pi$ is known, we can construct an unbiased estimator using only $X_1$,
+\begin{equation}
+\hat{\mu}_1 = \frac{X_1}{\pi} - \frac{1-\pi}{\pi} \kappa 
+\label{mu1}
+\end{equation} 
 
-$$\hat{\mu} = \frac{a_1}{n}\sumN X_{i1} + \frac{a_2}{n}\sumN X_{i2} - a_3 \kappa $$
+Similarly, we can construct an unbiased estimator using only $X_2$,
+\begin{equation}\hat{\mu_2} = \frac{X_2}{1-\pi} - \frac{\pi}{1-\pi} \kappa \label{mu2} \end{equation}
 
- and
-
+Compare these to an estimator that uses both $X_1$ and $X_2$, 
+\begin{equation}
+\hat{\mu} = a_1X_{1} + a_2 X_2 -  a_3 \kappa \label{mu} \end{equation}
+which has the following expectation,
 $$ E[\hat{\mu}] = (a_1 \pi + a_2 (1-\pi))\mu + (a_1(1-\pi)+a_2\pi - a_3)\kappa $$
-
-So for $\hat{\mu}$ to be unbiased, we need
+so that unbiased, requires
 \begin{gather}
-    a_1\pi + a_2(1-\pi) = 1 \\
-    a_1 (1-\pi) + a_2 \pi = a_3 
+    a_1\pi + a_2(1-\pi) = 1 \implies a_2(a_1) = \frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi} \\
+    a_1 (1-\pi) + a_2 \pi = a_3 \implies a_3(a_1) = \frac{\pi}{1-\pi}  + \frac{a_1 - 2a_1 \pi}{1-\pi} 
 \end{gather}
 
-A simpler way to solve the problem is to consider estimating the mean with just $X_{i1}$:
-
-\begin{gather*} 
-\hat{\mu}_1 = b_1 X_{1} + b_3 \kappa \\
-E[\hat{\mu}] = b_1 \pi \mu + [b_1(1-\pi) - b_3] \kappa
-\end{gather*}
-
-Unbiasedness therefore requires that $b_1 = \frac{1}{\pi}$ and $b_3 = \frac{1-\pi}{\pi}$.  Similarly we construct
-$$\hat{\mu_2} = C_1 X_2 - C_2 \kappa $$ 
-which gives the condition $C_2 = \frac{1}{1-\pi}$ and $C_3 = \frac{\pi}{1-\pi}$ for unbiasedness.  Connection to Horwitz-Thompson?
 
 Any unbiased estimator of the form CITE $\hat{\mu}$ can be written as a linear combination of $\hat{\mu}_1$ and $\hat{\mu}_2$ :
 
