@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  16 OCT 2019 12:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  16 OCT 2019 12:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1257,93 +1257,90 @@ l.103 ... methods and data generating processes.  
 
 ? 
 [3] [4] [5]
-./WorkingPaper.tex:141: Missing $ inserted.
+./WorkingPaper.tex:146: Missing $ inserted.
 <inserted text> 
                 $
-l.141 195 & $y_{195} &
+l.146 195 & $y_{195} &
                       $x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:141: Missing $ inserted.
+./WorkingPaper.tex:146: Missing $ inserted.
 <inserted text> 
                 $
-l.141 195 & $y_{195} &$x_{1,195} &
+l.146 195 & $y_{195} &$x_{1,195} &
                                    $x_{2,195}$ & Samantha & Andersen & 1914-...
 
 ? 
-./WorkingPaper.tex:142: Missing $ inserted.
+./WorkingPaper.tex:147: Missing $ inserted.
 <inserted text> 
                 $
-l.142 196 & $y_{196}$ & $x_{1,196}&
+l.147 196 & $y_{196}$ & $x_{1,196}&
                                     $x_{2,196}$ & Victoria & Andersen & 1918...
 
 ? 
-./WorkingPaper.tex:182: Missing } inserted.
+./WorkingPaper.tex:187: Missing } inserted.
 <inserted text> 
                 }
-l.182 \end{tikzpicture}
+l.187 \end{tikzpicture}
                        
 ? 
 [6] [7]
-Overfull \hbox (4.98752pt too wide) in paragraph at lines 209--210
+Overfull \hbox (4.98752pt too wide) in paragraph at lines 214--215
 []\OT1/cmr/m/n/12 Designate as matches all $(\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
 [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 401.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 406.
 
 (./Figures/match_rates.tex) (./Figures/multi_tab.tex)
-Overfull \hbox (47.01192pt too wide) in paragraph at lines 430--432
+Overfull \hbox (47.01192pt too wide) in paragraph at lines 435--437
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<./Figures/match_rate.pdf, id=342, 338.26375pt x 457.71pt>
+<./Figures/match_rate.pdf, id=340, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
-Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 438.
+Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 443.
 (pdftex.def)             Requested size: 422.77664pt x 572.08722pt.
-[21] [22 <./Figures/match_rate.pdf>] [23] (./Figures/est_tab.tex)
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./Figures/compare.pdf, id=371, 650.43pt x 649.42625pt>
+[21] [22 <./Figures/match_rate.pdf>] [23] [24] (./Figures/est_tab.tex)
+<./Figures/compare.pdf, id=375, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
-Package pdftex.def Info: ./Figures/compare.pdf  used on input line 480.
+Package pdftex.def Info: ./Figures/compare.pdf  used on input line 485.
 (pdftex.def)             Requested size: 516.73338pt x 515.97432pt.
 
-Overfull \hbox (46.97836pt too wide) in paragraph at lines 480--482
+Overfull \hbox (46.97836pt too wide) in paragraph at lines 485--487
  [] 
  []
 
-[24] [25 <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=393, 466.74374pt x 524.96124pt>
+[25] [26 <./Figures/compare.pdf>]
+<./Figures/ahl_hist.pdf, id=395, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
-Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 504.
+Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 509.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-<./Figures/sw_hist.pdf, id=394, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=396, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
-Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 512.
+Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 517.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-<./Figures/OLS(L=1)_hist.pdf, id=395, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=397, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
-Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 521.
+Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 526.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [26] [27 <./Figures/ahl_hist.pdf>] [28 <./Figures/sw_hist.pdf>] [29 <./Figures
-/OLS(L=1)_hist.pdf>] [30] (./WorkingPaper.bbl
+ [27] [28 <./Figures/ahl_hist.pdf>] [29 <./Figures/sw_hist.pdf>] [30 <./Figures
+/OLS(L=1)_hist.pdf>] [31] (./WorkingPaper.bbl
 ./WorkingPaper.bbl:73: Misplaced alignment tab character &.
 l.73 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
-[31]
+[32]
 ./WorkingPaper.bbl:96: Undefined control sequence.
 l.96 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
@@ -1352,24 +1349,24 @@ l.96 ...cy Qian}, ``The Fluidity of Race: \enquote
 
 Package natbib Warning: There were undefined citations.
 
-[32]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 563.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 563.
+[33]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 568.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 568.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 563.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 563.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 568.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 568.
 Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
 (rerunfilecheck)             Checksum: C6F75D1E5C64AA7DA63D18164A0050FF;832.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 563.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 568.
  ) 
 Here is how much of TeX's memory you used:
- 31930 strings out of 492649
- 639606 string characters out of 6129622
- 730563 words of memory out of 5000000
+ 31931 strings out of 492649
+ 639613 string characters out of 6129622
+ 727563 words of memory out of 5000000
  35194 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1411,10 +1408,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (32 pages, 355437 bytes).
+Output written on WorkingPaper.pdf (33 pages, 355921 bytes).
 PDF statistics:
- 547 PDF objects out of 1000 (max. 8388607)
- 460 compressed objects within 5 object streams
- 102 named destinations out of 1000 (max. 500000)
+ 550 PDF objects out of 1000 (max. 8388607)
+ 462 compressed objects within 5 object streams
+ 103 named destinations out of 1000 (max. 500000)
  246 words of extra memory for PDF output out of 10000 (max. 10000000)
 
