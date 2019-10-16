@@ -284,49 +284,26 @@ The downside of the \cite{sw1993} method is that it requires knowledge of $q_{ij
 
 The endogeneity problem arises because $\widehat{q_{ij}}$ are typically calculated by plugging in estimates of the parameters $\psi \equiv \{p_M, P(\gamij | M),\ P(\gamij |U)\}$ into equation (\ref{bayes}).   Thus, $\widehat{q_{ij}}$ will be correlated with $x$ or $y$ if errors in the matching variables, which determine the distribution of $\hat{\psi}$, are correlated with $x$ or $y$.  This is likely to be a problem in economics applications, such as in \cite{nq2015}, where $y$ measures whether a person's recorded ethnicity changes between Census years, but changes in names (the matching variables) are also strongly correlated with $y$.  
 
-
-
-
-%% WORK OUT THE MATH FOR HERE
-
-$$E(z_i) = \sumN (Y_i p_i + \sum_j y_J q_{ij}) = \sumN Y_i + \sumN y_i (h_i-1) + \sumN   + B_i = y_i + p_i y_i + (1-h_i )  $$
-
-To illustrate this problem explicitly, note that $\hat{\beta}_{SW}$ is the same as applying OLS to the model:
-$$E[2y_{j1} - q_{j_1}y_{j1} - q_j2 y_J2] = 2*q_{j1}y_{j1} + 2*(1-q_{j1}z)] - q_{j1}{y_j{1} - q_{j2} y_{j2} $$
-
-\begin{equation}
-z_i - (1-q_{ii}})z_i - \widehat{q_{ij_2}} y_{jj_2})= x_i'\beta + \varepsilon_i
-\end{equation}
-where we use the fact that $z_i = y_{ij_1}$, the $y$ value with the highest probability of being the true match.  So that errors in estimating $\widehat{q_{ij}}$ appear in the error term; and if these are correlated with variables in $x_i$ (or $z_i$), as would be the case in \cite{nq2015}, then the estimator $\hat{\beta}_{SW}$ will be biased.  Errors in estimating the $\hat{q}$ are potentially correlated when errors in matching variables are correlated with the $x$ varialbes.   ... % expand on this
-%% STOP HERE
-
-A solution to this problem is the estimator proposed by \cite{ahl2019}.  Rather than estimate probabilities, the unbiasedness of the estimator requires that errors in estimating the conditional expectation of $y$ be independent of the $x_i$.  
-
-
-%When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
-
-%Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
-
-%Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
-
-%The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
-They propose a GMM estimator that uses data where each observation $x_i$ is linked to $L_i$ potential outcomes, denoted $\{y_{i\ell}\}_{\ell=1}^{L_i}$.  Importantly, their methods require that (i) the true outcome is included among the set of possible matches, (ii) each of the possible matches is equally likely to be the true match, and (iii) that the observations $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are random samples from their marginal distributions conditional on $(w_i, L_i)$.  
- 
-Under these assumptions, the authors show how to construct an unbiased and consistent estimator $\hat{\beta}$ by considering the smoothed regression:
+One possible solution to the challenges described above is to use the estimator from \cite{ahl2019}, which is unbiased if the errors in estimating the conditional expectation of $y$ be independent of the $x_i$, which holds if $x_i$ and $y_i$ are random samples conditional on the matching variables\footnote{Technically, the result in \cite{ahl2019} is proven for GMM, so the necessary condition is that errors in estimating a conditional moment condition are independent of $x_i$}.   Specifically, for the model in (\ref{model}), the AHL estimator is computed by applying OLS to the transformed regression model,
 \begin{equation} 
-\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1)g(w_i, L_i) = x_i'\beta + u_i  \end{equation}
+\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1)\hat{g}(w_i, L_i) = x_i'\beta + u_i  \label{ahl} \end{equation}
+where $\hat{g}(w_i,L_i)$ is a (possibly nonparametric) estimator of $E[y_{i\ell} | w_i, L_i ]$, $u_i = \varepsilon_i + \sum_{\ell=1}^{L_i}\nu_{i\ell}$, and $\nu_{i\ell} = y_{i\ell} - \hat{g}(w_i, L_i)$. 
 
-\noindent where $g(w_i, L_i) = E[y_{i\ell} | w_i, L_i ]$, $u_i = \varepsilon_i + \sum_{\ell=1}^{L_i}\nu_{i\ell}$, and $\nu_{i\ell} = y_{i\ell} - E[y_{i\ell} | w_i, L_i ]$. 
-
-If, additionally, $E[\varepsilon_i^2 | w_i, L_i] = \sigma_{\varepsilon}^2$ and $E[\nu_{i\ell} | z_i, L_i] = \sigma_{\nu}^2$ then $\hat{\beta}$ can be estimated efficiently using weighted least squares, with $\sigma(X_i) = \sigma_{\varepsilon}^2 + (L_i - 1)\sigma_{\nu}^2$, and
+If, additionally, $E[\varepsilon_i^2 | x_i, w_i, L_i] = \sigma_{\varepsilon}^2$ and $E[\nu_{i\ell}^2 | x_i, w_i, L_i] = \sigma_{\nu}^2$ then the efficient estimator is weighted least squares,
 \begin{equation}
-\hat{\beta}^{WLS} = \left(\sum_{i=1}^N \frac{x_ix_i'}{\sigma(X_i)}\right)^{-1}\left(\sum_{i=1}^N \frac{x_i}{\sigma(X_i)}\left(\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1) g(w_i, L_i)\right)\right)
+\hat{\beta}^{WLS} = \left(\sum_{i=1}^N \frac{x_ix_i'}{\sigma(X_i)}\right)^{-1}\left(\sum_{i=1}^N \frac{x_i}{\sigma(X_i)}\left(\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1) g(w_i, L_i)\right)\right) \label{wls}
 \end{equation}
-which can be estimated in two-steps, where the first step involves estimating $\hat{g}(\cdot)$ and $\hat{\sigma}(X_i)$.  The resulting estimator is consistent and asymptotically normal under the regularity conditions described in \cite{ahl2019}. 
+where $\sigma(X_i) = \sigma_{\varepsilon}^2 + (L_i - 1)\sigma_{\nu}^2$.   
 
-Assumption (iii) rules out the possibility of unobserved sample selection, in the sense that all individuals with the same identifying information have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample (unless $w_i$ includes income).   However, unlike the OLS bias correction estimators, the methods here explicitly correct for any dependence between the outcome variable and the matching variables $w_i$ and the parameters of the matching procedure, insofar as they are captured by $L_i$.  
+In practice, the AHL is estimated in three steps: (i) estimating $\hat{g}(w_i, L_i)$ using nonparametric methods such as $k$-Nearest Neighbors, local polynomial regression, or kernel density estimators; (ii) estimating $\hat{\beta}$ by applying OLS to (\ref{ahl}) to construct $\hat{\sigma}(X_i)$, and (iii) computing $\hat{\beta}^{WLS}$ using the formula in (\ref{wls}).  The resulting estimator is consistent and asymptotically normal under the regularity conditions described in \cite{ahl2019}. 
 
-[This suggests that the AHL (2019) estimator may be more robust when $L_i$ is correlated with $x_i$..]
+Like the \cite{sw1993} estimator, the AHL estimator requires that the true match for $x_i$ is included among the matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $\ell$.  The simulations in Section 7 suggest that this is a reasonable assumption when multiple matches are allowed.  When $L_i=1$ for all $i$, the AHL estimator reduces to the OLS estimator $\hat{\beta}_N$, so it is only meaningful to compute for linked datasets with some $L_i>1$. 
+
+The AHL estimator also requires that $x$ and $y$ are random samples conditional on the matching variables.  Practically speaking, this means thats all individuals with the same identifying information (such as name, age, Census block) have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample (unless individuals are matched by income); but the OLS estimator using perfectly linked data would also be biased because of unobserved sample selection.  
+
+Other approaches for regression analysis using linked data have been proposed by \cite{lahiri05} and \cite{NeterMaynes}, however neither is appropriate for the setup described in Section 2.  The methods in \cite{lahiri05} assume that each observation appearing $y$-datafile  is generated according to the DGP in (\ref{model}), and that its corresponding value of $x$ appears in the $x$-datafile.  This is a problem both conceptually and for implementation when entries in the $x$-datafile represent a strict subset of observations in the $y$-datafile.   The methods in \cite{NeterMaynes} are simplified versions of those in \cite{sw1993}, and hence face the same implementation issues described above. 
+
+By contrast, the AHL estimator is agnostic about whether the incorrectly linked $y_j$ are generated by (\ref{model}) or by some other data generating process.  The AHL estimator has additional robustness properties due to the fact that it weights multiple matches equally and does not require estimating match probabilities, which are explored in the following section.  
 
 \section{Optimality of the AHL Estimator}
 
@@ -398,6 +375,17 @@ where $\hat{\mu}_i$ is the minimum variance estimator constructed for observatio
 Since $\hat{\mu}$ is an inverse probability weighting estimator, small values of $\pi_{i\ell}$ may be detrimental for its finite sample performance.  Rather than dropping observations whose maximal $\pi_{i\ell}$ is small, however, it is possible to give these observations equal weights for all $\{X_{i\ell}\}$, as in the AHL estimator.  I hypothesize that if $\pi_{i\ell} < 0.5$ (or another threshold) for all $\ell$, then it is better to give equal weights to all $X_{i\ell}$ associated with $i$, even when the $\pi_{i\ell}$ are known.
 
 In practice, $\pi_{i\ell}$ and $\kappa$ will most likely need to be estimated. Imprecise estimates of $\hat{\pi}_{i\ell}$ may introduce large finite-sample bias, as can seen via simulation.  Similarly the variance of $\hat{\kappa}$ may not be insignificant.   The advantage of the AHL estimator is that it does not require knowledge about $\pi_{i\ell}$, and may even have best worst case performance in terms of asymptotic MSE; however, the bias correction term $\hat{\kappa}$ still needs to be estimated. 
+
+
+
+%When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
+
+%Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
+
+%Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
+
+
+%The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
 
 
 \section{Monte Carlo Study}
