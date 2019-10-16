@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[margin=0.1in]{geometry}
+\usepackage[nomarkers,figuresonly,nofiglist]{endfloat}
 \usepackage{xcolor}
 \usepackage{framed}
 \usepackage{enumitem}
@@ -393,6 +394,28 @@ Following the same procedure for simulating the empirical example described in S
 
 Each matching method produces a distinct matched dataset, so that the matching step produces a total of 4,000 linked datasets.  Using each of the linked datasets, I then compute (i) naive OLS estimator (using all observations and also with observations assigned $(L_i=1)$, (ii) the \cite{sw1993} bias-corrected estimator, and (iii)  the AHL estimator that assigns equal weights to multiple matches.  As a benchmark, I also compute the OLS estimator that uses only the correctly matched pairs produced by the matching algorithm, and the OLS estimator applied to all 500 correctly linked record pairs.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
 
+% Match Rate Table 
+
+\begin{table}[htbp]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Summary of matching algorithm performance}
+\vspace{10pt}
+\resizebox{\textwidth}{!}{\input{./Figures/match_rates.tex}}
+\label{match_rate}
+\end{table}
+
+\begin{table}[htbp]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Performance of multiple match methods by value of $L_i$}
+\vspace{10pt}
+\resizebox{\textwidth}{!}{\input{./Figures/multi_tab.tex}}
+\label{multi_L}
+\end{table}
+
 \subsection{Matching results}
 To evaluate the matching procedures, I compute the following statistics for each linked dataset, reported in Table \ref{match_rate}:
 
@@ -406,29 +429,6 @@ To evaluate the matching procedures, I compute the following statistics for each
 
 \noindent For the linked datasets that contain multiple matches per observation, I report also the average number of links per observation, and how often those links include the true match (Table \ref{multi_L}). 
 
-%% Matching Algorithm Comparison
-% Match Rate Table 
-
-\begin{table}[h!]
-\let\center\empty
-\let\endcenter\relax
-\centering
-\caption{Average performance and SD for matching algorithms}
-\vspace{10pt}
-\resizebox{\textwidth}{!}{\input{./Figures/match_rates.tex}}
-\label{match_rate}
-\end{table}
-
-\begin{table}[h!]
-\let\center\empty
-\let\endcenter\relax
-\centering
-\caption{Average performance and SD for multiple match procedures}
-\vspace{10pt}
-\resizebox{1.1\textwidth}{!}{\input{./Figures/multi_tab.tex}}
-\label{multi_L}
-\end{table}
-
 %  Match Rate Histograms 
 \begin{figure}[htbp]
 \begin{center}
@@ -438,23 +438,18 @@ To evaluate the matching procedures, I compute the following statistics for each
 \end{center}
 \end{figure}
 
+As seen in Table \ref{match_rate}, the average match rates range between 71 and 79 percent across the various matching procedures, but plotting the distribution of match rates in Figure \ref{match_hist} shows that ABE Multi consistently matches more observations than any other procedure.  PRL Single and PRL Multi have about the same match rate, which suggests that allowing for multiple matches adds additional matches per observations rather than matching new individuals (however, this may be an artifact of how my PRL implementation).  ABE Multi, on the other hand, seems to increase match rates by matching new observations relative to ABE Single.  
 
-Here are some observations that need to be turned into paragraphs: 
-\begin{itemize}
-\item As seen in Table \ref{match_rate}, the average match rates range between 71 and 79 percent across the various matching procedures.  I also plot the distribution of match rates across replications in Figure \ref{match_hist}.   The distribution for ABE Multi lies almost entirely to the right of the mean match rate for the other procedures.  The PRL Single and PRL Multi have about the same match rate, which suggests that allowing for multiple matches does not match new individuals, but instead adds additional noise.  ABE Multi, on the other hand, increases match rates by matching new observations.  
-\item ABE Multi appears to be the least discriminating of the matching procedures, with higher match rates across all replications, and with the highest number of matches.
-\item PRL Single matches more observations than ABE Single, but those extra matches seem more often to be wrong (check with a regression?) because the Type I error rate is higher. 
-\item The multi-match methods have higher Type I error rates by construction; despite adding false matches, they seem to improve upon the unique-match methods because they are more likely to include the true match among the possible matches. 
-\item  ABE Single is the most conservative of all the matching algorithms, with the lowest match rate and lowest type I error.  Of course, the tradeoff is that it fails to identify a quarter of all possible matches. 
-\item  It seems like PRL Single is the worst performing algorithm -- despite higher match rates than ABE single it seems that those matches are not likely to be correct.  This may be an artifact of the threshold used to assign the matches.  A higher threshold may result in matches more similar to ABE Single.  It may be interesting to calculate whether these two algorithms are systematically matching different types of record pairs. 
-\item In Table \ref{multi_L}, we see that PRL Multi is more likely to match observations to a unique outcome; at the price of sometimes excluding the true match.  ABE Multi is more likely to assign more matches, however the true match is contained with high probability.   Few observations are matched with more than three different outcomes.   \footnote{Note PR(L=l) does not add up to one because these are average of the proportions, not the average proportions -- i.e. I calculate what proportion L = l for each monte carlo rep, and then take the average of the proportions.}  
-\item Based on these results, I hypothesize that ABE Multi seems to be the best performing match procedure, if multiple matches are desired.  This is because the methods described in this paper typically require that the true match be included among the matches.  But another question is how much noise do extra matches introduce.  
-\item I compare also ABE Multi and PRL Multi to determine whether the probability of containing a true match increases by allowing for multiple matches (Table \ref{multi_tab}).   In both procedures, more than half of observations are matched to a unique outcome, and those outcomes are correct 99 and 97 percent of the time for ABE Multi and PRL Multi, respectively.   Essentially, allowing for multiple matches in the deterministic procedure increases the probability that the true match is contained among the possible matches.  
-\end{itemize}
+When comparing Type I error rates, it is important to note that multiple-match methods will produce more false links by construction.  Therefore, it is best to compare multi-match methods by measuring the proportion of observations whose  matches contain the true link.  In this metric, both ABE Multi and PRL Multi perform very well.  Furthermore, we can compute these values for each value of $L_i$, as in Table \ref{multi_L}, which shows that allowing multiple matches improves the accuracy of the ABE algorithm.  Table \ref{multi_L} also shows that ABE Multi and PRL Multi rarely assign more than three matches to any given observation.  
+
+Comparing ABE Single and PRL Single in Table \ref{match_rate}, demonstrates the  usual tradeoff between Type I and Type II errors.  ABE Single is more conservative, produces incorrect matches only 3 percent of the time, but failing to identify 26 percent of all matches.  PRL Single is less conservative, missing only 15 percent of matches, but at the cost of matching false links 11 percent of the time.    
+
+Based on these results, ABE Multi seems to perform well if multiple matches are desired.  The linked datasets produced by ABE Multi are very likely to include the true match, which is required for all of the estimation methods described in this paper.  It is also easier in terms of computation, because it does not require linear sum assignment programs or thresholds to determine which record pairs should be designated as matches.  
 
 \subsection{Estimation Results}
 
-I compare estimators according to median absolute deviation, and plot histograms of the estimated values in Figures \ref{olstrue}-\ref{ols}.  
+I compare the estimators according to median absolute deviation, and plot histograms of the estimated values in Figures \ref{olstrue}-\ref{ols}.  In implementing the AHL (2019) estimator, I set $\hat{g}(w_i, L_i) = \sum_{j=1}^{N_y} y_j $, the mean of all $y$ observations, to reduce the computational burden and because I have generated $y$ such that it is independent of the identifiers $w_i$.  The AHL estimator will probably perform better in scenarios where $w_i$ has predictive power in estimating the conditional mean of $y_i$.   
+
 
 
 \begin{table}[h!]
@@ -477,7 +472,7 @@ I compare estimators according to median absolute deviation, and plot histograms
 
 
 \section{Discussion/Conclusion}
-To what extent my results generalize beyond the simulated data is unclear;  arbitrary choices in generating the data -- such as the dictionary of names and the structure of the typographical errors that I introduce in the $x$-datafile -- may impact my results in important ways.  However, my theoretical results suggest that (i) using the match that is most likely to be correct, and bias correcting based on the probability that it is correct is optimal, (ii) if weights are estimated imprecisely, or if no match has a high probability of being correct, then the it is better to assign equal weights to multiple matches.   This result needs to be studied using more general models, and ideally applied to real data where a ground truth is also available. 
+To what extent my results generalize beyond the simulated data is unclear, as I made many arbitrary choices while generating the synthetic data -- such as the dictionary of names and the structure of the typographical errors that I introduce in the $x$-datafile -- that may impact my results in important ways.  However, my theoretical results suggest that (i) using the match that is most likely to be correct, and bias correcting based on the probability that it is correct is optimal, (ii) if weights are estimated imprecisely, or if no match has a high probability of being correct, then the it is better to assign equal weights to multiple matches.   This result needs to be studied using more general models, and ideally applied to real data.
 
 
 
@@ -507,7 +502,6 @@ To what extent my results generalize beyond the simulated data is unclear;  arbi
 \label{ols}
 \end{center}
 \end{figure}
-
 
 
 \newpage

@@ -1,0 +1,31 @@
+\begin{table}[htbp]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Summary of matching algorithm performance}
+\vspace{10pt}
+\resizebox{\textwidth}{!}{\input{./Figures/match_rates.tex}}
+\label{match_rate}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[htbp]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Performance of multiple match methods by value of $L_i$}
+\vspace{10pt}
+\resizebox{\textwidth}{!}{\input{./Figures/multi_tab.tex}}
+\label{multi_L}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[h!]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Median Absolute Deviations for Estimators}
+\vspace{10pt}
+\resizebox{0.9\textwidth}{!}{\input{./Figures/est_tab.tex}}
+\label{multi_tab}
+\end{table}
