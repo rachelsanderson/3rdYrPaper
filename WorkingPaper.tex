@@ -264,35 +264,43 @@ Since membership to $M$ or $U$ is not actually observed, a convenient way of sim
 
 \section{Estimation with linked data }
 
-When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
+%Taking the matched dataset $(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i})$ for observations $i=1,\dots, N$ as given, I now discuss different approaches for estimating the parameters in (\ref{model}).   If the data include multiple $y_{i\ell}$ for each observation, along with probabilities, then SW and AHL methods are available.  If multiple matches are available, but no probabilities are available, then AHL is available (also SW is implementable if you assume equal weights --> same method as AHL if you construct nearest neighbor or mean or something).  If no multiple matches, your only hope is OLS.  
 
-Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
-
-Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
-
-The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
-
-Formally \cite{sw1993} assume that the matching procedure produces $n$ pairs $(x_i, z_i)$, where $z_i$ may or may not correspond to $y_i$, yet the true $y_i$ is included among the potential matches.   Hence, 
-$$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,n $} \end{cases}$$ 
-and $\sum_{j=1}^n q_{ij} = 1, \ i=1,\dots, n$.  Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
+Consider first the case where each $x$ observation is linked to a single value of $y$, i.e. $L_i=1$ for all $i$.  The data consists of $(x_i, z_i)$ for $i=1,\dots, N$, where $z_i$ may or may not correspond to $y_i$.  Specifically, 
+$$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,N_y $} \end{cases}$$ 
+and $\sum_{j=1}^{N_y} q_{ij} = 1, \ i=1,\dots, N$, where $N_y$ is the size of the $y$ datafile and $N$ is the size of the matched dataset.   Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
 \begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
-which is biased.   Denoting $q_i = (q_{i1}, \dots, q_{in})'$ and $Q = (q_1, \dots, q_n)'$, we can write the bias of $\hat{\beta}_N $ as
-$$\text{bias}(\hat{\beta}_N) = [(X'X)^{-1} X'QX - I] \beta $$ 
- since $E[z_i] = E[q_i'y]  = q_i'X\beta =  \sum_{j=1}^{n} q_{ij} x_j'\beta $.  
-
-To reduce the bias of $\hat{\beta}_N$, \cite{sw1993} observed that 
+which is biased, because $ E[z_i ] = E\left[q_{ii} y_i + \sum_{j\neq i} q_{ij} y_j\right] \neq E[y_i]$ if $q_{ii}\neq 1$ for some $i$.  Denoting
+ $q_i = (q_{i1}, \dots, q_{iN_y})'$, we can write the bias of $\hat{\beta}_N $ conditional on the observed values of $y$ as,
 \begin{equation} \text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B \label{bias} \end{equation}
-where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the actual response $y_i$.  The authors suggest estimating (\ref{bias}) using the first and second highest elements of the vector $q_i$, so that $\hat{B}_i^{TR} = (q_{ij_1} - 1) z_{j_1} + q_{ij_2} z_{j_2}$, and 
+where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the true response $y_i$.  
+
+Observing (\ref{bias}), \cite{sw1993} proposed estimating $\hat{B}$ to correct for the bias of $\hat{\beta}_N$.   To reduce the computational burden of constructing $\hat{B}$, they suggest using the first and second highest elements of the vector $q_i$ and their corresponding values $y_{ij_1}$ and $y_{ij_2}$ to compute $\hat{B}_i^{TR} = (q_{ij_1} - 1) y_{ij_1} + q_{ij_2} y_{ij_2}$, and then calculating
+% write what are z_j
 \begin{equation} \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}^{TR} \label{sw}\end{equation}
-The estimator can incorporate any number of elements of $q_i$, but, if the probability is high that the best candidate link is the true link, then the truncation  results in a very small bias. 
+Although $\hat{\beta}_{SW}$ can incorporate any number of elements of $q_i$, \cite{sw1993} note that if the probability is high that the best candidate link is the true link, then the truncation results in a very small bias. 
+ 
+The downside of this method is that it requires knowledge of $q_{ij}$, as well as the second most likely value of $y$ for each observation of $x$.  This information is not typically available when using deterministic matching procedures such as those developed by \cite{abe2012}.   However, even if  estimates of $q_{ij}$ are available (as is the case when probabilistic record linkage is used), the bias may persist if $\hat{q_i}$ is correlated with $y$, as this would introduce endogeneity.  
+To see this explicitly, note that $\hat{\beta}_{SW}$ is the same as applying OLS to the model:
+\begin{equation}
+2  y_{ij_1} - (\widehat{q_{ij_1}}y_{ij_1} + \widehat{q_{ij_2}} y_{jj_2})= x_i'\beta + \varepsilon_i
+\end{equation}
+where we use the fact that $z_i = y_{ij_1}$, the $y$ value with the highest probability of being the true match.  So that errors in estimating $\widehat{q_{ij}}$ appear in the error term; and if these are correlated with variables in $x_i$ (or $z_i$), as would be the case in \cite{nq2015}, then the estimator $\hat{\beta}_{SW}$ will be biased.  Errors in estimating the $\hat{q}$ are potentially correlated when errors in matching variables are correlated with the $x$ varialbes.   ... % expand on this
 
-Alternatively,  \cite{lahiri05} use the fact that $E(z_i) = w_i'\beta$, where $w_i = q_i'X_i\beta$, to construct the unbiased estimator:
-$$ \hat{\beta}_U = (W'W)^{-1} W'z$$ 
-where $W = (w_1, \dots, w_N)'$.  To construct $\hat{\beta}_U$ in practice, they also recommend using a truncated version of $W$, with $w_i^{TR} = q_{ij_1} x_{j_1} + q_{ij_2} x_{j_2}$.
+The values $q_{ij}$ are typically calculated using (\ref{bayes}) and parameter values $\psi = \{p_M, P(\gamij | M)$, and $P(\gamij |U)\}$. Thus, we can write the estimators $\hat{\beta}_{SW} = \hat{\beta}_{SW}(\psi)$ and $\hat{\beta}_U = \hat{\beta_U}(\psi)$.  In practice, $\psi$ is unknown, and a reasonable estimator $\hat{\psi}$ must be used.   Details on how to estimate $\hat{\psi}$ are provided in the next section.   Importantly, $\hat{\beta}_U(\hat{\psi})$ is unbiased whenever $\hat{\psi}$ is independent of $z$, which occurs if errors in the matching variables (which determine the distribution of $\hat{\psi}$ are independent of the response variable $y$.  Unfortunately, this assumption is unlikely to hold in many economic applications, such as \cite{nq2015}, where $y$ indicates whether a person's recorded ethnicity changes between survey years, but data quality significantly differs for individuals with different values of $y$.  
 
-For both methods, the values $q_{ij}$ are typically calculated using (\ref{bayes}) and parameter values $\psi = \{p_M, P(\gamij | M)$, and $P(\gamij |U)\}$. Thus, we can write the estimators $\hat{\beta}_{SW} = \hat{\beta}_{SW}(\psi)$ and $\hat{\beta}_U = \hat{\beta_U}(\psi)$.  In practice, $\psi$ is unknown, and a reasonable estimator $\hat{\psi}$ must be used.   Details on how to estimate $\hat{\psi}$ are provided in the next section.   Importantly, $\hat{\beta}_U(\hat{\psi})$ is unbiased whenever $\hat{\psi}$ is independent of $z$, which occurs if errors in the matching variables (which determine the distribution of $\hat{\psi}$ are independent of the response variable $y$.  Unfortunately, this assumption is unlikely to hold in many economic applications, such as \cite{nq2015}, where $y$ indicates whether a person's recorded ethnicity changes between survey years, but data quality significantly differs for individuals with different values of $y$.  
 
-The work of \cite{ahl2019} is like a generalized version of \cite{sw1993}.  They propose a GMM estimator that uses data where each observation $x_i$ is linked to $L_i$ equally likely, potential outcomes, denoted $\{y_{i\ell}\}_{\ell=1}^{L_i}$.  Importantly, their methods require that (i) the true outcome is included among the set of possible matches, (ii) each of the possible matches is equally likely to be the true match, and (iii) that the observations $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are random samples from their marginal distributions conditional on $(w_i, L_i)$.  
+A solution to this problem is the estimator proposed by \cite{ahl2019}.  Rather than estimate probabilities, the unbiasedness of the estimator requires that errors in estimating the conditional expectation of $y$ be independent of the $x_i$.  
+
+
+%When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
+
+%Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
+
+%Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
+
+%The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
+They propose a GMM estimator that uses data where each observation $x_i$ is linked to $L_i$ potential outcomes, denoted $\{y_{i\ell}\}_{\ell=1}^{L_i}$.  Importantly, their methods require that (i) the true outcome is included among the set of possible matches, (ii) each of the possible matches is equally likely to be the true match, and (iii) that the observations $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are random samples from their marginal distributions conditional on $(w_i, L_i)$.  
  
 Under these assumptions, the authors show how to construct an unbiased and consistent estimator $\hat{\beta}$ by considering the smoothed regression:
 \begin{equation} 
@@ -310,9 +318,6 @@ Assumption (iii) rules out the possibility of unobserved sample selection, in th
 
 [This suggests that the AHL (2019) estimator may be more robust when $L_i$ is correlated with $x_i$..]
 
-\section{Estimation with linked data and probabilities} 
-
-H
 \section{Optimality of the AHL Estimator}
 
 % To show optimality of the AHL consider the possibility of incorporating probabilities of matches in the AHL framework.  The interesting result is that the minimum variance unbiased estimator depends on the ratio of the structural error in the model to the variance in the reduced form estimation for $y$, which also depends on the precision of the estimator $\hat{g}$.  This is an interesting result because it connects to the Horwitz-Thompson estimator, and work on inverse propensity score weighting. 

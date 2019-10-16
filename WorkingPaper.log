@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 OCT 2019 16:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  15 OCT 2019 20:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1294,54 +1294,65 @@ Overfull \hbox (4.98752pt too wide) in paragraph at lines 209--210
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
-[8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20]
+[8] [9] [10] [11] [12] [13]
+Overfull \hbox (3.81776pt too wide) in paragraph at lines 290--291
+[]\OT1/cmr/m/n/12 The val-ues $\OML/cmm/m/it/12 q[]$ \OT1/cmr/m/n/12 are typ-i-
+cally cal-cu-lated us-ing ([]6[]) and pa-ram-e-ter val-ues $[] = \OMS/cmsy/m/n/
+12 f\OML/cmm/m/it/12 p[]; P\OT1/cmr/m/n/12 ([]\OMS/cmsy/m/n/12 j\OML/cmm/m/it/1
+2 M\OT1/cmr/m/n/12 )$,
+ []
+
+[14] [15] [16] [17] [18] [19]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 398.
- [21]
-(./Figures/match_rates.tex) (./Figures/multi_tab.tex)
-Overfull \hbox (47.01192pt too wide) in paragraph at lines 427--429
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 403.
+ [20] (./Figures/match_rates.tex)
+(./Figures/multi_tab.tex)
+Overfull \hbox (47.01192pt too wide) in paragraph at lines 432--434
  [][] 
  []
 
-<./Figures/match_rate.pdf, id=330, 338.26375pt x 457.71pt>
+<./Figures/match_rate.pdf, id=321, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
-Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 435.
+Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 440.
 (pdftex.def)             Requested size: 422.77664pt x 572.08722pt.
-[22] [23 <./Figures/match_rate.pdf>] [24] (./Figures/est_tab.tex)
-<./Figures/compare.pdf, id=359, 650.43pt x 649.42625pt>
+[21] [22 <./Figures/match_rate.pdf>] [23] (./Figures/est_tab.tex)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<./Figures/compare.pdf, id=350, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
-Package pdftex.def Info: ./Figures/compare.pdf  used on input line 477.
+Package pdftex.def Info: ./Figures/compare.pdf  used on input line 482.
 (pdftex.def)             Requested size: 516.73338pt x 515.97432pt.
 
-Overfull \hbox (46.97836pt too wide) in paragraph at lines 477--479
+Overfull \hbox (46.97836pt too wide) in paragraph at lines 482--484
  [] 
  []
 
-[25] [26 <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=380, 466.74374pt x 524.96124pt>
+[24] [25 <./Figures/compare.pdf>]
+<./Figures/ahl_hist.pdf, id=372, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
-Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 501.
+Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 506.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-<./Figures/sw_hist.pdf, id=381, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=373, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
-Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 509.
+Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 514.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-<./Figures/OLS(L=1)_hist.pdf, id=382, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=374, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
-Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 518.
+Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 523.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [27] [28 <./Figures/ahl_hist.pdf>] [29 <./Figures/sw_hist.pdf>] [30 <./Figures
-/OLS(L=1)_hist.pdf>] [31] (./WorkingPaper.bbl
+ [26] [27 <./Figures/ahl_hist.pdf>] [28 <./Figures/sw_hist.pdf>] [29 <./Figures
+/OLS(L=1)_hist.pdf>] [30] (./WorkingPaper.bbl
 ./WorkingPaper.bbl:69: Misplaced alignment tab character &.
 l.69 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
-[32]
+[31]
 ./WorkingPaper.bbl:87: Undefined control sequence.
 l.87 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
@@ -1350,24 +1361,30 @@ l.87 ...cy Qian}, ``The Fluidity of Race: \enquote
 
 Package natbib Warning: There were undefined citations.
 
-[33]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 560.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 560.
+[32]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 565.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 565.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 560.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 560.
-Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
-(rerunfilecheck)             Checksum: 299EFCD072A49E60E4A9951CA42A5BCE;914.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 565.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 565.
 
+
+Package rerunfilecheck Warning: File `WorkingPaper.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `WorkingPaper.out':
+(rerunfilecheck)             Before: 299EFCD072A49E60E4A9951CA42A5BCE;914
+(rerunfilecheck)             After:  C6F75D1E5C64AA7DA63D18164A0050FF;832.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 560.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 565.
  ) 
 Here is how much of TeX's memory you used:
- 31922 strings out of 492649
- 639472 string characters out of 6129622
- 728337 words of memory out of 5000000
+ 31924 strings out of 492649
+ 639506 string characters out of 6129622
+ 729337 words of memory out of 5000000
  35187 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1383,6 +1400,15 @@ pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
 
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 , replaced by a fixed one
+
+pdfTeX warning (dest): name{section.11} has been referenced but does not exist,
+ replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.8.2} has been referenced but does not ex
+ist, replaced by a fixed one
+
+pdfTeX warning (dest): name{subsection.8.1} has been referenced but does not ex
+ist, replaced by a fixed one
 
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
 /usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
@@ -1406,10 +1432,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (33 pages, 354559 bytes).
+Output written on WorkingPaper.pdf (32 pages, 352440 bytes).
 PDF statistics:
- 534 PDF objects out of 1000 (max. 8388607)
- 446 compressed objects within 5 object streams
- 101 named destinations out of 1000 (max. 500000)
+ 527 PDF objects out of 1000 (max. 8388607)
+ 440 compressed objects within 5 object streams
+ 103 named destinations out of 1000 (max. 500000)
  254 words of extra memory for PDF output out of 10000 (max. 10000000)
 
