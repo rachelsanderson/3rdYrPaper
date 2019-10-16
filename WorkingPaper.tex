@@ -90,13 +90,14 @@ Although frequently encountered in economics, problems related to merging also a
 
 In the past, authors have handled multiple matches by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or using methods that allow for multiple outcomes  \citep{ahl2019}.   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   
 
-The purpose of this paper is to show that inference using linked data requires making joint assumptions for the matching and estimation steps, such as whether multiple matches are allowed, and, if so, how these matches should be accounted for when using standard estimation techniques.  
+This paper contributes to the literature by developing a unified approach for inference using linked data.  Building upon a well-established literature that compares the performance of different record linkage methods, this paper studies how the \textit{outputs} of these procedures -- such as whether the linked dataset contains multiple matches per observation, or probabilities that any given record pair refers to a true match -- can be used to correct for bias and improve efficiency during estimation.  
 
-Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  Also representativeness is an issue. However, the impact of data pre-processing choices on estimation is still not well understood.  
-
-This paper adds to this literature by comparing methods that allow for multiple matches; to dtermine whether multiple matches are even optimal!  It also makes practical suggestions for choosing which methods best suit a given setting.  My hypothesis: if you use deterministic matching, you should allow for multiple matches.  If you use probabilistic record linkage, you need to bias correct a la SW.   Estimated probabilities can be noisy, so use agnostic weights if uncertain.  Incorporate multiple matches to avoid problem that $L_i$ is correlated with outcomes. 
+My preliminary results support the following suggestions for analyzing linked data: if you use deterministic matching, you should allow for multiple matches and use the estimator in \cite{ahl2019}.  If you use probabilistic record linkage, you should choose the match with the highest probability of being correct if it exceeds a certain threshold; otherwise you should use multiple matches because the estimated probabilities can be noisy, and can result in large weights on observations with small $\pi_{i\ell}$.  When it doubt, implement all methods and compare the results!
 
 In order to illustrate the techniques studied in this paper, Section 2 introduces a numerical example that is used to demonstrate the matching and estimation techniques described in Sections 3 and 4.  Section 5 provides details about the implementation of the methods and data generating processes.  Section 6 contains the results, and Section 7 concludes.
+
+%Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  Also representativeness is an issue. However, the impact of data pre-processing choices on estimation is still not well understood.  
+
 
 \section{Setup} 
 This paper considers the problem of estimating $\beta$ in the linear regression model, \begin{equation} y_i = x_i'\beta + \varepsilon_i, \ E[\varepsilon | x_i] = 0, \ E[\epsilon_i^2] = \sigma^2  \label{model} \end{equation}
@@ -390,7 +391,7 @@ In practice, $\pi_{i\ell}$ and $\kappa$ will most likely need to be estimated. I
 
 Following the same procedure for simulating the empirical example described in Section 2, I generate 1,000 random $x$- and $y$- dataset pairs.  I implement four types of matching procedures using each dataset pair: (i) deterministic matching with unique matches (ABE Single), (ii) deterministic matching with multiple matches (ABE Multi), (iii) probabilistic matching with unique matches (PRL Single), and (iv) probabilistic matching with multiple matches (PRL Multi).  Allowing for multiple matches means that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  
 
-Each matching method produces a distinct matched dataset, so that the matching step produces a total of 4,000 linked datasets.  For each of these datasets, I then compute a variety of estimates of $\beta$, primarily the Scheuren-Winkler bias-correction estimator,  and the AHL estimator that allows for multiple matches.  I additionally compute three standard OLS estimators; the first using only observations that are assigned a single match by the record linking procedure, and the second using only the correctly matched pairs.  The third OLS estimator is the benchmark estimator is $\hat{\beta}^{opt}$, which is calculated using the correctly linked version of the $x$- and $y$-dataset pair.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
+Each matching method produces a distinct matched dataset, so that the matching step produces a total of 4,000 linked datasets.  Using each of the linked datasets, I then compute (i) naive OLS estimator (using all observations and also with observations assigned $(L_i=1)$, (ii) the \cite{sw1993} bias-corrected estimator, and (iii)  the AHL estimator that assigns equal weights to multiple matches.  As a benchmark, I also compute the OLS estimator that uses only the correctly matched pairs produced by the matching algorithm, and the OLS estimator applied to all 500 correctly linked record pairs.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
 
 \subsection{Matching results}
 To evaluate the matching procedures, I compute the following statistics for each linked dataset, reported in Table \ref{match_rate}:
@@ -407,7 +408,6 @@ To evaluate the matching procedures, I compute the following statistics for each
 
 %% Matching Algorithm Comparison
 % Match Rate Table 
-
 
 \begin{table}[h!]
 \let\center\empty
@@ -454,13 +454,8 @@ Here are some observations that need to be turned into paragraphs:
 
 \subsection{Estimation Results}
 
-Benchmark is ... 
+I compare estimators according to median absolute deviation, and plot histograms of the estimated values in Figures \ref{olstrue}-\ref{ols}.  
 
-AHL Estimator performs well.... 
-
-OLS with (L=1)
-
-When only a single matching is allowed, it is not possible to use SW method because it requires that we carry over multiple matches for each observation.   
 
 \begin{table}[h!]
 \let\center\empty
@@ -476,22 +471,14 @@ When only a single matching is allowed, it is not possible to use SW method beca
 \begin{center}
 \caption{Comparing OLS with true matches produced by matching algorithm vs. matches with L=1}
 \includegraphics[width=1.1\textwidth]{./Figures/compare.pdf}
-\label{default}
+\label{olstrue}
 \end{center}
 \end{figure}
 
 
-\section{Discussion}
-To what extent my results generalize beyond the simulated data is unclear.  Many arbitrary choices -- name dictionary choice, uniform probability over those names -- and how I introduced error in the identifying variables may impact my results in important ways.  This needs to be studied in more detail, ideally with real data where a ground truth is also available. 
+\section{Discussion/Conclusion}
+To what extent my results generalize beyond the simulated data is unclear;  arbitrary choices in generating the data -- such as the dictionary of names and the structure of the typographical errors that I introduce in the $x$-datafile -- may impact my results in important ways.  However, my theoretical results suggest that (i) using the match that is most likely to be correct, and bias correcting based on the probability that it is correct is optimal, (ii) if weights are estimated imprecisely, or if no match has a high probability of being correct, then the it is better to assign equal weights to multiple matches.   This result needs to be studied using more general models, and ideally applied to real data where a ground truth is also available. 
 
-%  Multi Match Table 
-
-
-
-
-I evaluate the performance of the matching procedures and estimation procedures using the following criteria.  For the matching procedures, I calculate
-
-I compare estimators according to median absolute deviation.  I plot a histogram of the estimators. 
 
 
 
@@ -500,7 +487,7 @@ I compare estimators according to median absolute deviation.  I plot a histogram
 \label{ahl_hist}
 \begin{center}
 \includegraphics[width=\textwidth]{./Figures/ahl_hist.pdf}
-\label{default}
+\label{ahl}
 \end{center}
 \end{figure}
 
@@ -508,7 +495,7 @@ I compare estimators according to median absolute deviation.  I plot a histogram
 \label{sw_hist}
 \begin{center}
 \includegraphics[width=\textwidth]{./Figures/sw_hist.pdf}
-\label{default}
+\label{sw}
 \end{center}
 \end{figure}
 
@@ -517,7 +504,7 @@ I compare estimators according to median absolute deviation.  I plot a histogram
 \label{ols_hist}
 \begin{center}
 \includegraphics[width=\textwidth]{./Figures/OLS(L=1)_hist.pdf}
-\label{default}
+\label{ols}
 \end{center}
 \end{figure}
 
@@ -526,13 +513,12 @@ I compare estimators according to median absolute deviation.  I plot a histogram
 \newpage
 
 \section{Appendix:  Implementation Notes}
-Exact matching procedure.
 
-Formulas for estimators.
+Let's talk about what I need to include here.  Here are some ideas:
 
-Implementation of fastLink algorithm. 
+Formulas for SE of SW estimator.
 
-Here I will talk about all the nit-picky stuff, like 
+Details about implementation of fastLink algorithm. Also
 \begin{itemize}
 \item what threshold level I use for the fastLink algorithm (0.6)
 \item what nonparametric technique I use for AHL (nearest neighbor) 
@@ -546,8 +532,6 @@ Here I will talk about all the nit-picky stuff, like
 
 
 
-\section{Conclusion}
-Will write when I have results. 
 
 
 
