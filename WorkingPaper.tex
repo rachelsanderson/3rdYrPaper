@@ -275,20 +275,26 @@ which is biased, because $ E[z_i ] = E\left[q_{ii} y_i + \sum_{j\neq i} q_{ij} y
 \begin{equation} \text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B \label{bias} \end{equation}
 where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the true response $y_i$.  
 
-Observing (\ref{bias}), \cite{sw1993} proposed estimating $\hat{B}$ to correct for the bias of $\hat{\beta}_N$.   To reduce the computational burden of constructing $\hat{B}$, they suggest using the first and second highest elements of the vector $q_i$ and their corresponding values $y_{ij_1}$ and $y_{ij_2}$ to compute $\hat{B}_i^{TR} = (q_{ij_1} - 1) y_{ij_1} + q_{ij_2} y_{ij_2}$, and then calculating
+Observing (\ref{bias}), \cite{sw1993} proposed estimating $\hat{B}$ to correct for the bias of $\hat{\beta}_N$.   To reduce the computational burden of constructing $\hat{B}$, they suggest using the first and second highest elements of the vector $q_{ij_1}$ and $q_{ij_2}$ and their corresponding values $y_{ij_1}$ and $y_{ij_2}$ to compute $\hat{B}_i^{TR} = (q_{ij_1} - 1) y_{ij_1} + q_{ij_2} y_{ij_2}$, and then calculating
 % write what are z_j
 \begin{equation} \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}^{TR} \label{sw}\end{equation}
-Although $\hat{\beta}_{SW}$ can incorporate any number of elements of $q_i$, \cite{sw1993} note that if the probability is high that the best candidate link is the true link, then the truncation results in a very small bias. 
+Although $\hat{B}^{TR}$ can incorporate an arbitrary number of elements of $q_i$, \cite{sw1993} note that if the probability is high that the best candidate link is the true link, then the truncation with two links results in a very small bias. 
  
-The downside of this method is that it requires knowledge of $q_{ij}$, as well as the second most likely value of $y$ for each observation of $x$.  This information is not typically available when using deterministic matching procedures such as those developed by \cite{abe2012}.   However, even if  estimates of $q_{ij}$ are available (as is the case when probabilistic record linkage is used), the bias may persist if $\hat{q_i}$ is correlated with $y$, as this would introduce endogeneity.  
-To see this explicitly, note that $\hat{\beta}_{SW}$ is the same as applying OLS to the model:
+The downside of the \cite{sw1993} method is that it requires knowledge of $q_{ij}$, as well as the second most likely value of $y$ for each observation of $x$.  This information is not typically available when using deterministic matching procedures such as those developed by \cite{abe2012}.   However, even if  estimates of $q_{ij}$ are available (as may be the case when using probabilistic record linkage), the bias may persist if the estimates $\widehat{q_ij}$ are correlated with $x$ or $y$, as this would introduce endogeneity.   %% WORK OUT THE MATH FOR HERE
+
+$$E(z_i) = \sumN (Y_i p_i + \sum_j y_J q_{ij}) = \sumN Y_i + \sumN y_i (h_i-1) + \sumN   + B_i = y_i + p_i y_i + (1-h_i )  $$
+
+To illustrate this problem explicitly, note that $\hat{\beta}_{SW}$ is the same as applying OLS to the model:
+$$E[2y_{j1} - q_{j_1}y_{j1} - q_j2 y_J2] = 2*q_{j1}y_{j1} + 2*(1-q_{j1}z)] - q_{j1}{y_j{1} - q_{j2} y_{j2} $$
+
 \begin{equation}
-2  y_{ij_1} - (\widehat{q_{ij_1}}y_{ij_1} + \widehat{q_{ij_2}} y_{jj_2})= x_i'\beta + \varepsilon_i
+z_i - (1-q_{ii}})z_i - \widehat{q_{ij_2}} y_{jj_2})= x_i'\beta + \varepsilon_i
 \end{equation}
 where we use the fact that $z_i = y_{ij_1}$, the $y$ value with the highest probability of being the true match.  So that errors in estimating $\widehat{q_{ij}}$ appear in the error term; and if these are correlated with variables in $x_i$ (or $z_i$), as would be the case in \cite{nq2015}, then the estimator $\hat{\beta}_{SW}$ will be biased.  Errors in estimating the $\hat{q}$ are potentially correlated when errors in matching variables are correlated with the $x$ varialbes.   ... % expand on this
 
 The values $q_{ij}$ are typically calculated using (\ref{bayes}) and parameter values $\psi = \{p_M, P(\gamij | M)$, and $P(\gamij |U)\}$. Thus, we can write the estimators $\hat{\beta}_{SW} = \hat{\beta}_{SW}(\psi)$ and $\hat{\beta}_U = \hat{\beta_U}(\psi)$.  In practice, $\psi$ is unknown, and a reasonable estimator $\hat{\psi}$ must be used.   Details on how to estimate $\hat{\psi}$ are provided in the next section.   Importantly, $\hat{\beta}_U(\hat{\psi})$ is unbiased whenever $\hat{\psi}$ is independent of $z$, which occurs if errors in the matching variables (which determine the distribution of $\hat{\psi}$ are independent of the response variable $y$.  Unfortunately, this assumption is unlikely to hold in many economic applications, such as \cite{nq2015}, where $y$ indicates whether a person's recorded ethnicity changes between survey years, but data quality significantly differs for individuals with different values of $y$.  
 
+%% STOP HERE
 
 A solution to this problem is the estimator proposed by \cite{ahl2019}.  Rather than estimate probabilities, the unbiasedness of the estimator requires that errors in estimating the conditional expectation of $y$ be independent of the $x_i$.  
 
