@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  16 OCT 2019 18:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  18 OCT 2019 15:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1270,10 +1270,10 @@ Overfull \hbox (4.98752pt too wide) in paragraph at lines 209--210
  []
 
 [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
-(./Figures/match_rates.tex) (./Figures/multi_tab.tex)
+(./Figures/match_rates.tex) (./Figures/multi_tab.tex) [20]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 423.
- [20]
+
 
 ./WorkingPaper.tex:441: Package inputenc Error: Invalid UTF-8 byte 160.
 
@@ -1392,7 +1392,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 539.
 Here is how much of TeX's memory you used:
  32094 strings out of 492649
  642051 string characters out of 6129622
- 732702 words of memory out of 5000000
+ 733702 words of memory out of 5000000
  35355 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1431,7 +1431,7 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (32 pages, 354012 bytes).
+Output written on WorkingPaper.pdf (32 pages, 354087 bytes).
 PDF statistics:
  543 PDF objects out of 1000 (max. 8388607)
  456 compressed objects within 5 object streams

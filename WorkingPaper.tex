@@ -342,11 +342,11 @@ We can write:
 
 Hence any unbiased estimator $\hat{\mu}$ that uses $X_1$ and $X_2$ can be written as a linear combination of estimators using only $X_1$ or $X_2$.  The problem of finding the minimum variance, unbiased estimator $\hat{\mu}$ reduces to finding $d^*$ that solves 
 $$\min_d\  \Var{d \hat{\mu}_1 + (1-d) \hat{\mu}_2}$$
-which is solved by $d^*= 0$ or $d^* = 1$ depending on whether $\Var{\hat{\mu}_1}$ or $\Var{\hat{\mu}_2}$ is smaller.  
-
-I now show that $\Var{\hat{\mu}_1} > \Var{\hat{\mu}_2}$, without loss of generality, except when $\pi = 0.5$, or $\sigma^2 = \omega^2 = (\mu-\kappa)^2$.  Observe that,
+which is $$d^*= \frac{\Var{\hat{\mu}_2} - \text{Cov}(\hat{\mu}_1, \hat{\mu}_2)}{\Var{\hat{\mu}_1} + \Var{\hat{\mu}_2} - 2 \text{Cov}(\hat{\mu}_1, \hat{\mu}_2)}$$ 
+Observe that,
 \begin{align*} \Var{\hat{\mu}_1} &=  \frac{\text{Var}(X_1)}{\pi^2} = \frac{1}{\pi^2}\left(\pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) \\
-\Var{\hat{\mu}_2} &= \frac{\Var{X_2}}{(1-\pi)^2} = \frac{1}{(1-\pi)^2}\left((1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) 
+\Var{\hat{\mu}_2} &= \frac{\Var{X_2}}{(1-\pi)^2} = \frac{1}{(1-\pi)^2}\left((1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) \\
+\text{Cov}(\hat{\mu}_1, \hat{\mu}_2) &= \frac{\text{Cov}(X_1,X_2)}{\pi(1-\pi)} = \frac{1}{\pi(1-\pi)}\left((1-\pi^2 - (1-\pi)^2)\mu\kappa - \pi(1-\pi)(\mu^2 + \kappa^2)\right)
 \end{align*}
 
 This follows from the law of total variance, with the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise. 
