@@ -348,34 +348,14 @@ Observe that,
 \Var{\hat{\mu}_2} &= \frac{\Var{X_2}}{(1-\pi)^2} = \frac{1}{(1-\pi)^2}\left((1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) \\
 \text{Cov}(\hat{\mu}_1, \hat{\mu}_2) &= \frac{\text{Cov}(X_1,X_2)}{\pi(1-\pi)} = \frac{1}{\pi(1-\pi)}\left((1-\pi^2 - (1-\pi)^2)\mu\kappa - \pi(1-\pi)(\mu^2 + \kappa^2)\right)
 \end{align*}
-
-This follows from the law of total variance, with the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise. 
+where $\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, using the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise:
 \begin{align*} \Var{X_1} &= E[\Var{X_1 | D}] + \Var{E[X_1| D]} \\ 
 &= P(D=1)\sigma^2 +  P(D=0)\omega^2 + \Var{\mu D + \kappa (1-D)} \\
 &= \pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2
 \end{align*}
-Similarly,
-$$\Var{X_2} = (1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2 $$ 
-Thus, $\Var{\hat{\mu}_1}$ and $\Var{\hat{\mu}_2}$ can be written as functions of $\sigma^2, \omega^2,$ and $(\mu-\kappa)^2$,
-\begin{align*} 
-g(\sigma^2, \omega^2, (\mu-\kappa)^2, x) &\equiv  \frac{1}{x^2}\left(x \sigma^2 + (1-x)\omega^2 + x (1-x) (\mu -\kappa)^2\right)\\
-\Var{\hat{\mu}_1} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, \pi) \\
-\Var{\hat{\mu}_2} &= g(\sigma^2, \omega^2, (\mu-\kappa)^2, 1-\pi) 
-\end{align*}
-Importantly, 
-$$\frac{\partial g(\sigma^2, \omega^2, (\mu-\kappa)^2, x)}{\partial x} = \frac{\omega^2 (x-2) - x (\sigma^2 + (\mu-\kappa)^2)}{x^3}< 0,  \ x \in (0,1)$$
-and so $\Var{\hat{\mu}_{\ell}}$ is strictly decreasing in the probability that the observation $\ell$ is drawn from the correct distribution, and $\Var{\hat{\mu}_1} \neq \Var{\hat{\mu}_2}$ unless $\pi = 0.5$.   Thus, the minimum variance unbiased estimator is equal to $\hat{\mu}_{\ell}$ for the observation $\ell$ that has the highest probability of being correct.
+The same trick can be applied to calculate $\Var{X_2}$}
 
-The above result holds also for $L$ observations $X_1, \dots, X_{L}$ with corresponding probabilities $\pi_1,\dots, \pi_L$; that is, the minimum variance unbiased estimator $\hat{\mu}$ will use only $X_{\ell}$ with the highest $\pi_{\ell}$ and apply inverse probability weighting. 
-
-Now consider a sample of $N$ sets of i.i.d. observations, $\left\{\{X_{i\ell}\}_{\ell=1}^{L_i}\right\}_{i=1}^N$.  If the values $$\pi_{i\ell} = \text{Pr}(X_{i\ell}\text{ is drawn from the correct distribution}),   \sum_{\ell=1}^{L_i} \pi_{i\ell} = 1$$ are known for all $i$, then the optimal estimator is 
-$$\hat{\mu} = \frac{1}{N} \sum_{i=1}^N \hat{\mu}_i  = \frac{1}{N}\sum_{i=1}^N \frac{X_{i\ell_i}}{\pi_{i\ell_i}} - \frac{1-\pi_{i\ell_i}}{\pi_{i\ell_i}}\kappa$$
-where $\hat{\mu}_i$ is the minimum variance estimator constructed for observations $\{X_{i\ell}\}_{\ell=1}^{L_i}$. 
-
-Since $\hat{\mu}$ is an inverse probability weighting estimator, small values of $\pi_{i\ell}$ may be detrimental for its finite sample performance.  Rather than dropping observations whose maximal $\pi_{i\ell}$ is small, however, it is possible to give these observations equal weights for all $\{X_{i\ell}\}$, as in the AHL estimator.  I hypothesize that if $\pi_{i\ell} < 0.5$ (or another threshold) for all $\ell$, then it is better to give equal weights to all $X_{i\ell}$ associated with $i$, even when the $\pi_{i\ell}$ are known.
-
-In practice, $\pi_{i\ell}$ and $\kappa$ will most likely need to be estimated. Imprecise estimates of $\hat{\pi}_{i\ell}$ may introduce large finite-sample bias, as can seen via simulation.  Similarly the variance of $\hat{\kappa}$ may not be insignificant.   The advantage of the AHL estimator is that it does not require knowledge about $\pi_{i\ell}$, and may even have best worst case performance in terms of asymptotic MSE; however, the bias correction term $\hat{\kappa}$ still needs to be estimated. 
-
+Hence the optimal estimator $\hat{\mu} = d^* \hat{mu}_1 + (1-d^*) \hat{\mu}_2$ depends on $\sigma^2, \omega^2, \mu,$ and $\kappa$.  To see how these change, Figure below demonstrates. 
 
 
 %When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
