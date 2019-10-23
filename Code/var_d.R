@@ -94,7 +94,7 @@ truePiList <- seq(0.1, 0.5, by = 0.1)
 png(filename = paste0(outDir,"bias_plot.png"))
 par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.4))
 for (truePi in truePiList){
- plot_bias(truePi, parCombos)
+  plot_bias(truePi, parCombos)
 }
 plot(1, type="n", axes=FALSE, xlab="", ylab="")
 legend('center', xpd=TRUE, legend = sapply(parCombos, gen_title),
@@ -175,33 +175,29 @@ for (n in nList){
 ################################################################################################
 
 calc_var_ahl <- function(par){
-  d <- 0.5
-  piHat <- 0.5
+  print(unlist(par))
   var_x <- function(x) {(x*par$sig2 + (1-x)*par$omeg2 + x*(1-x)*(par$mu-par$kappa)^2)}
-  var_mu1 <- var_x(par$pi)/(piHat^2) # true variance/false beliefs 
-  var_mu2 <- var_x(1-par$pi)/((1-piHat)^2)
+  # print(paste0("vX1: ", var_x(par$pi), " vX2: ", var_x(1-par$pi)))
   cov_x12 <- (1-par$pi^2 - (1-par$pi)^2)*par$mu*par$kappa - par$pi*(1-par$pi)*(par$mu^2 + par$kappa^2)
-  cov_mu12 <- cov_x12/(piHat*(1-piHat)) #true covariance/false beliefs
-  var_mu <- (d^2)*var_mu1 + ((1-d)^2)*var_mu2 +2*d*(1-d)*cov_mu12
-  return(var_mu)
-}
-get_var_list_ahl <- function(parCombo, truePi){
-  sapply(piList, function(x){ calc_var_ahl(x, set_pars(c(truePi, parCombo))) } )
+  # print(paste0("cov: ", cov_x12))
+  return(var_x(par$pi) + var_x(1-par$pi) + 2*cov_x12)
 }
 
-plot_var_ahl <- function(truePi, parCombos){
-  var_list_ahl <- lapply(parCombos, get_var_list_ahl, truePi=truePi)
-  plot(x=piList, y=var_list[[1]], type = 'l', col = 'black', 
-       ylab="Bias", 
-       xlab=bquote(hat(pi)),
+plot_var_ahl <- function(parCombo){
+  var_list_ahl <- sapply(truePiList, function(x){ calc_var_ahl(set_pars(c(x, parCombo)))})
+  plot(x=truePiList, y=var_list_ahl, type = 'l', col = 'black', 
+       ylab="Variance/MSE", 
+       xlab=bquote(pi[0]),
        ylim = c(min(unlist(var_list_ahl)), max(unlist(var_list_ahl))))
-  sapply(1:length(var_list_ahl), FUN = function(i) { lines(x=piList, y = var_list_ahl[[i]], type='l',col=i)})
-  title(main = bquote(pi[0]==.(truePi)))
 }
+
 par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.2))
-for (truePi in truePiList){
-  plot_var_ahl(truePi, parCombos)
+for (combo in parCombos){
+  plot_var_ahl(combo)
 }
+
+par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.2))
+
 plot(1, type="n", axes=FALSE, xlab="", ylab="")
 legend('center', xpd=TRUE, legend = sapply(parCombos, gen_title),
        col = 1:length(parCombos), lty=1, lwd=2, pt.cex =1, cex=1.3)
