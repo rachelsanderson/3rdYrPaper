@@ -77,4 +77,4 @@ lines(x=beliefs, y=mseout[2,], col='green')
 lines(x=beliefs, y=mseout[3,], col='blue')
 legend("bottomleft",legend=c("mse","bias","var"),col=c('black','green','blue'),lty=1, cex=0.8)
 
-     
+
