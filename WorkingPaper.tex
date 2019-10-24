@@ -357,6 +357,14 @@ The same trick can be applied to calculate $\Var{X_2}$}
 
 Hence the optimal estimator $\hat{\mu} = d^* \hat{mu}_1 + (1-d^*) \hat{\mu}_2$ depends on $\sigma^2, \omega^2, \mu,$ and $\kappa$.  To see how these change, Figure below demonstrates. 
 
+\begin{center}
+\caption{Par values = ( 1 1 0 1 )}
+\input{./Figures/compare.tex}
+
+\caption{Par values $(\sigma^2, \omega^2, \mu, \kappa) =  ( 1, 20, 0, 1 )$}
+
+\input{./Figures/compare_2.tex}
+\end{center}
 
 %When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
 

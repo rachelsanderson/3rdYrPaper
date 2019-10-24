@@ -1,4 +1,8 @@
 library(purrr)
+library(dplyr)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
 
 outDir = "Desktop/3rdYrPaper/Figures/"
 
@@ -115,6 +119,7 @@ calc_variance <- function(piHat, par){
   var_mu <- (d^2)*var_mu1 + ((1-d)^2)*var_mu2 +2*d*(1-d)*cov_mu12
   return(var_mu)
 }
+
 get_var_list <- function(parCombo, truePi){
   sapply(piList, function(x){ calc_variance(x, set_pars(c(truePi, parCombo))) } )
 }
@@ -175,7 +180,7 @@ for (n in nList){
 ################################################################################################
 
 calc_var_ahl <- function(par){
-  print(unlist(par))
+  # print(unlist(par))
   var_x <- function(x) {(x*par$sig2 + (1-x)*par$omeg2 + x*(1-x)*(par$mu-par$kappa)^2)}
   # print(paste0("vX1: ", var_x(par$pi), " vX2: ", var_x(1-par$pi)))
   cov_x12 <- (1-par$pi^2 - (1-par$pi)^2)*par$mu*par$kappa - par$pi*(1-par$pi)*(par$mu^2 + par$kappa^2)
@@ -201,3 +206,46 @@ par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.2))
 plot(1, type="n", axes=FALSE, xlab="", ylab="")
 legend('center', xpd=TRUE, legend = sapply(parCombos, gen_title),
        col = 1:length(parCombos), lty=1, lwd=2, pt.cex =1, cex=1.3)
+
+
+
+############
+
+
+# df$bias <- apply(df, 1, FUN=function(x){x$set_pars(c(df$truePi,parCombos[[4]])))
+
+make_df <- function(parCombo, N){
+  truePi<-seq(0.1,0.9, by=0.1)
+  piHat<-seq(0.1,0.9, by=0.1)
+  
+  df <- data.frame(truePi=rep(seq(0.1,0.9, by=0.1), each=9),
+                   piHat=rep(seq(0.1,0.9, by=0.1), 9))
+  
+  df$bias <- apply(df[,c('truePi','piHat')], 1, 
+                   FUN = function(x) { calc_bias(x[2],set_pars(c(x[1],parCombo)))})
+  df$var <- apply(df[,c('truePi','piHat')], 1, 
+                  FUN = function(x) { calc_variance(x[2],set_pars(c(x[1],parCombo)))})    
+  df$mse <- apply(df[,c('bias','var')],1, FUN = function(x){ calc_mse(x[1],x[2], N = N)})
+  df$var_ahl <- lapply(df$truePi, FUN = function(x){calc_var_ahl(set_pars(c(x, parCombo)))})
+  df$mse_ahl <- (unlist(df$var_ahl))/N
+  df$ratio <- (unlist(df$mse_ahl))/df$mse
+  df$N <- N
+  return(df)
+}
+
+df_1 <- make_df(parCombos[[1]], 1)
+df_2 <- make_df(parCombos[[2]], 1)
+
+par(mfrow=c(1,1))
+plot(x = df$truePi-df$piHat, df_1$ratio, type = 'p')
+hist(df_1$ratio)
+
+k <- df_1 %>% select(c(piHat, truePi, ratio)) %>%
+      spread(key = piHat, value = ratio)
+writeLines(capture.output(kable(k,"latex", booktabs=T)), paste0(outDir, "compare.tex"))
+
+k2 <- df_2 %>% select(c(piHat, truePi, ratio)) %>%
+  spread(key = piHat, value = ratio)
+writeLines(capture.output(kable(k2,"latex", booktabs=T)), paste0(outDir, "compare_2.tex"))
+
+           
