@@ -7,11 +7,11 @@ library(kableExtra)
 outDir = "Desktop/3rdYrPaper/Figures/"
 
 set_pars <- function(parArray){
-  return(list(pi = parArray[1], sig2=parArray[2], omeg2 = parArray[3], mu=parArray[4], kappa=parArray[5]))
+  return(list(pi = parArray[1], mu=parArray[2], sig2=parArray[3],  kappa=parArray[4], omeg2 = parArray[5]))
 }
 
 ### TESTING DATA TO CHECK FORMULAS
-par <- set_pars(c(0.5, 1, 1, 0, 1))
+par <- set_pars(c(0.4, 1, 20, 0, 1))
 N<-10000
 trueX <- sqrt(par$sig2)*rnorm(N) + par$mu
 fakeX <- sqrt(par$omeg2)*rnorm(N) + par$kappa
@@ -24,6 +24,15 @@ cov.x12 <- cov(x1,x2)
 v_mu1_r <- var.x1/(par$pi^2)
 v_mu2_r <- var.x2/(1-par$pi)^2
 cov_mu12_r <- cov.x12/(par$pi*(1-par$pi))
+
+sig2 <- 2
+beta <- c(2,0.5,1)
+x1 <- rbernoulli(N, 0.5)
+x2 <- sqrt(2)*rnorm(N)
+x0 <- rep(1, N)
+eps <- sqrt(2)*rnorm(N)
+y = beta[1]*rep(1,N) + beta[2]*x1 + beta[3]*x2 + eps
+var(y)
 
 calc_d_star <- function(par){
   var_mu <- function(x) {(x*par$sig2 + (1-x)*par$omeg2 + x*(1-x)*(par$mu-par$kappa)^2)/(x^2)}
@@ -38,32 +47,34 @@ calc_d_star <- function(par){
 # see how d_star varies with parameters?
 
 gen_title <- function(pars){
-  return(as.expression(bquote(sigma^2 == .(pars[1]) ~ ", " ~
-                                omega^2 == .(pars[2]) ~", "~
-                                mu == .(pars[3]) ~ ", "~
-                                kappa == .(pars[4]))))
+  return(as.expression(bquote(mu == .(pars[1]) ~ ", "~
+                                sigma^2 == .(pars[2]) ~ ", " ~
+                                kappa == .(pars[3]) ~ "," ~
+                                omega^2 == .(pars[4]) ~", ")))
 }
 
-parCombos <- list(c(1,1,0,1),
-                  c(1,20,0,1),
-                  c(20,1,0,1),
-                  c(1,20,0,10),
-                  c(20,1,10,0))
+
+# (sig2, omeg2, mu, kappa)
+parCombos <- list(c(0,1,0,1), #equivariance
+                  c(0,1,0,2), 
+                  c(0,1,1,1),
+                  c(0,1,1,2))
 piList <- seq(0.01, 0.5, by = 0.01)
 
 get_dList <- function(parCombo){
-  sapply(piList, function(x){ calc_d_star(set_pars(c(x, parCombo))) } )
+  return(sapply(piList, function(x){ calc_d_star(set_pars(c(x, parCombo))) } ))
 }
 
 d_combos <- lapply(parCombos, get_dList)
+cols <- rainbow(length(parCombos))
 
-png(paste0(outDir, "dStar.png"))
+pdf(paste0(outDir, "dStar.pdf"))
 par(mfrow=c(1,1))
 plot(x=piList, y=d_combos[[1]], type = 'l', col = 'blue', ylab=bquote(d^"*"), xlab=bquote(pi==~"Pr(" ~ X[1]~ "is drawn from correct distribution)"))
-sapply(1:length(d_combos), FUN = function(i) { lines(x=piList, y = d_combos[[i]], type='l',col=i, lwd=1.5)})
-title(main=bquote("Optimal"~d^"*"~"as a function of "~pi[0]~"and different parameters"))
+sapply(1:length(d_combos), FUN = function(i) { lines(x=piList, y = d_combos[[i]], type='l',col=cols[i], lwd=2)})
+# title(main=bquote("Optimal"~d^"*"~"as a function of "~pi[0]~"and different parameters"))
 legend('topleft', legend = sapply(parCombos, gen_title),
-       col = 1:length(parCombos), lty=1, lwd=2, pt.cex =1, cex=1.2)
+       col = cols, lty=1, lwd=2, pt.cex =1, cex=1.2)
 dev.off()
 
 ################################################################################################################################
@@ -167,7 +178,7 @@ for (n in nList){
   png(paste0(outDir,"mse_n",n,".png"))
   par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.2))
   for (truePi in truePiList){
-    plot_mse(truePi, parCombos[-5],n)
+    plot_mse(truePi, parCombos[-c(3:5)],n)
   }
   plot(1, type="n", axes=FALSE, xlab="", ylab="")
   legend('center', xpd=TRUE, legend = sapply(parCombos[-5], gen_title),
@@ -187,6 +198,15 @@ calc_var_ahl <- function(par){
   # print(paste0("cov: ", cov_x12))
   return(var_x(par$pi) + var_x(1-par$pi) + 2*cov_x12)
 }
+# 
+# try <- function(x){
+#   v1 <- (x*par$sig2 + (1-x)*par$omeg2 + x*(1-x)*(par$mu-par$kappa)^2)
+#   v2 <- (1-x)*par$sig2 + x*par$omeg2 + x*(1-x)*(par$mu-par$kappa)^2
+#   cov_x12 <- (1-x^2 - (1-x)^2)*par$mu*par$kappa - x*(1-x)*(par$mu^2 + par$kappa^2)
+#   print(paste0("v1: ",v1, " v2: ", v2, " cov_x12: ", cov_x12))
+#   return(v1 + v2 + 2*cov_x12)
+# }
+
 
 plot_var_ahl <- function(parCombo){
   var_list_ahl <- sapply(truePiList, function(x){ calc_var_ahl(set_pars(c(x, parCombo)))})
@@ -215,37 +235,42 @@ legend('center', xpd=TRUE, legend = sapply(parCombos, gen_title),
 # df$bias <- apply(df, 1, FUN=function(x){x$set_pars(c(df$truePi,parCombos[[4]])))
 
 make_df <- function(parCombo, N){
-  truePi<-seq(0.1,0.9, by=0.1)
-  piHat<-seq(0.1,0.9, by=0.1)
   
-  df <- data.frame(truePi=rep(seq(0.1,0.9, by=0.1), each=9),
-                   piHat=rep(seq(0.1,0.9, by=0.1), 9))
+  # Intialize DF
+  df <- data.frame(truePi=rep(seq(0.1,0.9, by=0.1), each=5),
+                   piHat=rep(seq(0.1,0.5, by=0.1), 9))
   
+  # Calculate bias/var of optimal thing with bad beliefs
   df$bias <- apply(df[,c('truePi','piHat')], 1, 
                    FUN = function(x) { calc_bias(x[2],set_pars(c(x[1],parCombo)))})
   df$var <- apply(df[,c('truePi','piHat')], 1, 
                   FUN = function(x) { calc_variance(x[2],set_pars(c(x[1],parCombo)))})    
-  df$mse <- apply(df[,c('bias','var')],1, FUN = function(x){ calc_mse(x[1],x[2], N = N)})
-  df$var_ahl <- lapply(df$truePi, FUN = function(x){calc_var_ahl(set_pars(c(x, parCombo)))})
-  df$mse_ahl <- (unlist(df$var_ahl))/N
+  df$mse <- (df$bias)^2 + df$var/N
+  df$var_ahl <- sapply(df$truePi, FUN = function(x){calc_var_ahl(set_pars(c(x, parCombo)))})
+  df$mse_ahl <- df$var_ahl/N
   df$ratio <- (unlist(df$mse_ahl))/df$mse
   df$N <- N
+  df <- df %>% select(c(piHat, truePi, ratio)) %>%
+    spread(key = piHat, value = ratio) 
   return(df)
 }
 
-df_1 <- make_df(parCombos[[1]], 1)
-df_2 <- make_df(parCombos[[2]], 1)
+df_1 <- make_df(parCombos[[2]], 1)
+df_2 <- make_df(parCombos[[2]], 1000)
 
 par(mfrow=c(1,1))
 plot(x = df$truePi-df$piHat, df_1$ratio, type = 'p')
 hist(df_1$ratio)
 
-k <- df_1 %>% select(c(piHat, truePi, ratio)) %>%
-      spread(key = piHat, value = ratio)
-writeLines(capture.output(kable(k,"latex", booktabs=T)), paste0(outDir, "compare.tex"))
+title_1 = "MSE Ratio for Optimal vs. Equal Weights with $(\\mu, \\sigma^2, \\kappa, \\omega^2) = ($"
 
-k2 <- df_2 %>% select(c(piHat, truePi, ratio)) %>%
-  spread(key = piHat, value = ratio)
-writeLines(capture.output(kable(k2,"latex", booktabs=T)), paste0(outDir, "compare_2.tex"))
+for (i in 1:length(parCombos)){
+  pars <- parCombos[[i]]
+  df <- round(make_df(pars, 1),3)
+  title <- paste0(title_1, pars[3],",", pars[1], ",", pars[4], ",", pars[2], ")")
+  writeLines(capture.output(kable(df,"latex", booktabs=T, 
+                                  escape=FALSE,
+                                  caption=title,
+                                  linesep = "")), paste0(outDir, "compare_",i,".tex"))
+}
 
-           

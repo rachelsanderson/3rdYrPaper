@@ -60,6 +60,15 @@ ID & $y$ & Name & Birthday \\
  
 \begin{figure}[htbp]
 \begin{center}
+\caption{Optimal $d^*$ as a function of $\pi$ and $\sigma^2, \omega^2, \mu, \kappa$}
+\includegraphics[width=0.8\textwidth]{./Figures/dStar.pdf}
+\label{dStar}
+\end{center}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htbp]
+\begin{center}
 \caption{Match Rates by Linking Procedure }
 \includegraphics[width=0.9\textwidth]{./Figures/match_rate.pdf}
 \label{match_hist}

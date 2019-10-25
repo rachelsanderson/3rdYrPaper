@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  24 OCT 2019 10:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  24 OCT 2019 17:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1115,6 +1115,21 @@ LaTeX Info: Redefining \sc on input line 659.
 \temptoksc=\toks47
 ) (./WorkingPaper.aux
 
+LaTeX Warning: Label `tab:' multiply defined.
+
+
+LaTeX Warning: Label `tab:' multiply defined.
+
+
+LaTeX Warning: Label `tab:' multiply defined.
+
+
+LaTeX Warning: Label `tab:' multiply defined.
+
+
+LaTeX Warning: Label `tab:' multiply defined.
+
+
 LaTeX Warning: Label `ahl' multiply defined.
 
 
@@ -1274,64 +1289,46 @@ Overfull \hbox (4.98752pt too wide) in paragraph at lines 209--210
 l.356 ... can be applied to calculate $\Var{X_2}$}
                                                   
 ? 
-[17]
+[17] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
 
-./WorkingPaper.tex:361: LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.361 \caption
-              {Par values = ( 1 1 0 1 )}
-? 
-(./Figures/compare.tex)
-Overfull \hbox (52.51318pt too wide) in paragraph at lines 2--363
- [][] 
- []
-
-
-./WorkingPaper.tex:364: LaTeX Error: \caption outside float.
+./WorkingPaper.tex:374: LaTeX Error: \caption outside float.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.364 \caption
+l.374 \caption
               {Par values $(\sigma^2, \omega^2, \mu, \kappa) =  ( 1, 20, 0, ...
 
 ? 
-(./Figures/compare_2.tex)
-Overfull \hbox (99.5127pt too wide) in paragraph at lines 2--367
- [][] 
- []
-
-[18] [19] (./Figures/match_rates.tex) (./Figures/multi_tab.tex)
+(./Figures/compare_3.tex) (./Figures/compare_4.tex) (./Figures/compare_5.tex)
+(./Figures/compare_6.tex) [18] [19] (./Figures/match_rates.tex)
+(./Figures/multi_tab.tex) [20]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 411.
- [20]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 427.
+ [21]
 
-./WorkingPaper.tex:429: Package inputenc Error: Invalid UTF-8 byte 160.
+./WorkingPaper.tex:445: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.429 ...f match rates in Figure \ref{match_hist} 
+l.445 ...f match rates in Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
-[21] (./Figures/est_tab.tex) [22] [23] [24] (./WorkingPaper.bbl
+[22] (./Figures/est_tab.tex) [23] [24] [25] (./WorkingPaper.bbl
 ./WorkingPaper.bbl:73: Misplaced alignment tab character &.
 l.73 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
-[25]
+[26]
 ./WorkingPaper.bbl:96: Undefined control sequence.
 l.96 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
-) AED endfloat: Processing end Figures and Tables [26] (./WorkingPaper.fff
+) AED endfloat: Processing end Figures and Tables [27] (./WorkingPaper.fff
 ./WorkingPaper.fff:14: Missing $ inserted.
 <inserted text> 
                 $
@@ -1359,73 +1356,81 @@ l.15 196 & $y_{196}$ & $x_{1,196}&
 l.55 \end{tikzpicture}
                       
 ? 
-[27
+[28
 
 
 ]
-<./Figures/match_rate.pdf, id=379, 338.26375pt x 457.71pt>
+<./Figures/dStar.pdf, id=391, 505.89pt x 505.89pt>
+File: ./Figures/dStar.pdf Graphic file (type pdf)
+<use ./Figures/dStar.pdf>
+Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 64.
+(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+ [29
+
+ <./Figures/dStar.pdf>]
+<./Figures/match_rate.pdf, id=403, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
-Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 64.
+Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 73.
 (pdftex.def)             Requested size: 422.77664pt x 572.08722pt.
- [28
+ [30
 
  <./Figures/match_rate.pdf>]
-<./Figures/compare.pdf, id=392, 650.43pt x 649.42625pt>
+<./Figures/compare.pdf, id=416, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
-Package pdftex.def Info: ./Figures/compare.pdf  used on input line 73.
+Package pdftex.def Info: ./Figures/compare.pdf  used on input line 82.
 (pdftex.def)             Requested size: 516.73338pt x 515.97432pt.
 
-Overfull \hbox (46.97836pt too wide) in paragraph at lines 73--75
+Overfull \hbox (46.97836pt too wide) in paragraph at lines 82--84
  [] 
  []
 
-[29
+[31
 
  <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=407, 466.74374pt x 524.96124pt>
+<./Figures/ahl_hist.pdf, id=431, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
-Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 82.
+Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 91.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [30
+ [32
 
  <./Figures/ahl_hist.pdf>]
-<./Figures/sw_hist.pdf, id=421, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=445, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
-Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 91.
+Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 100.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [31
+ [33
 
  <./Figures/sw_hist.pdf>]
-<./Figures/OLS(L=1)_hist.pdf, id=436, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=459, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
-Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 100.
+Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 109.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-) [32
+) [34
 
  <./Figures/OLS(L=1)_hist.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 527.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 527.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 543.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 543.
  (./WorkingPaper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 527.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 527.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 543.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 543.
 Package rerunfilecheck Info: File `WorkingPaper.out' has not changed.
 (rerunfilecheck)             Checksum: 7F5C698CA7A90772EC374BFAAD389B07;773.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 527.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 543.
  ) 
 Here is how much of TeX's memory you used:
- 32099 strings out of 492649
- 642148 string characters out of 6129622
- 731702 words of memory out of 5000000
- 35355 multiletter control sequences out of 15000+600000
+ 32128 strings out of 492649
+ 642586 string characters out of 6129622
+ 741875 words of memory out of 5000000
+ 35361 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10384b,913s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1463,10 +1468,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on WorkingPaper.pdf (32 pages, 351622 bytes).
+Output written on WorkingPaper.pdf (34 pages, 358826 bytes).
 PDF statistics:
- 543 PDF objects out of 1000 (max. 8388607)
- 456 compressed objects within 5 object streams
- 98 named destinations out of 1000 (max. 500000)
- 238 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 567 PDF objects out of 1000 (max. 8388607)
+ 476 compressed objects within 5 object streams
+ 107 named destinations out of 1000 (max. 500000)
+ 243 words of extra memory for PDF output out of 10000 (max. 10000000)
 

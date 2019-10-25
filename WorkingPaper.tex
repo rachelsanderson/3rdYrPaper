@@ -355,16 +355,34 @@ where $\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance
 \end{align*}
 The same trick can be applied to calculate $\Var{X_2}$}
 
-Hence the optimal estimator $\hat{\mu} = d^* \hat{mu}_1 + (1-d^*) \hat{\mu}_2$ depends on $\sigma^2, \omega^2, \mu,$ and $\kappa$.  To see how these change, Figure below demonstrates. 
+Pick parameter values better...
 
+Hence the optimal estimator $\hat{\mu} = d^* \hat{\mu}_1 + (1-d^*) \hat{\mu}_2$ depends on $\sigma^2, \omega^2, \mu,$ and $\kappa$.  To see how these change, Figure \ref{dStar} demonstrates.   All estimators are unbiased; the plotted value just shows the optimal ratio of the two unbiased estimators to achieve the minimum variance unbiased estimator.  When the variance of both the correct and incorrect distributions are the same, then $d^*$ weights according to the probability of being correct.  When teh incorrect distribution has high variance, it becomes costlier to weight the incorrect distribution. We see that when the variance is the same, the mixture
+
+\begin{figure}[htbp]
 \begin{center}
-\caption{Par values = ( 1 1 0 1 )}
-\input{./Figures/compare.tex}
+\caption{Optimal $d^*$ as a function of $\pi$ and $\sigma^2, \omega^2, \mu, \kappa$}
+\includegraphics[width=0.8\textwidth]{./Figures/dStar.pdf}
+\label{dStar}
+\end{center}
+\end{figure}
+
+
+
+\input{./Figures/compare_1.tex}
+\input{./Figures/compare_2.tex}
+
 
 \caption{Par values $(\sigma^2, \omega^2, \mu, \kappa) =  ( 1, 20, 0, 1 )$}
 
-\input{./Figures/compare_2.tex}
-\end{center}
+
+
+\input{./Figures/compare_3.tex}
+\input{./Figures/compare_4.tex}
+\input{./Figures/compare_5.tex}
+\input{./Figures/compare_6.tex}
+
+Observe that AHL variance is constant becase var (x1) + var (x2) + 2*cov(x1,x2) does not depend on pi. 
 
 %When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
 
