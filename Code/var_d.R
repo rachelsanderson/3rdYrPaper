@@ -7,7 +7,11 @@ library(kableExtra)
 outDir = "Desktop/3rdYrPaper/Figures/"
 
 set_pars <- function(parArray){
-  return(list(pi = parArray[1], mu=parArray[2], sig2=parArray[3],  kappa=parArray[4], omeg2 = parArray[5]))
+  return(list(pi = parArray[1], 
+              mu=parArray[2], 
+              sig2=parArray[3],  
+              kappa=parArray[4], 
+              omeg2 = parArray[5]))
 }
 
 ### TESTING DATA TO CHECK FORMULAS
@@ -50,15 +54,15 @@ gen_title <- function(pars){
   return(as.expression(bquote(mu == .(pars[1]) ~ ", "~
                                 sigma^2 == .(pars[2]) ~ ", " ~
                                 kappa == .(pars[3]) ~ "," ~
-                                omega^2 == .(pars[4]) ~", ")))
+                                omega^2 == .(pars[4]))))
 }
 
 
 # (sig2, omeg2, mu, kappa)
-parCombos <- list(c(0,1,0,1), #equivariance
-                  c(0,1,0,2), 
-                  c(0,1,1,1),
-                  c(0,1,1,2))
+parCombos <- list(c(0,1,1,1), #equivariance
+                  c(0,1,1,2),0.1/()
+                  c(0,4,2,1),
+                  c(0,1,1,10))
 piList <- seq(0.01, 0.5, by = 0.01)
 
 get_dList <- function(parCombo){
