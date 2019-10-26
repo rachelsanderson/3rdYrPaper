@@ -1,0 +1,656 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.1in]{geometry}
+\usepackage[nomarkers,nofiglist,notablist]{endfloat}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{natbib}
+\usepackage{chngpage}
+\usepackage{mathtools,xparse}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage{tabu}
+\usepackage{tikz-cd}
+\colorlet{shadecolor}{orange!15}
+% \definecolor{shadecolor}{rgb}{255,128,0}\
+\usepackage{float}
+\usepackage{fullpage} % Package to use full page
+\usepackage{parskip} % Package to tweak paragraph skipping
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{pdflscape}
+\usepackage{setspace}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{longtable}
+\usepackage{indentfirst}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+\usepackage{array}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\usepackage{threeparttable}
+\usepackage{makecell}
+\usepackage[normalem]{ulem}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}m{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash}p{#1}}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}m{#1}}
+\newcommand{\Var}[1]{\text{Var}\left(#1\right)}
+\newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
+
+\tikzset{
+  basic/.style  = {draw, text width=2cm, drop shadow, font=\sffamily, rectangle},
+  root/.style   = {basic, rounded corners=2pt, thin, align=center,
+                   fill=green!30},
+  level 2/.style = {basic, rounded corners=6pt, thin,align=center, fill=green!60,
+                   text width=8em},
+  level 3/.style = {basic, thin, align=left, fill=pink!60, text width=6.5em}
+}
+
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\newcommand\gamij{\mathbf{\gamma_{ij}}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand\params{(p_M, p_{M\ell}, p_{U\ell})}
+\newcommand\longparam{(L,n_1,n_2, p_M,p_{M\ell},p_{U\ell})}
+
+
+%Allows multi-column tables 
+\input{./Deadlines/tcilatex}
+
+\setlength{\topmargin}{-0.4in} 
+\setlength{\textheight}{8.9in}
+\setlength{\parindent}{2em}
+% \setstretch{1.25}
+\doublespacing
+\title{\singlespacing Analyzing linked data}
+\author{Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building,
+Princeton, NJ 08544. Email: rachelsa@Princeton.edu.
+This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
+\date{This Version: \today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+\singlespacing
+\noindent This paper compares different methods for estimating parametric models with linked data, i.e. when $x$ and $y$ are observed in distinct datasets with imperfect identifiers.  This setup requires that the researcher must attempt to identify which observations in the $x$- and $y$-datafiles refer to the same individual, prior to performing inference about the joint or conditional distributions of $x$ and $y$.  At a minimum, random errors in the matching step introduce measurement error that must be accounted for in subsequent inference; however, additional concerns about sample selection arise when these errors are correlated with unobservables that affect $x$ or $y$.  \end{abstract}
+
+% Using matched data requires estimation techniques that incorporate information from the matching process to improve efficiency and accurately reflect uncertainty. 
+
+\section{Introduction}
+
+Merging data is a necessary first step for projects that use multiple data sources with overlapping units.  When the datasets are large, automated record linkage procedures offer the least-cost solution for performing a one-to-one merge.  These procedures come with the caveat that in the presence of imperfect identifiers, they may produce false matches, or exclude true matches.  One solution is to include multiple possible matches.  
+
+However, which automated record linkage procedure to use 
+
+Different procedures give different outputs -- for example, some produce multiple matches for each observation; others allow the researcher to estimate the probability that any given pair of observations refers to a match.  Consequently, different estimation methods are available depending on which matching procedure is used.  This paper compares the performance of existing estimation methods for matched data, and extends the methods described in \cite{ahl2019} to incorporate probabilities and correct for a nonparametric step. 
+
+The tradeoffs between automated record linkage procedures in terms of matched dataset quality has been studied.  While match quality is important, choosing which record linkage procedure to use should also depend on which estimation methods will be used in subsequent analysis.   
+
+By comparing the estimation methods, this gives suggestion to which record linkage procedure should be used (or, better yet, which outputs of the record linkage procedure are necessary for optimal estimation).  The main result is that unless probabilities can be estimated accurately, knowledge about them should not be incorporated in the estimation step.  
+
+
+
+Ask any economist how to handle multiple matches when performing a one-to-one merge, and you will get a different answer. Some select from among the possible matches the ones that they believe most likely to be correct.  Some estimate the same model using multiple configurations of matched data, or using methods that allow for multiple matches without double counting observations.  Others avoid the issue entirely, by ignoring all observations that may be associated with multiple matches.  While there are myriad ways to handle multiple matches in practice, there is no one-size-fits-all solution, nor a formal theory about how subjective decisions about merging impact subsequent inference and estimation in economic analyses. 
+
+Although frequently encountered in economics, problems related to merging also appear in many other fields, including statistics, computer science, operations research, and epidemiology, and under many names. such as record linkage, data linkage, entity resolution, instance identification, de-duplication, merge/purge processing, and entity reconciliation.  In economics, interest in matching has emerged in response to the increasing use of large administrative datasets across the profession, and because errors in matching may unintentionally introduce sample selection and bias results.  While there are a number of recent papers that compare the performance of popular matching methods on the representativeness and accuracy of the datasets that they produce, the literature on how to perform estimation using linked data is notably lacking  \citep{abe2019,arp2018,bailey2017}.
+
+In the past, authors have handled multiple matches by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}, or using methods that allow for multiple outcomes  \citep{ahl2019}.   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   
+
+This paper contributes to the literature by developing a unified approach for inference using linked data.  Building upon a well-established literature that compares the performance of different record linkage methods, this paper studies how the \textit{outputs} of these procedures -- such as whether the linked dataset contains multiple matches per observation, or probabilities that any given record pair refers to a true match -- can be used to correct for bias and improve efficiency during estimation.  
+
+My preliminary results support the following suggestions for analyzing linked data: if you use deterministic matching, you should allow for multiple matches and use the estimator in \cite{ahl2019}.  If you use probabilistic record linkage, you should choose the match with the highest probability of being correct if it exceeds a certain threshold; otherwise you should use multiple matches because the estimated probabilities can be noisy, and can result in large weights on observations with small $\pi_{i\ell}$.  When it doubt, implement all methods and compare the results!
+
+In order to illustrate the techniques studied in this paper, Section 2 introduces a numerical example that is used to demonstrate the matching and estimation techniques described in Sections 3 and 4.  Section 5 provides details about the implementation of the methods and data generating processes.  Section 6 contains the results, and Section 7 concludes.
+
+%Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  Also representativeness is an issue. However, the impact of data pre-processing choices on estimation is still not well understood.  
+
+
+\section{Setup} 
+This paper considers the problem of estimating $\beta$ in the linear regression model, \begin{equation} y_i = x_i'\beta + \varepsilon_i, \ E[\varepsilon | x_i] = 0, \ E[\epsilon_i^2] = \sigma^2  \label{model} \end{equation}
+where $x_i$ and $y_i$ are recorded in different datasets, and must be linked using auxiliary variables that are contained in both data sources.  
+
+Formally, the data consist of observations $\{x_i, w_i\}_{i=1}^{N_x}$ in the $x$-datafile, and observations $\{y_j, w_j\}_{j=1}^{N_y}$ in the $y$-datafile.  We assume that $N_y\geq N_x$, and that every $x_i$ has a unique match in the $y$-datafile that satisfies the relationship in (\ref{model}), but the index $j$ that corresponds with the match is unknown.  Also, since $N_y \geq N_x$, some $y_j$ may not correspond to any observation in the $x$ dataset, nor satisfy the relationship in (\ref{model}) for some unobserved $x_j$.  Hence, estimating the model in (\ref{model}) requires identifying which $(x_i,y_j)$ pairs refer to the same individuals by comparing $w_i$ and $w_j$.
+ 
+This matching step consists of constructing a linking function, $\varphi: \{1,\dots, N_x\} \to \{1,\dots, N_y\} \cup \varnothing$, where $\varphi(i) = j$ if the $i$th observation in the $x$-datafile is matched to the $j$th observation in the $y$-datafile, and $\varphi(i) = \varnothing$ if $i$ is not assigned a match.  If $w_i$ and $w_j$ identify individuals uniquely and without error, then the obvious choice is to set $\varphi(i) = j$ if and only if $w_i = w_j$, and $\varphi(i) = \varnothing$ otherwise.  In practice, however, $w_i$ and $w_j$ may contain variables that are not unique and prone to typographical error, so that it is difficult to distinguish false links from true links, or discern among multiple links with identical $w_j$.  
+
+To fix ideas, consider again the example of \cite{aizer2016}, who seek to estimate the effect of providing cash transfers to single mothers on the life expectancy of their children.  The $x$-datafile consists of mothers' welfare program applications, where $x_i$ includes a binary variable equal to 1 if person $i$'s mother received a cash transfer, and other demographic variables.  The $y$-datafile is a universal database of death records, which includes observations of $y_j$, person $j$'s age at death.  Both of the $x$- and $y$-datafiles also contain $w_i$ and $w_j$, which include the observation's first and last names and year of birth, so that common names and typographical error are likely to complicate even the most conservative assignment of $\varphi$. 
+
+In light of these challenges, researchers have developed a variety of automated record linkage methods for constructing $\varphi$, some of which are described in Section 4.  Such procedures result in a dataset $\{x_i, \{y_{i\ell}\}_{\ell=1}^{L_i}\}_{i=1}^N$, such that a single observation $x_i$ may be linked to $L_i$ possible values of $y$.   Note that $N_x \geq N$, which holds with equality if and only if every observation $x_i$ is assigned a match.  Additionally, some record linkage procedures output values $\pi_{i\ell}$ equal to the estimated probability that $y_{i\ell}$ is the true match, and $\sum_{\ell=1}^{L_i} \pi_{i\ell} =1 $ for all $i$. 
+
+As there is already a well-established literature that compares the performance of different record linkage methods, this paper studies how the \textit{outputs} of these procedures -- such as whether multiple matches are allowed or estimates of $\pi_{i\ell}$ are available -- can be used to improve the estimation step and correct for  bias introduced by errors in the matching step.  
+
+
+\section{Existing estimation methods for linked data }
+
+%Taking the matched dataset $(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i})$ for observations $i=1,\dots, N$ as given, I now discuss different approaches for estimating the parameters in (\ref{model}).   If the data include multiple $y_{i\ell}$ for each observation, along with probabilities, then SW and AHL methods are available.  If multiple matches are available, but no probabilities are available, then AHL is available (also SW is implementable if you assume equal weights --> same method as AHL if you construct nearest neighbor or mean or something).  If no multiple matches, your only hope is OLS.  
+
+Consider first the case where each $x$ observation is linked to a single value of $y$, i.e. $L_i=1$ for all $i$.  The data consists of $(x_i, z_i)$ for $i=1,\dots, N$, where $z_i$ may or may not correspond to $y_i$.  Specifically, 
+$$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,N_y $} \end{cases}$$ 
+and $\sum_{j=1}^{N_y} q_{ij} = 1, \ i=1,\dots, N$, where $N_y$ is the size of the $y$ datafile and $N$ is the size of the matched dataset.   Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
+\begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
+which is biased, because $ E[z_i ] = E\left[q_{ii} y_i + \sum_{j\neq i} q_{ij} y_j\right] \neq E[y_i]$ if $q_{ii}\neq 1$ for some $i$.  Denoting
+ $q_i = (q_{i1}, \dots, q_{iN_y})'$, we can write the bias of $\hat{\beta}_N $ conditional on the observed values of $y$ as,
+\begin{equation} \text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B \label{bias} \end{equation}
+where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the true response $y_i$.  
+
+Observing (\ref{bias}), \cite{sw1993} proposed estimating $\hat{B}$ to correct for the bias of $\hat{\beta}_N$.   To reduce the computational burden of constructing $\hat{B}$, they suggest using the first and second highest elements of the vector $q_{ij_1}$ and $q_{ij_2}$ and their corresponding values $y_{ij_1}$ and $y_{ij_2}$ to compute $\hat{B}_i^{TR} = (q_{ij_1} - 1) y_{ij_1} + q_{ij_2} y_{ij_2}$, and then calculating
+% write what are z_j
+\begin{equation} \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}^{TR} \label{sw}\end{equation}
+Although $\hat{B}^{TR}$ can incorporate an arbitrary number of elements of $q_i$, \cite{sw1993} note that if the probability is high that the best candidate link is the true link, then the truncation with two links results in a very small bias. 
+ 
+The downside of the \cite{sw1993} method is that it requires knowledge of $q_{ij}$, as well as the second most likely value of $y$ for each observation of $x$.  This information is not typically available when using deterministic matching procedures such as those developed by \cite{abe2012}.   However, even if  estimates of $q_{ij}$ are available (as may be the case when using probabilistic record linkage), the bias may persist if the estimates $\widehat{q_{ij}}$ are correlated with $x$ or $y$, as this would introduce endogeneity.   
+
+The endogeneity problem arises because $\widehat{q_{ij}}$ are typically calculated by plugging in estimates of the parameters $\psi \equiv \{p_M, P(\gamij | M),\ P(\gamij |U)\}$ into equation (\ref{bayes}).   Thus, $\widehat{q_{ij}}$ will be correlated with $x$ or $y$ if errors in the matching variables, which determine the distribution of $\hat{\psi}$, are correlated with $x$ or $y$.  This is likely to be a problem in economics applications, such as in \cite{nq2015}, where $y$ measures whether a person's recorded ethnicity changes between Census years, but changes in names (the matching variables) are also strongly correlated with $y$.  
+
+One possible solution to the challenges described above is to use the estimator from \cite{ahl2019}, which is unbiased if the errors in estimating the conditional expectation of $y$ be independent of the $x_i$, which holds if $x_i$ and $y_i$ are random samples conditional on the matching variables\footnote{Technically, the result in \cite{ahl2019} is proven for GMM, so the necessary condition is that errors in estimating a conditional moment condition are independent of $x_i$}.   Specifically, for the model in (\ref{model}), the AHL estimator is computed by applying OLS to the transformed regression model,
+\begin{equation} 
+\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1)\hat{g}(w_i, L_i) = x_i'\beta + u_i  \label{ahl} \end{equation}
+where $\hat{g}(w_i,L_i)$ is a (possibly nonparametric) estimator of $E[y_{i\ell} | w_i, L_i ]$, $u_i = \varepsilon_i + \sum_{\ell=1}^{L_i}\nu_{i\ell}$, and $\nu_{i\ell} = y_{i\ell} - \hat{g}(w_i, L_i)$. 
+
+If, additionally, $E[\varepsilon_i^2 | x_i, w_i, L_i] = \sigma_{\varepsilon}^2$ and $E[\nu_{i\ell}^2 | x_i, w_i, L_i] = \sigma_{\nu}^2$ then the efficient estimator is weighted least squares,
+\begin{equation}
+\hat{\beta}^{WLS} = \left(\sum_{i=1}^N \frac{x_ix_i'}{\sigma(X_i)}\right)^{-1}\left(\sum_{i=1}^N \frac{x_i}{\sigma(X_i)}\left(\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1) g(w_i, L_i)\right)\right) \label{wls}
+\end{equation}
+where $\sigma(X_i) = \sigma_{\varepsilon}^2 + (L_i - 1)\sigma_{\nu}^2$.   
+
+In practice, the AHL is estimated in three steps: (i) estimating $\hat{g}(w_i, L_i)$ using nonparametric methods such as $k$-Nearest Neighbors, local polynomial regression, or kernel density estimators; (ii) estimating $\hat{\beta}$ by applying OLS to (\ref{ahl}) to construct $\hat{\sigma}(X_i)$, and (iii) computing $\hat{\beta}^{WLS}$ using the formula in (\ref{wls}).  The resulting estimator is consistent and asymptotically normal under the regularity conditions described in \cite{ahl2019}. 
+
+Like the \cite{sw1993} estimator, the AHL estimator requires that the true match for $x_i$ is included among the matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $\ell$.  The simulations in Section 7 suggest that this is a reasonable assumption when multiple matches are allowed.  When $L_i=1$ for all $i$, the AHL estimator reduces to the OLS estimator $\hat{\beta}_N$, so it is only meaningful to compute for linked datasets with some $L_i>1$. 
+
+The AHL estimator also requires that $x$ and $y$ are random samples conditional on the matching variables.  Practically speaking, this means thats all individuals with the same identifying information (such as name, age, Census block) have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample (unless individuals are matched by income); but the OLS estimator using perfectly linked data would also be biased because of unobserved sample selection.  
+
+Other approaches for regression analysis using linked data have been proposed by \cite{lahiri05} and \cite{NeterMaynes}, however neither is appropriate for the setup described in Section 2.  The methods in \cite{lahiri05} assume that each observation appearing $y$-datafile  is generated according to the DGP in (\ref{model}), and that its corresponding value of $x$ appears in the $x$-datafile.  This is a problem both conceptually and for implementation when entries in the $x$-datafile represent a strict subset of observations in the $y$-datafile.   The methods in \cite{NeterMaynes} are simplified versions of those in \cite{sw1993}, and hence face the same implementation issues described above. 
+
+By contrast, the AHL estimator is agnostic about whether the incorrectly linked $y_j$ are generated by (\ref{model}) or by some other data generating process.  The AHL estimator has additional robustness properties due to the fact that it weights multiple matches equally and does not require estimating match probabilities, which are explored in the following section.  
+
+\section{Incorporating probabilities}
+
+Consider the problem of estimating the mean of a random variable $X \sim F_X(\mu; \sigma^2)$ using two observations $X_{1}$ and $X_{2}$.  With probability $\pi$, $X_1$ is drawn from the true distribution $F_X$ and $X_2$ is noise drawn from the distribution $F_Y(\kappa, \omega^2)$.  With probability $1-\pi$, $X_2$ is drawn from the correct distribution and $X_1$ is noise.  Under this specification, exactly one of $X_1$ or $X_2$ is drawn from the distribution of interest at all times.  
+
+Observe that if $\pi$ is known, we can construct an unbiased estimator using only $X_1$,
+\begin{equation}
+\hat{\mu}_1 = \frac{X_1}{\pi} - \frac{1-\pi}{\pi} \kappa 
+\label{mu1}
+\end{equation} 
+and, similarly, we can construct an unbiased estimator using only $X_2$,
+\begin{equation}\hat{\mu_2} = \frac{X_2}{1-\pi} - \frac{\pi}{1-\pi} \kappa \label{mu2} \end{equation} 
+Any unbiased linear estimator of $\mu$ that uses $X_1$ and $X_2$ can be written as a combination of $\hat{\mu}_1$ and $\hat{\mu}_2$\footnote{see Lemma 1 in the Appendix}, so finding the minimum variance, unbiased linear estimator $\hat{\mu}$ requires minimizing 
+$$\min_d\  \Var{d \hat{\mu}_1 + (1-d) \hat{\mu}_2}$$
+which is solved by \begin{equation} d^*= \frac{\Var{\hat{\mu}_2} - \text{Cov}(\hat{\mu}_1, \hat{\mu}_2)}{\Var{\hat{\mu}_1} + \Var{\hat{\mu}_2} - 2 \text{Cov}(\hat{\mu}_1, \hat{\mu}_2)} \label{dOpt}\end{equation}
+where\footnote{$\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, using the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise:
+\begin{align*} \Var{X_1} &= E[\Var{X_1 | D}] + \Var{E[X_1| D]} \\ 
+&= P(D=1)\sigma^2 +  P(D=0)\omega^2 + \Var{\mu D + \kappa (1-D)} \\
+&= \pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2
+\end{align*}
+The same trick can be applied to calculate $\Var{X_2}$}
+\begin{align} \Var{\hat{\mu}_1} &=  \frac{\text{Var}(X_1)}{\pi^2} = \frac{1}{\pi^2}\left(\pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right) \label{vmu1}\\
+\Var{\hat{\mu}_2} &= \frac{\Var{X_2}}{(1-\pi)^2} = \frac{1}{(1-\pi)^2}\left((1-\pi)\sigma^2 + \pi \omega^2 + \pi(1-\pi)(\mu-\kappa)^2\right)\label{vmu2} \\
+\text{Cov}(\hat{\mu}_1, \hat{\mu}_2) &= \frac{\text{Cov}(X_1,X_2)}{\pi(1-\pi)} = \frac{1}{\pi(1-\pi)}\left((1-\pi^2 - (1-\pi)^2)\mu\kappa - \pi(1-\pi)(\mu^2 + \kappa^2)\right) \label{cov}
+\end{align} 
+
+
+Thus, the minimum variance unbiased estimator is 
+\begin{equation} \hat{\mu}^* = d^* \hat{\mu}_1 + (1-d^*) \hat{\mu}_2 \label{muOpt}
+\end{equation}
+where $d^*$ is defined as in (\ref{dOpt}).  Notably, $d^*$ is strictly increasing in $\pi$, but at a rate that depends on $\sigma^2, \omega^2, \mu,$ and $\kappa$, as illustrated in Figure \ref{dStar}.  
+
+Figure \ref{dStar} plots the optimal $d^*$ for $\pi\in[0,0.5]$, since the solution is symmetric in $\pi$. When $\pi=0.5$, $\Var{\mu_1}=\Var{\mu_2}$ so that $d^*=0.5$, regardless of the other parameter values.  When the variance of both the correct and incorrect distributions are the same (i.e., $\sigma^2 = \omega^2$), then $\Var{X_1}=\Var{X_2}$, and differences in $d^*$ reflect only changes in $\pi$.   When $\sigma^2 \neq \omega^2$, the optimal $d^*$ puts additional weight (relative to the equal variance case) on the estimator based on the $X_i$ that is more likely to come from the lower variance distribution.  The curve with $\sigma^2 = 1$ and $\omega^2 = 10$ is the extreme version of this scenario, and represents what may happen if $\kappa$ is estimated imprecisely.  The resulting $d^*$ assigns very low weight to the observation that is more likely drawn from the incorrect distribution.  
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Optimal $d^*$ as a function of $\pi$ and $\sigma^2, \omega^2, \mu, \kappa$}
+\includegraphics[width=0.8\textwidth]{./Figures/dStar.pdf}
+\label{dStar}
+\end{center}
+\end{figure}
+
+More generally, the estimator $\hat{\mu}^*$ can be computed for sample of observations $(X_{i1}, X_{i2})_{i=1}^N$, where $X_{i1}$ is drawn from $F_X$ with probability $\pi_i$, and $X_{i2}$ is drawn from $F_X$ with probability $1-\pi_i$.  In this case, $d^*$ is calculated according to (\ref{dOpt}) using,
+\begin{align*} \hat{\mu}_1 &= \sum_{i=1}^N \frac{X_{i1}}{\pi_i} - \frac{1-\pi_i}{\pi_i}\kappa 
+& \Var{\hat{\mu}_1} &=  \frac{1}{N^2}\sum_{i=1}^N \frac{g(\pi_i; \theta)}{\pi_i^2} \\
+ \hat{\mu}_2 &= \sum_{i=1}^N \frac{X_{i2}}{1-\pi_i} - \frac{\pi_i}{1-\pi_i}\kappa \ &\Var{\hat{\mu}_2} &= \frac{1}{N^2} \sum_{i=1}^N \frac{g(1-\pi_i; \theta)}{(1-\pi_i)^2} \end{align*}
+$$\text{Cov}(\hat{\mu}_1, \hat{\mu}_2) = \frac{1}{N^2}\sum_{i=1}^N \frac{\text{Cov}(X_{1i}, X_{2i})}{\pi_i(1-\pi_i)} $$
+where $g(x; \theta) = x \sigma^2 + (1-x) \omega^2 + x(1-x)(\mu-\kappa)^2$ is the variance of $X_{i\ell},$ for $\ell \in \{1,2\}$, that has probability $x$ of being drawn from the correct distribution.  
+
+
+\subsection{Errors in $\hat{\pi}$}
+
+The construction of $\hat{\mu}^*$ was based on the assumption that $\pi$ was known; this section studies the performance of $\hat{\mu}^*$ when only an estimate $\hat{\pi}$ is available. 
+
+Suppose that we have an i.i.d. sample of observations $(X_{i1}, X_{i2})_{i=1}^N$, where $X_{i1}$ is drawn from $F_X$ with probability $\pi$, and $X_{i2}$ is drawn from $F_X$ with probability $1-\pi$.  In the context of record linkage, $X_{i1}$ and $X_{i2}$ may refer to two possible matches for an observation, and $\pi$ is the probability that $X_{i1}$ is the true match.  The estimated probabilities $\hat{\pi}$ may be obtained from a probabilistic record linkage procedure or reflect prior knowledge about the matching application\footnote{For example, $\hat{\pi}$ may reflect the econometrician's belief that ``Alicia" is more likely than ``Alex" to refer to the true match of an individual named ``Ali".}.
+
+As observed in \cite{ahl2019}, when $\pi$ is unknown, it is possible to construct an unbiased linear estimator of $\hat{\mu}$ by weighting all observations equally,
+\begin{equation} \hat{\mu}^{AHL} =  \frac{1}{N}\sum_{i=1}^N X_{i1} + \frac{1}{N} \sum_{i=1}^N X_{i2} - \kappa \label{ahl}\end{equation}
+The variance of this estimator is
+\begin{equation}
+\Var{\hat{\mu}^{AHL}} = \frac{\Var{X_{1i} + X_{2i}}}{N} 
+\label{var_ahl}
+\end{equation}
+Note that $\Var{\hat{\mu}^{AHL}}$ can be achieved by setting $d^* = \pi$, so that  $\Var{\hat{\mu}^{AHL}} \geq \Var{\hat{\mu}^*}$ if $\pi$ is known, with equality holding if and only if $\pi = 0.5$.  
+
+Since $\hat{\mu}^{AHL}$ is always available, it is therefore interesting to study the tradeoff in efficiency when choosing whether to incorporate possibly incorrect beliefs about $\pi$.  Unless $\hat{\pi}=0.5$, if $\hat{\pi} \neq \pi$, then the estimator $\hat{\mu}^*$ that incorporates the incorrect beliefs $\hat{\pi}$ is biased.  For example, if $(\mu, \sigma^2, \kappa, \omega^2) = (0, 1, 1, 2)$ and $\pi=0.6$, but the econometrician believes $\hat{\pi}=0.9$, then
+\begin{gather*}
+\hat{\mu}_1 = \frac{1}{N} \sum_{i=1}^N \frac{X_{i1}}{\hat{\pi}} - \frac{1-\hat{\pi}}{\hat{\pi}} = \frac{1}{N} \sum_{i=1}^N \frac{10}{9} X_1 - \frac{1}{9} \\
+\hat{\mu}_2 = \frac{1}{N}\sum_{i=1}^N \frac{X_2}{1-\hat{\pi}} - \frac{\hat{\pi}}{1-\hat{\pi}} =  \frac{1}{N} \sum_{i=1}^N10 X_2 - 9
+\end{gather*}
+each of which are biased, because $E[\hat{\mu}_1] = \frac{1}{3}$ and $E[\hat{\mu}_2] = -3$.  Similarly, using $\hat{\pi}$ instead of $\pi$ in (\ref{vmu1})-(\ref{cov}) to calculate $\Var{\hat{\mu}_1},\ \Var{\hat{\mu}_2}$, and Cov$(\hat{\mu}_1, \hat{\mu}_2)$ results in $d^* = 0.987$, and Bias(${\hat{\mu}}^*) = 0.292$ and $\Var{\hat{\mu}^*} = \frac{1.94}{N}$.
+
+By comparison, Bias($\hat{\mu}^{AHL}) =  0$ and $\Var{\hat{\mu}^{AHL}} = \frac{3}{N}$, so we can solve for $N$ such that $MSE_n(\hat{\mu}^{AHL}) < MSE_n(\hat{\mu}^*)$ for all $n \geq N$:
+$$0.292^2 + \frac{1.94}{N} = \frac{3}{N} \implies N = 12.43$$ 
+This example suggests that for fixed $\theta = (\mu, \sigma^2, \kappa, \omega^2)$ and $N$, we can compare the ratio of $MSE_n(\hat{\mu}^*; \theta)/MSE_n(\hat{\mu}^{AHL};\theta) $ for different values of Bias($\hat{\pi}$).  Alternatively, for a fixed value of Bias($\hat{\pi}$), we can calculate the minimum sample size $N$ such that it is more efficient to use $\hat{\mu}^{AHL}$. 
+
+Before performing this exercise, I plot the bias and variance of $\hat{\mu}^*$ as a function of the mis-specified beliefs $\hat{\pi}$ in Figures \ref{bias_plot} and \ref{var_plot}.  The bias is quadratic in $|\hat{\pi}-\pi|$, with zero bias at $\hat{\pi}=\pi$ and $\hat{\pi}=0.5$.  The variance of $\hat{\mu}^*$ is not minimized at $\hat{\pi}=\pi$, but at some value determined by $\sigma^2, \omega^2$, $(\mu-\kappa)^2$, and Bias$(\hat{\pi})$.  The variance term is less interesting, because it is dominated by the bias as $N\to\infty$. 
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Bias of $\hat{\mu}^*$ as a function of $\hat{\pi}$ }
+\vspace{5pt}
+\includegraphics[width=\textwidth]{./Figures/bias_plot.pdf}
+\label{bias_plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Variance of $\hat{\mu}^*$ as a function of $\hat{\pi}$ with $N=1$}
+\vspace{5pt}
+\includegraphics[width=\textwidth]{./Figures/var_plot.pdf}
+\label{var_plot}
+\end{center}
+\end{figure}
+
+Tables 1-3 compare the ratio of the $MSE_N(\hat{\mu}^{AHL};\theta)/MSE_N(\hat{\mu}^*;\theta)$, where $\hat{\mu^*}$ is calculated for different values of $\hat{\pi}$.  Each table displays this ratio for different values of $N$ and $\theta = (\mu, \sigma^2, \kappa, \omega^2)$. One combination is referred to in the text for values of $N=10, 100,$ and 1,000, but more parameter combinations are included in the Appendix. 
+
+For $N=1,000$, $\hat{\mu}^*$ only performs better when $\hat{\pi}=\pi$, and the benefits decrease as the true $\pi$ approaches 0.5.   For $N=100$, the ratio is close to 1 for Bias($\hat{\pi}$) = 0.1, so that the efficiency gain from incorporating knowledge about $\pi$ is reduced for $N > 100$.  This suggests that for small samples, you may want to incorporate knowledge about probabilities; but for samples of a large size, it's best to ignore them and weight multiple matches equally. 
+
+\input{./Figures/compare_10.tex}
+\input{./Figures/compare_100.tex}
+\input{./Figures/compare_1000.tex}
+
+
+\subsection{Applying argument to OLS}
+
+Suppose we have two matches $\{y_{i1}, y_{i2}\}_{i=1}^N$ for each observation.  We get the same conditions for unbiasedness of the OLS estimator if we consider using a linear combination of the $y$'s, as in the model:
+\begin{equation} a_1 y_{i1} + a_2 y_{i2} - \kappa = x_i'\beta + \varepsion_i \end{equation}
+Then the OLS estimator is
+$$ \hat{\beta} = \left(\frac{1}{N}\sum_{i=1}^N x_i x_i'\right)^{-1} \left(\frac{1}{N}\sum_{i=1}^N x_i'(a_1 y_{i1} + a_2 y_{i2} - \kappa)\right) $$
+and
+\begin{align*}
+E\left[\hat{\beta}\right] &= E[x_ix_i']^{-1} E[x_i'(a_1 y_{i1} + a_2 y_{i2} - \kappa] \\
+&= \beta(a_1 \pi + a_2 (1-\pi)) + E[x_ix_i']^{-1}E[x_i](a_2 \pi + (1-\pi)a_1 - a_3) \kappa 
+\end{align*}
+Unbiasedness requires the same conditions on $a_1, a_2,$ and $a_3$ as derived in Lemma 1, i.e.
+\begin{align*}
+a_2(a_1) &=  \frac{1-\pi a_1}{1-\pi} \\ a_3(a_1) &= \frac{\pi}{1-\pi} + \frac{a_1 - 2\pi a_1}{1-\pi} 
+\end{align*}
+which means that any unbiased linear estimator $\hat{\beta}$ can be written as a linear combination of unbiased estimators that use only $y_{i1}$ or $y_{i2}$,
+\begin{align*}
+\hat{\beta}_{1} &= \frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i1}}{\pi} - \frac{1-\pi}{\pi}\kappa \\
+ \hat{\beta}_{2} &= \frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i2}}{1-\pi} - \frac{\pi}{1-\pi}\kappa 
+ \end{align*}
+ and so the minimum variance estimator is $\hat{\beta}^* = d^* \hat{\beta}_1 + (1-d^*)\hat{\beta}_2$, where 
+ \begin{equation}
+ d^* = \frac{\Var{\hat{\beta}_{2}} - \text{Cov}\left(\hat{\beta}_1, \hat{\beta}_2\right)}{\Var{\hat{\beta}_1} + \Var{\hat{\beta}_{2}} - 2 \text{Cov}\left(\hat{\beta}_1, \hat{\beta}_2\right)}
+ \end{equation}
+and we can repeat the exercise in the previous sections, comparing variance and bias for misspecified beliefs $\hat{\pi}$ and different parameter combinations.  The choice of the weights $d^*$ that give the optimal $\hat{\beta}^*$ is now complicated by the fact that it depends on the second moments of $X_i$, so this is best performed by simulation. 
+
+
+
+\section{Numerical Example}
+Now I study how these methods work in practice.   This section introduces a numerical example, that illustrates what I do in the Monte Carlo below. 
+
+
+The purpose of this section is to introduce a numerical example that will be used to illustrate the different matching techniques discussed in this paper.  The benefits of using synthetic data are that I can control the degree of  similarity among identifying variables, and overlap between datasets, all while knowing the true match status of each $(x_i,y_j)$ record pair.  As a result, I can compare how sensitive my results are to data quality, and compare how the various matching and estimation procedures perform relative to the correctly specified model applied to a  dataset containing only correct links.
+
+I begin by constructing a ``ground truth" dataset with 1000 observations of $(x_{1i}, x_{2i}, y_i, w_i)$, where $x_{1i}$ and $x_{2i}$ are mutually independent, $x_{1i} \overset{i.i.d}{\sim} \text{Bernoulli}(0.5)$, and $x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, 2)$.  The $y_i$ values are generated according to the linear relationship,
+\begin{gather}
+y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i, \hspace{10pt} 
+\varepsilon_i\  |\  x_{1i}, x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, \sigma^2) 
+\end{gather}
+with $(\beta_0, \beta_1, \beta_2, \sigma^2) = (2, 0.5, 1, 2)$, so that estimating the correctly specified linear regression model yields an $R^2$ value of approximately 0.50.  Each observation is assigned a vector of identifying variables, $w_i$, which includes a first and last name drawn at random from a list of first and last names\footnote{The first and last name lists contain 41 and 24 names, respectively, and can be found in the replication files.  Note that the number of possible names is smaller than the number of observations to ensure that there are multiple observations with the same name.}, and a random birthday between January 1, 1900, and December 31, 1925.   The resulting dataset looks like the observations in the top panel of Figure \ref{sample_dta}.  
+ 
+ % Massive latex Figure of synthetic dataset -- put in new file ideally
+\begin{figure}[htbp]
+\caption{Creation of Synthetic Datasets}
+\vspace{5pt}
+ \begin{adjustwidth}{-.5in}{-.5in}  
+\begin{tikzpicture}
+\node (a) at (0,0){
+\begin{tabular}{ccccccc}
+\toprule
+ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
+\midrule
+1 & $y_1$ & $x_{1,1}$ & $x_{2,1}$ & Tyler & Ashenfelter & 1915-05-13 \\
+2 & $y_2$ & $x_{1,2}$ & $x_{2,2}$ & Brandon & Christensen & 1904-06-27 \\
+\mc{7}{c}\vdots \\
+195 & $y_{195} &$x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
+196 & $y_{196}$ & $x_{1,196}& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
+\mc{7}{c}\vdots \\ 
+1000 & $y_{500}$ & $x_{1,500}$ & $x_{2,500}$ & Vicky & Anderson & 1915-04-14\\
+\bottomrule
+\end{tabular}};
+\\
+\vspace{20pt}
+\\
+\footnotesize{
+\node[yshift=-3cm] (b) at (a.south){
+\begin{tabular}{ cc }   % top level tables, with 2 rows
+$x$-Datafile & $y$-Datafile \\  
+% bottom left of the top level table: table 1 
+\begin{tabular}{ cccc } 
+\toprule
+ID & $x$ & Name & Birthday \\
+\midrule
+2 & ($x_{1,2}, x_{2,2})$ & Branden Christenson & 1905-06-27 \\
+\mc{4}{c}\dots \\
+195 & ($x_{1,195},x_{2,195}$)& Samantha Anderson & 1914-08-21 \\
+198 & ($x_{1,198}, x_{2,198}$)& Jon Smyth & 1918-12-20\\
+\mc{4}{c}\dots \\ 
+1000 & ($x_{1,1000},x_{2,1000}$) & Vic Andersn & 1915-04-14\\
+\bottomrule
+\end{tabular} &  % starting bottom right of the top level table
+% table 2
+\begin{tabular}{ cccc } 
+\toprule
+ID & $y$ & Name & Birthday \\
+\midrule
+1 & $y_1$ & Tyler Ashenfelter & 1915-05-13 \\
+2 & $y_2$ & Brandon Christensen & 1904-06-27 \\
+\mc{4}{c}\dots \\
+195 & $y_{1,195}$ & Samantha Anderson & 1914-08-18 \\
+\mc{4}{c}\dots \\ 
+1000 & $y_{1000}$ & Vicky Anderson & 1915-04-14\\
+\bottomrule
+\end{tabular} \\
+\end{tabular}};
+\draw[->, thick](a)--(b);
+\end{tikzpicture}
+\end{adjustwidth}
+\label{sample_dta}
+\end{figure}%
+
+Next, I split the ground truth dataset into the $x$- and $y$-datafile, which contain the $(x_1,x_2, w)$ and $(y, w)$ values respectively.  To construct the $x$-datafile, I select 500 observations at random from the ground truth dataset, and introduce random errors in their corresponding identifiers.  To make the synthetic data resemble a real application, I set the probabilities of introducing transcription errors equal to those reported for the 1940 Census data in \cite{abe2019}.   These errors include deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), and swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  I also add normally distributed errors to the birth day, month, and year.   The probabilities of introducing an error are set to match the transcription error rates reported in the 1940 Census by \cite{abe2019}; for example, 7\% of observations have misreported first names and 17\% of observations have misreported last names.  The bottom panel of Figure \ref{sample_dta} illustrates how the $x$- and $y$-datafiles are split visually.  
+
+The $y$-datafile includes all 1,000 values from the ground truth data, and does not contain any errors in the identifiers $w$.  As a result, it will be likely that  some $x$ will be matched to multiple $y$.  In later sections, I will consider versions of this synthetic dataset, where errors in $w$ are correlated with $x_{1}$ or $y$. 
+
+\section{Record Linkage Methods}
+
+Recall that the data consist of an $x$-datafile, denoted $X \equiv \{(x_i, w_i): i  = 1,\dots,N_x \}$, and a $y$-datafile, denoted $Y \equiv \{(y_j,w_j): j = 1, \dots, N_y\}$, and the goal of record linkage is to use $w_i$ and $w_j$ to determine which $i \in \{1, \dots, N_x\}$ and $j \in \{1, \dots, N_y\}$ refer to the same individual.  
+
+For the purposes of this paper, I define a record linkage procedure as a set of decisions about (i) selecting and standardizing the identifying variables in $w_i$ and $w_j$, (ii) choosing which $(i,j)$ pairs to consider as potential matches, (iii) defining which patterns of $(w_i,w_j)$ constitute (partial) agreements, and (iv) designating $(i,j)$ pairs as matches.\footnote{By contrast, \cite{bailey2017} categorize record linkage procedures according to the set of assumptions that motivate their use.}  
+
+Step (i) addresses the fact that differences may arise in $w_i$ and $w_j$ because of transcription error or misreporting, even when observations $i$ and $j$ refer to the same individual.   In practice, this step consists of removing spaces and non-alphabetic characters from string variables and processing names with phonetic algorithms to account for potential misspellings; common nicknames may also be replaced with full names.  
+
+Step (ii) reduces the computational burden of a matching procedure when $N_x \times N_y$ is large by partitioning $X\times Y$ into ``blocks."  Only records within the same block are attempted to be matched, while records in different blocks are assumed to be non-matches.  Blocking variables should be recorded with minimal error, otherwise blocking may adversely affect the Type II error rate. 
+
+Step (iii) defines a metric for quantifying the similarity between non-numeric variables, such as Jaro-Winkler distances for strings.  For more details, see \cite{arp2018}. 
+
+Finally, Step (iv) is where record linkage procedures differ in the most meaningful ways; hence, this step will be the focus of my analysis.  Consider the following (deterministic) record linkage procedure as an example:
+\begin{enumerate}
+\item[(i)] Use a phonetic algorithm to standardize the first and last names in both datasets; 
+\item[(ii)] Consider as potential matches all $(i, j)$ pairs whose phonetically standardized names begin with the same letter, and whose birth years are within $\pm$2 years;
+\item[(iii)] Measure the distance between any two names using Jaro-Winkler string distance, and the distance between any two birth dates as a difference in months;
+\item[(iv)] Designate as matches all $(i,j)$ pairs with Jaro-Winkler scores exceeding a pre-determined cut-off; and, if a record $i$ has multiple possible matches that exceed the cut-off, then choose the corresponding $j$ with the highest score (or pick one match at random if there is a tie).  
+\end{enumerate}
+Another record linkage procedure could be defined using the same steps (i)-(iii), but replacing (iv) with a probabilistic matching rule that does not enforce one-to-one matching:
+\begin{enumerate}
+\item[(iv*)]  Use the Expectation-Maximization algorithm to compute ``match weights" for each $(i,j)$ pair; then, designate as matches all pairs with match weights exceeding a threshold that is set to reflect specific tolerances for Type I and Type II error. 
+\end{enumerate} 
+
+Except in rare cases, the estimated matching functions obtained by switching (iv) and (iv$^*$) will differ, if only because the former method matches each $x$ with at most one $y$, the latter potentially matches the same $x$ with multiple $y$.  This example also illustrates the difference between deterministic and probabilistic record linkage methods: while (iv) uses pre-determined rules to designate pairs as matches, (iv*) uses statistical theory to inform the selection of the decision rule.  Probabilistic record linkage also involves the estimation of match weights, which can be incorporated in subsequent estimation steps.
+
+Below I will discuss two record linkage methods -- one deterministic and one probabilistic -- that I will use in my analysis.  Each method will be implemented twice: first, requiring unique matches, and then allowing for multiple matches.  While these methods are by no means exhaustive, they are intended to be representative of the most commonly used methods in economics.  For a detailed survey of record linkage techniques, please refer to books by \cite{harron_book, christen2012} or \cite{herzog07}, or any of the references in this paper. 
+
+\subsection{Deterministic}
+The deterministic matching algorithm described herein is based upon methods developed by \cite{abe2012}.  It consists of the following steps.
+\begin{enumerate}
+\item Clean names in the $x$- and $y$- datafiles to remove any non-alphabetic characters and account for common mis-spellings and nicknames (e.g., so that Ben and Benjamin would be considered the same name).  
+\item Restrict the sample to people in the $x$-datafile with unique first name, last name, and birth year combinations  
+\item For each record in the $x$-datafile, look for records in the $y$-datafile that match on first name, last name, place of birth, and exact birth year.  At this point there are three possibilities 
+\begin{enumerate}
+\item If there is a \textit{unique} match, this pair of observations is considered a match.
+\item If there are multiple potential matches in the $y$-datafile with the same year of birth, the observation is discarded. 
+\item If there are no matches by exact year of birth, the algorithm searches for matches within $\pm$ 1 year of reported birth year, and if this is unsuccessful, it looks for matches within $\pm$ 2 years.  In each of these steps, only unique matches are accepted.  If none of these attempts produces a unique match, the observation is discarded.
+\end{enumerate}
+\item Repeat Step 3 for each record in the $y$-datafile, searching for matches in the $x$-datafile; then designate as matches all record pairs in the intersection of the two matched samples.
+\end{enumerate}
+
+An interesting quirk of this algorithm is that an individual with multiple matches is dropped from the sample only if those matches occur before a unique match is found in Step 3.  That is, a person with a unique, same-year match, and multiple matches with birth years within one year, will not be dropped from the sample.  If the same-year match were not included in the dataset, then that same individual would be dropped.  This has significant implications for bootstrapping standard errors; notably, the nonparametric bootstrap will fail. 
+
+Note that this quirk only occurs when the algorithm enforces unique matches.  When allowing for multiple matches, I designate as a match any pair that satisfies any of the categories in Step 3. 
+
+\subsection{Probabilistic Record Linkage}
+The probabilistic record linkage technique implemented in this paper is based on the canonical model by \cite{fellegi69}, which views record linkage as a classification problem, where every record pair belongs either to the set of \textit{matches} $(M)$ or \textit{non-matches} $(U)$:
+\begin{align*} M &= \{ (i,j) \in X\times Y: j \in \varphi(i) \} \\ U &= \{(i,j) \in X\times Y:  j \notin\varphi(i)\}\end{align*} 
+
+ To determine whether a record pair $(i,j)$ belongs to $M$ or $U$, the pair is evaluated according to $K$ different comparison criteria.  These comparisons are represented in a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$  where each comparison field $\gamma_{ij}^{k}$ may be binary-valued, as in ``$i$ and $j$ have the same birthday" and ``$i$ and $j$ have the same last name," or use ordinal values to indicate partial agreement between strings.
+
+The probability of observing a particular configuration of $\gamij$ can be modeled as arising from the mixture distribution:
+\begin{equation}
+P(\gamij) = P(\gamij | M) p_M + P(\gamij | U) p_U 
+\label{mm}
+\end{equation}
+where $P(\gamij | M)$ and $P(\gamij | U)$ are the probabilities of observing the pattern $\gamij$ conditional on the record pair $(i,j)$ belonging to $M$ or $U$, respectively.  The proportions $p_M$ and $p_U = 1-p_M$ are the marginal probabilities of observing a matched or unmatched pair.  Applying Bayes' Rule, we obtain the probability of $(i,j) \in M$ conditional on observing $\gamij$,
+\begin{equation} P(M | \gamij) = \frac{p_M P(\gamij | M)}{P(\gamij)} \label{bayes} \end{equation}
+Thus, if we can estimate $p_M$, $P(\gamij | M)$ and $P(\gamij | U)$, then we can estimate the probability that any two records refer to the same entity using (\ref{bayes}).   These probabilities can then be used to designate pairs as matches, or to estimate the false positive rate associated with a particular match configuration using the formulas in \cite{fellegi69}.  
+
+One difficulty arises from the fact that there are at least $2^K -1$ possible configurations of $\gamij$\footnote{There are more, if any of the comparison criteria are non-binary}.  While in principle we could model $P(\gamij | M)$ and $P(\gamij | U)$ as
+\begin{align*} (\gamma_{ij}^1, \dots, \gamma_{ij}^K) \  |\  M &\sim \text{Dirichlet}(\mathbf{\delta_M})\\
+ (\gamma_{ij}^1, \dots, \gamma_{ij}^K) \  |\  U &\sim \text{Dirichlet}(\mathbf{\delta_U}) \end{align*}
+but the parameters $\mathbf{\delta_M}$ and $\mathbf{\delta_U}$ may be high-dimensional.  However, if the comparison fields $\gamma_{ij}^{k}$ are independent across $k$ conditional on match status, then the number of parameters used to describe each mixture class can be reduced to $K$ by factoring:
+ \begin{equation} 
+ P(\gamma_{ij} | C) = \prod_{k=1}^K P(\gamma_{ij}^{k} | C)^{\gamma_{ij}^{k}}(1-Pr(\gamma_{ij}^{k} | C))^{1-\gamma_{ij}^{k}} \hspace{20pt} C\in \{M, U\} 
+ \label{eq:condInd}
+ \end{equation}
+ Alternatively, dependence between fields can be modeled using log-linear models; however, I will assume conditional independence to ease computation, and because the matching variables in the synthetic dataset are generated independently of each other.  
+ 
+Since membership to $M$ or $U$ is not actually observed, a convenient way of simultaneously estimating $p_M, p_U$ and classifying record pairs as matches or non-matches is via mixture modeling, with mixture distributions $P(\gamij | M)$ and $P(\gamij | U)$.  The parameters can be estimated using the expectation-maximization (EM), first applied to record linakge by \cite{larsen_rubin_2001}.  For this paper, I use the \texttt{fastLink} algorithm developed by \cite{enamorado2019}. 
+
+
+
+
+%\begin{align*}
+%\Var{\hat{\mu}_1} &= \frac{1}{N}\Var{x_i y_{i1}} = \frac{1}{N}\frac{1}{\pi^2}\left(\pi \Var{x_i\varepsilon_i} + (1-\pi) \Var{x_i}\omega^2 + \pi(1-\pi)(E[x_i^2\beta] - E[x_i]\kappa)^2\right) \\
+ %\hat{\mu}_2 &= \frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i2}}{1-\pi} - \frac{\pi}{1-\pi}\kappa 
+ %\end{align*}
+
+%When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
+
+%Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
+
+%Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
+
+
+%The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
+
+
+\section{Monte Carlo Study}
+
+Following the same procedure for simulating the empirical example described in Section 2, I generate 1,000 random $x$- and $y$- dataset pairs.  I implement four types of matching procedures using each dataset pair: (i) deterministic matching with unique matches (ABE Single), (ii) deterministic matching with multiple matches (ABE Multi), (iii) probabilistic matching with unique matches (PRL Single), and (iv) probabilistic matching with multiple matches (PRL Multi).  Allowing for multiple matches means that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  
+
+Each matching method produces a distinct matched dataset, so that the matching step produces a total of 4,000 linked datasets.  Using each of the linked datasets, I then compute (i) naive OLS estimator (using all observations and also with observations assigned $(L_i=1)$, (ii) the \cite{sw1993} bias-corrected estimator, and (iii)  the AHL estimator that assigns equal weights to multiple matches.  As a benchmark, I also compute the OLS estimator that uses only the correctly matched pairs produced by the matching algorithm, and the OLS estimator applied to all 500 correctly linked record pairs.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
+
+% Match Rate Table 
+
+\begin{table}[htbp]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Summary of matching algorithm performance}
+\vspace{10pt}
+\resizebox{\textwidth}{!}{\input{./Figures/match_rates.tex}}
+\label{match_rate}
+\end{table}
+
+\begin{table}[htbp]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Performance of multiple match methods by value of $L_i$}
+\vspace{10pt}
+\resizebox{\textwidth}{!}{\input{./Figures/multi_tab.tex}}
+\label{multi_L}
+\end{table}
+
+\subsection{Matching results}
+To evaluate the matching procedures, I compute the following statistics for each linked dataset, reported in Table \ref{match_rate}:
+
+\begin{itemize}
+\item the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile (match rate), 
+\item the total number of links made by the matching algorithm, 
+\item the proportion of links that are incorrect (Type I error rate), 
+\item the proportion of correct $(x,y)$ links that are not found by the matching algorithm (Type II error rate), 
+\item the proportion of observations whose links include the true match
+\end{itemize}
+
+\noindent For the linked datasets that contain multiple matches per observation, I report also the average number of links per observation, and how often those links include the true match (Table \ref{multi_L}). 
+
+%  Match Rate Histograms 
+\begin{figure}[htbp]
+\begin{center}
+\caption{Match Rates by Linking Procedure } 
+\includegraphics[width=0.9\textwidth]{./Figures/match_rate.pdf}
+\label{match_hist}
+\end{center}
+\end{figure}
+
+As seen in Table \ref{match_rate}, the average match rates range between 71 and 79 percent across the various matching procedures, but plotting the distribution of match rates in Figure \ref{match_hist} shows that ABE Multi consistently matches more observations than any other procedure.  PRL Single and PRL Multi have about the same match rate, which suggests that allowing for multiple matches adds additional matches per observations rather than matching new individuals (however, this may be an artifact of how my PRL implementation).  ABE Multi, on the other hand, seems to increase match rates by matching new observations relative to ABE Single.  
+
+When comparing Type I error rates, it is important to note that multiple-match methods will produce more false links by construction.  Therefore, it is best to compare multi-match methods by measuring the proportion of observations whose  matches contain the true link.  In this metric, both ABE Multi and PRL Multi perform very well.  Furthermore, we can compute these values for each value of $L_i$, as in Table \ref{multi_L}, which shows that allowing multiple matches improves the accuracy of the ABE algorithm.  Table \ref{multi_L} also shows that ABE Multi and PRL Multi rarely assign more than three matches to any given observation.  
+
+Comparing ABE Single and PRL Single in Table \ref{match_rate}, demonstrates the  usual tradeoff between Type I and Type II errors.  ABE Single is more conservative, produces incorrect matches only 3 percent of the time, but failing to identify 26 percent of all matches.  PRL Single is less conservative, missing only 15 percent of matches, but at the cost of matching false links 11 percent of the time.    
+
+Based on these results, ABE Multi seems to perform well if multiple matches are desired.  The linked datasets produced by ABE Multi are very likely to include the true match, which is required for all of the estimation methods described in this paper.  It is also easier in terms of computation, because it does not require linear sum assignment programs or thresholds to determine which record pairs should be designated as matches.  
+
+\subsection{Estimation Results}
+
+I compare the estimators according to median absolute deviation, and plot histograms of the estimated values in Figures \ref{olstrue}-\ref{ols}.  In implementing the AHL (2019) estimator, I set $\hat{g}(w_i, L_i) = \sum_{j=1}^{N_y} y_j $, the mean of all $y$ observations, to reduce the computational burden and because I have generated $y$ such that it is independent of the identifiers $w_i$.  The AHL estimator will probably perform better in scenarios where $w_i$ has predictive power in estimating the conditional mean of $y_i$.   
+
+
+
+\begin{table}[h!]
+\let\center\empty
+\let\endcenter\relax
+\centering
+\caption{Median Absolute Deviations for Estimators}
+\vspace{10pt}
+\resizebox{0.9\textwidth}{!}{\input{./Figures/est_tab.tex}}
+\label{multi_tab}
+\end{table}
+
+\begin{figure}[htbp]
+\begin{center}
+\caption{Comparing OLS with true matches produced by matching algorithm vs. matches with L=1}
+\includegraphics[width=1.1\textwidth]{./Figures/compare.pdf}
+\label{olstrue}
+\end{center}
+\end{figure}
+
+
+\section{Discussion/Conclusion}
+To what extent my results generalize beyond the simulated data is unclear, as I made many arbitrary choices while generating the synthetic data -- such as the dictionary of names and the structure of the typographical errors that I introduce in the $x$-datafile -- that may impact my results in important ways.  However, my theoretical results suggest that (i) using the match that is most likely to be correct, and bias correcting based on the probability that it is correct is optimal, (ii) if weights are estimated imprecisely, or if no match has a high probability of being correct, then the it is better to assign equal weights to multiple matches.   This result needs to be studied using more general models, and ideally applied to real data.
+
+
+
+
+% distribution of estimators
+\begin{figure}[htbp]
+\label{ahl_hist}
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/ahl_hist.pdf}
+\label{ahl}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\label{sw_hist}
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/sw_hist.pdf}
+\label{sw}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\label{ols_hist}
+\begin{center}
+\includegraphics[width=\textwidth]{./Figures/OLS(L=1)_hist.pdf}
+\label{ols}
+\end{center}
+\end{figure}
+
+
+\newpage
+
+
+
+\section{Appendix:  Implementation Notes}
+
+\subsection{Proofs}
+
+Lemma1.    Consider,
+\begin{equation}
+\hat{\mu} = a_1X_{1} + a_2 X_2 -  a_3 \kappa \label{mu} \end{equation}
+which has the following expectation,
+$$ E[\hat{\mu}] = (a_1 \pi + a_2 (1-\pi))\mu + (a_1(1-\pi)+a_2\pi - a_3)\kappa $$
+so that unbiased, requires
+\begin{gather}
+    a_1\pi + a_2(1-\pi) = 1 \implies a_2(a_1) = \frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi} \\
+    a_1 (1-\pi) + a_2 \pi = a_3 \implies a_3(a_1) = \frac{\pi}{1-\pi}  + \frac{a_1 - 2a_1 \pi}{1-\pi} 
+\end{gather}
+Hence we can write $\hat{\mu}$ as a function of $a_1$,  
+ $$\hat{\mu}(a_1) = a_1 X_1 +  \left(\frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi}\right)  X_2 - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa $$ 
+When $a_1 = \frac{1}{\pi}$, then $\hat{\mu} = \hat{\mu}_1$; and if $a_1 = 0$ then $\hat{\mu}=\hat{\mu_2}$. 
+
+We can write:
+\begin{align*}
+\hat{\mu} &= (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 + a_1(1-\pi)\kappa  + \frac{\pi}{1-\pi}(1-a_1)\kappa - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa  \\
+&=  (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 - (a_1\pi)\kappa
+\end{align*}
+
+Hence any unbiased estimator $\hat{\mu}$ that uses $X_1$ and $X_2$ can be written as a linear combination of estimators using only $X_1$ or $X_2$.  
+
+\subsection{implementation notes}
+
+Let's talk about what I need to include here.  Here are some ideas:
+
+Formulas for SE of SW estimator.
+
+Details about implementation of fastLink algorithm. Also
+\begin{itemize}
+\item what threshold level I use for the fastLink algorithm (0.6)
+\item what nonparametric technique I use for AHL (nearest neighbor) 
+\item how I choose z in LL when there are multiple matches (randomly)
+\item how I calculate standard errors for all of the estimators (using formulas for now)
+\item how I standardize the variables for matching (nysiis function in R)
+\item I change Step 2 in the ABE algorithm to restrict the all observations with unique first name, last name, date of birth, and $(x_1, x_2)$ combinations. 
+\item  When allowing for multiple matches, I count as matches all record pairs with the same name, and the difference in recorded birth years is within two (or five) years.  That is, I designate all potential matches that arise in Step 3 as matches. 
+\end{itemize}
+
+
+
+\section{More MSE Tables}
+
+\input{./Figures/compare_1.tex}
+\input{./Figures/compare_2.tex}
+\input{./Figures/compare_3.tex}
+\input{./Figures/compare_4.tex}
+\input{./Figures/compare_5.tex}
+
+
+
+
+
+
+\newpage
+\singlespacing
+\bibliography{./Deadlines/proposal_bib} 
+\bibliographystyle{aer}
+
+\end{document}

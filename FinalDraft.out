@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Setup}{}% 2
+\BOOKMARK [1][-]{section.3}{Existing estimation methods for linked data }{}% 3
+\BOOKMARK [1][-]{section.4}{Incorporating probabilities}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Errors in }{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Applying argument to OLS}{section.4}% 6
+\BOOKMARK [1][-]{section.5}{Numerical Example}{}% 7
+\BOOKMARK [1][-]{section.6}{Record Linkage Methods}{}% 8
+\BOOKMARK [2][-]{subsection.6.1}{Deterministic}{section.6}% 9
+\BOOKMARK [2][-]{subsection.6.2}{Probabilistic Record Linkage}{section.6}% 10
+\BOOKMARK [1][-]{section.7}{Monte Carlo Study}{}% 11
+\BOOKMARK [2][-]{subsection.7.1}{Matching results}{section.7}% 12
+\BOOKMARK [2][-]{subsection.7.2}{Estimation Results}{section.7}% 13
+\BOOKMARK [1][-]{section.8}{Discussion/Conclusion}{}% 14
+\BOOKMARK [1][-]{section.9}{Appendix: Implementation Notes}{}% 15
+\BOOKMARK [2][-]{subsection.9.1}{Proofs}{section.9}% 16
+\BOOKMARK [2][-]{subsection.9.2}{implementation notes}{section.9}% 17
+\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 18
