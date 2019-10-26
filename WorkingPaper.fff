@@ -69,6 +69,26 @@ ID & $y$ & Name & Birthday \\
  
 \begin{figure}[htbp]
 \begin{center}
+\caption{Bias of $\hat{\mu}^*$ as a function of $\hat{\pi}$ }
+\vspace{5pt}
+\includegraphics[width=\textwidth]{./Figures/bias_plot.pdf}
+\label{bias_plot}
+\end{center}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htbp]
+\begin{center}
+\caption{Variance of $\hat{\mu}^*$ as a function of $\hat{\pi}$ with $N=1$}
+\vspace{5pt}
+\includegraphics[width=\textwidth]{./Figures/var_plot.pdf}
+\label{var_plot}
+\end{center}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}[htbp]
+\begin{center}
 \caption{Match Rates by Linking Procedure }
 \includegraphics[width=0.9\textwidth]{./Figures/match_rate.pdf}
 \label{match_hist}

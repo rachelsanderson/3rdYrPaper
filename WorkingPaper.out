@@ -4,11 +4,14 @@
 \BOOKMARK [1][-]{section.4}{Record Linkage Methods}{}% 4
 \BOOKMARK [2][-]{subsection.4.1}{Deterministic}{section.4}% 5
 \BOOKMARK [2][-]{subsection.4.2}{Probabilistic Record Linkage}{section.4}% 6
-\BOOKMARK [1][-]{section.5}{Estimation with linked data }{}% 7
-\BOOKMARK [1][-]{section.6}{Optimality of the AHL Estimator}{}% 8
+\BOOKMARK [1][-]{section.5}{Existing estimation methods for linked data }{}% 7
+\BOOKMARK [1][-]{section.6}{Incorporating probabilities}{}% 8
 \BOOKMARK [2][-]{subsection.6.1}{Errors in }{section.6}% 9
 \BOOKMARK [1][-]{section.7}{Monte Carlo Study}{}% 10
 \BOOKMARK [2][-]{subsection.7.1}{Matching results}{section.7}% 11
 \BOOKMARK [2][-]{subsection.7.2}{Estimation Results}{section.7}% 12
 \BOOKMARK [1][-]{section.8}{Discussion/Conclusion}{}% 13
 \BOOKMARK [1][-]{section.9}{Appendix: Implementation Notes}{}% 14
+\BOOKMARK [2][-]{subsection.9.1}{Proofs}{section.9}% 15
+\BOOKMARK [2][-]{subsection.9.2}{implementation notes}{section.9}% 16
+\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 17

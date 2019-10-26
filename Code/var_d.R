@@ -60,8 +60,9 @@ gen_title <- function(pars){
 
 # (sig2, omeg2, mu, kappa)
 parCombos <- list(c(0,1,1,1), #equivariance
-                  c(0,1,1,2),0.1/()
-                  c(0,4,2,1),
+                  c(0,1,1,2),
+                  c(0,4,1,2),
+                  c(0,1,4,2),
                   c(0,1,1,10))
 piList <- seq(0.01, 0.5, by = 0.01)
 
@@ -104,20 +105,20 @@ plot_bias <- function(truePi, parCombos){
        ylab="Bias", 
        xlab=bquote(hat(pi)),
        ylim = c(min(unlist(bias_list)), max(unlist(bias_list))))
-  sapply(1:length(bias_list), FUN = function(i) { lines(x=piList, y = bias_list[[i]], type='l',col=i)})
+  sapply(1:length(bias_list), FUN = function(i) { lines(x=piList, y = bias_list[[i]], type='l',col=cols[i])})
   title(main = bquote(pi[0]==.(truePi)))
 }
 
 # Plot bias for different values of truePi
 truePiList <- seq(0.1, 0.5, by = 0.1)
-png(filename = paste0(outDir,"bias_plot.png"))
+pdf(paste0(outDir,"bias_plot.pdf"))
 par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.4))
 for (truePi in truePiList){
   plot_bias(truePi, parCombos)
 }
 plot(1, type="n", axes=FALSE, xlab="", ylab="")
 legend('center', xpd=TRUE, legend = sapply(parCombos, gen_title),
-       col = 1:length(parCombos), lty=1, lwd=2, pt.cex =1, cex=1.3)
+       col = cols, lty=1, lwd=2, pt.cex =1, cex=1.3)
 dev.off()
 
 #################################################################################################
@@ -144,19 +145,20 @@ plot_variance <- function(truePi, parCombos){
        ylab="Bias", 
        xlab=bquote(hat(pi)),
        ylim = c(min(unlist(var_list)), max(unlist(var_list))))
-  sapply(1:length(var_list), FUN = function(i) { lines(x=piList, y = var_list[[i]], type='l',col=i)})
+  sapply(1:length(var_list), FUN = function(i) { lines(x=piList, y = var_list[[i]], type='l',col=cols[i])})
   title(main = bquote(pi[0]==.(truePi)))
 }
 
+
 # Plot variance of one obs for different values of truePi
-png(filename = paste0(outDir,"var_plot.png"))
+pdf(paste0(outDir,"var_plot.pdf"))
 par(mfrow=c(3,2), mai = c(0.6, 0.8, 0.3, 0.2))
 for (truePi in truePiList){
   plot_variance(truePi, parCombos)
 }
 plot(1, type="n", axes=FALSE, xlab="", ylab="")
 legend('center', xpd=TRUE, legend = sapply(parCombos, gen_title),
-       col = 1:length(parCombos), lty=1, lwd=2, pt.cex =1, cex=1.3)
+       col = cols, lty=1, lwd=2, pt.cex =1, cex=1.3)
 dev.off()
 
 #################################################################################################
@@ -266,15 +268,35 @@ par(mfrow=c(1,1))
 plot(x = df$truePi-df$piHat, df_1$ratio, type = 'p')
 hist(df_1$ratio)
 
-title_1 = "MSE Ratio for Optimal vs. Equal Weights with $(\\mu, \\sigma^2, \\kappa, \\omega^2) = ($"
+title_1 = "MSE ratio for $\\hat{\\mu}^*$ and $\\hat{\\mu}^{AHL}$ for $N=1,000$ and $(\\mu, \\sigma^2, \\kappa, \\omega^2) = ($"
 
 for (i in 1:length(parCombos)){
   pars <- parCombos[[i]]
-  df <- round(make_df(pars, 1),3)
-  title <- paste0(title_1, pars[3],",", pars[1], ",", pars[4], ",", pars[2], ")")
-  writeLines(capture.output(kable(df,"latex", booktabs=T, 
-                                  escape=FALSE,
-                                  caption=title,
-                                  linesep = "")), paste0(outDir, "compare_",i,".tex"))
+  df <- round(make_df(pars, 1000),3)
+  colnames(df)[1] <- "$\\pi$"
+  title <- paste0(title_1, pars[1],",", pars[2], ",", pars[3], ",", pars[4], ")")
+  kab <- kable(df,"latex", booktabs=T, 
+               escape=FALSE,
+               caption=title,
+               linesep = "", align=c("c")) %>% kable_styling() %>%
+          add_header_above(c(" " =1, "$\\\\hat{\\\\pi}}$" = 5), escape = FALSE)
+  writeLines(kab, paste0(outDir, "compare_",i,".tex"))
+}
+
+
+title_1 = "MSE ratio for $\\hat{\\mu}^*$ and $\\hat{\\mu}^{AHL}$ for $N="
+title_2 = "$ and $(\\mu, \\sigma^2, \\kappa, \\omega^2) = ($"
+
+nList <- c(10,100,1000)
+for (n in 1:length(nList)){
+  pars <- parCombos[[2]]
+  df <- round(make_df(pars, nList[n]),3)
+  title <- paste0(title_1, nList[n], title_2, pars[1],",", pars[2], ",", pars[3], ",", pars[4], ")")
+  kab <- kable(df,"latex", booktabs=T, 
+               escape=FALSE,
+               caption=title,
+               linesep = "", align=c("c")) %>% kable_styling() %>%
+    add_header_above(c(" " =1, "$\\\\hat{\\\\pi}}$" = 5), escape = FALSE)
+  writeLines(kab, paste0(outDir, "compare_",nList[n],".tex"))
 }
 
