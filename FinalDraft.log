@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  26 OCT 2019 11:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  26 OCT 2019 15:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1268,161 +1268,180 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
-
-
-Package natbib Warning: Citation `ahl2019' on page 1 undefined on input line 92
-.
-
-[1
+ [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-Package natbib Warning: Citation `abe2019' on page 2 undefined on input line 10
-2.
-
-
-Package natbib Warning: Citation `arp2018' on page 2 undefined on input line 10
-2.
-
-
-Package natbib Warning: Citation `bailey2017' on page 2 undefined on input line
- 102.
+Package natbib Warning: Citation `ahl2019' on page 2 undefined on input line 97
+.
 
 [2]
 
+Package natbib Warning: Citation `abe2019' on page 3 undefined on input line 10
+7.
+
+
+Package natbib Warning: Citation `arp2018' on page 3 undefined on input line 10
+7.
+
+
+Package natbib Warning: Citation `bailey2017' on page 3 undefined on input line
+ 107.
+
+
 Package natbib Warning: Citation `bleakley2016' on page 3 undefined on input li
-ne 104.
+ne 109.
 
 
-Package natbib Warning: Citation `nq2015' on page 3 undefined on input line 104
+Package natbib Warning: Citation `nq2015' on page 3 undefined on input line 109
 .
 
 
 Package natbib Warning: Citation `ahl2019' on page 3 undefined on input line 10
-4.
+9.
 
 
-Package natbib Warning: Citation `sw1993' on page 3 undefined on input line 104
+Package natbib Warning: Citation `sw1993' on page 3 undefined on input line 109
 .
 
 
 Package natbib Warning: Citation `lahiri05' on page 3 undefined on input line 1
-04.
+09.
 
 
 Package natbib Warning: Citation `Goldstein2012' on page 3 undefined on input l
-ine 104.
+ine 109.
+
+[3]
+
+Package natbib Warning: Citation `ahl2019' on page 4 undefined on input line 11
+3.
 
 
-Package natbib Warning: Citation `ahl2019' on page 3 undefined on input line 10
-8.
-
-
-./FinalDraft.tex:110: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:115: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.110 ... methods and data generating processes.  
+l.115 ... methods and data generating processes.  
                                                   Section 6 contains the res...
 
 ? 
-[3]
 
-Package natbib Warning: Citation `aizer2016' on page 4 undefined on input line 
-123.
-
-[4] [5]
-
-Package natbib Warning: Citation `sw1993' on page 6 undefined on input line 143
-.
+Package natbib Warning: Citation `ahl2019' on page 4 undefined on input line 12
+2.
 
 
-Package natbib Warning: Citation `sw1993' on page 6 undefined on input line 146
-.
+Package natbib Warning: Citation `ahl2019' on page 4 undefined on input line 12
+2.
 
+[4]
 
-Package natbib Warning: Citation `sw1993' on page 6 undefined on input line 148
-.
+Package natbib Warning: Citation `aizer2016' on page 5 undefined on input line 
+129.
 
+[5]
 
-Package natbib Warning: Citation `abe2012' on page 6 undefined on input line 14
-8.
+./FinalDraft.tex:136: Package inputenc Error: Invalid UTF-8 byte sequence.
 
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.136 
+      
+? 
 [6]
 
-Package natbib Warning: Citation `nq2015' on page 7 undefined on input line 150
+Package natbib Warning: Citation `sw1993' on page 7 undefined on input line 150
 .
 
 
-Package natbib Warning: Citation `ahl2019' on page 7 undefined on input line 15
-2.
+Package natbib Warning: Citation `sw1993' on page 7 undefined on input line 153
+.
 
 
-Package natbib Warning: Citation `ahl2019' on page 7 undefined on input line 15
-2.
+Package natbib Warning: Citation `sw1993' on page 7 undefined on input line 155
+.
+
+
+Package natbib Warning: Citation `abe2012' on page 7 undefined on input line 15
+5.
 
 [7]
 
-Package natbib Warning: Citation `ahl2019' on page 8 undefined on input line 16
-3.
-
-
-Package natbib Warning: Citation `sw1993' on page 8 undefined on input line 165
+Package natbib Warning: Citation `nq2015' on page 8 undefined on input line 157
 .
 
 
-Package natbib Warning: Citation `lahiri05' on page 8 undefined on input line 1
-69.
+Package natbib Warning: Citation `ahl2019' on page 8 undefined on input line 15
+9.
 
 
-Package natbib Warning: Citation `NeterMaynes' on page 8 undefined on input lin
-e 169.
+Package natbib Warning: Citation `ahl2019' on page 8 undefined on input line 15
+9.
+
+[8]
+
+Package natbib Warning: Citation `ahl2019' on page 9 undefined on input line 17
+0.
 
 
-Package natbib Warning: Citation `lahiri05' on page 8 undefined on input line 1
-69.
-
-
-Package natbib Warning: Citation `NeterMaynes' on page 8 undefined on input lin
-e 169.
-
-
-Package natbib Warning: Citation `sw1993' on page 8 undefined on input line 169
+Package natbib Warning: Citation `sw1993' on page 9 undefined on input line 172
 .
 
-[8] [9] [10]
+
+Package natbib Warning: Citation `lahiri05' on page 9 undefined on input line 1
+76.
+
+
+Package natbib Warning: Citation `NeterMaynes' on page 9 undefined on input lin
+e 176.
+
+
+Package natbib Warning: Citation `lahiri05' on page 9 undefined on input line 1
+76.
+
+
+Package natbib Warning: Citation `NeterMaynes' on page 9 undefined on input lin
+e 176.
+
+
+Package natbib Warning: Citation `sw1993' on page 9 undefined on input line 176
+.
+
+[9] [10] [11]
 \openout3 = `FinalDraft.fff'.
 
  (FinalDraft.fff)
-Overfull \hbox (5.2011pt too wide) in paragraph at lines 214--215
+Overfull \hbox (5.2011pt too wide) in paragraph at lines 221--222
 []\OT1/cmr/m/n/12 More gen-er-ally, the es-ti-ma-tor $[][]$ can be com-puted fo
 r sam-ple of ob-ser-va-tions $(\OML/cmm/m/it/12 X[]; X[]\OT1/cmr/m/n/12 )[]$,
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 222.
+(hyperref)                removing `math shift' on input line 229.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 222.
-
-[11]
-
-Package natbib Warning: Citation `ahl2019' on page 12 undefined on input line 2
-28.
+(hyperref)                removing `math shift' on input line 229.
 
 [12]
 
-./FinalDraft.tex:270: Package inputenc Error: Invalid UTF-8 byte 160.
+Package natbib Warning: Citation `ahl2019' on page 13 undefined on input line 2
+35.
+
+[13]
+
+./FinalDraft.tex:277: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.270 ...crease as the true $\pi$ approaches 0.5. 
+l.277 ...crease as the true $\pi$ approaches 0.5. 
                                                     For $N=100$, the ratio i...
 
 ? 
@@ -1430,124 +1449,124 @@ l.270 ...crease as the true $\pi$ approaches 0.5. 
 \openout4 = `FinalDraft.ttt'.
 
  (FinalDraft.ttt)) (./Figures/compare_100.tex)
-(./Figures/compare_1000.tex) [13]
-./FinalDraft.tex:280: Undefined control sequence.
-l.280 ... y_{i2} - \kappa = x_i'\beta + \varepsion
+(./Figures/compare_1000.tex) [14]
+./FinalDraft.tex:287: Undefined control sequence.
+l.287 ... y_{i2} - \kappa = x_i'\beta + \varepsion
                                                   _i \end{equation}
 ? 
-[14]
-Overfull \hbox (7.09613pt too wide) in paragraph at lines 311--312
+[15]
+Overfull \hbox (7.09613pt too wide) in paragraph at lines 318--319
 []\OT1/cmr/m/n/12 I be-gin by con-struct-ing a ``ground truth" dataset with 100
 0 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m/n/12 )$,
  []
 
-[15]
-
-Package natbib Warning: Citation `abe2019' on page 16 undefined on input line 3
-78.
-
-
-Package natbib Warning: Citation `abe2019' on page 16 undefined on input line 3
-78.
-
 [16]
 
-Package natbib Warning: Citation `bailey2017' on page 17 undefined on input lin
-e 386.
+Package natbib Warning: Citation `abe2019' on page 17 undefined on input line 3
+85.
 
 
-Package natbib Warning: Citation `arp2018' on page 17 undefined on input line 3
-92.
+Package natbib Warning: Citation `abe2019' on page 17 undefined on input line 3
+85.
 
 [17]
-Overfull \hbox (4.98752pt too wide) in paragraph at lines 399--400
+
+Package natbib Warning: Citation `bailey2017' on page 18 undefined on input lin
+e 393.
+
+
+Package natbib Warning: Citation `arp2018' on page 18 undefined on input line 3
+99.
+
+[18]
+Overfull \hbox (4.98752pt too wide) in paragraph at lines 406--407
 []\OT1/cmr/m/n/12 Designate as matches all $(\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
 
-Package natbib Warning: Citation `harron_book' on page 18 undefined on input li
-ne 408.
+Package natbib Warning: Citation `harron_book' on page 19 undefined on input li
+ne 415.
 
 
-Package natbib Warning: Citation `christen2012' on page 18 undefined on input l
-ine 408.
+Package natbib Warning: Citation `christen2012' on page 19 undefined on input l
+ine 415.
 
 
-Package natbib Warning: Citation `herzog07' on page 18 undefined on input line 
-408.
-
-[18]
-
-Package natbib Warning: Citation `abe2012' on page 19 undefined on input line 4
-11.
+Package natbib Warning: Citation `herzog07' on page 19 undefined on input line 
+415.
 
 [19]
 
-Package natbib Warning: Citation `fellegi69' on page 20 undefined on input line
- 429.
+Package natbib Warning: Citation `abe2012' on page 20 undefined on input line 4
+18.
 
 [20]
 
 Package natbib Warning: Citation `fellegi69' on page 21 undefined on input line
- 441.
+ 436.
 
 [21]
 
-Package natbib Warning: Citation `larsen_rubin_2001' on page 22 undefined on in
-put line 453.
-
-
-Package natbib Warning: Citation `enamorado2019' on page 22 undefined on input 
-line 453.
+Package natbib Warning: Citation `fellegi69' on page 22 undefined on input line
+ 448.
 
 [22]
 
-Package natbib Warning: Citation `sw1993' on page 23 undefined on input line 47
-7.
+Package natbib Warning: Citation `larsen_rubin_2001' on page 23 undefined on in
+put line 460.
 
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 505.
+
+Package natbib Warning: Citation `enamorado2019' on page 23 undefined on input 
+line 460.
+
 [23]
 
-./FinalDraft.tex:523: Package inputenc Error: Invalid UTF-8 byte 160.
+Package natbib Warning: Citation `sw1993' on page 24 undefined on input line 48
+4.
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 512.
+[24]
+
+./FinalDraft.tex:530: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.523 ...f match rates in Figure \ref{match_hist} 
+l.530 ...f match rates in Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
-[24] [25] [26] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
+[25] [26] [27] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
 (./Figures/compare_3.tex) (./Figures/compare_4.tex) (./Figures/compare_5.tex)
-[27]
+[28]
 No file FinalDraft.bbl.
 AED endfloat: Processing end Figures and Tables (./FinalDraft.fff
-<./Figures/dStar.pdf, id=324, 505.89pt x 505.89pt>
+<./Figures/dStar.pdf, id=329, 505.89pt x 505.89pt>
 File: ./Figures/dStar.pdf Graphic file (type pdf)
 <use ./Figures/dStar.pdf>
 Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 4.
 (pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
- [28
+ [29
 
 
  <./Figures/dStar.pdf>]
-<./Figures/bias_plot.pdf, id=335, 505.89pt x 505.89pt>
+<./Figures/bias_plot.pdf, id=340, 505.89pt x 505.89pt>
 File: ./Figures/bias_plot.pdf Graphic file (type pdf)
 <use ./Figures/bias_plot.pdf>
 Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 14.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
- [29
+ [30
 
  <./Figures/bias_plot.pdf>]
-<./Figures/var_plot.pdf, id=346, 505.89pt x 505.89pt>
+<./Figures/var_plot.pdf, id=351, 505.89pt x 505.89pt>
 File: ./Figures/var_plot.pdf Graphic file (type pdf)
 <use ./Figures/var_plot.pdf>
 Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 24.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
- [30
+ [31
 
  <./Figures/var_plot.pdf>]
 ./FinalDraft.fff:43: Missing $ inserted.
@@ -1577,18 +1596,18 @@ l.44 196 & $y_{196}$ & $x_{1,196}&
 l.84 \end{tikzpicture}
                       
 ? 
-[31
+[32
 
 ]
-<./Figures/match_rate.pdf, id=362, 338.26375pt x 457.71pt>
+<./Figures/match_rate.pdf, id=367, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
 Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 93.
 (pdftex.def)             Requested size: 422.77664pt x 572.08722pt.
- [32
+ [33
 
  <./Figures/match_rate.pdf>]
-<./Figures/compare.pdf, id=375, 650.43pt x 649.42625pt>
+<./Figures/compare.pdf, id=380, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
 Package pdftex.def Info: ./Figures/compare.pdf  used on input line 102.
@@ -1598,31 +1617,31 @@ Overfull \hbox (46.97836pt too wide) in paragraph at lines 102--104
  [] 
  []
 
-[33
+[34
 
  <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=389, 466.74374pt x 524.96124pt>
+<./Figures/ahl_hist.pdf, id=394, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
 Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 111.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [34
+ [35
 
  <./Figures/ahl_hist.pdf>]
-<./Figures/sw_hist.pdf, id=403, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=408, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
 Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 120.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [35
+ [36
 
  <./Figures/sw_hist.pdf>]
-<./Figures/OLS(L=1)_hist.pdf, id=417, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=422, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
 Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 129.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-) [36
+) [37
 
  <./Figures/OLS(L=1)_hist.pdf>] (./FinalDraft.ttt
 ./FinalDraft.ttt:7: Missing $ inserted.
@@ -1643,7 +1662,7 @@ l.7 ...1}{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.8 \cmidrule
              (l{3pt}r{3pt}){2-6}
 ? 
-[37]
+[38]
 ./FinalDraft.ttt:31: Missing $ inserted.
 <inserted text> 
                 $
@@ -1662,7 +1681,7 @@ l.31 ...}{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.32 \cmidrule
               (l{3pt}r{3pt}){2-6}
 ? 
-[38]
+[39]
 ./FinalDraft.ttt:55: Missing $ inserted.
 <inserted text> 
                 $
@@ -1681,16 +1700,16 @@ l.55 ...}{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.56 \cmidrule
               (l{3pt}r{3pt}){2-6}
 ? 
-[39] (./Figures/match_rates.tex) [40
+[40] (./Figures/match_rates.tex) [41
 
 
 
 
 
-] (./Figures/multi_tab.tex) [41
+] (./Figures/multi_tab.tex) [42
 
 ]
-(./Figures/est_tab.tex) [42
+(./Figures/est_tab.tex) [43
 
 ]
 ./FinalDraft.ttt:112: Missing $ inserted.
@@ -1711,7 +1730,7 @@ l.112 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.113 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[43]
+[44]
 ./FinalDraft.ttt:136: Missing $ inserted.
 <inserted text> 
                 $
@@ -1730,7 +1749,7 @@ l.136 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.137 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[44]
+[45]
 ./FinalDraft.ttt:160: Missing $ inserted.
 <inserted text> 
                 $
@@ -1749,7 +1768,7 @@ l.160 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.161 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[45]
+[46]
 ./FinalDraft.ttt:184: Missing $ inserted.
 <inserted text> 
                 $
@@ -1768,7 +1787,7 @@ l.184 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.185 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[46]
+[47]
 ./FinalDraft.ttt:208: Missing $ inserted.
 <inserted text> 
                 $
@@ -1787,28 +1806,28 @@ l.208 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.209 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-) [47]
+) [48]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 656.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 656.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 663.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 663.
 (./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 656.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 656.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 663.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 663.
 Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
 (rerunfilecheck)             Checksum: FFD17FE26EA0A8A116F13292EFDCA7CE;1097.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 656.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 663.
  ) 
 Here is how much of TeX's memory you used:
- 32129 strings out of 492649
- 642358 string characters out of 6129622
- 730294 words of memory out of 5000000
- 35339 multiletter control sequences out of 15000+600000
+ 32131 strings out of 492649
+ 642373 string characters out of 6129622
+ 730297 words of memory out of 5000000
+ 35340 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10382b,917s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1855,10 +1874,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on FinalDraft.pdf (47 pages, 390927 bytes).
+Output written on FinalDraft.pdf (48 pages, 393752 bytes).
 PDF statistics:
- 587 PDF objects out of 1000 (max. 8388607)
- 479 compressed objects within 5 object streams
- 121 named destinations out of 1000 (max. 500000)
+ 592 PDF objects out of 1000 (max. 8388607)
+ 483 compressed objects within 5 object streams
+ 122 named destinations out of 1000 (max. 500000)
  293 words of extra memory for PDF output out of 10000 (max. 10000000)
 
