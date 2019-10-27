@@ -111,7 +111,7 @@ In order to illustrate the techniques studied in this paper, Section 2 introduce
 %Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  Also representativeness is an issue. However, the impact of data pre-processing choices on estimation is still not well understood.  
 
 %discussion can include where this may fail. 
-%The example of \cite{aizer2016} illustrates how the choice of matching procedure determines which estimation methods are available.  Alternatively, the authors could have used probabilistic record linkage to estimate the probability that a given $(x_i, y_j)$ pair refers to a match, and incorporated this information into their estimation using the methods described in \cite{sw1993}.  Other authors have handled multiple matches by generating a ``composite match" equal to the average of the linked observations \citep{bleakley2016}, or constructing bounds on the parameter of interest using different configurations of matched data \citep{nq2015}.  Others avoid the multiple match problem entirely, by excluding all individuals who are linked to multiple matches from the sample \cite{abe2012}.  In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   
+%The example of \cite{aizer2016} illustrates how the choice of matching procedure determines which estimation methods are available.  Alternatively, the authors could have used probabilistic record linkage to estimate the probability that a given $(x_i, y_j)$ pair refers to a match, and incorporated this information into their estimation using the methods described in \cite{sw1993}.  
 
 \section{Setup} 
 
@@ -133,11 +133,59 @@ where $x_i$ is a vector of covariates for a single observation in the $x$-datafi
 
 Additionally, I assume that (i) the true match $y_i$ is included among the possible matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $i$, and that (ii) the observed $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are i.i.d. draws from their marginal distributions conditional on the identifying variables $w_i$.  Assumption (i) is necessary for identification, and Assumption (ii) is a selection on observables assumption, which requires that all individuals with the same identifying information are equally likely to be included in $\mathcal{D}_n$.  I defer to later sections the discussion about when these assumptions are likely to fail in practice. 
 
+\section{Estimation methods for linked data }
+
+In this section, I review two estimation methods designed to handle matched data of the form (\ref{data}).  Aside from these methods, handling of multiple matches has been ad hoc. 
+\cite{bleakley2016} generated ``composite match" equal to the average of the linked observations.   \cite{nq2015} construct bounds on the parameter of interest using different configurations of matched data.   \cite{abe2012} use traditional estimation methods using only individuals who are uniquely matched, and then reweight on observables (not sure what this means?).   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   Multiple imputation is not useful here, as we do not consider missing data. The Lahiri methods require $N_x = N_y$ and so we are left with two methods.
+
+\subsection{\cite{ahl2019}}
+
+The goal of \cite{ahl2019} is to estimate $\theta_0$ that satisfies the model
+\begin{equation}
+E_0\left[ m\left( y_{i},x_{i};\theta _{0}\right) \right] =0
+\label{Moment}
+\end{equation}%
+where $y_{i}$ and $x_{i}$ are vectors or scalars of data for an individual $i$, the function $m(\cdot)$ is known, and the expectation is taken with respect to the joint distribution $f_0(y,x)$.  The data consist of observations $\left(x_i, w_i, \{y_{i\ell}\}_{\ell=1}^{L_i}\right)_{i=1}^N$, where the $x_i$ and $y_{i\ell}$ are recorded in distinct datasets and matched according to the identifier $w_i$.  They assume $L_i > 1$ for some $i$, so that the identity of the outcome that generates the relationship in (\ref{Moment}) is unknown.  
+
+Under assumptions (i) and (ii) in Section 2, (\ref{Moment}) can be rewritten,
+\begin{gather*}
+E_0[m(y_i, x_i; \theta)] = E\left[\sum_{\ell=1}^{L_i} m(y_{i\ell}, x_i; \theta)\right] - E\left[(L_i -1)g(w_i, L_i; x_i; \theta)\right] \\ 
+g(w_i, L_i, x_i; \theta) = E\left[m(y_i, x_i; \theta) |\ w_i, L_i \right] 
+\end{gather*}
+so if $g$ is known or can be estimated consistently, a sample version of (\ref{Moment}) can be constructed as follows,
+\begin{equation}
+\overline{m}_n(\theta, \hat{g}) = \frac{1}{N}\sum_{i=1}^N \sum_{\ell=1}^{L_i} m(y_{i\ell}, x_i ;\theta) - \frac{1}{N}\sum_{i=1}^N (L_i-1) \hat{g}(w_i, L_i, x_i; \theta) 
+\label{ahl_moment}
+\end{equation}
+which is in general a two-step procedure, where $\hat{g}$ is estimated using nonparametric methods such as $k$-Nearest Neighbors or local polynomial regression in the first step.  The GMM estimator applied to (\ref{ahl_moment}) is consistent and asymptotically normal under the regularity conditions described in \cite{ahl2019}. 
+
+For the linear regression model in (\ref{model}), the AHL estimator can be computed by applying OLS to the transformed regression model,
+\begin{equation} 
+\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1)\hat{g}(w_i, L_i) = x_i'\beta + u_i  \label{ahl} \end{equation}
+where $\hat{g}(w_i,L_i)$ is a (possibly nonparametric) estimator of $E[y_{i\ell} | w_i, L_i ]$, $u_i = \varepsilon_i + \sum_{\ell=1}^{L_i}\nu_{i\ell}$, and $\nu_{i\ell} = y_{i\ell} - \hat{g}(w_i, L_i)$.   If, additionally, $E[\varepsilon_i^2 | x_i, w_i, L_i] = \sigma_{\varepsilon}^2$ and $E[\nu_{i\ell}^2 | x_i, w_i, L_i] = \sigma_{\nu}^2$ then the efficient estimator is weighted least squares,
+\begin{equation}
+\hat{\beta}^{WLS} = \left(\sum_{i=1}^N \frac{x_ix_i'}{\sigma(X_i)}\right)^{-1}\left(\sum_{i=1}^N \frac{x_i}{\sigma(X_i)}\left(\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1) g(w_i, L_i)\right)\right) \label{wls}
+\end{equation}
+where $\sigma(X_i) = \sigma_{\varepsilon}^2 + (L_i - 1)\sigma_{\nu}^2$.   
+
+Unfortunately, the performance of the AHL estimator depends on the accuracy of $\hat{g}(w_i, L_i)$, which is a function of possibly high-dimensional, non-numeric variables $w_i$.  One way to circumvent this issue is to observe that if $m(\cdot)$ is indendent of $L_i$... tink
+\begin{equation}
+E[m(y_i, x_i; \theta)] = E\left[\sum_{\ell=1}^{2} m(y_{i\ell}, x_i; \theta) | L_i = 2 \right]  - E\left[ \sum_{\ell=1}^3 m(y_{i\ell}, x_i; \theta) | L_i = 3\right] \label{new_ahl} \end{equation}
+
+\begin{gather}
+\begin{bmatrix} 2 E\left[\sum_{\ell=1}^{2} m(y_{i\ell}, x_i; \theta) | L_i = 2 \right]  - E\left[ \sum_{\ell=1}^3 m(y_{i\ell}, x_i; \theta | L_i = 3\right] \\
+E\left[ m(y_i, x_i; \theta)  | L_i = 1] \end{bmatrix} = 0 
+\end{gather}
+
+In the context of OLS this would use GMM on the following sample moments:
+\begin{gather}
+\begin{bmatrix} \frac{2}{N_{L_i = 2}} \sum_{i=1}^{N_{L_i=2}} (y_{i1} + y_{i2} - x_i'\beta)x_i  - \frac{1}{N_{L_i = 3}} \sum_{i=1}^{N_{L_i=3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta)x_i   \\
+\frac{1}{N_{L_i=1}}\sum_{i=1}^{N_{L_i=1}} (y_i - x_i'\beta)x_i \end{bmatrix} = 0 
+\end{gather}
 
 
-\section{Existing estimation methods for linked data }
 
-Taking the matched dataset $(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i})$ for observations $i=1,\dots, N$ as given, I now discuss different approaches for estimating the parameters in (\ref{model}).   If the data include multiple $y_{i\ell}$ for each observation, along with probabilities, then SW and AHL methods are available.  If multiple matches are available, but no probabilities are available, then AHL is available (also SW is implementable if you assume equal weights --> same method as AHL if you construct nearest neighbor or mean or something).  If no multiple matches, your only hope is OLS.  
+\subsection{\cite{sw1993}}
 
 Consider first the case where each $x$ observation is linked to a single value of $y$, i.e. $L_i=1$ for all $i$.  The data consists of $(x_i, z_i)$ for $i=1,\dots, N$, where $z_i$ may or may not correspond to $y_i$.  Specifically, 
 $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,N_y $} \end{cases}$$ 
@@ -157,18 +205,9 @@ The downside of the \cite{sw1993} method is that it requires knowledge of $q_{ij
 
 The endogeneity problem arises because $\widehat{q_{ij}}$ are typically calculated by plugging in estimates of the parameters $\psi \equiv \{p_M, P(\gamij | M),\ P(\gamij |U)\}$ into equation (\ref{bayes}).   Thus, $\widehat{q_{ij}}$ will be correlated with $x$ or $y$ if errors in the matching variables, which determine the distribution of $\hat{\psi}$, are correlated with $x$ or $y$.  This is likely to be a problem in economics applications, such as in \cite{nq2015}, where $y$ measures whether a person's recorded ethnicity changes between Census years, but changes in names (the matching variables) are also strongly correlated with $y$.  
 
-One possible solution to the challenges described above is to use the estimator from \cite{ahl2019}, which is unbiased if the errors in estimating the conditional expectation of $y$ be independent of the $x_i$, which holds if $x_i$ and $y_i$ are random samples conditional on the matching variables\footnote{Technically, the result in \cite{ahl2019} is proven for GMM, so the necessary condition is that errors in estimating a conditional moment condition are independent of $x_i$}.   Specifically, for the model in (\ref{model}), the AHL estimator is computed by applying OLS to the transformed regression model,
-\begin{equation} 
-\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1)\hat{g}(w_i, L_i) = x_i'\beta + u_i  \label{ahl} \end{equation}
-where $\hat{g}(w_i,L_i)$ is a (possibly nonparametric) estimator of $E[y_{i\ell} | w_i, L_i ]$, $u_i = \varepsilon_i + \sum_{\ell=1}^{L_i}\nu_{i\ell}$, and $\nu_{i\ell} = y_{i\ell} - \hat{g}(w_i, L_i)$. 
+One possible solution to the challenges described above is to use the estimator from \cite{ahl2019}, which is unbiased if the errors in estimating the conditional expectation of $y$ be independent of the $x_i$, which holds if $x_i$ and $y_i$ are random samples conditional on the matching variables\footnote{Technically, the result in \cite{ahl2019} is proven for GMM, so the necessary condition is that errors in estimating a conditional moment condition are independent of $x_i$}.   Specifically, for the model in (\ref{model}),
 
-If, additionally, $E[\varepsilon_i^2 | x_i, w_i, L_i] = \sigma_{\varepsilon}^2$ and $E[\nu_{i\ell}^2 | x_i, w_i, L_i] = \sigma_{\nu}^2$ then the efficient estimator is weighted least squares,
-\begin{equation}
-\hat{\beta}^{WLS} = \left(\sum_{i=1}^N \frac{x_ix_i'}{\sigma(X_i)}\right)^{-1}\left(\sum_{i=1}^N \frac{x_i}{\sigma(X_i)}\left(\sum_{\ell=1}^{L_i} y_{i\ell} - (L_i - 1) g(w_i, L_i)\right)\right) \label{wls}
-\end{equation}
-where $\sigma(X_i) = \sigma_{\varepsilon}^2 + (L_i - 1)\sigma_{\nu}^2$.   
 
-In practice, the AHL is estimated in three steps: (i) estimating $\hat{g}(w_i, L_i)$ using nonparametric methods such as $k$-Nearest Neighbors, local polynomial regression, or kernel density estimators; (ii) estimating $\hat{\beta}$ by applying OLS to (\ref{ahl}) to construct $\hat{\sigma}(X_i)$, and (iii) computing $\hat{\beta}^{WLS}$ using the formula in (\ref{wls}).  The resulting estimator is consistent and asymptotically normal under the regularity conditions described in \cite{ahl2019}. 
 
 Like the \cite{sw1993} estimator, the AHL estimator requires that the true match for $x_i$ is included among the matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $\ell$.  The simulations in Section 7 suggest that this is a reasonable assumption when multiple matches are allowed.  When $L_i=1$ for all $i$, the AHL estimator reduces to the OLS estimator $\hat{\beta}_N$, so it is only meaningful to compute for linked datasets with some $L_i>1$. 
 
@@ -177,6 +216,9 @@ The AHL estimator also requires that $x$ and $y$ are random samples conditional 
 Other approaches for regression analysis using linked data have been proposed by \cite{lahiri05} and \cite{NeterMaynes}, however neither is appropriate for the setup described in Section 2.  The methods in \cite{lahiri05} assume that each observation appearing $y$-datafile  is generated according to the DGP in (\ref{model}), and that its corresponding value of $x$ appears in the $x$-datafile.  This is a problem both conceptually and for implementation when entries in the $x$-datafile represent a strict subset of observations in the $y$-datafile.   The methods in \cite{NeterMaynes} are simplified versions of those in \cite{sw1993}, and hence face the same implementation issues described above. 
 
 By contrast, the AHL estimator is agnostic about whether the incorrectly linked $y_j$ are generated by (\ref{model}) or by some other data generating process.  The AHL estimator has additional robustness properties due to the fact that it weights multiple matches equally and does not require estimating match probabilities, which are explored in the following section.  
+
+
+
 
 \section{Incorporating probabilities}
 
@@ -285,7 +327,7 @@ For $N=1,000$, $\hat{\mu}^*$ only performs better when $\hat{\pi}=\pi$, and the 
 \subsection{Applying argument to OLS}
 
 Suppose we have two matches $\{y_{i1}, y_{i2}\}_{i=1}^N$ for each observation.  We get the same conditions for unbiasedness of the OLS estimator if we consider using a linear combination of the $y$'s, as in the model:
-\begin{equation} a_1 y_{i1} + a_2 y_{i2} - \kappa = x_i'\beta + \varepsion_i \end{equation}
+\begin{equation} a_1 y_{i1} + a_2 y_{i2} - \kappa = x_i'\beta + \varepsilon_i \end{equation}
 Then the OLS estimator is
 $$ \hat{\beta} = \left(\frac{1}{N}\sum_{i=1}^N x_i x_i'\right)^{-1} \left(\frac{1}{N}\sum_{i=1}^N x_i'(a_1 y_{i1} + a_2 y_{i2} - \kappa)\right) $$
 and
@@ -337,8 +379,8 @@ ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
 1 & $y_1$ & $x_{1,1}$ & $x_{2,1}$ & Tyler & Ashenfelter & 1915-05-13 \\
 2 & $y_2$ & $x_{1,2}$ & $x_{2,2}$ & Brandon & Christensen & 1904-06-27 \\
 \mc{7}{c}\vdots \\
-195 & $y_{195} &$x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
-196 & $y_{196}$ & $x_{1,196}& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
+195 & $y_{195} $ &$x_{1,195} $& $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
+196 & $y_{196}$ & $x_{1,196}$& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
 \mc{7}{c}\vdots \\ 
 1000 & $y_{500}$ & $x_{1,500}$ & $x_{2,500}$ & Vicky & Anderson & 1915-04-14\\
 \bottomrule

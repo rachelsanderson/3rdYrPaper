@@ -40,8 +40,8 @@ ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
 1 & $y_1$ & $x_{1,1}$ & $x_{2,1}$ & Tyler & Ashenfelter & 1915-05-13 \\
 2 & $y_2$ & $x_{1,2}$ & $x_{2,2}$ & Brandon & Christensen & 1904-06-27 \\
 \mc{7}{c}\vdots \\
-195 & $y_{195} &$x_{1,195} & $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
-196 & $y_{196}$ & $x_{1,196}& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
+195 & $y_{195} $ &$x_{1,195} $& $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
+196 & $y_{196}$ & $x_{1,196}$& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
 \mc{7}{c}\vdots \\
 1000 & $y_{500}$ & $x_{1,500}$ & $x_{2,500}$ & Vicky & Anderson & 1915-04-14\\
 \bottomrule
