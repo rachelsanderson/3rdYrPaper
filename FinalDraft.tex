@@ -135,8 +135,9 @@ Additionally, I assume that (i) the true match $y_i$ is included among the possi
 
 \section{Estimation methods for linked data }
 
-In this section, I review two estimation methods designed to handle matched data of the form (\ref{data}).  Aside from these methods, handling of multiple matches has been ad hoc. 
-\cite{bleakley2016} generated ``composite match" equal to the average of the linked observations.   \cite{nq2015} construct bounds on the parameter of interest using different configurations of matched data.   \cite{abe2012} use traditional estimation methods using only individuals who are uniquely matched, and then reweight on observables (not sure what this means?).   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   Multiple imputation is not useful here, as we do not consider missing data. The Lahiri methods require $N_x = N_y$ and so we are left with two methods.
+In this section, I review two estimation methods designed to handle matched data of the form (\ref{data}).  
+
+Other methods exist, however they are ad hoc or are not easily adapted to the setup in Section 2.  For example, \cite{bleakley2016} generated ``composite match" equal to the average of the linked observations.   \cite{nq2015} construct bounds on the parameter of interest using different configurations of matched data.   \cite{abe2012} use traditional estimation methods using only individuals who are uniquely matched, and then reweight on observables (not sure what this means?).   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   Multiple imputation is not useful here, as we do not consider missing data. The Lahiri methods require $N_x = N_y$ and so we are left with two methods.
 
 \subsection{\cite{ahl2019}}
 
@@ -168,28 +169,26 @@ where $\hat{g}(w_i,L_i)$ is a (possibly nonparametric) estimator of $E[y_{i\ell}
 \end{equation}
 where $\sigma(X_i) = \sigma_{\varepsilon}^2 + (L_i - 1)\sigma_{\nu}^2$.   
 
-Unfortunately, the performance of the AHL estimator depends on the accuracy of $\hat{g}(w_i, L_i)$, which is a function of possibly high-dimensional, non-numeric variables $w_i$.  One way to circumvent this issue is to observe that if $m(\cdot)$ is indendent of $L_i$... tink
+Unfortunately, the performance of the AHL estimator depends on the accuracy of $\hat{g}(w_i, L_i)$, which depends on a potentially high-dimensional vector $w_i$ containing a combination of string and numeric variables.  One way to circumvent this issue that I explore in this paper is based on noting that if $E[m(y_i, x_i; \theta) | L_i = \ell] = E_0[m(y_i, x_i; \theta)]$, then 
 \begin{equation}
-E[m(y_i, x_i; \theta)] = E\left[\sum_{\ell=1}^{2} m(y_{i\ell}, x_i; \theta) | L_i = 2 \right]  - E\left[ \sum_{\ell=1}^3 m(y_{i\ell}, x_i; \theta) | L_i = 3\right] \label{new_ahl} \end{equation}
-
+E_0[m(y_i, x_i; \theta)] = E\left[\sum_{\ell=1}^{L_i} m(y_{i\ell}, x_i; \theta) \Bigg|\ L_i = 2 \right]  - E\left[ \sum_{\ell=1}^{L_i} m(y_{i\ell}, x_i; \theta) \Bigg|\ L_i = 3\right] \label{new_ahl} \end{equation}
+and
+\begin{equation}
+E_0[m(y_i, x_i; \theta)] = E[m(y_{i\ell}, x_i; \theta) | L_i =1]  \label{obs}
+\end{equation}
+which suggests we can use (\ref{new_ahl}) and (\ref{obs}) as moment conditions.  Applying this to the model of interest in (\ref{model}), this version of the AHL estimator amounts to using the following moments in a standard GMM model:
 \begin{gather}
-\begin{bmatrix} 2 E\left[\sum_{\ell=1}^{2} m(y_{i\ell}, x_i; \theta) | L_i = 2 \right]  - E\left[ \sum_{\ell=1}^3 m(y_{i\ell}, x_i; \theta | L_i = 3\right] \\
-E\left[ m(y_i, x_i; \theta)  | L_i = 1] \end{bmatrix} = 0 
+\begin{bmatrix} \frac{2}{N_{L_ 2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta)x_i  - \frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta)x_i   \\
+\frac{1}{N_{L_1}}\sum_{i=1}^{N_{L_1}} (y_i - x_i'\beta)x_i \end{bmatrix} = 0 
 \end{gather}
-
-In the context of OLS this would use GMM on the following sample moments:
-\begin{gather}
-\begin{bmatrix} \frac{2}{N_{L_i = 2}} \sum_{i=1}^{N_{L_i=2}} (y_{i1} + y_{i2} - x_i'\beta)x_i  - \frac{1}{N_{L_i = 3}} \sum_{i=1}^{N_{L_i=3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta)x_i   \\
-\frac{1}{N_{L_i=1}}\sum_{i=1}^{N_{L_i=1}} (y_i - x_i'\beta)x_i \end{bmatrix} = 0 
-\end{gather}
-
+where $N_{L_{\ell}}$ is the number of observations matched to $\ell$ observations.  The precision of the first moment may be limited by the number of observations with two and three matches, respectively. 
 
 
 \subsection{\cite{sw1993}}
 
-Consider first the case where each $x$ observation is linked to a single value of $y$, i.e. $L_i=1$ for all $i$.  The data consists of $(x_i, z_i)$ for $i=1,\dots, N$, where $z_i$ may or may not correspond to $y_i$.  Specifically, 
+\cite{sw1993} develop methods for linked data where each $x_i$ observation is linked to a single outcome, so that $L_i=1$ for all $i$.  They label these observations $(x_i, z_i)$ for $i=1,\dots, N$, where $z_i$ may or may not correspond to the true $y_i$.  Specifically, 
 $$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,N_y $} \end{cases}$$ 
-and $\sum_{j=1}^{N_y} q_{ij} = 1, \ i=1,\dots, N$, where $N_y$ is the size of the $y$ datafile and $N$ is the size of the matched dataset.   Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
+and $\sum_{j=1}^{N_y} q_{ij} = 1, \ i=1,\dots, N$, where $N_y$ is the size of the $y$-datafile and $N$ is the size of the matched dataset.   Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
 \begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
 which is biased, because $ E[z_i ] = E\left[q_{ii} y_i + \sum_{j\neq i} q_{ij} y_j\right] \neq E[y_i]$ if $q_{ii}\neq 1$ for some $i$.  Denoting
  $q_i = (q_{i1}, \dots, q_{iN_y})'$, we can write the bias of $\hat{\beta}_N $ conditional on the observed values of $y$ as,
