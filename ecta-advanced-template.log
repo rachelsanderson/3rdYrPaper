@@ -1,0 +1,148 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 OCT 2019 09:21
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**ecta-advanced-template.tex
+(./ecta-advanced-template.tex
+LaTeX2e <2018-04-01> patch level 2
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+
+! LaTeX Error: File `actaart.cls' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: cls)
+
+Enter file name: 
+./ecta-advanced-template.tex:25: Undefined control sequence.
+l.25 \startlocaldefs
+                    
+? 
+./ecta-advanced-template.tex:26: Undefined control sequence.
+l.26 \endlocaldefs
+                  
+? 
+(./ecta-advanced-template.aux)
+\openout1 = `ecta-advanced-template.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+
+
+./ecta-advanced-template.tex:28: LaTeX Error: The font size command \normalsize
+ is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.28 \begin{document}
+                     
+? 
+
+./ecta-advanced-template.tex:30: LaTeX Error: Environment frontmatter undefined
+.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 \begin{frontmatter}
+                        
+? 
+./ecta-advanced-template.tex:34: Undefined control sequence.
+l.34 \runtitle
+              {???}
+? 
+Missing character: There is no ? in font nullfont!
+Missing character: There is no ? in font nullfont!
+Missing character: There is no ? in font nullfont!
+
+./ecta-advanced-template.tex:41: LaTeX Error: Environment aug undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.41 \begin{aug}
+                
+? 
+./ecta-advanced-template.tex:43: Undefined control sequence.
+l.43 \address
+             {\printead{e1}}
+? 
+./ecta-advanced-template.tex:43: Undefined control sequence.
+l.43 \address{\printead
+                       {e1}}
+? 
+Missing character: There is no e in font nullfont!
+Missing character: There is no 1 in font nullfont!
+
+./ecta-advanced-template.tex:47: LaTeX Error: \begin{document} ended by \end{au
+g}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.47 \end{aug}
+              
+? 
+./ecta-advanced-template.tex:49: Undefined control sequence.
+l.49 \runauthor
+               {???}
+? 
+Missing character: There is no ? in font nullfont!
+Missing character: There is no ? in font nullfont!
+Missing character: There is no ? in font nullfont!
+
+./ecta-advanced-template.tex:59: LaTeX Error: \begin{document} ended by \end{fr
+ontmatter}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.59 \end{frontmatter}
+                      
+? 
+
+./ecta-advanced-template.tex:62: LaTeX Error: The font size command \normalsize
+ is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.62 \end{document}
+                   
+? 
+[1] (./ecta-advanced-template.aux) ) 
+Here is how much of TeX's memory you used:
+ 21 strings out of 492649
+ 412 string characters out of 6129622
+ 56400 words of memory out of 5000000
+ 3997 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 22i,4n,15p,115b,109s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on ecta-advanced-template.pdf (1 page, 903 bytes).
+PDF statistics:
+ 8 PDF objects out of 1000 (max. 8388607)
+ 4 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

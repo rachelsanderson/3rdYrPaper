@@ -1,0 +1,100 @@
+\ifx\undefined\bysame
+\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\fi
+\begin{thebibliography}{xx}
+
+\harvarditem[Abramitzky et al.]{Abramitzky, Boustan, Eriksson, Feigenbaum and
+  Perez}{2019}{abe2019}
+{\bf Abramitzky, Ran, Leah Boustan, Katherine Eriksson, James Feigenbaum, and
+  Santiago Perez}, ``Automated Linking of Historical Data,'' {\it NBER Working
+  Paper}, 2019.
+
+\harvarditem[Abramitzky et al.]{Abramitzky, Boustan and
+  Eriksson}{2012}{abe2012}
+{\bf \bysame{}, Leah~Platt Boustan, and Katherine Eriksson}, ``Europe's Tired,
+  Poor, Huddled Masses: Self-Selection and Economic Outcomes in the Age of Mass
+  Migration,'' {\it American Economic Review}, May 2012, {\it 102} (5),
+  1832--56.
+
+\harvarditem[Abramitzky et al.]{Abramitzky, Mill and Perez}{2018}{arp2018}
+{\bf \bysame{}, Roy Mill, and Santiago Perez}, ``Linking Individuals Across
+  Historical Sources: a Fully Automated Approach,'' Working Paper 24324,
+  National Bureau of Economic Research February 2018.
+
+\harvarditem[Aizer et al.]{Aizer, Eli, Ferrie and
+  Lleras-Muney}{2016}{aizer2016}
+{\bf Aizer, Anna, Shari Eli, Joseph Ferrie, and Adriana Lleras-Muney}, ``The
+  Long-Run Impact of Cash Transfers to Poor Families,'' {\it American Economic
+  Review}, April 2016, {\it 106} (4), 935--71.
+
+\harvarditem[Anderson et al.]{Anderson, Honore and Lleras-Muney}{2019}{ahl2019}
+{\bf Anderson, Rachel, Bo~Honore, and Adriana Lleras-Muney}, ``Estimation and
+  inference using imperfectly matched data,'' {\it Working paper}, August 2019.
+
+\harvarditem[Bailey et al.]{Bailey, Cole, Henderson and
+  Massey}{2017}{bailey2017}
+{\bf Bailey, Martha, Connor Cole, Morgan Henderson, and Catherine Massey},
+  ``How Well Do Automated Linking Methods Perform? Lessons from U.S. Historical
+  Data,'' Working Paper 24019, National Bureau of Economic Research November
+  2017.
+
+\harvarditem[Bleakley and Ferrie]{Bleakley and Ferrie}{2016}{bleakley2016}
+{\bf Bleakley, Hoyt and Joseph Ferrie}, ``Shocking Behavior: Random Wealth in
+  Antebellum Georgia and Human Capital Across Generations,'' {\it The Quarterly
+  Journal of Economics}, 2016, {\it 131} (3), 1455--1495.
+
+\harvarditem[Christen]{Christen}{2012}{christen2012}
+{\bf Christen, Peter}, {\it Data Matching: Concepts and Techniques for Record
+  Linkage, Entity Resolution, and Duplicate Detection}, Springer Publishing
+  Company, Incorporated, 2012.
+
+\harvarditem[Enamorado et al.]{Enamorado, Fifield and
+  Imai}{2019}{enamorado2019}
+{\bf Enamorado, Ted, Benjamin Fifield, and Kosuke Imai}, ``Using a
+  Probabilistic Model to Assist Merging of Large-Scale Administrative
+  Records,'' {\it American Political Science Review}, 2019, {\it 113} (2),
+  353?371.
+
+\harvarditem[Fellegi and Sunter]{Fellegi and Sunter}{1969}{fellegi69}
+{\bf Fellegi, I.~P. and A.~B. Sunter}, ``A Theory for Record Linkage,'' {\it
+  Journal of the American Statistical Association}, 1969, {\it 64}, 1183--1210.
+
+\harvarditem[Goldstein et al.]{Goldstein, Harron and Wade}{2012}{Goldstein2012}
+{\bf Goldstein, Harvey, Katie~L Harron, and Angela~Mills Wade}, ``The analysis
+  of record-linked data using multiple imputation with data value priors.,''
+  {\it Statistics in medicine}, 2012, {\it 31 28}, 3481--93.
+
+\harvarditem[Harron et al.]{Harron, Goldstein and Dibben}{2015}{harron_book}
+{\bf Harron, Katie, Harvey Goldstein, and Chris Dibben}, {\it Methodological
+  Developments in Data Linkage}, United States: John Wiley & Sons Inc., 2015.
+
+\harvarditem[Herzog et al.]{Herzog, Scheuren and Winkler}{2007}{herzog07}
+{\bf Herzog, Thomas~N., Fritz~J. Scheuren, and William~E. Winkler}, {\it Data
+  Quality and Record Linkage Techniques}, 1st ed., Springer Publishing Company,
+  Incorporated, 2007.
+
+\harvarditem[Lahiri and Larsen]{Lahiri and Larsen}{2005}{lahiri05}
+{\bf Lahiri, P. and Michael~D. Larsen}, ``Regression Analysis with Linked
+  Data,'' {\it Journal of the American Statistical Association}, 2005, {\it
+  100} (469), 222--230.
+
+\harvarditem[Larsen and Rubin]{Larsen and Rubin}{2001}{larsen_rubin_2001}
+{\bf Larsen, Michael~D and Donald~B Rubin}, ``Iterative Automated Record
+  Linkage Using Mixture Models,'' {\it Journal of the American Statistical
+  Association}, 2001, {\it 96} (453), 32?41.
+
+\harvarditem[Neter et al.]{Neter, Maynes and Ramanathan}{1965}{NeterMaynes}
+{\bf Neter, John, E.~Scott Maynes, and R.~Ramanathan}, ``The Effect of
+  Mismatching on the Measurement of Response Errors,'' {\it Journal of the
+  American Statistical Association}, 1965, {\it 60} (312), 1005--1027.
+
+\harvarditem[Nix and Qian]{Nix and Qian}{2015}{nq2015}
+{\bf Nix, Emily and Nancy Qian}, ``The Fluidity of Race: \enquote{Passing} in
+  the United States, 1880-1940,'' Working Paper 20828, National Bureau of
+  Economic Research January 2015.
+
+\harvarditem[Scheuren and Winkler]{Scheuren and Winkler}{1993}{sw1993}
+{\bf Scheuren, Fritz and William Winkler}, ``Regression analysis of data files
+  that are computer matched,'' {\it Survey Methodology}, 01 1993, {\it 19.}
+
+\end{thebibliography}
