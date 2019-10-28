@@ -1,20 +1,22 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Setup}{}% 2
 \BOOKMARK [1][-]{section.3}{Estimation methods for linked data }{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{ahl2019}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{sw1993}{section.3}% 5
-\BOOKMARK [1][-]{section.4}{Incorporating probabilities}{}% 6
-\BOOKMARK [2][-]{subsection.4.1}{Errors in }{section.4}% 7
-\BOOKMARK [2][-]{subsection.4.2}{Applying argument to OLS}{section.4}% 8
-\BOOKMARK [1][-]{section.5}{Numerical Example}{}% 9
-\BOOKMARK [1][-]{section.6}{Record Linkage Methods}{}% 10
-\BOOKMARK [2][-]{subsection.6.1}{Deterministic}{section.6}% 11
-\BOOKMARK [2][-]{subsection.6.2}{Probabilistic Record Linkage}{section.6}% 12
-\BOOKMARK [1][-]{section.7}{Monte Carlo Study}{}% 13
-\BOOKMARK [2][-]{subsection.7.1}{Matching results}{section.7}% 14
-\BOOKMARK [2][-]{subsection.7.2}{Estimation Results}{section.7}% 15
-\BOOKMARK [1][-]{section.8}{Discussion/Conclusion}{}% 16
-\BOOKMARK [1][-]{section.9}{Appendix: Implementation Notes}{}% 17
-\BOOKMARK [2][-]{subsection.9.1}{Proofs}{section.9}% 18
-\BOOKMARK [2][-]{subsection.9.2}{implementation notes}{section.9}% 19
-\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 20
+\BOOKMARK [2][-]{subsection.3.1}{sw1993}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{ahl2019}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Comparing SW and AHL}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Incorporating probabilities in the AHL estimator}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Estimating the mean}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Errors in }{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.3}{Applying argument to OLS}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Numerical Example}{}% 11
+\BOOKMARK [1][-]{section.6}{Record Linkage Methods}{}% 12
+\BOOKMARK [2][-]{subsection.6.1}{Deterministic}{section.6}% 13
+\BOOKMARK [2][-]{subsection.6.2}{Probabilistic Record Linkage}{section.6}% 14
+\BOOKMARK [1][-]{section.7}{Monte Carlo Study}{}% 15
+\BOOKMARK [2][-]{subsection.7.1}{Matching results}{section.7}% 16
+\BOOKMARK [2][-]{subsection.7.2}{Estimation Results}{section.7}% 17
+\BOOKMARK [1][-]{section.8}{Discussion/Conclusion}{}% 18
+\BOOKMARK [1][-]{section.9}{Appendix: Implementation Notes}{}% 19
+\BOOKMARK [2][-]{subsection.9.1}{Proofs}{section.9}% 20
+\BOOKMARK [2][-]{subsection.9.2}{implementation notes}{section.9}% 21
+\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 22

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 OCT 2019 22:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  28 OCT 2019 11:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1273,33 +1273,27 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 
 
-./FinalDraft.tex:109: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:111: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 ... methods and data generating processes.  
+l.111 ... methods and data generating processes.  
                                                   Section 6 contains the res...
 
 ? 
-./FinalDraft.tex:122: Misplaced \noalign.
-\addlinespace ->\noalign 
-                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.122 \addlinespace
-                   
-? 
-[4]
 ./FinalDraft.tex:124: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.124 \addlinespace
                    
 ? 
-./FinalDraft.tex:127: Misplaced \noalign.
+[4]
+./FinalDraft.tex:126: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.127 \addlinespace
+l.126 \addlinespace
                    
 ? 
 ./FinalDraft.tex:129: Misplaced \noalign.
@@ -1308,90 +1302,122 @@ l.127 \addlinespace
 l.129 \addlinespace
                    
 ? 
+./FinalDraft.tex:131: Misplaced \noalign.
+\addlinespace ->\noalign 
+                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
+l.131 \addlinespace
+                   
+? 
 [5] [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 142.
+(hyperref)                removing `\begingroup' on input line 144.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 142.
+(hyperref)                removing `\<let>-command' on input line 144.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 142.
+(hyperref)                removing `\NAT@ctype' on input line 144.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 142.
+(hyperref)                removing `\z@' on input line 144.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 142.
+(hyperref)                removing `\let' on input line 144.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 142.
+(hyperref)                removing `\let' on input line 144.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 142.
+(hyperref)                removing `\new@ifnextchar' on input line 144.
 
 [7] [8]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 187.
+(hyperref)                removing `\begingroup' on input line 163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 187.
+(hyperref)                removing `\<let>-command' on input line 163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 187.
+(hyperref)                removing `\NAT@ctype' on input line 163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 187.
+(hyperref)                removing `\z@' on input line 163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 187.
+(hyperref)                removing `\let' on input line 163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 187.
+(hyperref)                removing `\let' on input line 163.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 187.
+(hyperref)                removing `\new@ifnextchar' on input line 163.
 
-[9] [10] [11] [12] [13]
+[9] [10]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 209.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 209.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 209.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 209.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 209.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 209.
+
+[11] [12] [13]
 \openout3 = `FinalDraft.fff'.
 
  (FinalDraft.fff)
-Overfull \hbox (5.2011pt too wide) in paragraph at lines 263--264
+Overfull \hbox (5.2011pt too wide) in paragraph at lines 269--270
 []\OT1/cmr/m/n/12 More gen-er-ally, the es-ti-ma-tor $[][]$ can be com-puted fo
 r sam-ple of ob-ser-va-tions $(\OML/cmm/m/it/12 X[]; X[]\OT1/cmr/m/n/12 )[]$,
  []
 
+[14]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 271.
+(hyperref)                removing `math shift' on input line 277.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 271.
+(hyperref)                removing `math shift' on input line 277.
 
-[14] [15]
+[15] [16]
 
-./FinalDraft.tex:319: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:325: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.319 ...crease as the true $\pi$ approaches 0.5. 
+l.325 ...crease as the true $\pi$ approaches 0.5. 
                                                     For $N=100$, the ratio i...
 
 ? 
@@ -1399,70 +1425,70 @@ l.319 ...crease as the true $\pi$ approaches 0.5. 
 \openout4 = `FinalDraft.ttt'.
 
  (FinalDraft.ttt)) (./Figures/compare_100.tex)
-(./Figures/compare_1000.tex) [16] [17]
-Overfull \hbox (7.09613pt too wide) in paragraph at lines 360--361
+(./Figures/compare_1000.tex) [17] [18]
+Overfull \hbox (7.09613pt too wide) in paragraph at lines 366--367
 []\OT1/cmr/m/n/12 I be-gin by con-struct-ing a ``ground truth" dataset with 100
 0 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m/n/12 )$,
  []
 
-[18] [19] [20]
-Overfull \hbox (4.98752pt too wide) in paragraph at lines 448--449
+[19] [20]
+Overfull \hbox (4.98752pt too wide) in paragraph at lines 454--455
 []\OT1/cmr/m/n/12 Designate as matches all $(\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
-[21] [22] [23] [24] [25]
+[21] [22] [23] [24] [25] [26]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 554.
- [26]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 560.
 
-./FinalDraft.tex:572: Package inputenc Error: Invalid UTF-8 byte 160.
+
+./FinalDraft.tex:578: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.572 ...f match rates in Figure \ref{match_hist} 
+l.578 ...f match rates in Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
-[27] [28] [29] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
+[27] [28] [29] [30] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
 (./Figures/compare_3.tex) (./Figures/compare_4.tex) (./Figures/compare_5.tex)
-[30] (./FinalDraft.bbl
+[31] (./FinalDraft.bbl
 ./FinalDraft.bbl:69: Misplaced alignment tab character &.
 l.69 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
-[31]
+[32]
 ./FinalDraft.bbl:92: Undefined control sequence.
 l.92 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
-) AED endfloat: Processing end Figures and Tables [32] (./FinalDraft.fff
-<./Figures/dStar.pdf, id=505, 505.89pt x 505.89pt>
+) AED endfloat: Processing end Figures and Tables [33] (./FinalDraft.fff
+<./Figures/dStar.pdf, id=508, 505.89pt x 505.89pt>
 File: ./Figures/dStar.pdf Graphic file (type pdf)
 <use ./Figures/dStar.pdf>
 Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 4.
 (pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
 
-[33
+[34
 
 
  <./Figures/dStar.pdf>]
-<./Figures/bias_plot.pdf, id=516, 505.89pt x 505.89pt>
+<./Figures/bias_plot.pdf, id=519, 505.89pt x 505.89pt>
 File: ./Figures/bias_plot.pdf Graphic file (type pdf)
 <use ./Figures/bias_plot.pdf>
 Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 14.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
- [34
+ [35
 
  <./Figures/bias_plot.pdf>]
-<./Figures/var_plot.pdf, id=528, 505.89pt x 505.89pt>
+<./Figures/var_plot.pdf, id=531, 505.89pt x 505.89pt>
 File: ./Figures/var_plot.pdf Graphic file (type pdf)
 <use ./Figures/var_plot.pdf>
 Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 24.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
- [35
+ [36
 
  <./Figures/var_plot.pdf>]
 ./FinalDraft.fff:84: Missing } inserted.
@@ -1471,18 +1497,18 @@ Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 24.
 l.84 \end{tikzpicture}
                       
 ? 
-[36
+[37
 
 ]
-<./Figures/match_rate.pdf, id=543, 338.26375pt x 457.71pt>
+<./Figures/match_rate.pdf, id=547, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
 Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 93.
 (pdftex.def)             Requested size: 422.77664pt x 572.08722pt.
- [37
+ [38
 
  <./Figures/match_rate.pdf>]
-<./Figures/compare.pdf, id=557, 650.43pt x 649.42625pt>
+<./Figures/compare.pdf, id=560, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
 Package pdftex.def Info: ./Figures/compare.pdf  used on input line 102.
@@ -1492,31 +1518,31 @@ Overfull \hbox (46.97836pt too wide) in paragraph at lines 102--104
  [] 
  []
 
-[38
+[39
 
  <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=571, 466.74374pt x 524.96124pt>
+<./Figures/ahl_hist.pdf, id=574, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
 Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 111.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [39
+ [40
 
  <./Figures/ahl_hist.pdf>]
-<./Figures/sw_hist.pdf, id=585, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=588, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
 Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 120.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
- [40
+ [41
 
  <./Figures/sw_hist.pdf>]
-<./Figures/OLS(L=1)_hist.pdf, id=599, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=602, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
 Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 129.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-) [41
+) [42
 
  <./Figures/OLS(L=1)_hist.pdf>] (./FinalDraft.ttt
 ./FinalDraft.ttt:7: Missing $ inserted.
@@ -1537,7 +1563,7 @@ l.7 ...1}{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.8 \cmidrule
              (l{3pt}r{3pt}){2-6}
 ? 
-[42]
+[43]
 ./FinalDraft.ttt:31: Missing $ inserted.
 <inserted text> 
                 $
@@ -1556,7 +1582,7 @@ l.31 ...}{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.32 \cmidrule
               (l{3pt}r{3pt}){2-6}
 ? 
-[43]
+[44]
 ./FinalDraft.ttt:55: Missing $ inserted.
 <inserted text> 
                 $
@@ -1575,16 +1601,16 @@ l.55 ...}{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.56 \cmidrule
               (l{3pt}r{3pt}){2-6}
 ? 
-[44] (./Figures/match_rates.tex) [45
+[45] (./Figures/match_rates.tex) [46
 
 
 
 
 
-] (./Figures/multi_tab.tex) [46
+] (./Figures/multi_tab.tex) [47
 
 ]
-(./Figures/est_tab.tex) [47
+(./Figures/est_tab.tex) [48
 
 ]
 ./FinalDraft.ttt:112: Missing $ inserted.
@@ -1605,7 +1631,7 @@ l.112 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.113 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[48]
+[49]
 ./FinalDraft.ttt:136: Missing $ inserted.
 <inserted text> 
                 $
@@ -1624,7 +1650,7 @@ l.136 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.137 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[49]
+[50]
 ./FinalDraft.ttt:160: Missing $ inserted.
 <inserted text> 
                 $
@@ -1643,7 +1669,7 @@ l.160 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.161 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[50]
+[51]
 ./FinalDraft.ttt:184: Missing $ inserted.
 <inserted text> 
                 $
@@ -1662,7 +1688,7 @@ l.184 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.185 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-[51]
+[52]
 ./FinalDraft.ttt:208: Missing $ inserted.
 <inserted text> 
                 $
@@ -1681,25 +1707,31 @@ l.208 ...{c}{ } & \multicolumn{5}{c}{$\hat{\pi}}$}
 l.209 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
-) [52]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 705.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 705.
+) [53]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 711.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 711.
  (./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 705.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 705.
-Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
-(rerunfilecheck)             Checksum: 968628E03B6BE8008B563D2031F3988C;1201.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 711.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 711.
 
+
+Package rerunfilecheck Warning: File `FinalDraft.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `FinalDraft.out':
+(rerunfilecheck)             Before: 9329C7B7349F97E393A001F1FDB0358E;1292
+(rerunfilecheck)             After:  34AB07B5B1200B2AA7C31EF6AC008D6A;1361.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 705.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 711.
  ) 
 Here is how much of TeX's memory you used:
- 32227 strings out of 492649
- 643856 string characters out of 6129622
- 731475 words of memory out of 5000000
- 35403 multiletter control sequences out of 15000+600000
+ 32238 strings out of 492649
+ 643986 string characters out of 6129622
+ 731795 words of memory out of 5000000
+ 35407 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10382b,917s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1728,28 +1760,31 @@ pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 /usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
 usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
-/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
-local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/l
-ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/loc
-al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
-/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
-exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/t
-exlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
-live/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texli
-ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive
-/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/20
-18/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on FinalDraft.pdf (52 pages, 420047 bytes).
+/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
+sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
+r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
+local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/lo
+cal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
+texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texl
+ive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
+/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
+18/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on FinalDraft.pdf (53 pages, 445193 bytes).
 PDF statistics:
- 775 PDF objects out of 1000 (max. 8388607)
- 660 compressed objects within 7 object streams
- 153 named destinations out of 1000 (max. 500000)
- 309 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 788 PDF objects out of 1000 (max. 8388607)
+ 669 compressed objects within 7 object streams
+ 160 named destinations out of 1000 (max. 500000)
+ 317 words of extra memory for PDF output out of 10000 (max. 10000000)
 

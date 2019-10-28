@@ -102,6 +102,8 @@ The goal of this paper is to build a bridge between the matching and estimation 
 
 % good til here
 
+% maybe add to intro Other methods for estimating with linked data are ad hoc or are not easily adapted to the setup in Section 2.  For example, \cite{bleakley2016} generated ``composite match" equal to the average of the linked observations.   \cite{nq2015} construct bounds on the parameter of interest using different configurations of matched data.   \cite{abe2012} use traditional estimation methods using only individuals who are uniquely matched, and then reweight on observables (not sure what this means?).   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   Multiple imputation is not useful here, as we do not consider missing data. The Lahiri methods require $N_x = N_y$ and so we are left with two methods.
+
 By comparing the estimation methods, this gives suggestion to which record linkage procedure should be used (or, better yet, which outputs of the record linkage procedure are necessary for optimal estimation).  The main result is that unless probabilities can be estimated accurately, knowledge about them should not be incorporated in the estimation step.  
 
 My preliminary results support the following suggestions for analyzing linked data: if you use deterministic matching, you should allow for multiple matches and use the estimator in \cite{ahl2019}.  If you use probabilistic record linkage, you should choose the match with the highest probability of being correct if it exceeds a certain threshold; otherwise you should use multiple matches because the estimated probabilities can be noisy, and can result in large weights on observations with small $\pi_{i\ell}$.  When it doubt, implement all methods and compare the results!
@@ -131,15 +133,36 @@ For the purposes of this paper, a matching procedure is defined as a set of rule
 Although I will discuss a few of the most popular methods used to construct $\varphi$ in later sections, this is not the focus of this paper.  Like \cite{ahl2019}, I take $\varphi$ and the matched dataset it produces as given.  The matched dataset can be written in the general form \begin{equation} \mathcal{D}_n \equiv \left(x_i, w_i, \{y_{i\ell}\}_{\ell=1}^{L_i}, \{\pi_{i\ell}\}_{\ell=1}^{L_i}\right)_{i=1}^N \label{data} \end{equation}
 where $x_i$ is a vector of covariates for a single observation in the $x$-datafile, and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are the outcomes from the $y$-datafile to which it is linked based on the identifying variables $w_i$.  The variables $\{\pi_{i\ell}\}_{\ell=1}^{L_i}$ correspond to the conditional probability that a particular $y_{i\ell}$ refers to the correct match, so that $\sum_{\ell=1}^{L_i} \pi_{i\ell} = 1$.  If $\varphi$ was constructed without estimating $\pi_{i\ell}$, as in a deterministic matching procedure, I assume that $\pi_{i\ell} = \frac{1}{L_i}$.  
 
-Additionally, I assume that (i) the true match $y_i$ is included among the possible matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $i$, and that (ii) the observed $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are i.i.d. draws from their marginal distributions conditional on the identifying variables $w_i$.  Assumption (i) is necessary for identification, and Assumption (ii) is a selection on observables assumption, which requires that all individuals with the same identifying information are equally likely to be included in $\mathcal{D}_n$.  I defer to later sections the discussion about when these assumptions are likely to fail in practice. 
+Additionally, I assume that (i) the true match $y_i$ is included among the possible matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $i$, and that (ii) the observed $x_i$ and $\{y_{i\ell}\}_{\ell=1}^{L_i}$ are i.i.d. draws from their marginal distributions conditional on the identifying variables $w_i$.  Assumption (i) is necessary for identification, and Assumption (ii) is a selection on observables assumption, which requires that all individuals with the same identifying information are equally likely to be included in $\mathcal{D}_n$.  
+
+Assumption (i) needs to be verified empirically; however the simulations in Section X suggest that it is reasonable when multiple matches are allowed.  Assumption (ii) requires thats all individuals with the same identifying information (such as name, age, Census block) have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample (unless individuals are matched by income); but the OLS estimator using perfectly linked data would also be biased because of unobserved sample selection. 
 
 \section{Estimation methods for linked data }
 
-In this section, I review two estimation methods designed to handle matched data of the form (\ref{data}).  
+In this section, I review methods from \cite{sw1993} and \cite{ahl2019} (henceforth referred to as the SW and AHL estimators) for estimating regression models using matched data with the structure described in (\ref{data}), and establish conditions under which they are equivalent.   Although there are other methods for analyzing linked data, none are fully compatible with the setup described in Section 2.  For example, \cite{lahiri05} develop a version of the SW estimator based on the assumption that each observation in the $y$-datafile is generated by model in (\ref{model}), and that its corresponding value of $x$ appears in the $x$-datafile.  This differs from the problem considered in this paper, which allows for $N_y > N_x$, and assumes that the relationship in (\ref{model}) holds only for observations in the $x$-datafile. % Sentence about Goldstein.
 
-Other methods exist, however they are ad hoc or are not easily adapted to the setup in Section 2.  For example, \cite{bleakley2016} generated ``composite match" equal to the average of the linked observations.   \cite{nq2015} construct bounds on the parameter of interest using different configurations of matched data.   \cite{abe2012} use traditional estimation methods using only individuals who are uniquely matched, and then reweight on observables (not sure what this means?).   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   Multiple imputation is not useful here, as we do not consider missing data. The Lahiri methods require $N_x = N_y$ and so we are left with two methods.
+\subsection{\cite{sw1993}}
+
+Building upon the work \cite{NeterMaynes}, \cite{sw1993} study how to correct for bias introduced using incorrectly linked data in linear regression models.  Their methods assume that the data consists of observations $(x_i,z_i)_{i=1}^N$, so that each $x_i$ is linked with a single outcome $z_i$ that may or may not correspond to the true $y_i$.  Specifically, 
+$$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,N_y $} \end{cases}$$ 
+and $\sum_{j=1}^{N_y} q_{ij} = 1, \ i=1,\dots, N$, where $N_y$ is the size of the $y$-datafile and $N$ is the size of the matched dataset.   Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
+\begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
+which is biased, because $ E[z_i ] = E\left[q_{ii} y_i + \sum_{j\neq i} q_{ij} y_j\right] \neq E[y_i]$ if $q_{ii}\neq 1$ for some $i$.  Denoting
+ $q_i = (q_{i1}, \dots, q_{iN_y})'$, \cite{sw1993} derive the bias of $\hat{\beta}_N $ conditional on the observed values of $y$,
+\begin{equation} \text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B \label{bias} \end{equation}
+where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the true response $y_i$.  
+
+Observing (\ref{bias}), \cite{sw1993} propose estimating $\hat{B}$ using the first and second highest elements of $q_i$, and their corresponding values $y_j$ to compute 
+\begin{equation} \hat{B}_i^{TR} = (q_{ij_1} - 1) y_{ij_1} + q_{ij_2} y_{ij_2} \label{bHat} \end{equation}
+for each $i$, and then using it to correct for the bias in $\hat{\beta}_N$ as follows,
+\begin{equation} \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}^{TR} \label{sw}\end{equation}
+In principle, $\hat{B}^{TR}$ can incorporate any number of elements of $q_i$, however \cite{sw1993} show that if $q_{ij1}$ is sufficiently high for all $i$, then the truncation with two links results in a very small bias.  
+ 
+The SW estimator has two important caveats.  The first is that it requires that the $y$ value associated with the largest element in $q_i$ corresponds with the true outcome $y_i$, so that errors in $z_i$ result from random assignment rules or requiring that no two values $x_i$ and $x_j$ are linked to the same value of $y$.  The second is that constructing $\hat{\beta}_{SW}$ requires knowledge of $q_{i}$ and the corresponding elements of $y$, and so it cannot be applied to data linked with deterministic methods.  Even if estimates of $q_{ij}$ are available, $\hat{\beta}_{SW}$ will be biased if the estimates $\widehat{q_{ij}}$ are correlated with $x$ or $y$, which occurs if $x$ or $y$ is correlated with errors in the matching variables.  This assumption is different from Assumption (ii) in Section 2, and often fails in economic application, such as in \cite{nq2015}, where $y$ measures whether a person's recorded ethnicity changes between Census years, and changes in first and last name (the matching variables) are strongly correlated with $y$.  
 
 \subsection{\cite{ahl2019}}
+
+When the assumptions of $\hat{\beta}_{SW}$ fail, one solution is to use methods from \cite{ahl2019}, which is unbiased under Assumptions (i) and (ii) from Section 2.  Recall that these are (i) the true match of $x_i$ is included among the matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $i$, and (ii) $x_i$ and $y_i$ are random samples conditional on the matching variables.  Assumption (ii) allows $x$ and $y$ to be correlated with errors in matching, so long as that dependence is fully captured by $w$; hence the AHL estimator would be valid in the \cite{nq2015} if ethnicity is included among the matching variables.  
 
 The goal of \cite{ahl2019} is to estimate $\theta_0$ that satisfies the model
 \begin{equation}
@@ -181,45 +204,28 @@ which suggests we can use (\ref{new_ahl}) and (\ref{obs}) as moment conditions. 
 \begin{bmatrix} \frac{2}{N_{L_ 2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta)x_i  - \frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta)x_i   \\
 \frac{1}{N_{L_1}}\sum_{i=1}^{N_{L_1}} (y_i - x_i'\beta)x_i \end{bmatrix} = 0 
 \end{gather}
-where $N_{L_{\ell}}$ is the number of observations matched to $\ell$ observations.  The precision of the first moment may be limited by the number of observations with two and three matches, respectively. 
+where $N_{L_{\ell}}$ is the number of observations matched to $\ell$ observations.  In practice, the precision of the estimator depends on the number of observations that are linked to two and three outcomes, however the estimator based on these moments should be asymptotically consistent.  % think about doing a proof
 
+\subsection{Comparing $\hat{\beta}_{SW}$ and $\hat{\beta}_{AHL}$}
+There is a natural parallel between $\hat{\beta}_{SW}$ and $\hat{\beta}_{AHL}$ when we consider data of the form in (\ref{data}), and we assume that $L_i$ is the number of links whose $q_{ij}$ exceed a threshold $\bar{q}$, and that the conditional probabilities $\pi_{i\ell} = \frac{q_{i\ell}}{\sum_{\ell=1}^{L_{i}} q_{i\ell}}$.  Let also $y_{i\ell^*}$ refer to the element of $\{y_{i\ell}\}_{\ell=1}^{L_i}$ that is associated with the highest value of $\{\pi_{i\ell}\}_{\ell=1}^{L_i}$.  Then, we can write $\hat{\beta}_{SW}$ as the OLS estimator for the model
+\begin{equation}
+z_i - \hat{B}_i = x_i'\beta + \varepsilon_i 
+\label{transformed}
+\end{equation}
+with $\hat{B}_i = \sum_{\ell =1}^{L_i} \pi_{i\ell} y_{i\ell} - y_{i\ell^*}$.  Note that the \cite{sw1993} method assumes that the $y_{i\ell}$ with the highest value of $\pi_{i\ell}$ is the true match.\footnote{There are reasons that $z_i \neq y_{i\ell^*}$.  This happens, for example, if $z_i$ is assigned at random according to the probabilities $\pi_{i\ell}$ or if a one-to-one matching is enforced such that no single $y$ is assigned to two distinct values of $x$}
 
-\subsection{\cite{sw1993}}
+The AHL estimator can be written in the form (\ref{transformed}) with 
+\begin{equation}
+\hat{B}_i = z_i - \sum_{\ell=1}^{L_i} y_{i\ell} + (L_i -1) \hat{g}(w_i, L_i) \end{equation} 
+so that $\hat{\beta}^{AHL}$ and $\hat{\beta}^{SW}$ differ only in their choice of $B_i$.  Alternatively, $\hat{\beta}_{SW}$ can be written in the form of $\hat{\beta}_{AHL}$, as in equation (\ref{ahl}), by setting 
+\begin{equation} \hat{g}(w_i, L_i) = \frac{1}{L_i -1 }\left( \sum_{\ell \neq \ell^*} y_{i\ell} + y_{i\ell^*} \right) \label{ahl_sw} \end{equation}
+Since $\hat{g}(\cdot)$ as written in (\ref{ahl_sw}) ignores information about $w_i$, and assumes that $y_{i\ell^*}$ is the correct match, the AHL estimator may perform better if $y_{i\ell^*}$ is not the true match, informative $\pi_{i\ell}$ are not available, or $w_i$ contains information about the conditional mean of the $y_{i\ell}$ drawn from the incorrect distribution.   However, if reliable estimates of $\pi_{i\ell}$ is available, it may be possible to improve the AHL estimator by incorporating this information.  I explore this possibility in the next section. 
 
-\cite{sw1993} develop methods for linked data where each $x_i$ observation is linked to a single outcome, so that $L_i=1$ for all $i$.  They label these observations $(x_i, z_i)$ for $i=1,\dots, N$, where $z_i$ may or may not correspond to the true $y_i$.  Specifically, 
-$$z_i = \begin{cases} y_i & \text{with probability $q_{ii}$} \\ y_j & \text{with probability $q_{ij}$ for $j\neq i,\ j = 1,\dots,N_y $} \end{cases}$$ 
-and $\sum_{j=1}^{N_y} q_{ij} = 1, \ i=1,\dots, N$, where $N_y$ is the size of the $y$-datafile and $N$ is the size of the matched dataset.   Estimating (\ref{model}) using $z_i$ as the dependent variable yields the naive least squares estimator, 
-\begin{equation} \hat{\beta}_N = (X'X)^{-1} X'z \label{naive} \end{equation}
-which is biased, because $ E[z_i ] = E\left[q_{ii} y_i + \sum_{j\neq i} q_{ij} y_j\right] \neq E[y_i]$ if $q_{ii}\neq 1$ for some $i$.  Denoting
- $q_i = (q_{i1}, \dots, q_{iN_y})'$, we can write the bias of $\hat{\beta}_N $ conditional on the observed values of $y$ as,
-\begin{equation} \text{bias} (\hat{\beta}_N | y) = E[(\hat{\beta}_N - \beta) | y ] = (X'X)^{-1} X'B \label{bias} \end{equation}
-where $B = (B_1, \dots, B_n)'$ and $B_i = (q_{ii}-1)y_i + \sum_{j\neq i } q_{ij} y_j = q_i'y - y_i$, which is the difference between a weighted average of responses from all observations and the true response $y_i$.  
+\section{Incorporating probabilities in the AHL estimator} 
 
-Observing (\ref{bias}), \cite{sw1993} proposed estimating $\hat{B}$ to correct for the bias of $\hat{\beta}_N$.   To reduce the computational burden of constructing $\hat{B}$, they suggest using the first and second highest elements of the vector $q_{ij_1}$ and $q_{ij_2}$ and their corresponding values $y_{ij_1}$ and $y_{ij_2}$ to compute $\hat{B}_i^{TR} = (q_{ij_1} - 1) y_{ij_1} + q_{ij_2} y_{ij_2}$, and then calculating
-% write what are z_j
-\begin{equation} \hat{\beta}_{SW} = \hat{\beta}_N - (X'X)^{-1} X' \hat{B}^{TR} \label{sw}\end{equation}
-Although $\hat{B}^{TR}$ can incorporate an arbitrary number of elements of $q_i$, \cite{sw1993} note that if the probability is high that the best candidate link is the true link, then the truncation with two links results in a very small bias. 
- 
-The downside of the \cite{sw1993} method is that it requires knowledge of $q_{ij}$, as well as the second most likely value of $y$ for each observation of $x$.  This information is not typically available when using deterministic matching procedures such as those developed by \cite{abe2012}.   However, even if  estimates of $q_{ij}$ are available (as may be the case when using probabilistic record linkage), the bias may persist if the estimates $\widehat{q_{ij}}$ are correlated with $x$ or $y$, as this would introduce endogeneity.   
+I begin with a simplified version of the AHL GMM framework, based on the observation that estimating $E[m(y_i, x_i; \theta)]$ is the same as estimating the mean... 
 
-The endogeneity problem arises because $\widehat{q_{ij}}$ are typically calculated by plugging in estimates of the parameters $\psi \equiv \{p_M, P(\gamij | M),\ P(\gamij |U)\}$ into equation (\ref{bayes}).   Thus, $\widehat{q_{ij}}$ will be correlated with $x$ or $y$ if errors in the matching variables, which determine the distribution of $\hat{\psi}$, are correlated with $x$ or $y$.  This is likely to be a problem in economics applications, such as in \cite{nq2015}, where $y$ measures whether a person's recorded ethnicity changes between Census years, but changes in names (the matching variables) are also strongly correlated with $y$.  
-
-One possible solution to the challenges described above is to use the estimator from \cite{ahl2019}, which is unbiased if the errors in estimating the conditional expectation of $y$ be independent of the $x_i$, which holds if $x_i$ and $y_i$ are random samples conditional on the matching variables\footnote{Technically, the result in \cite{ahl2019} is proven for GMM, so the necessary condition is that errors in estimating a conditional moment condition are independent of $x_i$}.   Specifically, for the model in (\ref{model}),
-
-
-
-Like the \cite{sw1993} estimator, the AHL estimator requires that the true match for $x_i$ is included among the matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ for all $\ell$.  The simulations in Section 7 suggest that this is a reasonable assumption when multiple matches are allowed.  When $L_i=1$ for all $i$, the AHL estimator reduces to the OLS estimator $\hat{\beta}_N$, so it is only meaningful to compute for linked datasets with some $L_i>1$. 
-
-The AHL estimator also requires that $x$ and $y$ are random samples conditional on the matching variables.  Practically speaking, this means thats all individuals with the same identifying information (such as name, age, Census block) have equal probability of appearing in the sample.  This assumption would be violated if, for example, higher income individuals have a greater probability of appearing in the sample (unless individuals are matched by income); but the OLS estimator using perfectly linked data would also be biased because of unobserved sample selection.  
-
-Other approaches for regression analysis using linked data have been proposed by \cite{lahiri05} and \cite{NeterMaynes}, however neither is appropriate for the setup described in Section 2.  The methods in \cite{lahiri05} assume that each observation appearing $y$-datafile  is generated according to the DGP in (\ref{model}), and that its corresponding value of $x$ appears in the $x$-datafile.  This is a problem both conceptually and for implementation when entries in the $x$-datafile represent a strict subset of observations in the $y$-datafile.   The methods in \cite{NeterMaynes} are simplified versions of those in \cite{sw1993}, and hence face the same implementation issues described above. 
-
-By contrast, the AHL estimator is agnostic about whether the incorrectly linked $y_j$ are generated by (\ref{model}) or by some other data generating process.  The AHL estimator has additional robustness properties due to the fact that it weights multiple matches equally and does not require estimating match probabilities, which are explored in the following section.  
-
-
-
-
-\section{Incorporating probabilities}
+\subsection{Estimating the mean}
 
 Consider the problem of estimating the mean of a random variable $X \sim F_X(\mu; \sigma^2)$ using two observations $X_{1}$ and $X_{2}$.  With probability $\pi$, $X_1$ is drawn from the true distribution $F_X$ and $X_2$ is noise drawn from the distribution $F_Y(\kappa, \omega^2)$.  With probability $1-\pi$, $X_2$ is drawn from the correct distribution and $X_1$ is noise.  Under this specification, exactly one of $X_1$ or $X_2$ is drawn from the distribution of interest at all times.  
 
