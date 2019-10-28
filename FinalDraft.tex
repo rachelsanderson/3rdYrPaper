@@ -268,9 +268,9 @@ Figure \ref{dStar} plots the optimal $d^*$ for $\pi\in[0,0.5]$, since the soluti
 \end{figure}
 
 More generally, the estimator $\hat{\mu}^*$ can be computed for a sample of observations $(X_{i1}, X_{i2})_{i=1}^N$, where $X_{i1}$ is drawn from $F_X$ with probability $\pi_i$, and $X_{i2}$ is drawn from $F_X$ with probability $1-\pi_i$.  In this case, $d^*$ is calculated according to (\ref{dOpt}) using,
-\begin{align*} \hat{\mu}_1 &= \sum_{i=1}^N \frac{X_{i1}}{\pi_i} - \frac{1-\pi_i}{\pi_i}\kappa 
+\begin{align*} \hat{\mu}_1 &= \frac{1}{N} \sum_{i=1}^N \frac{X_{i1}}{\pi_i} - \frac{1-\pi_i}{\pi_i}\kappa 
 & \Var{\hat{\mu}_1} &=  \frac{1}{N^2}\sum_{i=1}^N \frac{g(\pi_i; \theta)}{\pi_i^2} \\
- \hat{\mu}_2 &= \sum_{i=1}^N \frac{X_{i2}}{1-\pi_i} - \frac{\pi_i}{1-\pi_i}\kappa \ &\Var{\hat{\mu}_2} &= \frac{1}{N^2} \sum_{i=1}^N \frac{g(1-\pi_i; \theta)}{(1-\pi_i)^2} \end{align*}
+ \hat{\mu}_2 &= \frac{1}{N} \sum_{i=1}^N \frac{X_{i2}}{1-\pi_i} - \frac{\pi_i}{1-\pi_i}\kappa \ &\Var{\hat{\mu}_2} &= \frac{1}{N^2} \sum_{i=1}^N \frac{g(1-\pi_i; \theta)}{(1-\pi_i)^2} \end{align*}
 $$\text{Cov}(\hat{\mu}_1, \hat{\mu}_2) = \frac{1}{N^2}\sum_{i=1}^N \frac{\text{Cov}(X_{1i}, X_{2i})}{\pi_i(1-\pi_i)} $$
 where $g(p; \theta) = p \sigma^2 + (1-p) \omega^2 + p(1-p)(\mu-\kappa)^2$ is the variance of $X_{i\ell},$ for $\ell \in \{1,2\}$, that has probability $p$ of being drawn from the correct distribution.  
 
