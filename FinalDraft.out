@@ -9,17 +9,18 @@
 \BOOKMARK [2][-]{subsection.4.2}{Errors in }{section.4}% 9
 \BOOKMARK [2][-]{subsection.4.3}{Incorporating 0=x"0119 in linear regression}{section.4}% 10
 \BOOKMARK [2][-]{subsection.4.4}{Generalizing results to Li > 2}{section.4}% 11
-\BOOKMARK [1][-]{section.5}{Numerical Example}{}% 12
-\BOOKMARK [1][-]{section.6}{Record Linkage Methods}{}% 13
-\BOOKMARK [2][-]{subsection.6.1}{Deterministic}{section.6}% 14
-\BOOKMARK [2][-]{subsection.6.2}{Probabilistic Record Linkage}{section.6}% 15
-\BOOKMARK [1][-]{section.7}{Monte Carlo Study}{}% 16
-\BOOKMARK [2][-]{subsection.7.1}{Matching results}{section.7}% 17
-\BOOKMARK [2][-]{subsection.7.2}{Estimation Results}{section.7}% 18
-\BOOKMARK [1][-]{section.8}{Discussion/Conclusion}{}% 19
-\BOOKMARK [1][-]{section.9}{Appendix: Implementation Notes}{}% 20
-\BOOKMARK [2][-]{subsection.9.1}{Proofs}{section.9}% 21
-\BOOKMARK [2][-]{subsection.9.2}{Lemma 1}{section.9}% 22
-\BOOKMARK [2][-]{subsection.9.3}{Variance formulas}{section.9}% 23
-\BOOKMARK [2][-]{subsection.9.4}{implementation notes}{section.9}% 24
-\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 25
+\BOOKMARK [1][-]{section.5}{Monte Carlo Study}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Generating the x- and y-datafiles}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Linking the x- and y-datafiles}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.3}{Deterministic}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.4}{Probabilistic Record Linkage}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Monte Carlo Study}{}% 17
+\BOOKMARK [2][-]{subsection.6.1}{Matching results}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.2}{Estimation Results}{section.6}% 19
+\BOOKMARK [1][-]{section.7}{Discussion/Conclusion}{}% 20
+\BOOKMARK [1][-]{section.8}{Appendix: Implementation Notes}{}% 21
+\BOOKMARK [2][-]{subsection.8.1}{Proofs}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.2}{Lemma 1}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.3}{Variance formulas}{section.8}% 24
+\BOOKMARK [2][-]{subsection.8.4}{implementation notes}{section.8}% 25
+\BOOKMARK [1][-]{section.9}{More MSE Tables}{}% 26
