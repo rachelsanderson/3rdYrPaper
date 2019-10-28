@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  28 OCT 2019 11:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  28 OCT 2019 11:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1391,33 +1391,32 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 209.
 
-[11] [12] [13]
+[11] [12] [13] [14]
 \openout3 = `FinalDraft.fff'.
 
  (FinalDraft.fff)
-Overfull \hbox (5.2011pt too wide) in paragraph at lines 269--270
+Overfull \hbox (5.2011pt too wide) in paragraph at lines 273--274
 []\OT1/cmr/m/n/12 More gen-er-ally, the es-ti-ma-tor $[][]$ can be com-puted fo
 r sam-ple of ob-ser-va-tions $(\OML/cmm/m/it/12 X[]; X[]\OT1/cmr/m/n/12 )[]$,
  []
 
-[14]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 277.
+(hyperref)                removing `math shift' on input line 281.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 277.
+(hyperref)                removing `math shift' on input line 281.
 
 [15] [16]
 
-./FinalDraft.tex:325: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:329: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.325 ...crease as the true $\pi$ approaches 0.5. 
+l.329 ...crease as the true $\pi$ approaches 0.5. 
                                                     For $N=100$, the ratio i...
 
 ? 
@@ -1426,33 +1425,33 @@ l.325 ...crease as the true $\pi$ approaches 0.5. 
 
  (FinalDraft.ttt)) (./Figures/compare_100.tex)
 (./Figures/compare_1000.tex) [17] [18]
-Overfull \hbox (7.09613pt too wide) in paragraph at lines 366--367
+Overfull \hbox (7.09613pt too wide) in paragraph at lines 370--371
 []\OT1/cmr/m/n/12 I be-gin by con-struct-ing a ``ground truth" dataset with 100
 0 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m/n/12 )$,
  []
 
-[19] [20]
-Overfull \hbox (4.98752pt too wide) in paragraph at lines 454--455
+[19] [20] [21]
+Overfull \hbox (4.98752pt too wide) in paragraph at lines 458--459
 []\OT1/cmr/m/n/12 Designate as matches all $(\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
-[21] [22] [23] [24] [25] [26]
+[22] [23] [24] [25] [26]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 560.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 564.
+ [27]
 
-
-./FinalDraft.tex:578: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:582: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.578 ...f match rates in Figure \ref{match_hist} 
+l.582 ...f match rates in Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
-[27] [28] [29] [30] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
+[28] [29] [30] (./Figures/compare_1.tex) (./Figures/compare_2.tex)
 (./Figures/compare_3.tex) (./Figures/compare_4.tex) (./Figures/compare_5.tex)
 [31] (./FinalDraft.bbl
 ./FinalDraft.bbl:69: Misplaced alignment tab character &.
@@ -1465,7 +1464,7 @@ l.92 ...cy Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
 ) AED endfloat: Processing end Figures and Tables [33] (./FinalDraft.fff
-<./Figures/dStar.pdf, id=508, 505.89pt x 505.89pt>
+<./Figures/dStar.pdf, id=511, 505.89pt x 505.89pt>
 File: ./Figures/dStar.pdf Graphic file (type pdf)
 <use ./Figures/dStar.pdf>
 Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 4.
@@ -1475,7 +1474,7 @@ Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 4.
 
 
  <./Figures/dStar.pdf>]
-<./Figures/bias_plot.pdf, id=519, 505.89pt x 505.89pt>
+<./Figures/bias_plot.pdf, id=522, 505.89pt x 505.89pt>
 File: ./Figures/bias_plot.pdf Graphic file (type pdf)
 <use ./Figures/bias_plot.pdf>
 Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 14.
@@ -1483,7 +1482,7 @@ Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 14.
  [35
 
  <./Figures/bias_plot.pdf>]
-<./Figures/var_plot.pdf, id=531, 505.89pt x 505.89pt>
+<./Figures/var_plot.pdf, id=534, 505.89pt x 505.89pt>
 File: ./Figures/var_plot.pdf Graphic file (type pdf)
 <use ./Figures/var_plot.pdf>
 Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 24.
@@ -1500,7 +1499,7 @@ l.84 \end{tikzpicture}
 [37
 
 ]
-<./Figures/match_rate.pdf, id=547, 338.26375pt x 457.71pt>
+<./Figures/match_rate.pdf, id=550, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
 Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 93.
@@ -1508,7 +1507,7 @@ Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 93.
  [38
 
  <./Figures/match_rate.pdf>]
-<./Figures/compare.pdf, id=560, 650.43pt x 649.42625pt>
+<./Figures/compare.pdf, id=563, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
 Package pdftex.def Info: ./Figures/compare.pdf  used on input line 102.
@@ -1521,7 +1520,7 @@ Overfull \hbox (46.97836pt too wide) in paragraph at lines 102--104
 [39
 
  <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=574, 466.74374pt x 524.96124pt>
+<./Figures/ahl_hist.pdf, id=577, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
 Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 111.
@@ -1529,7 +1528,7 @@ Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 111.
  [40
 
  <./Figures/ahl_hist.pdf>]
-<./Figures/sw_hist.pdf, id=588, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=591, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
 Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 120.
@@ -1537,7 +1536,7 @@ Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 120.
  [41
 
  <./Figures/sw_hist.pdf>]
-<./Figures/OLS(L=1)_hist.pdf, id=602, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=605, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
 Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 129.
@@ -1708,30 +1707,24 @@ l.209 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
 ) [53]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 711.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 711.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 715.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 715.
  (./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 711.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 711.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 715.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 715.
+Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
+(rerunfilecheck)             Checksum: 34AB07B5B1200B2AA7C31EF6AC008D6A;1361.
 
-
-Package rerunfilecheck Warning: File `FinalDraft.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `FinalDraft.out':
-(rerunfilecheck)             Before: 9329C7B7349F97E393A001F1FDB0358E;1292
-(rerunfilecheck)             After:  34AB07B5B1200B2AA7C31EF6AC008D6A;1361.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 711.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 715.
  ) 
 Here is how much of TeX's memory you used:
- 32238 strings out of 492649
- 643986 string characters out of 6129622
- 731795 words of memory out of 5000000
- 35407 multiletter control sequences out of 15000+600000
+ 32239 strings out of 492649
+ 644002 string characters out of 6129622
+ 731592 words of memory out of 5000000
+ 35408 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,18n,84p,10382b,917s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1781,10 +1774,10 @@ ist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist/
 fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on FinalDraft.pdf (53 pages, 445193 bytes).
+Output written on FinalDraft.pdf (53 pages, 446158 bytes).
 PDF statistics:
- 788 PDF objects out of 1000 (max. 8388607)
- 669 compressed objects within 7 object streams
+ 791 PDF objects out of 1000 (max. 8388607)
+ 672 compressed objects within 7 object streams
  160 named destinations out of 1000 (max. 500000)
- 317 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 325 words of extra memory for PDF output out of 10000 (max. 10000000)
 

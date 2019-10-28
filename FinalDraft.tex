@@ -223,7 +223,11 @@ Since $\hat{g}(\cdot)$ as written in (\ref{ahl_sw}) ignores information about $w
 
 \section{Incorporating probabilities in the AHL estimator} 
 
-I begin with a simplified version of the AHL GMM framework, based on the observation that estimating $E[m(y_i, x_i; \theta)]$ is the same as estimating the mean... 
+I begin by considering a simplified version of the AHL (2019) problem, based on the observation that 
+$$ E[m(y_{i\ell}, x_i; \theta)] =  \begin{cases} 0 & \text{if } y_{i\ell} = y_i \\
+g(w_i, L_i, x_i; \theta) & \text{if } y_{i\ell} \neq y_i
+\end{cases} $$
+If $\hat{g}$ can be estimated consistently, or $g(\cdot)$ is a constant function, this problem can be reduced to estimating the mean using observations $\{X_{i\ell}\}_{\ell=1}^{L_i}$, where each $X_{i\ell}$ is drawn from the correct distribution with probability $\pi_{i\ell}$ and drawn from the incorrect distribution with probability $(1-\pi_{i\ell})$.  Under Assumption (i), exactly one of the $X_{i\ell}$ is drawn from the correct distribution, so that $\sum_{\ell=1}^{L_i} X_{i\ell} = \mu + (L_i -1) \kappa$, where $\mu =0$ in the above example, and $\kappa = g(\cdot)$. 
 
 \subsection{Estimating the mean}
 
