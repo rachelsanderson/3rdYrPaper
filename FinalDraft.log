@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 OCT 2019 18:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  27 OCT 2019 22:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1340,58 +1340,58 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 [7] [8]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 189.
+(hyperref)                removing `\begingroup' on input line 187.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 189.
+(hyperref)                removing `\<let>-command' on input line 187.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 189.
+(hyperref)                removing `\NAT@ctype' on input line 187.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 189.
+(hyperref)                removing `\z@' on input line 187.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 189.
+(hyperref)                removing `\let' on input line 187.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 189.
+(hyperref)                removing `\let' on input line 187.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 189.
+(hyperref)                removing `\new@ifnextchar' on input line 187.
 
 [9] [10] [11] [12] [13]
 \openout3 = `FinalDraft.fff'.
 
  (FinalDraft.fff)
-Overfull \hbox (5.2011pt too wide) in paragraph at lines 265--266
+Overfull \hbox (5.2011pt too wide) in paragraph at lines 263--264
 []\OT1/cmr/m/n/12 More gen-er-ally, the es-ti-ma-tor $[][]$ can be com-puted fo
 r sam-ple of ob-ser-va-tions $(\OML/cmm/m/it/12 X[]; X[]\OT1/cmr/m/n/12 )[]$,
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 273.
+(hyperref)                removing `math shift' on input line 271.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 273.
+(hyperref)                removing `math shift' on input line 271.
 
 [14] [15]
 
-./FinalDraft.tex:321: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:319: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.321 ...crease as the true $\pi$ approaches 0.5. 
+l.319 ...crease as the true $\pi$ approaches 0.5. 
                                                     For $N=100$, the ratio i...
 
 ? 
@@ -1400,29 +1400,29 @@ l.321 ...crease as the true $\pi$ approaches 0.5. 
 
  (FinalDraft.ttt)) (./Figures/compare_100.tex)
 (./Figures/compare_1000.tex) [16] [17]
-Overfull \hbox (7.09613pt too wide) in paragraph at lines 362--363
+Overfull \hbox (7.09613pt too wide) in paragraph at lines 360--361
 []\OT1/cmr/m/n/12 I be-gin by con-struct-ing a ``ground truth" dataset with 100
 0 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m/n/12 )$,
  []
 
 [18] [19] [20]
-Overfull \hbox (4.98752pt too wide) in paragraph at lines 450--451
+Overfull \hbox (4.98752pt too wide) in paragraph at lines 448--449
 []\OT1/cmr/m/n/12 Designate as matches all $(\OML/cmm/m/it/12 i; j\OT1/cmr/m/n/
 12 )$ pairs with Jaro-Winkler scores ex-ceed-ing a pre-determined
  []
 
 [21] [22] [23] [24] [25]
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 556.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 554.
  [26]
 
-./FinalDraft.tex:574: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:572: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.574 ...f match rates in Figure \ref{match_hist} 
+l.572 ...f match rates in Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
@@ -1682,23 +1682,23 @@ l.209 \cmidrule
                (l{3pt}r{3pt}){2-6}
 ? 
 ) [52]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 707.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 707.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 705.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 705.
  (./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 707.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 707.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 705.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 705.
 Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
 (rerunfilecheck)             Checksum: 968628E03B6BE8008B563D2031F3988C;1201.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 707.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 705.
  ) 
 Here is how much of TeX's memory you used:
  32227 strings out of 492649
  643856 string characters out of 6129622
- 732462 words of memory out of 5000000
+ 731475 words of memory out of 5000000
  35403 multiletter control sequences out of 15000+600000
  545547 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1746,7 +1746,7 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on FinalDraft.pdf (52 pages, 419137 bytes).
+Output written on FinalDraft.pdf (52 pages, 420047 bytes).
 PDF statistics:
  775 PDF objects out of 1000 (max. 8388607)
  660 compressed objects within 7 object streams
