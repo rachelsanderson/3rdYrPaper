@@ -18,5 +18,7 @@
 \BOOKMARK [1][-]{section.8}{Discussion/Conclusion}{}% 18
 \BOOKMARK [1][-]{section.9}{Appendix: Implementation Notes}{}% 19
 \BOOKMARK [2][-]{subsection.9.1}{Proofs}{section.9}% 20
-\BOOKMARK [2][-]{subsection.9.2}{implementation notes}{section.9}% 21
-\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 22
+\BOOKMARK [2][-]{subsection.9.2}{Lemma 1}{section.9}% 21
+\BOOKMARK [2][-]{subsection.9.3}{Variance formulas}{section.9}% 22
+\BOOKMARK [2][-]{subsection.9.4}{implementation notes}{section.9}% 23
+\BOOKMARK [1][-]{section.10}{More MSE Tables}{}% 24
