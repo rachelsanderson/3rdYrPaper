@@ -291,6 +291,7 @@ nList <- c(10,100,1000)
 for (n in 1:length(nList)){
   pars <- parCombos[[2]]
   df <- round(make_df(pars, nList[n]),3)
+  colnames(df)[1] <- "$\\pi$"
   title <- paste0(title_1, nList[n], title_2, pars[1],",", pars[2], ",", pars[3], ",", pars[4], ")")
   kab <- kable(df,"latex", booktabs=T, 
                escape=FALSE,
