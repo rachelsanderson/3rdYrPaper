@@ -327,10 +327,10 @@ For $N=1,000$, $\hat{\mu}^*$ only performs better when $\hat{\pi}=\pi$, and the 
 \input{./Figures/compare_100.tex}
 \input{./Figures/compare_1000.tex}
 
-\subsection{Applying argument to OLS}
+\subsection{Incorporating $\pi$ in linear regression}
 
 Suppose we have two matches $\{y_{i1}, y_{i2}\}_{i=1}^N$ for each observation.  We get the same conditions for unbiasedness of the OLS estimator if we consider using a linear combination of the $y$'s, as in the model:
-\begin{equation} a_1 y_{i1} + a_2 y_{i2} - \kappa = x_i'\beta + \varepsilon_i \end{equation}
+\begin{equation} a_1 y_{i1} + a_2 y_{i2} - \kappa = x_i'\beta + \varepsilon_i, \ \hspace{10pt} \Var{\varepsilon | x_i } = \sigma^2  \end{equation}
 Then the OLS estimator is
 $$ \hat{\beta} = \left(\frac{1}{N}\sum_{i=1}^N x_i x_i'\right)^{-1} \left(\frac{1}{N}\sum_{i=1}^N x_i'(a_1 y_{i1} + a_2 y_{i2} - \kappa)\right) $$
 and
@@ -344,93 +344,38 @@ a_2(a_1) &=  \frac{1-\pi a_1}{1-\pi} \\ a_3(a_1) &= \frac{\pi}{1-\pi} + \frac{a_
 \end{align*}
 which means that any unbiased linear estimator $\hat{\beta}$ can be written as a linear combination of unbiased estimators that use only $y_{i1}$ or $y_{i2}$,
 \begin{align*}
-\hat{\beta}_{1} &= \frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i1}}{\pi} - \frac{1-\pi}{\pi}\kappa \\
- \hat{\beta}_{2} &= \frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i2}}{1-\pi} - \frac{\pi}{1-\pi}\kappa 
+\hat{\beta}_{1} &= \left(\frac{1}{N}\sum_{i=1}^N x_i x_i'\right)^{-1}\frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i1}}{\pi} - \frac{1-\pi}{\pi}\kappa \\
+ \hat{\beta}_{2} &= \left(\frac{1}{N}\sum_{i=1}^N x_i x_i'\right)^{-1}\frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i2}}{1-\pi} - \frac{\pi}{1-\pi}\kappa 
  \end{align*}
  and so the minimum variance estimator is $\hat{\beta}^* = d^* \hat{\beta}_1 + (1-d^*)\hat{\beta}_2$, where 
  \begin{equation}
  d^* = \frac{\Var{\hat{\beta}_{2}} - \text{Cov}\left(\hat{\beta}_1, \hat{\beta}_2\right)}{\Var{\hat{\beta}_1} + \Var{\hat{\beta}_{2}} - 2 \text{Cov}\left(\hat{\beta}_1, \hat{\beta}_2\right)}
  \end{equation}
-and we can repeat the exercise in the previous sections, comparing variance and bias for misspecified beliefs $\hat{\pi}$ and different parameter combinations.  The choice of the weights $d^*$ that give the optimal $\hat{\beta}^*$ is now complicated by the fact that it depends on the second moments of $X_i$, so this is best performed by simulation. 
+and we can repeat the exercise in the previous sections, comparing variance and bias for misspecified beliefs $\hat{\pi}$ and different parameter combinations.  The choice of the weights $d^*$ that give the optimal $\hat{\beta}^*$ is now complicated by the fact that it depends on the second moments of $X_i$, however the formulas for $\Var{\hat{\beta}_i}$ are the same as in (\ref{vmu1})-(\ref{cov}), but replacing $\mu, \sigma^2, \kappa,$ and $\omega^2$ with: 
 
+% add this here
 
+\subsection{Generalizing results to $L_i > 2$}
+
+% to do 
 
 \section{Numerical Example}
-Now I study how these methods work in practice.   This section introduces a numerical example, that illustrates what I do in the Monte Carlo below. 
+In order to compare how the methods discussed in Sections 3 and 4 perform in practice, I conduct a Monte Carlo study using simulated data.  The purpose of this section is to introduce a numerical example that is representative of one observation in the Monte Carlo study.  The benefits of using simulated data is that I can control the degree of similarity among identifying variables, and overlap between datasets, all while knowing the true match status of each $(x_i,y_j)$ record pair.  As a result, I can compare how sensitive my results are to data quality, and compare how the various matching and estimation procedures perform relative to the correctly specified model applied to a  dataset containing only correct links.
 
-
-The purpose of this section is to introduce a numerical example that will be used to illustrate the different matching techniques discussed in this paper.  The benefits of using synthetic data are that I can control the degree of  similarity among identifying variables, and overlap between datasets, all while knowing the true match status of each $(x_i,y_j)$ record pair.  As a result, I can compare how sensitive my results are to data quality, and compare how the various matching and estimation procedures perform relative to the correctly specified model applied to a  dataset containing only correct links.
-
-I begin by constructing a ``ground truth" dataset with 1000 observations of $(x_{1i}, x_{2i}, y_i, w_i)$, where $x_{1i}$ and $x_{2i}$ are mutually independent, $x_{1i} \overset{i.i.d}{\sim} \text{Bernoulli}(0.5)$, and $x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, 2)$.  The $y_i$ values are generated according to the linear relationship,
-\begin{gather}
+I begin by constructing a ``ground truth" dataset with 1000 observations of $(x_{1i}, x_{2i}, y_i, w_i)$, where $x_{1i}$ and $x_{2i}$ are mutually independent, i.i.d draws from Bernoulli(0.5) and Normal(0,2) distributions, respectively.s  The $y_i$ values are generated according to \begin{gather}
 y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \varepsilon_i, \hspace{10pt} 
 \varepsilon_i\  |\  x_{1i}, x_{2i} \overset{i.i.d}{\sim} \mathcal{N}(0, \sigma^2) 
 \end{gather}
-with $(\beta_0, \beta_1, \beta_2, \sigma^2) = (2, 0.5, 1, 2)$, so that estimating the correctly specified linear regression model yields an $R^2$ value of approximately 0.50.  Each observation is assigned a vector of identifying variables, $w_i$, which includes a first and last name drawn at random from a list of first and last names\footnote{The first and last name lists contain 41 and 24 names, respectively, and can be found in the replication files.  Note that the number of possible names is smaller than the number of observations to ensure that there are multiple observations with the same name.}, and a random birthday between January 1, 1900, and December 31, 1925.   The resulting dataset looks like the observations in the top panel of Figure \ref{sample_dta}.  
+where $\varepsilon_i$ are independent draws from a Normal(0,2) distribution.  I chooses $(\beta_0, \beta_1, \beta_2, \sigma^2) = (2, 0.5, 1, 2)$, so that estimating the correctly specified linear regression model yields an $R^2$ value of approximately 0.50.  
+
+The vector of identifying variables, $w_i$, includes a first name, last name, and birth year.  In total, there are 960 unique first and last name combinations, so multiple observations will be assigned the same first and last name.  The birth years are drawn at random from a uniform distribution over the set of integers between 1900 and 1925.  The resulting dataset resembles the top panel of Figure \ref{sample_dta}.  
+ 
+ \input{./Figures/synthetic.tex}
  
  % Massive latex Figure of synthetic dataset -- put in new file ideally
-\begin{figure}[htbp]
-\caption{Creation of Synthetic Datasets}
-\vspace{5pt}
- \begin{adjustwidth}{-.5in}{-.5in}  
-\begin{tikzpicture}
-\node (a) at (0,0){
-\begin{tabular}{ccccccc}
-\toprule
-ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
-\midrule
-1 & $y_1$ & $x_{1,1}$ & $x_{2,1}$ & Tyler & Ashenfelter & 1915-05-13 \\
-2 & $y_2$ & $x_{1,2}$ & $x_{2,2}$ & Brandon & Christensen & 1904-06-27 \\
-\mc{7}{c}\vdots \\
-195 & $y_{195} $ &$x_{1,195} $& $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
-196 & $y_{196}$ & $x_{1,196}$& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
-\mc{7}{c}\vdots \\ 
-1000 & $y_{500}$ & $x_{1,500}$ & $x_{2,500}$ & Vicky & Anderson & 1915-04-14\\
-\bottomrule
-\end{tabular}};
-\\
-\vspace{20pt}
-\\
-\footnotesize{
-\node[yshift=-3cm] (b) at (a.south){
-\begin{tabular}{ cc }   % top level tables, with 2 rows
-$x$-Datafile & $y$-Datafile \\  
-% bottom left of the top level table: table 1 
-\begin{tabular}{ cccc } 
-\toprule
-ID & $x$ & Name & Birthday \\
-\midrule
-2 & ($x_{1,2}, x_{2,2})$ & Branden Christenson & 1905-06-27 \\
-\mc{4}{c}\dots \\
-195 & ($x_{1,195},x_{2,195}$)& Samantha Anderson & 1914-08-21 \\
-198 & ($x_{1,198}, x_{2,198}$)& Jon Smyth & 1918-12-20\\
-\mc{4}{c}\dots \\ 
-1000 & ($x_{1,1000},x_{2,1000}$) & Vic Andersn & 1915-04-14\\
-\bottomrule
-\end{tabular} &  % starting bottom right of the top level table
-% table 2
-\begin{tabular}{ cccc } 
-\toprule
-ID & $y$ & Name & Birthday \\
-\midrule
-1 & $y_1$ & Tyler Ashenfelter & 1915-05-13 \\
-2 & $y_2$ & Brandon Christensen & 1904-06-27 \\
-\mc{4}{c}\dots \\
-195 & $y_{1,195}$ & Samantha Anderson & 1914-08-18 \\
-\mc{4}{c}\dots \\ 
-1000 & $y_{1000}$ & Vicky Anderson & 1915-04-14\\
-\bottomrule
-\end{tabular} \\
-\end{tabular}};
-\draw[->, thick](a)--(b);
-\end{tikzpicture}
-\end{adjustwidth}
-\label{sample_dta}
-\end{figure}%
+Next, I split the ground truth dataset into the $x$- and $y$-datafiles, as in the bottom panel of Figure \ref{sample_dta}.  The $x$-datafile contains values of $(x_{i1},x_{i2})$ for 500 observations selected at random from the ground truth dataset.  The identifiers in the $x$-datafile are equal to the original $w_i$ plus some random transcription error.  The probability of introducing a certain type ofs typographical error is equal to that reported for the 1940 Census data in \cite{abe2019}\foonote{For example, 7\% of observations have misreported first names and 17\% of observations have misreported last names.} These errors include deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), and swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  For half of the observations, I introduce random errors in the birth year drawn from a Normal(0, 2.5) distribution and rounded to the nearest integer.  
 
-Next, I split the ground truth dataset into the $x$- and $y$-datafile, which contain the $(x_1,x_2, w)$ and $(y, w)$ values respectively.  To construct the $x$-datafile, I select 500 observations at random from the ground truth dataset, and introduce random errors in their corresponding identifiers.  To make the synthetic data resemble a real application, I set the probabilities of introducing transcription errors equal to those reported for the 1940 Census data in \cite{abe2019}.   These errors include deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), and swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  I also add normally distributed errors to the birth day, month, and year.   The probabilities of introducing an error are set to match the transcription error rates reported in the 1940 Census by \cite{abe2019}; for example, 7\% of observations have misreported first names and 17\% of observations have misreported last names.  The bottom panel of Figure \ref{sample_dta} illustrates how the $x$- and $y$-datafiles are split visually.  
-
-The $y$-datafile includes all 1,000 values from the ground truth data, and does not contain any errors in the identifiers $w$.  As a result, it will be likely that  some $x$ will be matched to multiple $y$.  In later sections, I will consider versions of this synthetic dataset, where errors in $w$ are correlated with $x_{1}$ or $y$. 
+The $y$-datafile includes all 1,000 values of $y_i$ from the ground truth data, along with the original identifiers $w_i$.  The aim of this construction is to make it likely that some observations in the $x$-datafile will be linked to multiple values of $y$.  The next section describes the record linkage methods used to link the $x$- and $y$-datafiles. 
 
 \section{Record Linkage Methods}
 

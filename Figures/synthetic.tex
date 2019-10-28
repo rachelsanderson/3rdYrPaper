@@ -1,0 +1,59 @@
+\begin{figure}[htbp]
+\caption{Creation of Synthetic Datasets}
+\vspace{5pt}
+ \begin{adjustwidth}{-.5in}{-.5in}  
+\begin{tikzpicture}
+\node (a) at (0,0){
+\begin{tabular}{ccccccc}
+\toprule
+ID &  $y$ & $x_1$ & $x_2$ & First Name & Last Name & Birthday \\
+\midrule
+1 & $y_1$ & $x_{1,1}$ & $x_{2,1}$ & Tyler & Ashenfelter & 1915-05-13 \\
+2 & $y_2$ & $x_{1,2}$ & $x_{2,2}$ & Brandon & Christensen & 1904-06-27 \\
+\mc{7}{c}\vdots \\
+195 & $y_{195} $ &$x_{1,195} $& $x_{2,195}$ & Samantha & Andersen & 1914-08-18 \\
+196 & $y_{196}$ & $x_{1,196}$& $x_{2,196}$ & Victoria & Andersen & 1918-11-25\\
+\mc{7}{c}\vdots \\ 
+1000 & $y_{500}$ & $x_{1,500}$ & $x_{2,500}$ & Vicky & Anderson & 1915-04-14\\
+\bottomrule
+\end{tabular}};
+\\
+\vspace{20pt}
+\\
+\footnotesize{
+\node[yshift=-3cm] (b) at (a.south){
+\begin{tabular}{ cc }   % top level tables, with 2 rows
+$x$-Datafile & $y$-Datafile \\  
+% bottom left of the top level table: table 1 
+\begin{tabular}{ cccc } 
+\toprule
+ID & $x$ & Name & Birthday \\
+\midrule
+2 & ($x_{1,2}, x_{2,2})$ & Branden Christenson & 1905-06-27 \\
+\mc{4}{c}\dots \\
+195 & ($x_{1,195},x_{2,195}$)& Samantha Anderson & 1914-08-21 \\
+198 & ($x_{1,198}, x_{2,198}$)& Jon Smyth & 1918-12-20\\
+\mc{4}{c}\dots \\ 
+1000 & ($x_{1,1000},x_{2,1000}$) & Vic Andersn & 1915-04-14\\
+\bottomrule
+\end{tabular} &  % starting bottom right of the top level table
+% table 2
+\begin{tabular}{ cccc } 
+\toprule
+ID & $y$ & Name & Birthday \\
+\midrule
+1 & $y_1$ & Tyler Ashenfelter & 1915-05-13 \\
+2 & $y_2$ & Brandon Christensen & 1904-06-27 \\
+\mc{4}{c}\dots \\
+195 & $y_{1,195}$ & Samantha Anderson & 1914-08-18 \\
+\mc{4}{c}\dots \\ 
+1000 & $y_{1000}$ & Vicky Anderson & 1915-04-14\\
+\bottomrule
+\end{tabular} \\
+\end{tabular}};
+\draw[->, thick](a)--(b);
+\end{tikzpicture}
+\end{adjustwidth}
+\label{sample_dta}
+\end{figure}%
+
