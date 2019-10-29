@@ -586,27 +586,26 @@ To what extent my results generalize beyond the simulated data is unclear, as I 
 \section{Appendix:  Implementation Notes}
 
 \subsection{Proofs}
-\noindent \textit{\textbf{Lemma 1.}} Consider constructing a linear unbiased estimator of $\mu$ that places positive weight on both observations $X_1$ and $X_2$, 
+\noindent \textit{\textbf{Lemma 1.}} Any linear unbiased estimator of $\mu$ of the form
 \begin{equation}
 \hat{\mu} = a_1X_{1} + a_2 X_2 -  a_3 \kappa \label{mu} \end{equation}
-which has the following expectation,
+with $a_1$ and $a_2 >0$, can be written as a linear combination of 
+\begin{align*}
+\hat{\mu}_1 &= \frac{X_1}{\pi} - \frac{1-\pi}{\pi} \kappa \\
+\hat{\mu}_2 &= \frac{X_2}{1-\pi} - \frac{\pi}{1-\pi}\kappa 
+\end{align*}
+\textbf{Proof.} The expectation of $\hat{\mu}$ is 
 $$ E[\hat{\mu}] = (a_1 \pi + a_2 (1-\pi))\mu + (a_1(1-\pi)+a_2\pi - a_3)\kappa $$
-so that unbiased, requires
+so that unbiasedness requires choosing $a_1, a_2$ and $a_3$ that satsify,
 \begin{gather}
     a_1\pi + a_2(1-\pi) = 1 \implies a_2(a_1) = \frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi} \\
     a_1 (1-\pi) + a_2 \pi = a_3 \implies a_3(a_1) = \frac{\pi}{1-\pi}  + \frac{a_1 - 2a_1 \pi}{1-\pi} 
 \end{gather}
-Hence we can write $\hat{\mu}$ as a function of $a_1$,  
+Rewriting $\hat{\mu}$ as a function of $a_1$,  
  $$\hat{\mu}(a_1) = a_1 X_1 +  \left(\frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi}\right)  X_2 - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa $$ 
-When $a_1 = \frac{1}{\pi}$, then $\hat{\mu} = \hat{\mu}_1$; and if $a_1 = 0$ then $\hat{\mu}=\hat{\mu_2}$. 
-
-We can write:
-\begin{align*}
-\hat{\mu} &= (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 + a_1(1-\pi)\kappa  + \frac{\pi}{1-\pi}(1-a_1)\kappa - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa  \\
-&=  (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 - (a_1\pi)\kappa
-\end{align*}
-
-Hence any unbiased estimator $\hat{\mu}$ that uses $X_1$ and $X_2$ can be written as a linear combination of estimators using only $X_1$ or $X_2$.  
+which, after some rearranging, can be written as
+$$\hat{\mu}(a_1) &= (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 $$
+which completes the proof.  
 
 \noindent \textit{\textbf{Lemma 2.}} Suppose the data consist of $\{X_{\ell}\}_{\ell=1}^{L}$, where each $X_{\ell}$ is drawn from the correct distribution with probability $\pi_{\ell}$ and from the incorrect distribution with probability $1-\pi_{\ell}$, and exactly one $X_{\ell}$ is drawn from the correct distribution.  Then, any unbiased estimator of $\mu$ that places positive weight on all of the $\{X_{\ell}\}$ can be written as a linear combination of $\hat{\mu}_{\ell}$, the unbiased estimator of $\mu$ that only uses $X_{\ell}$, 
 $$ \hat{\mu}_{\ell} = \frac{X_{\ell}}{\pi_{\ell}}  - \frac{1-\pi_{\ell}}{\pi_{\ell}} \kappa, \hspace{10pt} \ell = 1, \dots, L $$
@@ -621,8 +620,7 @@ Plugging this into $\hat{\mu}^{(L)}$ yields,
 \begin{align*} \hat{\mu}^{(L)} &= a_1 \hat{\mu}^{(L-1)} + (1-a_1)\underbrace{\left(\frac{X_L}{\pi_L} - \frac{1-\pi_L}{\pi_L}\right)}_{\hat{\mu}_L} \\
 \implies \hat{\mu}^{(L)} &= \sum_{\ell=1}^{L-1} a_1 {b_\ell} \hat{\mu}_{\ell} + (1 - a_1) \hat{\mu}_{\ell}
 \end{align*}
-which completes the proof.  Recall that $a_1$ is only pinned down by minimizing the variance of $\hat{\mu}^{(\ell)}$. 
-
+which completes the proof.  
 
 \subsection{Variance formulas}
 \Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, using the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise:
@@ -631,6 +629,12 @@ which completes the proof.  Recall that $a_1$ is only pinned down by minimizing 
 &= \pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2
 \end{align*}
 The same trick can be applied to calculate $\Var{X_2}$
+
+\subsection{Variance of alternative AHL estimator}
+
+\begin{align*}
+\Var{\frac{2}{N_{L_2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta) x_i \Bigg\vert L_i = 2} &= \frac{4}{N_{L_2}}\left(\Var{x_i\varepsilon_i | L_i = 2} + E[x_i^2 | L_i = 2](\omega^2 + \kappa^2)\\ &- E[x_i | L_i = 2 ] \kappa\right) \\
+\Var{\frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta) x_i \Bigg\vert L_i = 3} &= \frac{1}{N_{L_3}} \left(\Var{x_i\varepsilon_i | L_i = 3} + 2\left(E[x_i^2 | L_i = 3](\omega^2 + \kappa^2)\\ &- E[x_i | L_i = 3] \kappa \right)\right) \end{align*}
 
 
 \subsection{implementation notes}
