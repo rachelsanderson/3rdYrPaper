@@ -11,7 +11,7 @@ load(paste0(metaDataDir,"matching_metadata.RData"))
 options(qwraps2_markup = "latex")
 
 
-row_names <- c("ABE (Single)","ABE (Multi)", "PRL (Single)", "PRL (Multi)")
+row_names <- c("ABE Single","ABE Multi", "PRL Single", "PRL Multi")
 method_names <- c(
   'abe_single' = "ABE Single",
   'abe_multi' = "ABE Multi", 
@@ -47,6 +47,21 @@ writeLines(k,paste0(figureDir,"match_rates.tex"))
 ### Match Rate histogram
 match_rate_mean <- metaMatch %>% group_by(method) %>% summarise(mean_match = mean(pMatchedX))
 
+match_rates<- ggplot(metaMatch, aes(x=pMatchedX, color =method, fill=method)) + geom_density(alpha=0.3) +
+  geom_vline(aes(xintercept = mean_match, color=method), linetype = "dashed", data=match_rate_mean, show.legend=FALSE) +
+  labs(x="Match Rate", y="Frequency", fill="Method", color = "Method") +
+  theme(legend.position ="bottom") +
+  scale_fill_discrete(name = "", labels = row_names)+
+  scale_color_discrete(name = "", labels = row_names) + 
+  labs(caption = "*Based on 1,000 simulations. Vertical line indicates the sample mean.") +
+  theme(plot.caption =element_text(hjust=0,size=12),
+        legend.text=element_text(size=12),
+        axis.title.x = element_text(size=12),
+        axis.title.y = element_text(size=12))
+
+ggsave(paste0(figureDir,"match_rate.pdf"), plot = match_rates)
+
+
 match_rates <- ggplot(metaMatch, aes(x=pMatchedX, fill=method, color=method)) + 
   geom_histogram(position = "identity", alpha=0.5, bins=50, show.legend=FALSE) +
   geom_vline(aes(xintercept = mean_match), linetype="dashed",
@@ -55,9 +70,9 @@ match_rates <- ggplot(metaMatch, aes(x=pMatchedX, fill=method, color=method)) +
   facet_grid(method ~ ., labeller=as_labeller(method_names)) + 
   labs(x = "Match Rate", y = "Frequency") +
   labs(caption = "*Based on 1,000 simulations. Vertical line indicates the sample mean.") +
-  theme(plot.caption =element_text(hjust=0))
+  theme_grey(base_size=12)
+  # theme(plot.caption =element_text(hjust=0))
 
-ggsave(paste0(figureDir,"match_rate.pdf"), plot = match_rates)
 
 ### Multi Match Table
 table2 <- metaMultiMatch %>% group_by(method,mc_id) %>% mutate(totMatches = sum(counts),

@@ -474,11 +474,33 @@ Since membership to $M$ or $U$ is not observed, \cite{larsen_rubin_2001} suggest
 
 The fastLink package by \cite{enamorado2019} estimates the posterior match probability for each pair of observations in the sample, as outputted by the EM algorithm.  Their method allows the user to specify a lower bound for the posterior probability of a match that will be accepted; I set this equal to 0.7 because the default value of 0.85 does not result in any matches.   The fastLink algorithm also allows the user to specify whether unique matches are desired, and, if so, returns the set of matches that solves the linear sum assignment program assigned above.  This is how I obtain PRL Single.  To obtain PRL Multi, I accept all matches with posterior match probabilities greater than 0.7, and I normalize those probabilities to obtain $\pi_{i\ell}$. 
 
-\section{Monte Carlo Study}
+\subsection{Estimation with the linked datasets}
 
-Following the same procedure for simulating the empirical example described in Section 2, I generate 1,000 random $x$- and $y$- dataset pairs.  I implement four types of matching procedures using each dataset pair: (i) deterministic matching with unique matches (ABE Single), (ii) deterministic matching with multiple matches (ABE Multi), (iii) probabilistic matching with unique matches (PRL Single), and (iv) probabilistic matching with multiple matches (PRL Multi).  Allowing for multiple matches means that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile.  
+Describe what I actually do??
 
-Each matching method produces a distinct matched dataset, so that the matching step produces a total of 4,000 linked datasets.  Using each of the linked datasets, I then compute (i) naive OLS estimator (using all observations and also with observations assigned $(L_i=1)$, (ii) the \cite{sw1993} bias-corrected estimator, and (iii)  the AHL estimator that assigns equal weights to multiple matches.  As a benchmark, I also compute the OLS estimator that uses only the correctly matched pairs produced by the matching algorithm, and the OLS estimator applied to all 500 correctly linked record pairs.  Details on the implementation of these algorithms and estimation procedures can be found in the appendix.  
+\section{Monte Carlo Results}
+
+Following the data generating process described in Section 5.1, I generate 1,000 $x$- and $y$-dataset pairs, such that each of the 500 observations in the $x$-datafile has a unique, true match in the $y$-dataset, but the identifiers in the $y$-dataset may repeat, and the identifiers in the $x$-dataset contain random errors.  I then match each dataset pair a total of four times, using two deterministic matching methods, ABE Single and ABE Multi, and two probabilistic record linkage methods, PRL Single and PRL Multi.   ABE Single and PRL Single require that each $x_i$ is matched to at most one $y_j$, and that each $y_j$ is matched to at most one $x_{i}$.  ABE Multi and PRL Multi enforce no such requirement, so that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile, and a single observation in the $y$-datafile may be a match for multiple values of $x_i$. 
+
+Each linkage method produces a distinct matched dataset, and so the matching step produces a total of 4,000 matched datasets.  For each dataset, I compute and compare the following estimators:
+\begin{enumerate}
+\item the OLS estimator that treats each link as a distinct observation 
+\item the OLS estimator that uses only observations assigned a unique match
+\item the SW estimator 
+\item the AHL estimator 
+\item the OLS estimator that uses all 500 correctly linked record pairs
+\end{enumerate}
+
+\subsection{Matching results}
+The first column of Table \ref{match_rate} reports the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile, averaged across the Monte Carlo replications.  These rates range between 71 and 79 percent across methods, however Figure \ref{match_hist} shows that ABE Multi consistently matches more observations than any other procedure.  Additionally, PRL Single and PRL Multi have the same match rate, which suggests that allowing for multiple matches adds additional matches per observations, as opposed to matching new individuals.  This is an artifact of the fastLink algorithm, because the posterior probability threshold for designating a match is the same for both PRL Single and PRL Multi.  By contrast, ABE Multi seems to increase the match rate relative to ABE Single by matching  observations that are discarded by ABE Single. 
+
+The second column of Table \ref{match_rate} displays the average number of links assigned by each matching procedure.  For ABE Multi and PRL Multi, each $(i, j)$ combination counts as a distinct link, so that an observation with $L$ linked outcomes counts as $L$ matches.  To explore whether these numbers are driven primarily by linking the observations to many matches, or by linking more observations to possibly multiple, but fewer, matches, I report the average number of links per observation in Table \ref{multi_L}.  On average, ABE Multi seems to assign larger $L_i$ per observation:  PRL Multi assigns a unique match to 59 percent of observations, and two matches to 33 percent of observations, compared to ABE Multi which assigns, on average, one, two, and three matches to 52, 35, and 11 percent of observations, respectively.  Both algorithms tend not to assign more than four matches for many observations.  Note that these probabilities do not sum to one, because they reflect the average of $P(L_i = \ell)$ across 1,000 observations, and not the average \textit{distribution} of $L_i$ across datasets. 
+
+Although ABE Single and PRL Single match a similar number of observations on average, ABE Single seems to produce higher quality matches as measured by its low Type I error (0.03 compared to 0.11 for PRL Single).  This comes at the cost of a high Type II error rate: ABE Single fails to match about 26 percent of possible links on average, compared to 15 percent for PRL Single.  As discussed in Section 5, about 6 percent of the Type II error can be attributed to the blocking structure imposed by the ABE algorithm; however, this cannot fully explain the gap between the two methods.  
+
+% TO DO : FIX TYPE II ERROR RATE FOR TE MULTIPLE MATCH METHODS! cannot be correct
+
+The last column in Table \ref{match_rate} reports the average probability that the set of matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ contains the true match.  This is an important metric to study, because the estimation methods used in this paper assume that this probability is equal to 1.  Notably, this assumption is most likely to fail for PRL Single (it finds the correct match only 89 percent of the time), but allowing for multiple matches in PRL Multi improves this probability significantly.   ABE Single and ABE Multi perform very well on this metric, including the correct match 97 and 99 percent of the time.  Breaking down this probability by the number of matches $L_i$ for ABE Multi and PRL Multi in Table \ref{multi_L} shows that allowing for multiple matches increases the probability that the true match is included in the sample.  
 
 % Match Rate Table 
 
@@ -502,35 +524,14 @@ Each matching method produces a distinct matched dataset, so that the matching s
 \label{multi_L}
 \end{table}
 
-\subsection{Matching results}
-To evaluate the matching procedures, I compute the following statistics for each linked dataset, reported in Table \ref{match_rate}:
-
-\begin{itemize}
-\item the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile (match rate), 
-\item the total number of links made by the matching algorithm, 
-\item the proportion of links that are incorrect (Type I error rate), 
-\item the proportion of correct $(x,y)$ links that are not found by the matching algorithm (Type II error rate), 
-\item the proportion of observations whose links include the true match
-\end{itemize}
-
-\noindent For the linked datasets that contain multiple matches per observation, I report also the average number of links per observation, and how often those links include the true match (Table \ref{multi_L}). 
-
 %  Match Rate Histograms 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 \begin{center}
 \caption{Match Rates by Linking Procedure } 
 \includegraphics[width=0.9\textwidth]{./Figures/match_rate.pdf}
 \label{match_hist}
 \end{center}
 \end{figure}
-
-As seen in Table \ref{match_rate}, the average match rates range between 71 and 79 percent across the various matching procedures, but plotting the distribution of match rates in Figure \ref{match_hist} shows that ABE Multi consistently matches more observations than any other procedure.  PRL Single and PRL Multi have about the same match rate, which suggests that allowing for multiple matches adds additional matches per observations rather than matching new individuals (however, this may be an artifact of how my PRL implementation).  ABE Multi, on the other hand, seems to increase match rates by matching new observations relative to ABE Single.  
-
-When comparing Type I error rates, it is important to note that multiple-match methods will produce more false links by construction.  Therefore, it is best to compare multi-match methods by measuring the proportion of observations whose  matches contain the true link.  In this metric, both ABE Multi and PRL Multi perform very well.  Furthermore, we can compute these values for each value of $L_i$, as in Table \ref{multi_L}, which shows that allowing multiple matches improves the accuracy of the ABE algorithm.  Table \ref{multi_L} also shows that ABE Multi and PRL Multi rarely assign more than three matches to any given observation.  
-
-Comparing ABE Single and PRL Single in Table \ref{match_rate}, demonstrates the  usual tradeoff between Type I and Type II errors.  ABE Single is more conservative, produces incorrect matches only 3 percent of the time, but failing to identify 26 percent of all matches.  PRL Single is less conservative, missing only 15 percent of matches, but at the cost of matching false links 11 percent of the time.    
-
-Based on these results, ABE Multi seems to perform well if multiple matches are desired.  The linked datasets produced by ABE Multi are very likely to include the true match, which is required for all of the estimation methods described in this paper.  It is also easier in terms of computation, because it does not require linear sum assignment programs or thresholds to determine which record pairs should be designated as matches.  
 
 \subsection{Estimation Results}
 
@@ -558,6 +559,10 @@ I compare the estimators according to median absolute deviation, and plot histog
 
 
 \section{Discussion/Conclusion}
+% fix this or add to discussion
+Based on these results, ABE Multi seems to perform well if the AHL estimator will be used.  This is because  ABE Multi is very likely to include the true match among the matches.  It is also easier in terms of computation, because it does not require linear sum assignment programs or thresholds to determine which record pairs should be designated as matches.  Furthermore, we know the efficiency gains from obtaining estimated probabilities are minor for $N$ large. 
+
+
 To what extent my results generalize beyond the simulated data is unclear, as I made many arbitrary choices while generating the synthetic data -- such as the dictionary of names and the structure of the typographical errors that I introduce in the $x$-datafile -- that may impact my results in important ways.  However, my theoretical results suggest that (i) using the match that is most likely to be correct, and bias correcting based on the probability that it is correct is optimal, (ii) if weights are estimated imprecisely, or if no match has a high probability of being correct, then the it is better to assign equal weights to multiple matches.   This result needs to be studied using more general models, and ideally applied to real data.
 
 
