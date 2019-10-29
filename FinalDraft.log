@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  29 OCT 2019 12:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  29 OCT 2019 14:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1619,97 +1619,94 @@ l.419 \addlinespace
                    
 ? 
 [29] [30] [31] [32] (./Figures/match_rates.tex) (./Figures/multi_tab.tex)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 529.
-
 [33]
-<./Figures/match_rate.pdf, id=551, 338.26375pt x 457.71pt>
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 507.
+ [34]
+<./Figures/match_rate.pdf, id=562, 338.26375pt x 457.71pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
-Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 542.
+Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 520.
 (pdftex.def)             Requested size: 422.77664pt x 572.08722pt.
 
 
-./FinalDraft.tex:547: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:525: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.547 ...f match rates in Figure \ref{match_hist} 
+l.525 ...f match rates in Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
-[34] [35 <./Figures/match_rate.pdf>] [36] (./Figures/est_tab.tex)
-<./Figures/compare.pdf, id=582, 650.43pt x 649.42625pt>
+[35] [36 <./Figures/match_rate.pdf>] (./Figures/est_tab.tex)
+<./Figures/compare.pdf, id=587, 650.43pt x 649.42625pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
-Package pdftex.def Info: ./Figures/compare.pdf  used on input line 574.
+Package pdftex.def Info: ./Figures/compare.pdf  used on input line 552.
 (pdftex.def)             Requested size: 516.73338pt x 515.97432pt.
 
-Overfull \hbox (46.97836pt too wide) in paragraph at lines 574--576
+Overfull \hbox (46.97836pt too wide) in paragraph at lines 552--554
  [] 
  []
 
 [37] [38 <./Figures/compare.pdf>]
-<./Figures/ahl_hist.pdf, id=603, 466.74374pt x 524.96124pt>
+<./Figures/ahl_hist.pdf, id=608, 466.74374pt x 524.96124pt>
 File: ./Figures/ahl_hist.pdf Graphic file (type pdf)
 <use ./Figures/ahl_hist.pdf>
-Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 590.
+Package pdftex.def Info: ./Figures/ahl_hist.pdf  used on input line 568.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-<./Figures/sw_hist.pdf, id=604, 466.74374pt x 524.96124pt>
+<./Figures/sw_hist.pdf, id=609, 466.74374pt x 524.96124pt>
 File: ./Figures/sw_hist.pdf Graphic file (type pdf)
 <use ./Figures/sw_hist.pdf>
-Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 598.
+Package pdftex.def Info: ./Figures/sw_hist.pdf  used on input line 576.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
-<./Figures/OLS(L=1)_hist.pdf, id=605, 466.74374pt x 524.96124pt>
+<./Figures/OLS(L=1)_hist.pdf, id=610, 466.74374pt x 524.96124pt>
 File: ./Figures/OLS(L=1)_hist.pdf Graphic file (type pdf)
 <use ./Figures/OLS(L=1)_hist.pdf>
-Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 607.
+Package pdftex.def Info: ./Figures/OLS(L=1)_hist.pdf  used on input line 585.
 (pdftex.def)             Requested size: 469.75502pt x 528.37231pt.
  [39] [40 <./Figures/ahl_hist.pdf>] [41 <./Figures/sw_hist.pdf>] [42 <./Figures
 /OLS(L=1)_hist.pdf>] [43] [44]
-Overfull \hbox (134.88458pt too wide) detected at line 668
+Overfull \hbox (134.88458pt too wide) detected at line 646
 []
  []
 
 [45] [46] (./FinalDraft.bbl
-./FinalDraft.bbl:77: Misplaced alignment tab character &.
-l.77 ...Data Linkage}, United States: John Wiley &
+./FinalDraft.bbl:82: Misplaced alignment tab character &.
+l.82 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
 [47]
-./FinalDraft.bbl:105: Undefined control sequence.
-l.105 ...y Qian}, ``The Fluidity of Race: \enquote
+./FinalDraft.bbl:110: Undefined control sequence.
+l.110 ...y Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
 ) [48]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 708.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 708.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 686.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 686.
  (./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 708.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 708.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 686.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 686.
 Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
 (rerunfilecheck)             Checksum: 2478D7E1C152D8F82152F73FE88E853B;1655.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 708.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 686.
  ) 
 Here is how much of TeX's memory you used:
- 32055 strings out of 492649
- 641312 string characters out of 6129622
- 742605 words of memory out of 5000000
- 35246 multiletter control sequences out of 15000+600000
+ 32058 strings out of 492649
+ 641344 string characters out of 6129622
+ 742616 words of memory out of 5000000
+ 35248 multiletter control sequences out of 15000+600000
  545906 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,21n,84p,10382b,870s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exi
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exi
 st, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
-, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
 , replaced by a fixed one
@@ -1746,10 +1743,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
 /fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on FinalDraft.pdf (48 pages, 459445 bytes).
+Output written on FinalDraft.pdf (48 pages, 458396 bytes).
 PDF statistics:
- 798 PDF objects out of 1000 (max. 8388607)
- 683 compressed objects within 7 object streams
- 156 named destinations out of 1000 (max. 500000)
+ 804 PDF objects out of 1000 (max. 8388607)
+ 689 compressed objects within 7 object streams
+ 157 named destinations out of 1000 (max. 500000)
  349 words of extra memory for PDF output out of 10000 (max. 10000000)
 

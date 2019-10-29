@@ -55,6 +55,11 @@
   Linkage, Entity Resolution, and Duplicate Detection}, Springer Publishing
   Company, Incorporated, 2012.
 
+\harvarditem[Dempster et al.]{Dempster, Laird and Rubin}{1977}{em}
+{\bf Dempster, A.~P., N.~M. Laird, and D.~B. Rubin}, ``Maximum Likelihood from
+  Incomplete Data via the EM Algorithm,'' {\it Journal of the Royal Statistical
+  Society. Series B (Methodological)}, 1977, {\it 39} (1), 1--38.
+
 \harvarditem[Enamorado et al.]{Enamorado, Fifield and
   Imai}{2019}{enamorado2019}
 {\bf Enamorado, Ted, Benjamin Fifield, and Kosuke Imai}, ``Using a

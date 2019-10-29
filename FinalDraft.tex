@@ -418,9 +418,8 @@ Step (iii) defines a metric for quantifying the similarity between non-numeric v
 \textbf{Example 2 (cont'd).}  The probabilistic record linkage methods in this paper use Jaro-Winkler distances to calculate the similarity between strings.  This metric gives higher weight to discrepancies in the first part of the string, as this is where errors are less likely to be made when recording names \citep{jaro, winkler06}.  The Jaro-Winkler distance is also the default string metric for many record linkage packages, so this choice best reflects how researchers often match datasets in practice. 
 \addlinespace
 
-% flesh this out probably. 
-Step (iv) is the most complicated step, and so I defer discussion to the next sections.  In total, I implement four matching methods which produce the matched datasets described in Table \ref{overview}.  The rest of this section is devoted to discussing each method in detail.
-
+% TO DO: flesh this out probably. 
+Whereas Steps (i)-(iii) involve decisions about pre-processing data that can be incorporated in any linkage procedure, Step (iv) is where the most meaningful differences among procedures arise.  The decision to match an $(i,j)$ pair requires trading off the possibility of introducing Type I or Type II error.  Probabilistic methods developed by \cite{fellegi69} show how to construct the optimal linkage rule subject to pre-specified tolerances for Type I and Type II errors.  Deterministic methods offer a proxy for these methods.   The rest of this section is devoted to discussing each method in detail.
 
 \subsubsection{Deterministic Methods}
 The deterministic matching methods used in this paper are based upon those used by \cite{abe2012, abe2014, abe2019b}, and \cite{ferrie96}; hence, I refer to my adaptations of their methods as ABE Single and ABE Multi.   The names refer to the fact that ABE Single matches each observation in the $x$-datafile to at most one observation in the $y$-datafile, and discards any observations that result in multiple matches.  By contrast, ABE Multi designates as a match \textit{any} pair of observations that have the same phonetically spelled first and last names, and whose birth years fall within a 2-year band, which can result in linking a single observation to multiple matches. 
@@ -448,50 +447,33 @@ I implement ABE Multi in exactly the same way, except that I replace Step 3 with
 Although there are many variations of the ABE algorithm, such as using a $\pm5$-year age band, replacing NYSIIS with another phonetic algorithm, or allowing for partial string agreement by incorporating Jaro-Winkler string distances, I design my methods to mimic the ``basic structure" of the ABE algorithms presented in \cite{abe2019}.   As discussed above, I predict that the choice of the 2-year age band, combined with my data generation process, will result in a Type II error rate of about 5.7 percent for both the ABE Single and ABE Multi methods.  However, the focus of this paper is to study estimation methods for linked data, so I favor simplicity over choosing the optimal variant, and defer to \cite{bailey2017} and \cite{abe2019} for a discussion of these matters.  
 
 \subsection{Probabilistic Method}
-\cite{fellegi69} developed the canonical framework for probabilistic record linkage by posing record linkage as a classification problem in which each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$. 
 
-To determine whether $(i,j)$ belongs to $M$ or $U$, the pair is evaluated according to $K$ different comparison criteria.  These comparisons are represented in a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$  where each comparison field $\gamma_{ij}^{k}$ may be binary-valued, as in ``$i$ and $j$ have the same birthday" and ``$i$ and $j$ have the same last name," or use ordinal values to indicate partial agreement between strings.
-
-The probability of observing a particular configuration of $\gamij$ can be modeled as arising from the mixture distribution:
+The key insight of the canonical probabilistic record linkage framework from \cite{fellegi69} is to view record linkage as a classification problem, where each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$.  If the pairs are evaluated according to $K$,  comparison criteria, represented as a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$ then the probability of observing a particular configuration of $\gamij$ can be represented by the mixture distribution:
 \begin{equation}
 P(\gamij) = P(\gamij | M) p_M + P(\gamij | U) p_U 
 \label{mm}
 \end{equation}
-where $P(\gamij | M)$ and $P(\gamij | U)$ are the probabilities of observing the pattern $\gamij$ conditional on the record pair $(i,j)$ belonging to $M$ or $U$, respectively.  The proportions $p_M$ and $p_U = 1-p_M$ are the marginal probabilities of observing a matched or unmatched pair.  Applying Bayes' Rule, we obtain the probability of $(i,j) \in M$ conditional on observing $\gamij$,
-\begin{equation} P(M | \gamij) = \frac{p_M P(\gamij | M)}{P(\gamij)} \label{bayes} \end{equation}
-Thus, if we can estimate $p_M$, $P(\gamij | M)$ and $P(\gamij | U)$, then we can estimate the probability that any two records refer to the same entity using (\ref{bayes}).   These probabilities can then be used to designate pairs as matches, or to estimate the false positive rate associated with a particular match configuration using the formulas in \cite{fellegi69}.  
+where $P(\gamij | M)$ and $P(\gamij | U)$ are the probabilities of observing the pattern $\gamij$ conditional on the record pair $(i,j)$ belonging to $M$ or $U$, and $p_M$ and $p_U = 1-p_M$ are the marginal probabilities of observing a matched or unmatched pair. 
 
-% need to talk about assignment in this paper
+Using Bayes' Rule, we can write the probability of $(i,j)$ belonging to $M$ or $U$, conditional on observing $\gamij$, as
+\begin{align} P(M | \gamij) &= \frac{p_M P(\gamij | M)}{P(\gamij)} \\ 
+P(U | \gamij) &= \frac{p_U P(\gamij | U)}{P(\gamij)}
+ \end{align}
+If we can estimate the parameters of the mixture distribution in (\ref{mm}), then we can estimate the probability that any two records refer to the same entity using the formulas above.  These probabilities can in turn be used to designate pairs as matches, or to quantify uncertainty about the matched dataset.  
 
-One difficulty arises from the fact that there are at least $2^K -1$ possible configurations of $\gamij$\footnote{There are more, if any of the comparison criteria are non-binary}.  While in principle we could model $P(\gamij | M)$ and $P(\gamij | U)$ as
-\begin{align*} (\gamma_{ij}^1, \dots, \gamma_{ij}^K) \  |\  M &\sim \text{Dirichlet}(\mathbf{\delta_M})\\
- (\gamma_{ij}^1, \dots, \gamma_{ij}^K) \  |\  U &\sim \text{Dirichlet}(\mathbf{\delta_U}) \end{align*}
-but the parameters $\mathbf{\delta_M}$ and $\mathbf{\delta_U}$ may be high-dimensional.  However, if the comparison fields $\gamma_{ij}^{k}$ are independent across $k$ conditional on match status, then the number of parameters used to describe each mixture class can be reduced to $K$ by factoring:
+In the context of this paper, the comparison vector $\gamij$ reflects agreements between $w_i$ and $w_j$, such as ``$i$ and $j$ have the same birth year" or ``$i$ and $j$ have the same phonetically spelled last name."  Yet even if all of the $\gamma_{ij}^{k}$ are binary, $\gamij$ has $2^K -1$ possible configurations of $\gamij$, and so it is convenient to assume the comparison fields $\gamma_{ij}^{k}$ are independent across $k$ conditional on match status.  This reduces the number of parameters necessary to describe each mixture class, since we can factor 
  \begin{equation} 
  P(\gamma_{ij} | C) = \prod_{k=1}^K P(\gamma_{ij}^{k} | C)^{\gamma_{ij}^{k}}(1-Pr(\gamma_{ij}^{k} | C))^{1-\gamma_{ij}^{k}} \hspace{20pt} C\in \{M, U\} 
  \label{eq:condInd}
  \end{equation}
- Alternatively, dependence between fields can be modeled using log-linear models; however, I will assume conditional independence to ease computation, and because the matching variables in the synthetic dataset are generated independently of each other.  
+In principle, this assumption can be relaxed using log-linear models, as in \cite{larsen_rubin_2001}; however, the conditional independence assumption is appropriate for my application, because I generate the errors for different categories of $w_i$ independently. 
  
-Since membership to $M$ or $U$ is not actually observed, a convenient way of simultaneously estimating $p_M, p_U$ and classifying record pairs as matches or non-matches is via mixture modeling, with mixture distributions $P(\gamij | M)$ and $P(\gamij | U)$.  The parameters can be estimated using the expectation-maximization (EM), first applied to record linakge by \cite{larsen_rubin_2001}.  For this paper, I use the \texttt{fastLink} algorithm developed by \cite{enamorado2019}. 
+Since membership to $M$ or $U$ is not observed, \cite{larsen_rubin_2001} suggest using the expectation-maximization (EM) algorithm from \cite{em} to simultaneously estimate the parameters in (\ref{mm}) and classify record pairs as matches or non-matches.  I use a variation of these methods developed by \cite{enamorado2019}, whose \texttt{R} package called fastLink is designed for large-scale administrative data.  Their software allows the user set a lower bound for the posterior probability of a match that will be accepted, and to decide whether unique matches should be assigned via the linear sum assignment program described in \cite{enamorado2019}.  
 
 
 
-
-%\begin{align*}
-%\Var{\hat{\mu}_1} &= \frac{1}{N}\Var{x_i y_{i1}} = \frac{1}{N}\frac{1}{\pi^2}\left(\pi \Var{x_i\varepsilon_i} + (1-\pi) \Var{x_i}\omega^2 + \pi(1-\pi)(E[x_i^2\beta] - E[x_i]\kappa)^2\right) \\
- %\hat{\mu}_2 &= \frac{1}{N}\sum_{i=1}^N \frac{x_i y_{i2}}{1-\pi} - \frac{\pi}{1-\pi}\kappa 
- %\end{align*}
-
-%When performing estimation with linked data, a few obvious comparison metrics arise:  data can be partitioned into three parts - identfied links, nonlinks and potential links.  Could repeat the analysis for each group or for subsets of these groups.  They use nonlinks to adjust the potential links, and thereby, gain an additional perspective that could lead to reductions in MSE over statistics calculated only from the linked data.  Benchmark is OLS with one-to-one-matching, or using observations assigned $L_i = 1$ matches. 
-
-%Using only data from pairs of records that are highly likely to be links might mean throwing away additional information from potentiallyl inked pairs, which could contain true links.  Additionally, we could bias results because confidently linked pairs may differ from potentially linked piars.  For example, considering affirmative actiona nd income questison, certain records may be harder to match.  For deterministic methods, people reweight on observables.. 
-
-%Some methods specifically attempt to correct for the bias introduced by the matching step.  Seminal work by Neter, Maynes and Ramanathan (1965) shows that if matching errors are moderate then regression coefficeints can be severely biased.  This work is formalized by \cite{sw1993}. 
-
-
-%The primary examples are \cite{lahiri05} and \cite{sw1993}.  \cite{sw1993} presuppose that the linker has provided a combined data file consisting of pairs of records (one from each input file) along with the match probability and the link status -- either link, nonlink, or potential link -- of each pair.  They assume that the file of linked cases has been augmented so that every record on the smaller of the two files has been paired with two records of the larger file having the highest matching weights.  Some cases will consist of (link, nonlink) combinations or (nonlink, nonlink) combinations, but they rule out settings where more than one true link could occur, so that (link link) combinations are ruled out.
-
+In my implementation of their algorithm, I set the threshold equal to 0.7, enforce the unique matches to obtain PRL Single and accept all matches with posterior probability exceeding the threshold for PRL Multi.  
+note that the posterior probabilities do not sum to 1 for any indvidiual $i$, so that multiple matches are possible 
 
 \section{Monte Carlo Study}
 
