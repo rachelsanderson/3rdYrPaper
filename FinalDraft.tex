@@ -392,33 +392,35 @@ Step (ii) reduces the computational burden of a matching procedure when $N_x \ti
 
 Step (iii) defines a metric for quantifying the similarity between non-numeric variables, such as Jaro-Winkler distances for strings.  Other metrics include the Levenshtein ``edit" distance, however I use the Jaro-Winkler method because it was developed specifically for record linkage by Jaro and Winkler.   The metric measures the number of matching characters and required transpositions between two names, and gives a higher weight to discrepancies in the first part of the string.  Importantly, having identical NYSIIS codes does not imply that the Jaro-Winkler distance between two strings will be 1, so the methods I use apply the Jaro-Winkler distance to the phonetically-spelled names.  %cite .  For more details, see \cite{arp2018}. 
 
+% FIX BELOW HERE in the AM when I have brain power
 Finally, Step (iv) is where record linkage procedures differ in the most meaningful ways; hence, this step will be the focus of my analysis.  In fact I hold Step (i)-(iii) as described above, and define differences in the record linkage procedures according to differences in Step (iv).  
 
 Below I will discuss two record linkage methods -- one deterministic and one probabilistic -- that I will use in my analysis.  Each method will be implemented twice: first, requiring unique matches, and then allowing for multiple matches.  While these methods are by no means exhaustive, they are intended to be representative of the most commonly used methods in economics.  For a detailed survey of record linkage techniques, please refer to books by \cite{harron_book, christen2012} or \cite{herzog07}, or any of the references in this paper. 
 
-\subsection{Deterministic}
-The deterministic matching algorithm described herein is based upon methods developed by \cite{abe2012}.  It consists of the following steps.
+\subsection{Deterministic Method}
+The deterministic matching algorithm I implement is based upon the matching procedure used in \cite{abe2012}.  My version is as follows,
 \begin{enumerate}
-\item Clean names in the $x$- and $y$- datafiles to remove any non-alphabetic characters and account for common mis-spellings and nicknames (e.g., so that Ben and Benjamin would be considered the same name).  
-\item Restrict the sample to people in the $x$-datafile with unique first name, last name, and birth year combinations  
-\item For each record in the $x$-datafile, look for records in the $y$-datafile that match on first name, last name, place of birth, and exact birth year.  At this point there are three possibilities 
+\item Use the NYSIIS phonetic algorithm to obtain phonetically-spelled versions of the names in the $x$- and $y$- datafiles.
+\item Restrict the sample to people in the $x$-datafile with unique first name, last name, birth year, and $(x_{i1}, x_{i2})$ combinations. 
+\item For each record $i$ in the $x$-datafile, search for a record $j$ in the $y$-datafile whose phonetically spelled first and last names and birth year match exactly.  
 \begin{enumerate}
-\item If there is a \textit{unique} match, this pair of observations is considered a match.
-\item If there are multiple potential matches in the $y$-datafile with the same year of birth, the observation is discarded. 
-\item If there are no matches by exact year of birth, the algorithm searches for matches within $\pm$ 1 year of reported birth year, and if this is unsuccessful, it looks for matches within $\pm$ 2 years.  In each of these steps, only unique matches are accepted.  If none of these attempts produces a unique match, the observation is discarded.
+\item If there is a \textit{unique} match, designate the records $(i,j)$ as a match.
+\item If there are multiple possible matches in the $y$-datafile, drop the observation $i$ from the sample. 
+\item If there are no observations in the $y$-datafile that match $i$'s exact year of birth, search for a match within $\pm$1 year of $i$'s reported birth year; and, if this is unsuccessful, search for a match within $\pm$2 years.  If $i$ matches to multiple observations at any point, or if none of these attempts produces a match, then the observation is discarded.
 \end{enumerate}
-\item Repeat Step 3 for each record in the $y$-datafile, searching for matches in the $x$-datafile; then designate as matches all record pairs in the intersection of the two matched samples.
+\item Repeat Steps 2 and 3 for each record in the $y$-datafile, searching for matches in the $x$-datafile.  Set the matched sample equal to the intersection of the two sets of matches.
+\end{enumerate}
+To allow for multiple matches, I replace Step 3 with,
+\begin{enumerate}
+\item[3.^*] Designate as a match any observation in the $y$-datafile that matches $i$'s phonetically spelled first and last name exactly, and whose birth year falls within $\pm$2 years of $i$'s birth year. 
 \end{enumerate}
 
-An interesting quirk of this algorithm is that an individual with multiple matches is dropped from the sample only if those matches occur before a unique match is found in Step 3.  That is, a person with a unique, same-year match, and multiple matches with birth years within one year, will not be dropped from the sample.  If the same-year match were not included in the dataset, then that same individual would be dropped.  This has significant implications for bootstrapping standard errors; notably, the nonparametric bootstrap will fail. 
+% include an example here, what is ruled out by 3 vs 3*
 
-Note that this quirk only occurs when the algorithm enforces unique matches.  When allowing for multiple matches, I designate as a match any pair that satisfies any of the categories in Step 3. 
+\subsection{Probabilistic Method}
+\cite{fellegi69} developed the canonical framework for probabilistic record linkage by posing record linkage as a classification problem in which each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$. 
 
-\subsection{Probabilistic Record Linkage}
-The probabilistic record linkage technique implemented in this paper is based on the canonical model by \cite{fellegi69}, which views record linkage as a classification problem, where every record pair belongs either to the set of \textit{matches} $(M)$ or \textit{non-matches} $(U)$:
-\begin{align*} M &= \{ (i,j) \in X\times Y: j \in \varphi(i) \} \\ U &= \{(i,j) \in X\times Y:  j \notin\varphi(i)\}\end{align*} 
-
- To determine whether a record pair $(i,j)$ belongs to $M$ or $U$, the pair is evaluated according to $K$ different comparison criteria.  These comparisons are represented in a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$  where each comparison field $\gamma_{ij}^{k}$ may be binary-valued, as in ``$i$ and $j$ have the same birthday" and ``$i$ and $j$ have the same last name," or use ordinal values to indicate partial agreement between strings.
+To determine whether $(i,j)$ belongs to $M$ or $U$, the pair is evaluated according to $K$ different comparison criteria.  These comparisons are represented in a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$  where each comparison field $\gamma_{ij}^{k}$ may be binary-valued, as in ``$i$ and $j$ have the same birthday" and ``$i$ and $j$ have the same last name," or use ordinal values to indicate partial agreement between strings.
 
 The probability of observing a particular configuration of $\gamij$ can be modeled as arising from the mixture distribution:
 \begin{equation}
@@ -428,6 +430,8 @@ P(\gamij) = P(\gamij | M) p_M + P(\gamij | U) p_U
 where $P(\gamij | M)$ and $P(\gamij | U)$ are the probabilities of observing the pattern $\gamij$ conditional on the record pair $(i,j)$ belonging to $M$ or $U$, respectively.  The proportions $p_M$ and $p_U = 1-p_M$ are the marginal probabilities of observing a matched or unmatched pair.  Applying Bayes' Rule, we obtain the probability of $(i,j) \in M$ conditional on observing $\gamij$,
 \begin{equation} P(M | \gamij) = \frac{p_M P(\gamij | M)}{P(\gamij)} \label{bayes} \end{equation}
 Thus, if we can estimate $p_M$, $P(\gamij | M)$ and $P(\gamij | U)$, then we can estimate the probability that any two records refer to the same entity using (\ref{bayes}).   These probabilities can then be used to designate pairs as matches, or to estimate the false positive rate associated with a particular match configuration using the formulas in \cite{fellegi69}.  
+
+% need to talk about assignment in this paper
 
 One difficulty arises from the fact that there are at least $2^K -1$ possible configurations of $\gamij$\footnote{There are more, if any of the comparison criteria are non-binary}.  While in principle we could model $P(\gamij | M)$ and $P(\gamij | U)$ as
 \begin{align*} (\gamma_{ij}^1, \dots, \gamma_{ij}^K) \  |\  M &\sim \text{Dirichlet}(\mathbf{\delta_M})\\
@@ -582,7 +586,7 @@ To what extent my results generalize beyond the simulated data is unclear, as I 
 \section{Appendix:  Implementation Notes}
 
 \subsection{Proofs}
-\subsection{Lemma 1}Consider,
+\noindent \textit{\textbf{Lemma 1.}} Consider constructing a linear unbiased estimator of $\mu$ that places positive weight on both observations $X_1$ and $X_2$, 
 \begin{equation}
 \hat{\mu} = a_1X_{1} + a_2 X_2 -  a_3 \kappa \label{mu} \end{equation}
 which has the following expectation,
@@ -603,6 +607,22 @@ We can write:
 \end{align*}
 
 Hence any unbiased estimator $\hat{\mu}$ that uses $X_1$ and $X_2$ can be written as a linear combination of estimators using only $X_1$ or $X_2$.  
+
+\noindent \textit{\textbf{Lemma 2.}} Suppose the data consist of $\{X_{\ell}\}_{\ell=1}^{L}$, where each $X_{\ell}$ is drawn from the correct distribution with probability $\pi_{\ell}$ and from the incorrect distribution with probability $1-\pi_{\ell}$, and exactly one $X_{\ell}$ is drawn from the correct distribution.  Then, any unbiased estimator of $\mu$ that places positive weight on all of the $\{X_{\ell}\}$ can be written as a linear combination of $\hat{\mu}_{\ell}$, the unbiased estimator of $\mu$ that only uses $X_{\ell}$, 
+$$ \hat{\mu}_{\ell} = \frac{X_{\ell}}{\pi_{\ell}}  - \frac{1-\pi_{\ell}}{\pi_{\ell}} \kappa, \hspace{10pt} \ell = 1, \dots, L $$
+\textbf{Proof.}  The proof follows by induction.  Lemma 1 proves the base case for $L=2$.  Assume that $\hat{\mu}^{(L-1)} = \sum_{\ell=1}^{L-1} b_{\ell} \hat{\mu}_{\ell}$.  Construct $\hat{\mu}^{(L)} = a_1 \hat{\mu}^{(L-1)} + a_2 X_L - a_0 \kappa$, so that
+$$ E[\hat{\mu}^{(L)}] = (a_1 + a_2 \pi_L) \mu + (a_2(1-\pi_L) - a_0) \kappa $$
+Unbiasedness requires that
+\begin{align*}
+a_2(a_1) &=  \frac{1-a_1}{\pi_L} \\ 
+a_3(a_1) &= \left(\frac{1-\pi_L}{\pi_L}\right)\left(\frac{1-a_1}{\pi_L}\right)
+\end{align*}
+Plugging this into $\hat{\mu}^{(L)}$ yields,
+\begin{align*} \hat{\mu}^{(L)} &= a_1 \hat{\mu}^{(L-1)} + (1-a_1)\underbrace{\left(\frac{X_L}{\pi_L} - \frac{1-\pi_L}{\pi_L}\right)}_{\hat{\mu}_L} \\
+\implies \hat{\mu}^{(L)} &= \sum_{\ell=1}^{L-1} a_1 {b_\ell} \hat{\mu}_{\ell} + (1 - a_1) \hat{\mu}_{\ell}
+\end{align*}
+which completes the proof.  Recall that $a_1$ is only pinned down by minimizing the variance of $\hat{\mu}^{(\ell)}$. 
+
 
 \subsection{Variance formulas}
 \Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, using the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise:

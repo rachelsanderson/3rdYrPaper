@@ -12,15 +12,14 @@
 \BOOKMARK [1][-]{section.5}{Monte Carlo Study}{}% 12
 \BOOKMARK [2][-]{subsection.5.1}{Generating the x- and y-datafiles}{section.5}% 13
 \BOOKMARK [2][-]{subsection.5.2}{Linking the x- and y-datafiles}{section.5}% 14
-\BOOKMARK [2][-]{subsection.5.3}{Deterministic}{section.5}% 15
-\BOOKMARK [2][-]{subsection.5.4}{Probabilistic Record Linkage}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.3}{Deterministic Method}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.4}{Probabilistic Method}{section.5}% 16
 \BOOKMARK [1][-]{section.6}{Monte Carlo Study}{}% 17
 \BOOKMARK [2][-]{subsection.6.1}{Matching results}{section.6}% 18
 \BOOKMARK [2][-]{subsection.6.2}{Estimation Results}{section.6}% 19
 \BOOKMARK [1][-]{section.7}{Discussion/Conclusion}{}% 20
 \BOOKMARK [1][-]{section.8}{Appendix: Implementation Notes}{}% 21
 \BOOKMARK [2][-]{subsection.8.1}{Proofs}{section.8}% 22
-\BOOKMARK [2][-]{subsection.8.2}{Lemma 1}{section.8}% 23
-\BOOKMARK [2][-]{subsection.8.3}{Variance formulas}{section.8}% 24
-\BOOKMARK [2][-]{subsection.8.4}{implementation notes}{section.8}% 25
-\BOOKMARK [1][-]{section.9}{More MSE Tables}{}% 26
+\BOOKMARK [2][-]{subsection.8.2}{Variance formulas}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.3}{implementation notes}{section.8}% 24
+\BOOKMARK [1][-]{section.9}{More MSE Tables}{}% 25
