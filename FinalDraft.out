@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Setup}{}% 2
+\BOOKMARK [1][-]{section.3}{Estimation methods for linked data }{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{sw1993}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{ahl2019}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Comparing SW and AHL}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Incorporating probabilities in the AHL estimator}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Estimating the mean}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Errors in }{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.3}{Incorporating 0=x"0119 in linear regression}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.4}{Generalizing results to Li > 2}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Monte Carlo Study}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Generating the x- and y-datafiles}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Linking the x- and y-datafiles}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.3}{Deterministic Method}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.4}{Probabilistic Method}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Monte Carlo Study}{}% 17
+\BOOKMARK [2][-]{subsection.6.1}{Matching results}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.2}{Estimation Results}{section.6}% 19
+\BOOKMARK [1][-]{section.7}{Discussion/Conclusion}{}% 20
+\BOOKMARK [1][-]{section.8}{Appendix}{}% 21
+\BOOKMARK [2][-]{subsection.8.1}{Proofs}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.2}{Variance formulas}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.3}{Variance of alternative AHL estimator}{section.8}% 24
+\BOOKMARK [2][-]{subsection.8.4}{implementation notes}{section.8}% 25

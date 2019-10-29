@@ -16,7 +16,10 @@ abe_match <- function(x.df, y.df, name_vars, xVar, yVar, age_band=2, unique=TRUE
   
   # if unique matching desired, drop non-unique matches
   if (unique) { 
-    x_matches <- x_matches %>% group_by(id_x) %>% filter(n == 1 & age_diff == min(age_diff))
+    x_matches <- x_matches %>% group_by(id_
+                                        
+                                        
+                                        x) %>% filter(n == 1 & age_diff == min(age_diff))
   }
   
   if (twoway){

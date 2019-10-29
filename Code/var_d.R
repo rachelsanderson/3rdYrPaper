@@ -244,7 +244,7 @@ make_df <- function(parCombo, N){
   
   # Intialize DF
   df <- data.frame(truePi=rep(seq(0.1,0.9, by=0.1), each=5),
-                   piHat=rep(seq(0.1,0.5, by=0.1), 9))
+                   piHat=rep(seq(0.05,0.5, by=0.05), 9))
   
   # Calculate bias/var of optimal thing with bad beliefs
   df$bias <- apply(df[,c('truePi','piHat')], 1, 

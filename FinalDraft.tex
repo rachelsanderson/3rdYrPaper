@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage[margin=0.1in]{geometry}
-\usepackage[nomarkers,nofiglist,notablist]{endfloat}
+%\usepackage[nomarkers,nofiglist,notablist]{endfloat}
 \usepackage{xcolor}
 \usepackage{framed}
 \usepackage{enumitem}
@@ -301,7 +301,12 @@ By comparison, Bias($\hat{\mu}^{AHL}) =  0$ and $\Var{\hat{\mu}^{AHL}} = \frac{3
 $$0.292^2 + \frac{1.94}{N} = \frac{3}{N} \implies N = 12.43$$ 
 This example suggests that for fixed $\theta = (\mu, \sigma^2, \kappa, \omega^2)$ and $N$, we can compare the ratio of $MSE_n(\hat{\mu}^*; \theta)/MSE_n(\hat{\mu}^{AHL};\theta) $ for different values of Bias($\hat{\pi}$).  Alternatively, for a fixed value of Bias($\hat{\pi}$), we can calculate the minimum sample size $N$ such that it is more efficient to use $\hat{\mu}^{AHL}$. 
 
-Figures 2 and 3 plot the bias and variance of $\hat{\mu}^*$ as a function of the mis-specified beliefs $\hat{\pi}$ for different values of $\theta$.  The bias is quadratic in $|\hat{\pi}-\pi|$, with zero bias at $\hat{\pi}=\pi$ and $\hat{\pi}=0.5$.  The variance of $\hat{\mu}^*$ is not minimized at $\hat{\pi}=\pi$, but at some value determined by $\sigma^2, \omega^2$, $(\mu-\kappa)^2$, and Bias$(\hat{\pi})$.  The variance term is less interesting than the bias, because $\Var{\hat{\mu}^*}\to0$ as $N\to\infty$, whereas the bias does not disappear.  This is made apparent in Tables 1-3, which show the ratio of the $MSE_N(\hat{\mu}^{AHL};\theta)/MSE_N(\hat{\mu}^*;\theta)$ for $N=10, 100$, and $1000$, and $\hat{\mu^*}$ is calculated for different values of $\hat{\pi}$.  These tables display values for $\theta = (\mu, \sigma^2, \kappa, \omega^2) = (0,1,1,2)$ following the example above, although the same pattern of results appears for other parameter combinations included in the Appendix. 
+Figures 2 and 3 plot the bias and variance of $\hat{\mu}^*$ as a function of the mis-specified beliefs $\hat{\pi}$ for different values of $\theta$.  The bias is quadratic in $|\hat{\pi}-\pi|$, with zero bias at $\hat{\pi}=\pi$ and $\hat{\pi}=0.5$.  The variance of $\hat{\mu}^*$ is not minimized at $\hat{\pi}=\pi$, but at some value determined by $\sigma^2, \omega^2$, $(\mu-\kappa)^2$, and Bias$(\hat{\pi})$.  The variance term is less interesting than the bias, because $\Var{\hat{\mu}^*}\to0$ as $N\to\infty$, whereas the bias does not disappear.  
+
+This issue is reflected in Tables 1-3, which display the ratio of the $MSE_N(\hat{\mu}^{AHL};\theta)/MSE_N(\hat{\mu}^*;\theta)$ for $N=10, 100$, and $1000$, when $\hat{\mu^*}$ is calculated for different values of $\hat{\pi}$.  Although the values in these tables are calculated for $\theta = (\mu, \sigma^2, \kappa, \omega^2) = (0,1,1,2)$ the same pattern of results appears for other parameter combinations included in the Appendix. 
+
+Although no economist would use $N=10$ in practice, Table 1 illustrates how, even in small samples, the AHL estimator can be more efficient than $\hat{\mu}^*$ for incorrect beliefs such that $|\hat{\pi}-\pi| >  0.35$.   For $N=100$, this tolerance for error in $\hat{\pi}$ decreases to $|\hat{\pi}-\pi| >  0.15$; and, for $N=1,000$, $\hat{\mu}^*$ outperforms $\hat{\mu}^{AHL}$ only if $\hat{\pi}=\pi$.  This pattern may suggests that incorporating knowledge about $\pi$ offers potential efficiency gains for estimators applied to small samples, but that the potential gains, as well as the tolerance for errors in $\hat{\pi}$, decrease with sample size.  Before this conclusion can be generalized, however, the MSE ratio needs to be studied for heterogenous
+$\pi_i$ and $\hat{\pi}_i$, and $L > 2$ observations.  
 
 \begin{figure}[htbp]
 \begin{center}
@@ -320,10 +325,6 @@ Figures 2 and 3 plot the bias and variance of $\hat{\mu}^*$ as a function of the
 \label{var_plot}
 \end{center}
 \end{figure}
-
-% TO DO: Fix this but also try smaller deviations in $\hat{\pi}$!!!
-
-For $N=1,000$, $\hat{\mu}^*$ only performs better when $\hat{\pi}=\pi$, and the benefits decrease as the true $\pi$ approaches 0.5.   For $N=100$, the ratio is close to 1 for Bias($\hat{\pi}$) = 0.1, so that the efficiency gain from incorporating knowledge about $\pi$ is reduced for $N > 100$.  This suggests that for small samples, you may want to incorporate knowledge about probabilities; but for samples of a large size, it's best to ignore them and weight multiple matches equally. 
 
 \input{./Figures/compare_10.tex}
 \input{./Figures/compare_100.tex}
@@ -377,7 +378,7 @@ The vector of identifying variables, $w_i$, includes a first name, last name, an
  
  \input{./Figures/synthetic.tex}
  
-Next, I split the ground truth dataset into the $x$- and $y$-datafiles, as in the bottom panel of Figure \ref{sample_dta}.  The $x$-datafile contains values of $(x_{i1},x_{i2})$ for 500 observations selected at random from the ground truth dataset.  The identifiers in the $x$-datafile are equal to the original $w_i$ plus some random transcription error.  The probability of introducing a certain type ofs typographical error is equal to that reported for the 1940 Census data in \cite{abe2019}\foonote{For example, 7\% of observations have misreported first names and 17\% of observations have misreported last names.} These errors include deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), and swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  For half of the observations, I introduce random errors in the birth year drawn from a Normal(0, 2.5) distribution and rounded to the nearest integer.  
+Next, I split the ground truth dataset into the $x$- and $y$-datafiles, as in the bottom panel of Figure \ref{sample_dta}.  The $x$-datafile contains values of $(x_{i1},x_{i2})$ for 500 observations selected at random from the ground truth dataset.  The identifiers in the $x$-datafile are equal to the original $w_i$ plus some random transcription error.  The probability of introducing a certain type ofs typographical error is equal to that reported for the 1940 Census data in \cite{abe2019}\footnote{For example, 7\% of observations have misreported first names and 17\% of observations have misreported last names.} These errors include deleting characters (e.g., ``Anderson"  becomes ``Andersn"), exchanging vowels (e.g., ``Rachel" becomes ``Rachal"), and swapping English phonetic equivalents (e.g. ``Ellie" becomes ``Elie").  For half of the observations, I introduce random errors in the birth year drawn from a Normal(0, 2.5) distribution and rounded to the nearest integer.  
 
 The $y$-datafile includes all 1,000 values of $y_i$ from the ground truth data, along with the original identifiers $w_i$.  The aim of this construction is to make it likely that some observations in the $x$-datafile will be linked to multiple values of $y$.  The next section describes the record linkage methods used to link the $x$- and $y$-datafiles. 
 
@@ -412,7 +413,7 @@ The deterministic matching algorithm I implement is based upon the matching proc
 \end{enumerate}
 To allow for multiple matches, I replace Step 3 with,
 \begin{enumerate}
-\item[3.^*] Designate as a match any observation in the $y$-datafile that matches $i$'s phonetically spelled first and last name exactly, and whose birth year falls within $\pm$2 years of $i$'s birth year. 
+\item[3.$^*$] Designate as a match any observation in the $y$-datafile that matches $i$'s phonetically spelled first and last name exactly, and whose birth year falls within $\pm$2 years of $i$'s birth year. 
 \end{enumerate}
 
 % include an example here, what is ruled out by 3 vs 3*
@@ -583,7 +584,7 @@ To what extent my results generalize beyond the simulated data is unclear, as I 
 
 
 
-\section{Appendix:  Implementation Notes}
+\section{Appendix}
 
 \subsection{Proofs}
 \noindent \textit{\textbf{Lemma 1.}} Any linear unbiased estimator of $\mu$ of the form
@@ -604,7 +605,7 @@ so that unbiasedness requires choosing $a_1, a_2$ and $a_3$ that satsify,
 Rewriting $\hat{\mu}$ as a function of $a_1$,  
  $$\hat{\mu}(a_1) = a_1 X_1 +  \left(\frac{1}{1-\pi} - \frac{a_1 \pi}{1-\pi}\right)  X_2 - \left(\frac{\pi}{1-\pi} + \frac{a_1 - 2a_1\pi}{1-\pi}\right)\kappa $$ 
 which, after some rearranging, can be written as
-$$\hat{\mu}(a_1) &= (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 $$
+$$\hat{\mu}(a_1) = (a_1 \pi) \hat{\mu}_1 + (1-a_1\pi) \hat{\mu}_2 $$
 which completes the proof.  
 
 \noindent \textit{\textbf{Lemma 2.}} Suppose the data consist of $\{X_{\ell}\}_{\ell=1}^{L}$, where each $X_{\ell}$ is drawn from the correct distribution with probability $\pi_{\ell}$ and from the incorrect distribution with probability $1-\pi_{\ell}$, and exactly one $X_{\ell}$ is drawn from the correct distribution.  Then, any unbiased estimator of $\mu$ that places positive weight on all of the $\{X_{\ell}\}$ can be written as a linear combination of $\hat{\mu}_{\ell}$, the unbiased estimator of $\mu$ that only uses $X_{\ell}$, 
@@ -623,7 +624,7 @@ Plugging this into $\hat{\mu}^{(L)}$ yields,
 which completes the proof.  
 
 \subsection{Variance formulas}
-\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, using the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise:
+$\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, using the random variable $D = 1$ if $X_1$ is drawn from the correct distribution (and $X_2$ is drawn from the incorrect distribution), and $D=0$ otherwise:
 \begin{align*} \Var{X_1} &= E[\Var{X_1 | D}] + \Var{E[X_1| D]} \\ 
 &= P(D=1)\sigma^2 +  P(D=0)\omega^2 + \Var{\mu D + \kappa (1-D)} \\
 &= \pi \sigma^2 + (1-\pi) \omega^2 + \pi(1-\pi)(\mu-\kappa)^2
@@ -633,8 +634,8 @@ The same trick can be applied to calculate $\Var{X_2}$
 \subsection{Variance of alternative AHL estimator}
 
 \begin{align*}
-\Var{\frac{2}{N_{L_2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta) x_i \Bigg\vert L_i = 2} &= \frac{4}{N_{L_2}}\left(\Var{x_i\varepsilon_i | L_i = 2} + E[x_i^2 | L_i = 2](\omega^2 + \kappa^2)\\ &- E[x_i | L_i = 2 ] \kappa\right) \\
-\Var{\frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta) x_i \Bigg\vert L_i = 3} &= \frac{1}{N_{L_3}} \left(\Var{x_i\varepsilon_i | L_i = 3} + 2\left(E[x_i^2 | L_i = 3](\omega^2 + \kappa^2)\\ &- E[x_i | L_i = 3] \kappa \right)\right) \end{align*}
+\Var{\frac{2}{N_{L_2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta) x_i \Bigg\vert L_i = 2} &= \frac{4}{N_{L_2}}\left(\Var{x_i\varepsilon_i | L_i = 2} + E[x_i^2 | L_i = 2](\omega^2 + \kappa^2) - E[x_i | L_i = 2 ] \kappa\right) \\
+\Var{\frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta) x_i \Bigg\vert L_i = 3} &= \frac{1}{N_{L_3}} \left(\Var{x_i\varepsilon_i | L_i = 3} + 2\left(E[x_i^2 | L_i = 3](\omega^2 + \kappa^2) - E[x_i | L_i = 3] \kappa \right)\right) \end{align*}
 
 
 \subsection{implementation notes}
@@ -656,13 +657,13 @@ Details about implementation of fastLink algorithm. Also
 
 
 
-\section{More MSE Tables}
+%\section{More MSE Tables}
 
-\input{./Figures/compare_1.tex}
-\input{./Figures/compare_2.tex}
-\input{./Figures/compare_3.tex}
-\input{./Figures/compare_4.tex}
-\input{./Figures/compare_5.tex}
+%\input{./Figures/compare_1.tex}
+%\input{./Figures/compare_2.tex}
+%\input{./Figures/compare_3.tex}
+%\input{./Figures/compare_4.tex}
+%\input{./Figures/compare_5.tex}
 
 
 
