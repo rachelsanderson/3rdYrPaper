@@ -305,8 +305,7 @@ Figures 2 and 3 plot the bias and variance of $\hat{\mu}^*$ as a function of the
 
 This issue is reflected in Tables 1-3, which display the ratio of the $MSE_N(\hat{\mu}^{AHL};\theta)/MSE_N(\hat{\mu}^*;\theta)$ for $N=10, 100$, and $1000$, when $\hat{\mu^*}$ is calculated for different values of $\hat{\pi}$.  Although the values in these tables are calculated for $\theta = (\mu, \sigma^2, \kappa, \omega^2) = (0,1,1,2)$ the same pattern of results appears for other parameter combinations included in the Appendix. 
 
-Although no economist would use $N=10$ in practice, Table 1 illustrates how, even in small samples, the AHL estimator can be more efficient than $\hat{\mu}^*$ for incorrect beliefs such that $|\hat{\pi}-\pi| >  0.35$.   For $N=100$, this tolerance for error in $\hat{\pi}$ decreases to $|\hat{\pi}-\pi| >  0.15$; and, for $N=1,000$, $\hat{\mu}^*$ outperforms $\hat{\mu}^{AHL}$ only if $\hat{\pi}=\pi$.  This pattern may suggests that incorporating knowledge about $\pi$ offers potential efficiency gains for estimators applied to small samples, but that the potential gains, as well as the tolerance for errors in $\hat{\pi}$, decrease with sample size.  Before this conclusion can be generalized, however, the MSE ratio needs to be studied for heterogenous
-$\pi_i$ and $\hat{\pi}_i$, and $L > 2$ observations.  
+Although no economist would use $N=10$ in practice, Table 1 illustrates how, even in small samples, the AHL estimator can be more efficient than $\hat{\mu}^*$ for incorrect beliefs such that $|\hat{\pi}-\pi| >  0.35$.   For $N=100$, this tolerance for error in $\hat{\pi}$ decreases to $|\hat{\pi}-\pi| >  0.15$; and, for $N=1,000$, $\hat{\mu}^*$ outperforms $\hat{\mu}^{AHL}$ only if $\hat{\pi}=\pi$.  This pattern may suggests that incorporating knowledge about $\pi$ offers potential efficiency gains for estimators applied to small samples, but that the potential gains, as well as the tolerance for errors in $\hat{\pi}$, decrease with sample size.  Whether this result holds more generally requires additional work to incorporate heterogenous $\pi_i$ and $L>2$ observations of $X_{\ell}$.  
 
 \begin{figure}[htbp]
 \begin{center}
@@ -354,13 +353,25 @@ which means that any unbiased linear estimator $\hat{\beta}$ can be written as a
  \begin{equation}
  d^* = \frac{\Var{\hat{\beta}_{2}} - \text{Cov}\left(\hat{\beta}_1, \hat{\beta}_2\right)}{\Var{\hat{\beta}_1} + \Var{\hat{\beta}_{2}} - 2 \text{Cov}\left(\hat{\beta}_1, \hat{\beta}_2\right)}
  \end{equation}
-and we can repeat the exercise in the previous sections, comparing variance and bias for misspecified beliefs $\hat{\pi}$ and different parameter combinations.  The choice of the weights $d^*$ that give the optimal $\hat{\beta}^*$ is now complicated by the fact that it depends on the second moments of $X_i$, however the formulas for $\Var{\hat{\beta}_i}$ are the same as in (\ref{vmu1})-(\ref{cov}), but replacing $\mu, \sigma^2, \kappa,$ and $\omega^2$ with: 
-
-% add this here
-
+and we can repeat the exercise in the previous sections, comparing variance and bias for misspecified beliefs $\hat{\pi}$ and different parameter combinations.  The choice of the weights $d^*$ that give the optimal $\hat{\beta}^*$ is now complicated by the fact that it depends on the second moments of $X_i$, however the formulas for $\Var{\hat{\beta}_i}$ are the same as in (\ref{vmu1})-(\ref{cov}), but replacing $\mu, \sigma^2, \kappa,$ and $\omega^2$ with (under conditional homoskedasticity),
+\begin{align*}
+\tilde{\mu} &= \beta \\
+\tilde{\sigma}^2 &=  \sigma^2 E[x_ix_i]^{-1}\\
+\tilde{\kappa} &= E[x_ix_i']^{-1}E[x_i]\kappa \\
+\tilde{\omega}^2 &= (\omega^2 + \kappa^2)E[x_ix_i']^{-1}
+\end{align*}
+and the bias and variance should behave as in Figures \ref{bias_plot} and \ref{var_plot} for misspecified beliefs $\hat{\pi} \neq \pi$.
+ 
 \subsection{Generalizing results to $L_i > 2$}
 
-% to do 
+Lemma 2 in the Appendix demonstrates that any unbiased linear estimator that uses observations $\{X_{\ell}\}_{\ell=1}^L$ can be written as linear combination of the unbiased linear estimators that use a single observation $X_{\ell}$.  This suggests that for a sample of observations $\{X_{i\ell}\}_{\ell=1}^{L_i}$, $i=1,\dots,N$, we can construct for each $i$ a minimum variance estimator 
+$$\hat{\mu}_i^* = \sum_{\ell=1}^{L_i} d_{i\ell}^* \hat{\mu}_{i\ell}$$
+where 
+$$\hat{\mu}_{i\ell} = \frac{X_{i\ell}}{\pi_{i\ell}} - \frac{1-\pi_{i\ell}}{\pi_{i\ell}}\kappa $$ 
+and construct 
+$$\hat{\mu}^* = \sum_{i=1}^N \hat{\mu}_i^*}
+
+% to do -- proof 
 
 \section{Monte Carlo Study}
 
@@ -383,40 +394,58 @@ Next, I split the ground truth dataset into the $x$- and $y$-datafiles, as in th
 The $y$-datafile includes all 1,000 values of $y_i$ from the ground truth data, along with the original identifiers $w_i$.  The aim of this construction is to make it likely that some observations in the $x$-datafile will be linked to multiple values of $y$.  The next section describes the record linkage methods used to link the $x$- and $y$-datafiles. 
 
 \subsection{Linking the $x$- and $y$-datafiles}
-Taking the $x$- and $y$-datafiles as given, I implement four record linkage procedures to obtain four configurations of matched data with the form (\ref{data}).  For the purposes of this paper, I define a record linkage procedure as a set of decisions about (i) selecting and standardizing the identifying variables in $w_i$ and $w_j$, (ii) choosing which $(i,j)$ pairs to consider as potential matches, (iii) defining which patterns of $(w_i,w_j)$ constitute (partial) agreements, and (iv) designating $(i,j)$ pairs as matches.
+Taking the $x$- and $y$-datafiles as given, I implement four record linkage procedures to obtain matched datasets with the general structure in (\ref{data}).  These procedures, and their respective outputs, are summarized in Table \ref{overview}.  This section offers a brief overview of these methods, however the interested reader should refer to \cite{harron_book, christen2012} and \cite{herzog07} to learn more about modern record linkage methods. 
 
-Step (i) addresses the fact that differences may arise in $w_i$ and $w_j$ because of transcription error or misreporting, even when observations $i$ and $j$ refer to the same individual.   In practice, this step consists of removing spaces and non-alphabetic characters from string variables and processing names with phonetic algorithms to account for potential misspellings; common nicknames may also be replaced with full names.  
+\input{./Figures/overview_tab.tex}
 
-The identifiers in the simulated data do not include non-alphabetic characters, but do include misspelled names, so I standardize all of the first and last names using the New York State Identification and Intelligence (NYSIIS) phonetic algorithm.  Other popular phonetic algorithms include Soundex\footnote{This is the phonetic algorithm used in \cite{aizer2016} from Example 1} and Metafone; however, I assume that the NYSIIS algorithm performs sufficiently well for the purposes of my analysis, given that the names I use are selected from among the most common names in the United States.  
+For the purposes of this paper, I define a record linkage procedure as a set of decisions about (i) selecting and standardizing the identifying variables in $w_i$ and $w_j$, (ii) choosing which $(i,j)$ pairs to consider as potential matches, (iii) defining how to measure (partial) agreement between $(w_i,w_j)$, and (iv) designating $(i,j)$ pairs as matches.  
 
-Step (ii) reduces the computational burden of a matching procedure when $N_x \times N_y$ is large, by dividing observations into non-overlapping ``blocks" based on their values of $w_i$ or $w_j$.  For example, if observations are divided into blocks based on their place of birth, only individuals born in the same state will be considered as potential matches, and all pairs of individuals who are born in different states are assumed to be non-matches.  Given the size of my simulated datafiles, I do not impose any blocking rule.  If the datasets were larger, I could block observations according to the first letter of an observation's standardized first or last name, at the cost of possibly increasing the Type II error rate if these variables are recorded with error. 
+Step (i) accounts for differences in $w_i$ and $w_j$ that arise as a result of transcription error or misreporting, even when observations $i$ and $j$ refer to the same individual.   In practice, the researcher may define binary matching variables that correspond with events such as $i$ and $j$ were born in the same month or $i$ and $j$ have last names ending with the same three characters.  If the matching variables include full strings, then the researcher may standardize them by removing spaces and non-alphabetic characters, replacing common nicknames with full names, or pre-processing names with phonetic algorithms to account for possible misspellings.
 
-Step (iii) defines a metric for quantifying the similarity between non-numeric variables, such as Jaro-Winkler distances for strings.  Other metrics include the Levenshtein ``edit" distance, however I use the Jaro-Winkler method because it was developed specifically for record linkage by Jaro and Winkler.   The metric measures the number of matching characters and required transpositions between two names, and gives a higher weight to discrepancies in the first part of the string.  Importantly, having identical NYSIIS codes does not imply that the Jaro-Winkler distance between two strings will be 1, so the methods I use apply the Jaro-Winkler distance to the phonetically-spelled names.  %cite .  For more details, see \cite{arp2018}. 
+\addlinespace
+\textbf{Example 2.}  The identifiers in the simulated data do not include non-alphabetic characters, but do include misspelled names, so I pre-process all of the first and last names using the New York State Identification and Intelligence (NYSIIS) phonetic algorithm, and include these phonetically-spelled names among the matching variables.  The other matching variable is birth year, which does not require standardization.   Other popular phonetic algorithms include Soundex\footnote{This is the phonetic algorithm used in \cite{aizer2016} from Example 1.} and Metafone; however, I assume that the NYSIIS algorithm performs sufficiently well for the purposes of my analysis, given that the names I use are selected from among the most common names assigned at birth in the present-day United States.  
+\addlinespace
 
-% FIX BELOW HERE in the AM when I have brain power
-Finally, Step (iv) is where record linkage procedures differ in the most meaningful ways; hence, this step will be the focus of my analysis.  In fact I hold Step (i)-(iii) as described above, and define differences in the record linkage procedures according to differences in Step (iv).  
+Step (ii) reduces the computational burden of a matching procedure when $N_x \times N_y$ is large, by dividing observations into non-overlapping ``blocks" based on their values of $w_i$ or $w_j$.  Only pairs assigned to the same block are considered as potential matches, and pairs that belong to different blocks are automatically designated as non-matches.  Thus, blocking variables should be recorded with minimal error, otherwise blocking can increase the Type II error rate. 
 
-Below I will discuss two record linkage methods -- one deterministic and one probabilistic -- that I will use in my analysis.  Each method will be implemented twice: first, requiring unique matches, and then allowing for multiple matches.  While these methods are by no means exhaustive, they are intended to be representative of the most commonly used methods in economics.  For a detailed survey of record linkage techniques, please refer to books by \cite{harron_book, christen2012} or \cite{herzog07}, or any of the references in this paper. 
+\addlinespace
+\textbf{Example 2 (cont'd).} Given the size of my simulated datafiles, I do not need to impose any blocking rule for computational feasibility; however, the age-band threshold imposed by my deterministic matching methods acts as one.  These methods require that potential matches have recorded birth years that lie within a 2-year band.  Since I generate errors in the recorded birth year by rounding independent, random draws from a Normal(0, 2.5) distribution to the nearest integer, about 12 percent of these errors should result in true matches outside the threshold.  Furthermore, only half of the observations in the $x$-datafile contain errors in their recorded birth year, so this blocking structure should imply a Type II error rate of about 6 percent.  Out of the 500 observations in the $x$-datafile, this corresponds to approximately 28 false non-matches. 
+\addlinespace
 
-\subsection{Deterministic Method}
-The deterministic matching algorithm I implement is based upon the matching procedure used in \cite{abe2012}.  My version is as follows,
+Step (iii) defines a metric for quantifying the similarity between non-numeric variables, such as the Jaro-Winkler distance or Levenshtein ``edit" distance for strings.  This allows the researcher to declare as a ``name match", or ``partial name match" any observation pair whose string distance is lower than a pre-specified threshold.  These metrics are related to, but different from the standardization methods described in Step (ii).  This is pointed out by \cite{arp2018}, who observe that ``Abramtziky" is coded differently than ``Abramitzky" using the NYSIIS algorithm, but the Jaro-Winkler distance between these two names is very low (0.02, where the minimum distance is 0, and the maximum distance is 1).  Also, ``James Tennes" and ``James Thomas" have the same NYSIIS code, but the Jaro-Winkler distance between ``Tennes" and ``Thomas" is 0.4 
+
+\addlinespace
+\textbf{Example 2 (cont'd).}  The probabilistic record linkage methods in this paper use Jaro-Winkler distances to calculate the similarity between strings.  This metric gives higher weight to discrepancies in the first part of the string, as this is where errors are less likely to be made when recording names \citep{jaro, winkler06}.  The Jaro-Winkler distance is also the default string metric for many record linkage packages, so this choice best reflects how researchers often match datasets in practice. 
+\addlinespace
+
+% flesh this out probably. 
+Step (iv) is the most complicated step, and so I defer discussion to the next sections.  In total, I implement four matching methods which produce the matched datasets described in Table \ref{overview}.  The rest of this section is devoted to discussing each method in detail.
+
+
+\subsubsection{Deterministic Methods}
+The deterministic matching methods used in this paper are based upon those used by \cite{abe2012, abe2014, abe2019b}, and \cite{ferrie96}; hence, I refer to my adaptations of their methods as ABE Single and ABE Multi.   The names refer to the fact that ABE Single matches each observation in the $x$-datafile to at most one observation in the $y$-datafile, and discards any observations that result in multiple matches.  By contrast, ABE Multi designates as a match \textit{any} pair of observations that have the same phonetically spelled first and last names, and whose birth years fall within a 2-year band, which can result in linking a single observation to multiple matches. 
+
+The algorithm for ABE Single is as follows, 
 \begin{enumerate}
-\item Use the NYSIIS phonetic algorithm to obtain phonetically-spelled versions of the names in the $x$- and $y$- datafiles.
-\item Restrict the sample to people in the $x$-datafile with unique first name, last name, birth year, and $(x_{i1}, x_{i2})$ combinations. 
+\item Use the NYSIIS phonetic algorithm to obtain phonetically-spelled versions of the names in the $x$- and $y$-datafiles.
+\item Restrict the sample to people in the $x$-datafile with unique first name, last name, birth year, and $x_{i}$ combinations. 
 \item For each record $i$ in the $x$-datafile, search for a record $j$ in the $y$-datafile whose phonetically spelled first and last names and birth year match exactly.  
 \begin{enumerate}
-\item If there is a \textit{unique} match, designate the records $(i,j)$ as a match.
-\item If there are multiple possible matches in the $y$-datafile, drop the observation $i$ from the sample. 
-\item If there are no observations in the $y$-datafile that match $i$'s exact year of birth, search for a match within $\pm$1 year of $i$'s reported birth year; and, if this is unsuccessful, search for a match within $\pm$2 years.  If $i$ matches to multiple observations at any point, or if none of these attempts produces a match, then the observation is discarded.
+\item If there is a \textit{unique} match, designate $(i,j)$ as a match, and stop searching for additional possible matches. 
+\item If there are multiple possible matches in the $y$-datafile, discard the observation $i$.
+\item If there are no observations in the $y$-datafile that match $i$'s exact year of birth, search for a match within $\pm$1 year of $i$'s reported birth year; and, if this is unsuccessful, search for a match within $\pm$2 years.  If $i$ matches to multiple observations at any point, or if none of these attempts produces an exact name match, then discard the observation.
 \end{enumerate}
-\item Repeat Steps 2 and 3 for each record in the $y$-datafile, searching for matches in the $x$-datafile.  Set the matched sample equal to the intersection of the two sets of matches.
+\item Repeat Steps 2 and 3 for each record in the $y$-datafile, searching for matches in the $x$-datafile.  
+\item Return the matched dataset equal to the intersection of the two sets of matches produced by Steps 3 and 4. 
 \end{enumerate}
-To allow for multiple matches, I replace Step 3 with,
+I implement ABE Multi in exactly the same way, except that I replace Step 3 with,
 \begin{enumerate}
 \item[3.$^*$] Designate as a match any observation in the $y$-datafile that matches $i$'s phonetically spelled first and last name exactly, and whose birth year falls within $\pm$2 years of $i$'s birth year. 
 \end{enumerate}
 
-% include an example here, what is ruled out by 3 vs 3*
+%TO DO: Place for an example.  Replacing 3 with 3^* results in differences such as:   X Y Z? 
+
+Although there are many variations of the ABE algorithm, such as using a $\pm5$-year age band, replacing NYSIIS with another phonetic algorithm, or allowing for partial string agreement by incorporating Jaro-Winkler string distances, I design my methods to mimic the ``basic structure" of the ABE algorithms presented in \cite{abe2019}.   As discussed above, I predict that the choice of the 2-year age band, combined with my data generation process, will result in a Type II error rate of about 5.7 percent for both the ABE Single and ABE Multi methods.  However, the focus of this paper is to study estimation methods for linked data, so I favor simplicity over choosing the optimal variant, and defer to \cite{bailey2017} and \cite{abe2019} for a discussion of these matters.  
 
 \subsection{Probabilistic Method}
 \cite{fellegi69} developed the canonical framework for probabilistic record linkage by posing record linkage as a classification problem in which each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$. 

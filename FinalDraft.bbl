@@ -4,7 +4,7 @@
 \begin{thebibliography}{xx}
 
 \harvarditem[Abramitzky et al.]{Abramitzky, Boustan, Eriksson, Feigenbaum and
-  Perez}{2019}{abe2019}
+  Perez}{2019a}{abe2019}
 {\bf Abramitzky, Ran, Leah Boustan, Katherine Eriksson, James Feigenbaum, and
   Santiago Perez}, ``Automated Linking of Historical Data,'' {\it NBER Working
   Paper}, 2019.
@@ -15,6 +15,18 @@
   Poor, Huddled Masses: Self-Selection and Economic Outcomes in the Age of Mass
   Migration,'' {\it American Economic Review}, May 2012, {\it 102} (5),
   1832--56.
+
+\harvarditem[Abramitzky et al.]{Abramitzky, Boustan and
+  Eriksson}{2014}{abe2014}
+{\bf \bysame{}, \bysame{}, and \bysame{}}, ``A Nation of Immigrants:
+  Assimilation and Economic Outcomes in the Age of Mass Migration,'' {\it
+  Journal of Political Economy}, 2014, {\it 122} (3), 467--506.
+
+\harvarditem[Abramitzky et al.]{Abramitzky, Boustan and
+  Eriksson}{2019b}{abe2019b}
+{\bf \bysame{}, \bysame{}, and \bysame{}}, ``To the New World and Back Again:
+  Return Migrants in the Age of Mass Migration,'' {\it ILR Review}, 2019, {\it
+  72} (2), 300--322.
 
 \harvarditem[Abramitzky et al.]{Abramitzky, Mill and Perez}{2018}{arp2018}
 {\bf \bysame{}, Roy Mill, and Santiago Perez}, ``Linking Individuals Across
@@ -38,11 +50,6 @@
   Data,'' Working Paper 24019, National Bureau of Economic Research November
   2017.
 
-\harvarditem[Bleakley and Ferrie]{Bleakley and Ferrie}{2016}{bleakley2016}
-{\bf Bleakley, Hoyt and Joseph Ferrie}, ``Shocking Behavior: Random Wealth in
-  Antebellum Georgia and Human Capital Across Generations,'' {\it The Quarterly
-  Journal of Economics}, 2016, {\it 131} (3), 1455--1495.
-
 \harvarditem[Christen]{Christen}{2012}{christen2012}
 {\bf Christen, Peter}, {\it Data Matching: Concepts and Techniques for Record
   Linkage, Entity Resolution, and Duplicate Detection}, Springer Publishing
@@ -59,10 +66,11 @@
 {\bf Fellegi, I.~P. and A.~B. Sunter}, ``A Theory for Record Linkage,'' {\it
   Journal of the American Statistical Association}, 1969, {\it 64}, 1183--1210.
 
-\harvarditem[Goldstein et al.]{Goldstein, Harron and Wade}{2012}{Goldstein2012}
-{\bf Goldstein, Harvey, Katie~L Harron, and Angela~Mills Wade}, ``The analysis
-  of record-linked data using multiple imputation with data value priors.,''
-  {\it Statistics in medicine}, 2012, {\it 31 28}, 3481--93.
+\harvarditem[Ferrie]{Ferrie}{1996}{ferrie96}
+{\bf Ferrie, Joseph~P}, ``A New Sample of Males Linked from the Public Use
+  Microdata Sample of the 1850 U.S. Federal Census of Population to the 1860
+  U.S. Federal Census Manuscript Schedules,'' {\it Historical Methods}, 1 1996,
+  {\it 29} (4), 141--156.
 
 \harvarditem[Harron et al.]{Harron, Goldstein and Dibben}{2015}{harron_book}
 {\bf Harron, Katie, Harvey Goldstein, and Chris Dibben}, {\it Methodological
@@ -72,6 +80,11 @@
 {\bf Herzog, Thomas~N., Fritz~J. Scheuren, and William~E. Winkler}, {\it Data
   Quality and Record Linkage Techniques}, 1st ed., Springer Publishing Company,
   Incorporated, 2007.
+
+\harvarditem[Jaro]{Jaro}{1989}{jaro}
+{\bf Jaro, Matthew~A.}, ``Advances in Record-Linkage Methodology as Applied to
+  Matching the 1985 Census of Tampa, Florida,'' {\it Journal of the American
+  Statistical Association}, 1989, {\it 84} (406), 414--420.
 
 \harvarditem[Lahiri and Larsen]{Lahiri and Larsen}{2005}{lahiri05}
 {\bf Lahiri, P. and Michael~D. Larsen}, ``Regression Analysis with Linked
@@ -96,5 +109,9 @@
 \harvarditem[Scheuren and Winkler]{Scheuren and Winkler}{1993}{sw1993}
 {\bf Scheuren, Fritz and William Winkler}, ``Regression analysis of data files
   that are computer matched,'' {\it Survey Methodology}, 01 1993, {\it 19.}
+
+\harvarditem[Winkler]{Winkler}{2006}{winkler06}
+{\bf Winkler, William~E}, ``Overview of record linkage and current research
+  directions,'' Technical Report, U.S. Census Bureau 2006.
 
 \end{thebibliography}
