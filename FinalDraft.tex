@@ -448,7 +448,9 @@ Although there are many variations of the ABE algorithm, such as using a $\pm5$-
 
 \subsection{Probabilistic Method}
 
-The key insight of the canonical probabilistic record linkage framework from \cite{fellegi69} is to view record linkage as a classification problem, where each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$.  If the pairs are evaluated according to $K$,  comparison criteria, represented as a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$ then the probability of observing a particular configuration of $\gamij$ can be represented by the mixture distribution:
+The probabilistic matching methods, referred to as PRL Single and PRL Multi, are implemented using the fastLink package in \texttt{R} created by \cite{enamorado2019}.  Their methods are based upon the canonical work of \cite{fellegi69}, which I now review. 
+
+\cite{fellegi69} present the record linkage task as a classification problem, where each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$.  If the pairs are evaluated according to $K$,  comparison criteria, represented as a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$ then the probability of observing a particular configuration of $\gamij$ can be represented by the mixture distribution:
 \begin{equation}
 P(\gamij) = P(\gamij | M) p_M + P(\gamij | U) p_U 
 \label{mm}
@@ -468,12 +470,9 @@ In the context of this paper, the comparison vector $\gamij$ reflects agreements
  \end{equation}
 In principle, this assumption can be relaxed using log-linear models, as in \cite{larsen_rubin_2001}; however, the conditional independence assumption is appropriate for my application, because I generate the errors for different categories of $w_i$ independently. 
  
-Since membership to $M$ or $U$ is not observed, \cite{larsen_rubin_2001} suggest using the expectation-maximization (EM) algorithm from \cite{em} to simultaneously estimate the parameters in (\ref{mm}) and classify record pairs as matches or non-matches.  I use a variation of these methods developed by \cite{enamorado2019}, whose \texttt{R} package called fastLink is designed for large-scale administrative data.  Their software allows the user set a lower bound for the posterior probability of a match that will be accepted, and to decide whether unique matches should be assigned via the linear sum assignment program described in \cite{enamorado2019}.  
+Since membership to $M$ or $U$ is not observed, \cite{larsen_rubin_2001} suggest using the expectation-maximization (EM) algorithm from \cite{em} to simultaneously estimate the parameters in (\ref{mm}) and classify record pairs as matches or non-matches.  Crucially, there is no restriction that the posterior match probabilities in (30) sum to 1 for a fixed observation $i$.  Obtaining unique matches requires using a linear sum assignment program that maximizes the sum of the posterior matching probabilities subject to the constraint that no observations in either datafile can be matched multiple times. 
 
-
-
-In my implementation of their algorithm, I set the threshold equal to 0.7, enforce the unique matches to obtain PRL Single and accept all matches with posterior probability exceeding the threshold for PRL Multi.  
-note that the posterior probabilities do not sum to 1 for any indvidiual $i$, so that multiple matches are possible 
+The fastLink package by \cite{enamorado2019} estimates the posterior match probability for each pair of observations in the sample, as outputted by the EM algorithm.  Their method allows the user to specify a lower bound for the posterior probability of a match that will be accepted; I set this equal to 0.7 because the default value of 0.85 does not result in any matches.   The fastLink algorithm also allows the user to specify whether unique matches are desired, and, if so, returns the set of matches that solves the linear sum assignment program assigned above.  This is how I obtain PRL Single.  To obtain PRL Multi, I accept all matches with posterior match probabilities greater than 0.7, and I normalize those probabilities to obtain $\pi_{i\ell}$. 
 
 \section{Monte Carlo Study}
 
