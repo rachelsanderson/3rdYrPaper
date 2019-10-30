@@ -78,9 +78,10 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \begin{abstract}
 \singlespacing
-\noindent This paper compares methods for estimating linear regression models when the variables of interest are observed in distinct datasets with ambiguous identifiers.  In this setup, the researcher must attempt to identify which observations refer to the same individual prior to estimation, so that random errors in matching result in biased estimators.  \cite{sw1993} suggest correcting for the bias by incorporating knowledge about the probability that a given match is correct, however \citet*{ahl2019} propose an unbiased estimator that only requires that the true match is included among an observation's possible matches.  This paper establishes conditions under which these methods are equivalent, and compares their performance using matched data that is linked with different record linkage procedures.  The results suggest that the AHL estimator offers unbiasedness under weaker assumptions that the SW estimator, without sacrificing efficiency, and suggests further areas for study. \end{abstract} 
-
+\noindent This paper compares methods for estimating linear regression models when the variables of interest are recorded in separate datasets that must be merged prior to analysis.  When it is not possible to identify the true matches with certainty, random errors in matching cause standard estimators to be biased \citep*{NeterMaynes}.  
+In this context, \cite{sw1993} and \citet*{ahl2019} propose methods to correct for the bias, however each procedure requires distinct assumptions on how the data are linked.  This paper establishes conditions under which these methods are equivalent, and compares their performance using data that are matched using different record linkage procedures.  The results suggest that the estimator from \citet*{ahl2019} is unbiased under weaker assumptions, without sacrificing efficiency.  The paper concludes with  suggestions for handling the matching problem in practice and for future areas of theoretical study. 
 \newpage
+
 \section{Introduction}
 
 When analyzing multiple data sources with overlapping units, automated record linkage procedures offer the least cost solution for merging data.  These methods allow the researcher to specify a set of matching variables that are recorded across all of the datasets, and a decision rule for linking record pairs, in order to obtain a matched dataset in a matter of minutes.  When the files to be linked are large, the time saved relative to manual linking or automated linking with clerical review is immense. 
@@ -96,6 +97,12 @@ Other contributions to this literature include papers by \citet*{arp2018} and \c
 The ability to use probabilistic record linkage to correct for bias in the OLS estimator illustrates how the \textit{outputs} of different matching procedures determine which estimation methods are available for subsequent analysis.  Similarly, \citet*{ahl2019} develop methods for consistently estimating Generalized Method of Moments (GMM) models using linked data that include multiple matches per observation.  Unfortunately, none of these estimation methods is acknowledged in the survey papers by \citet*{abe2019} and \citet*{bailey2017}; however, it seems natural that the choice of which matching procedure to use should be informed by which estimation methods are available. 
 
 % good til here
+
+
+%Whereas the former relies on data that are linked probabilistically, the latter assumes that observations are linked to multiple possible matches, and is unbiased as long as the true match is included in the set of matches.  
+%However, \cite{sw1993} show how to correct for the bias if the datasets are matched using probabilistic record linkage methods; and \citet*{ahl2019} propose an estimator that is unbiased as long as true match is included among an observation's possible matches.  This paper establishes conditions under which these methods are equivalent, and compares their performance using matched data that is linked with different record linkage procedures.   \end{abstract} 
+
+
 
 The goal of this paper is therefore to connect the existing literature on matching and estimating linear regression models with linked data.  I compare the performance of different methods that incorporate different types of information, as well as extend the methods from \citet*{ahl2019} to incorporate probabilities as may be outputted from a record linkage procedure.  Using these estimation methods for a variety of matched datasets, that are obtained by applying different matching procedures on the same raw data, allows me to conclude which \textit{combinations} of matching and estimation procedures perform best in practice.  The theoretical and empirical analyses in this paper suggest that deterministic matching methods which allow for multiple links, combined with the estimator from \citet*{ahl2019}, may be a promising method for increasing the match rate, without introducing bias or sacrificing efficiency if the sample size is sufficiently large.  
 
