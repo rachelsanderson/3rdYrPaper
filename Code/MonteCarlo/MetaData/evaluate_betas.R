@@ -14,8 +14,9 @@ options(qwraps2_markup = "latex")
 # Code for plotting the histogram of the estimators
 levels(estimates$matching) <- c("ABE~Single","ABE~Multi","PRL~Single","PRL~Multi")
 levels(estimates$param) <- c(expression(beta[0]==2), expression(beta[1]==0.5), expression(beta[2]==1))
-levels(estimates$est_method) <- c("AHL", "SW", "NaiveOLS", "OLSTrue","OLS(L=1)")
+levels(estimates$est_method) <- c("AHL", "SW", "OLS (All)", "OLS (True)","OLS (Single)")
 est_methods <- levels(estimates$est_method)
+
 plot_estimate_hist <- function(method){
   
   results <- estimates %>% filter(est_method == method)
@@ -25,36 +26,36 @@ plot_estimate_hist <- function(method){
   }
   
   mean_betas <- results %>% group_by(matching, param) %>% 
-        summarise(mean_beta = mean(value))
+    summarise(mean_beta = mean(value))
   
   
   temp <- ggplot(results, aes(x=value, fill=matching, color=matching)) + 
-    geom_histogram(position = "identity", alpha=0.5, show.legend=FALSE, bins = 50) + 
-    geom_vline(aes(xintercept = mean_beta), linetype="dashed",
-    data=mean_betas,
-    show.legend=FALSE) + 
+    geom_density(alpha=0.3, show.legend=FALSE) + 
+    # geom_vline(aes(xintercept = mean_beta), linetype="dashed",
+    #            data=mean_betas,
+    #            show.legend=FALSE) + 
     facet_grid(rows = vars(matching), cols=vars(param), 
                labeller=label_parsed,
                scales="free") +
-    labs(x = "Parameter Estimate", y = "Frequency", title = paste0(method, " Estimator")) +
-    labs(caption = "*Based on 1,000 simulations. Vertical line indicates the sample mean.") +
-    theme(plot.caption =element_text(hjust=0),
+    labs(x = "Parameter Estimate", y = "Frequency") +
+    labs(caption = "*Based on 1,000 simulations.") +
+    theme(plot.caption =element_text(hjust=0, size=12),
           plot.title = element_text(hjust=0.5))
   ggsave(paste0(figureDir,method,"_hist.pdf"), plot=temp)
 }
+
 lapply(est_methods, plot_estimate_hist)
 
 # Plot comparing (L=1) vs. True Matches 
-t <- estimates %>% filter(est_method=="OLSTrue" | est_method=="OLS(L=1)")
+t <- estimates %>% filter(est_method=="OLS (True)" | est_method == "OLS (All)" |
+                            est_method=="OLS (Single)")
 tPlot <- ggplot(t, aes(x=value, fill=est_method, color=est_method)) +
-  geom_histogram(position = "identity", alpha=0.5, bins = 50) + 
+  geom_density(alpha=0.3) + 
   facet_grid(rows = vars(matching), cols = vars(param),
              labeller=label_parsed,
              scales="free") +
   labs(x = "Parameter Estimate", y = "Frequency", 
        fill = "", color="") +
-  scale_fill_discrete(labels=c("True Matches", "L=1 Matches")) + 
-  scale_color_discrete(labels=c("True Matches", "L=1 Matches")) +
   theme(legend.position="bottom")
 
 ggsave(paste0(figureDir,"compare.pdf"), plot=tPlot)
@@ -69,8 +70,8 @@ names(est_tab)[1] <- "Parameter"
 est_tab[, 3:ncol(est_tab)] <- round(est_tab[, 3:ncol(est_tab)], 3)
 
 est_tab_out <- kable(est_tab[,-2], "latex", booktabs = T, 
-                   align=c("l", rep("c", ncol(est_tab)-1)),
-                   escape=FALSE) %>%
+                     align=c("l", rep("c", ncol(est_tab)-1)),
+                     escape=FALSE) %>%
   pack_rows("ABE Single", 1,3) %>%
   pack_rows("ABE Multi", 4,6) %>%
   pack_rows("PRL Single", 7, 9) %>%
@@ -86,4 +87,40 @@ beta_opt %>% group_by(param) %>% summarise(mad=mad(val),
 ggplot(beta_opt, aes(x=val,color=param,fill=param)) +
   geom_histogram(position = "identity", alpha=0.5, show.legend=FALSE, bins = 50) +
   facet_grid(rows = vars(param), scales="free") 
+
+
+# View by dataset instead and overlay densities
+plot_densities <- function(method){
   
+  results <- estimates %>% filter(matching == method)
+  names <- est_methods
+  if (grepl("Single", method)){
+    results <- results %>% filter(est_method == "OLS (All)"
+                                  | est_method == "OLS (True)")
+    names <- est_methods[-c(1,2,5)]
+  }
+  
+  if (grepl("Multi", method)){
+    results <- results %>% filter(est_method != "OLS (True)")
+    names <- est_methods[-4]
+  }
+  
+  temp <- ggplot(results, aes(x=value,color=est_method, fill =est_method)) + 
+    geom_density(aes(x=value, color = est_method, fill=est_method), alpha=0.1) +
+    # stat_density(aes(x=value, color= est_method), geom="line", position="identity") +
+    facet_grid(rows = vars(param), 
+               labeller=label_parsed,
+               scales="free") +
+    labs(x = "Parameter Estimate", y = "Density", title = method) +
+    theme(legend.position ="bottom") +
+    scale_color_discrete(name = "", labels = names) + 
+    scale_fill_discrete(name = "", labels = names) + 
+    labs(caption = "*Based on 1,000 simulations. Vertical line indicates the sample mean.") +
+    theme(plot.caption =element_text(hjust=0),
+          plot.title = element_text(hjust=0.5))
+  temp
+  ggsave(paste0(figureDir,method,"_hist.pdf"), plot=temp)
+}
+
+levels(estimates$matching) <- c("ABE Single","ABE Multi","PRL Single","PRL Multi")
+match_methods <- levels(estimates$matching)

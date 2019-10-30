@@ -76,10 +76,9 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 
 \maketitle
 
-
 \begin{abstract}
 \singlespacing
-\noindent This paper compares different methods for estimating parametric models with linked data, i.e. when $x$ and $y$ are observed in distinct datasets with imperfect identifiers.  This setup requires that the researcher must attempt to identify which observations in the $x$- and $y$-datafiles refer to the same individual, prior to performing inference about the joint or conditional distributions of $x$ and $y$.  At a minimum, random errors in the matching step introduce measurement error that must be accounted for in subsequent inference; however, additional concerns about sample selection arise when these errors are correlated with unobservables that affect $x$ or $y$.  \end{abstract}
+\noindent This paper compares methods for estimating linear regression models when the variables of interest are observed in distinct datasets with ambiguous identifiers.  In this setup, the researcher must attempt to identify which observations refer to the same individual prior to estimation, so that random errors in matching result in biased estimators.  \cite{sw1993} suggest correcting for the bias by incorporating knowledge about the probability that a given match is correct, however \cite{ahl2019} propose an unbiased estimator that only requires that the true match is included among an observation's possible matches.  This paper establishes conditions under which these methods are equivalent, and compares their performance using matched data that is linked with different record linkage procedures.  The results suggest that the AHL estimator offers unbiasedness under weaker assumptions that the SW estimator, without sacrificing efficiency, and suggests further areas for study. \end{abstract} 
 
 % Using matched data requires estimation techniques that incorporate information from the matching process to improve efficiency and accurately reflect uncertainty. 
 
@@ -100,17 +99,11 @@ The ability to use probabilistic record linkage to correct for bias in the OLS e
 
 % good til here
 
-The goal of this paper is to build a bridge between the matching and estimation steps in the analysis of linked data.  I compare the performance of different methods that incorporate different types of information, as well as extend the methods from \cite{ahl2019} to incorporate probabilities as may be outputted from a record linkage procedure.  
+The goal of this paper is therefore to connect the existing literature on matching and estimating linear regression models with linked data.  I compare the performance of different methods that incorporate different types of information, as well as extend the methods from \cite{ahl2019} to incorporate probabilities as may be outputted from a record linkage procedure.  Using these estimation methods for a variety of matched datasets, that are obtained by applying different matching procedures on the same raw data, allows me to conclude which \textit{combinations} of matching and estimation procedures perform best in practice.  The theoretical and empirical analyses in this paper suggest that deterministic matching methods which allow for multiple links, combined with the estimator from \cite{ahl2019}, may be a promising method for increasing the match rate, without introducing bias or sacrificing efficiency if the sample size is sufficiently large.  
 
-
+The rest of this paper is laid out as follows.  Section 2 describes a simplified version of the setup from \cite{ahl2019}, which I call the linked data regression problem.  Section 3 describes two existing methods for estimating linear regression models with matched data -- specifically, the estimators proposed by \cite{sw1993} and \cite{ahl2019} -- and describes under what conditions they are equivalent.  Section 4 explores how knowledge of match probabilities may be used to improve the efficiency of the estimator from \cite{ahl2019}.   Section 5 describes in detail how I test these methods in a Monte Carlo study that involves simulating and linking datasets with a variety of record linkage techniques, Section 6 reports the results, and Section 7 concludes. 
 
 % maybe add to intro Other methods for estimating with linked data are ad hoc or are not easily adapted to the setup in Section 2.  For example, \cite{bleakley2016} generated ``composite match" equal to the average of the linked observations.   \cite{nq2015} construct bounds on the parameter of interest using different configurations of matched data.   \cite{abe2012} use traditional estimation methods using only individuals who are uniquely matched, and then reweight on observables (not sure what this means?).   In statistics, authors have suggested using probabilistic record linkage and multiple imputation to correct for bias introduced by errors in the matching process \cite{sw1993, lahiri05, Goldstein2012}.   Multiple imputation is not useful here, as we do not consider missing data. The Lahiri methods require $N_x = N_y$ and so we are left with two methods.
-
-By comparing the estimation methods, this gives suggestion to which record linkage procedure should be used (or, better yet, which outputs of the record linkage procedure are necessary for optimal estimation).  The main result is that unless probabilities can be estimated accurately, knowledge about them should not be incorporated in the estimation step.  
-
-My analysis in the paper supports support the following suggestions for analyzing linked data: if you use deterministic matching, you should allow for multiple matches and use the estimator in \cite{ahl2019}.  If you use probabilistic record linkage, you should choose the match with the highest probability of being correct if it exceeds a certain threshold; otherwise you should use multiple matches because the estimated probabilities can be noisy, and can result in large weights on observations with small $\pi_{i\ell}$.  When it doubt, implement all methods and compare the results!
-
-In order to illustrate the techniques studied in this paper, Section 2 introduces a numerical example that is used to demonstrate the matching and estimation techniques described in Sections 3 and 4.  Section 5 provides details about the implementation of the methods and data generating processes.  Section 6 contains the results, and Section 7 concludes.
 
 %Each step of the record linkage process introduces the possibility that a true match is overlooked (Type II error), or that a false match is designated as correct (Type I error); and, generally, there is a tradeoff between reducing either one of the two \citep{abe2019, harron2018}.  Also representativeness is an issue. However, the impact of data pre-processing choices on estimation is still not well understood.  
 
@@ -474,10 +467,6 @@ Since membership to $M$ or $U$ is not observed, \cite{larsen_rubin_2001} suggest
 
 The fastLink package by \cite{enamorado2019} estimates the posterior match probability for each pair of observations in the sample, as outputted by the EM algorithm.  Their method allows the user to specify a lower bound for the posterior probability of a match that will be accepted; I set this equal to 0.7 because the default value of 0.85 does not result in any matches.   The fastLink algorithm also allows the user to specify whether unique matches are desired, and, if so, returns the set of matches that solves the linear sum assignment program assigned above.  This is how I obtain PRL Single.  To obtain PRL Multi, I accept all matches with posterior match probabilities greater than 0.7, and I normalize those probabilities to obtain $\pi_{i\ell}$. 
 
-\subsection{Estimation with the linked datasets}
-
-Describe what I actually do??
-
 \section{Monte Carlo Results}
 
 Following the data generating process described in Section 5.1, I generate 1,000 $x$- and $y$-dataset pairs, such that each of the 500 observations in the $x$-datafile has a unique, true match in the $y$-dataset, but the identifiers in the $y$-dataset may repeat, and the identifiers in the $x$-dataset contain random errors.  I then match each dataset pair a total of four times, using two deterministic matching methods, ABE Single and ABE Multi, and two probabilistic record linkage methods, PRL Single and PRL Multi.   ABE Single and PRL Single require that each $x_i$ is matched to at most one $y_j$, and that each $y_j$ is matched to at most one $x_{i}$.  ABE Multi and PRL Multi enforce no such requirement, so that a single observation in the $x$- datafile may be matched to multiple observations in the $y$-datafile, and a single observation in the $y$-datafile may be a match for multiple values of $x_i$. 
@@ -535,9 +524,13 @@ The last column in Table \ref{match_rate} reports the average probability that t
 
 \subsection{Estimation Results}
 
-I compare the estimators according to median absolute deviation, and plot histograms of the estimated values in Figures \ref{olstrue}-\ref{ols}.  In implementing the AHL (2019) estimator, I set $\hat{g}(w_i, L_i) = \sum_{j=1}^{N_y} y_j $, the mean of all $y$ observations, to reduce the computational burden and because I have generated $y$ such that it is independent of the identifiers $w_i$.  The AHL estimator will probably perform better in scenarios where $w_i$ has predictive power in estimating the conditional mean of $y_i$.   
+Based on Figure \ref{ahl_sw}, the AHL estimator appears to perform better than the SW estimator for both datasets, because the SW estimator for $\beta_0$ is not centered around the true value, and the distribution of the SW estimator has fatter tails than that of the AHL estimator for all parameter values.  The AHL estimator also performs better than the SW estimator as measured by the median absolute deviation across the 1,000 replications, and for both datasets (see Table\ref{mad}).   Furthermore, the AHL estimator performs better than the OLS estimator that uses only those observations assigned $L_i =1$ by the ABE Multi and PRL Multi methods, whereas the SW estimator performs worse.  The AHL and SW estimators cannot be compared using the datasets matched by ABE Single or PRL Single, because they are both equal to the Naive OLS estimator when $L_i = 1$.  
 
+I calculate the AHL estimator by setting $\hat{g}(w_i, L_i)$ equal to the unconditional mean of the $y_j$, which, despite being the correct choice for my data generating process, means that the AHL estimator may perform better in scenarios where $w$ or $L$ is correlated with $y$.  By contrast, the SW estimator is biased when the matching variables $w$ are correlated with $y$, so the gains in accuracy achieved by the AHL estimator relative to the SW estimator reported here can be interpreted as a lower bound.  
 
+Table \ref{mad} also compares the AHL and SW estimators to the OLS estimator that uses only the true matches appearing in the matched datasets (OLS True).  As expected, no estimator performs as OLS True, however both AHL and SW do not perform significantly worse in terms of median absolute deviations. 
+
+Figure \ref{benchmark} serves as both a benchmark for comparing the AHL and SW methods, as well as an additional metric for evaluating the performance of the matching methods.   Note that the OLS estimator that incorporates all matches (counting multiple links as distinct observations) suffers from attenuation bias in its estimate of $\hat{\beta}_2$.  This is because the additional matches, by necessity, introduce measurement error.  
 
 \begin{table}[h!]
 \let\center\empty
@@ -546,58 +539,38 @@ I compare the estimators according to median absolute deviation, and plot histog
 \caption{Median Absolute Deviations for Estimators}
 \vspace{10pt}
 \resizebox{0.9\textwidth}{!}{\input{./Figures/est_tab.tex}}
-\label{multi_tab}
+\label{mad}
 \end{table}
-
-\begin{figure}[htbp]
-\begin{center}
-\caption{Comparing OLS with true matches produced by matching algorithm vs. matches with L=1}
-\includegraphics[width=1.1\textwidth]{./Figures/compare.pdf}
-\label{olstrue}
-\end{center}
-\end{figure}
-
-
-\section{Discussion/Conclusion}
-% fix this or add to discussion
-Based on these results, ABE Multi seems to perform well if the AHL estimator will be used.  This is because  ABE Multi is very likely to include the true match among the matches.  It is also easier in terms of computation, because it does not require linear sum assignment programs or thresholds to determine which record pairs should be designated as matches.  Furthermore, we know the efficiency gains from obtaining estimated probabilities are minor for $N$ large. 
-
-
-To what extent my results generalize beyond the simulated data is unclear, as I made many arbitrary choices while generating the synthetic data -- such as the dictionary of names and the structure of the typographical errors that I introduce in the $x$-datafile -- that may impact my results in important ways.  However, my theoretical results suggest that (i) using the match that is most likely to be correct, and bias correcting based on the probability that it is correct is optimal, (ii) if weights are estimated imprecisely, or if no match has a high probability of being correct, then the it is better to assign equal weights to multiple matches.   This result needs to be studied using more general models, and ideally applied to real data.
-
-
-
 
 % distribution of estimators
 \begin{figure}[htbp]
-\label{ahl_hist}
+\label{ahl_sw}
+\caption{Monte Carlo Distribution of the SW and AHL Estimators}
 \begin{center}
-\includegraphics[width=\textwidth]{./Figures/ahl_hist.pdf}
-\label{ahl}
+\includegraphics[width=\textwidth]{./Figures/ahl_sw.pdf}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
-\label{sw_hist}
 \begin{center}
-\includegraphics[width=\textwidth]{./Figures/sw_hist.pdf}
-\label{sw}
+\label{benchmark}
+\caption{Monte Carlo Distribution of Benchmark OLS Estimators}
+\includegraphics[width=1.1\textwidth]{./Figures/compare.pdf}
 \end{center}
 \end{figure}
 
+\section{Conclusion}
 
-\begin{figure}[htbp]
-\label{ols_hist}
-\begin{center}
-\includegraphics[width=\textwidth]{./Figures/OLS(L=1)_hist.pdf}
-\label{ols}
-\end{center}
-\end{figure}
-
+The Monte Carlo study in this paper involved arbitrary choices about the types of identifiers and the errors added to them that may influence the results in important ways, and so further work is necessary to determine whether the patterns described in Sections 4 and 6 generalize to other settings.  For now, both the theoretical and numerical analysis in this paper suggest that allowing for multiple matches may offer a solution for analyzing data that are linked with imperfect and non-unique identifiers.  Furthermore, my theoretical results suggest that multiple matches should be weighted equally for asymptotically linear estimators such as OLS and GMM, unless the match probability can be estimated exactly or the sample size is very small.  
 
 \newpage
 
+\singlespacing
+\bibliography{./Deadlines/proposal_bib} 
+\bibliographystyle{aer}
 
+\newpage
+\doublespacing
 
 \section{Appendix}
 
@@ -646,48 +619,18 @@ $\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, usin
 \end{align*}
 The same trick can be applied to calculate $\Var{X_2}$
 
-\subsection{Variance of alternative AHL estimator}
+%\subsection{Variance of alternative AHL estimator}
+%Here I try to derive the variance of the AHL estimator based on the difference between conditional moments, but I ran out of time
+%\begin{align*}
+%\Var{\frac{2}{N_{L_2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta) x_i \Bigg\vert L_i = 2} &= \frac{4}{N_{L_2}}\left(\Var{x_i\varepsilon_i | L_i = 2} + E[x_i^2 | L_i = 2](\omega^2 + \kappa^2) - E[x_i | L_i = 2 ] \kappa\right) \\
+%\Var{\frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta) x_i \Bigg\vert L_i = 3} &= \frac{1}{N_{L_3}} \left(\Var{x_i\varepsilon_i | L_i = 3} + 2\left(E[x_i^2 | L_i = 3](\omega^2 + \kappa^2) - E[x_i | L_i = 3] \kappa \right)\right) \end{align*}
 
-\begin{align*}
-\Var{\frac{2}{N_{L_2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta) x_i \Bigg\vert L_i = 2} &= \frac{4}{N_{L_2}}\left(\Var{x_i\varepsilon_i | L_i = 2} + E[x_i^2 | L_i = 2](\omega^2 + \kappa^2) - E[x_i | L_i = 2 ] \kappa\right) \\
-\Var{\frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta) x_i \Bigg\vert L_i = 3} &= \frac{1}{N_{L_3}} \left(\Var{x_i\varepsilon_i | L_i = 3} + 2\left(E[x_i^2 | L_i = 3](\omega^2 + \kappa^2) - E[x_i | L_i = 3] \kappa \right)\right) \end{align*}
+\section{Additional MSE Tables}
 
-
-\subsection{implementation notes}
-
-Let's talk about what I need to include here.  Here are some ideas:
-
-Formulas for SE of SW estimator.
-
-Details about implementation of fastLink algorithm. Also
-\begin{itemize}
-\item what threshold level I use for the fastLink algorithm (0.6)
-\item what nonparametric technique I use for AHL (nearest neighbor) 
-\item how I choose z in LL when there are multiple matches (randomly)
-\item how I calculate standard errors for all of the estimators (using formulas for now)
-\item how I standardize the variables for matching (nysiis function in R)
-\item I change Step 2 in the ABE algorithm to restrict the all observations with unique first name, last name, date of birth, and $(x_1, x_2)$ combinations. 
-\item  When allowing for multiple matches, I count as matches all record pairs with the same name, and the difference in recorded birth years is within two (or five) years.  That is, I designate all potential matches that arise in Step 3 as matches. 
-\end{itemize}
-
-
-
-%\section{More MSE Tables}
-
-%\input{./Figures/compare_1.tex}
-%\input{./Figures/compare_2.tex}
-%\input{./Figures/compare_3.tex}
-%\input{./Figures/compare_4.tex}
-%\input{./Figures/compare_5.tex}
-
-
-
-
-
-
-\newpage
-\singlespacing
-\bibliography{./Deadlines/proposal_bib} 
-\bibliographystyle{aer}
+\input{./Figures/compare_1.tex}
+\input{./Figures/compare_2.tex}
+\input{./Figures/compare_3.tex}
+\input{./Figures/compare_4.tex}
+\input{./Figures/compare_5.tex}
 
 \end{document}
