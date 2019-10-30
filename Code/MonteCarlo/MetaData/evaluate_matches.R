@@ -6,10 +6,13 @@ require(magrittr)
 require(qwraps2)
 
 metaDataDir <- "~/Desktop/3rdYrPaper/Code/MonteCarlo/MetaData/"
+matchDataDir <- "~/Desktop/3rdYrPaper/Code/MonteCarlo/Linked_Datasets/"
 figureDir <- "~/Desktop/3rdYrPaper/Figures/"
 load(paste0(metaDataDir,"matching_metadata.RData"))
+load(paste0(metaDataDir, "true_type_ii.RData"))
 options(qwraps2_markup = "latex")
 
+source("~/Desktop/3rdYrPaper/Code/correct_type_ii.R")
 
 row_names <- c("ABE Single","ABE Multi", "PRL Single", "PRL Multi")
 method_names <- c(
@@ -28,8 +31,14 @@ mean.sd <- function(x){
 metaMatch <- matching.metadata$full_matching_meta   
 metaMultiMatch <- matching.metadata$multi_matching_meta
 
+metaMatch$type_ii <- NULL
+true_type_ii <- calc_type_ii(matchDataDir)
+metaMatch <- inner_join(metaMatch, true_type_ii, by=c("mc_id", "method"))
+
+
 # Make Matching Summary Table
 table1 <- metaMatch   
+table1 <- table1[,c(1:5, 7,6)]
 table1 <- table1 %>% group_by(method) %>% 
                      summarise_all(mean.sd) %>% 
                      select(-mc_id)
@@ -37,7 +46,7 @@ table1$method <- row_names
 colnames(table1) <- c("Method", "Match Rate", 
                       "# Matches", "Type I", "Type II",
                       "P(Contains True)")
-table1 <- round(table1[,-1], 3)
+# table1 <- round(table1[,-1], 3)
 
 k <- kable(table1, "latex", booktabs=T,align=("c")) %>% 
   footnote(general = footnote_text,

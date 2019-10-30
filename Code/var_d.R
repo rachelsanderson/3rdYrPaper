@@ -279,7 +279,7 @@ for (i in 1:length(parCombos)){
                escape=FALSE,
                caption=title,
                linesep = "", align=c("c")) %>% kable_styling() %>%
-          add_header_above(c(" " =1, "$\\\\hat{\\\\pi}}$" = 5), escape = FALSE)
+          add_header_above(c(" " =1, "$\\\\hat{\\\\pi}}$" = ncol(df)-1), escape = FALSE)
   writeLines(kab, paste0(outDir, "compare_",i,".tex"))
 }
 
