@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 OCT 2019 14:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  30 OCT 2019 15:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1257,156 +1257,154 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
  [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+
+./FinalDraft.tex:122: Misplaced \noalign.
+\addlinespace ->\noalign 
+                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
+l.122 \addlinespace
+                   
+? 
 ./FinalDraft.tex:124: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.124 \addlinespace
                    
 ? 
-./FinalDraft.tex:126: Misplaced \noalign.
+[4]
+./FinalDraft.tex:127: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.126 \addlinespace
+l.127 \addlinespace
                    
 ? 
-[3]
 ./FinalDraft.tex:129: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.129 \addlinespace
                    
 ? 
-./FinalDraft.tex:131: Misplaced \noalign.
-\addlinespace ->\noalign 
-                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.131 \addlinespace
-                   
-? 
-[4]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 144.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 144.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 144.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 144.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 144.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 144.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 144.
-
 [5]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\begingroup' on input line 163.
+(hyperref)                removing `\begingroup' on input line 142.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<let>-command' on input line 163.
+(hyperref)                removing `\<let>-command' on input line 142.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\NAT@ctype' on input line 163.
+(hyperref)                removing `\NAT@ctype' on input line 142.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\z@' on input line 163.
+(hyperref)                removing `\z@' on input line 142.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 163.
+(hyperref)                removing `\let' on input line 142.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\let' on input line 163.
+(hyperref)                removing `\let' on input line 142.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 163.
+(hyperref)                removing `\new@ifnextchar' on input line 142.
 
-[6]
-Overfull \hbox (29.08853pt too wide) in paragraph at lines 188--190
-[][] [][]$\OT1/cmr/m/n/10.95 , and $[][] = \OML/cmm/m/it/10.95 y[] \OMS/cmsy/m/
-n/10.95 ^^@ []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 w[]; L[]\OT1/cmr/m/n/10.9
-5 )$. If, ad-di-tion-ally, $\OML/cmm/m/it/10.95 E\OT1/cmr/m/n/10.95 [[][]\OMS/c
-msy/m/n/10.95 j\OML/cmm/m/it/10.95 x[]; w[]; L[]\OT1/cmr/m/n/10.95 ] = [][]$ an
-d $\OML/cmm/m/it/10.95 E\OT1/cmr/m/n/10.95 [[][]\OMS/cmsy/m/n/10.95 j\OML/cmm/m
-/it/10.95 x[]; w[]; L[]\OT1/cmr/m/n/10.95 ] =
- []
-
-[7]
+[6] [7]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 209.
+(hyperref)                removing `\begingroup' on input line 161.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 209.
+(hyperref)                removing `\<let>-command' on input line 161.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 209.
+(hyperref)                removing `\NAT@ctype' on input line 161.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 209.
+(hyperref)                removing `\z@' on input line 161.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 209.
+(hyperref)                removing `\let' on input line 161.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 209.
+(hyperref)                removing `\let' on input line 161.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\new@ifnextchar' on input line 161.
 
 [8] [9]
-<./Figures/dStar.pdf, id=338, 505.89pt x 505.89pt>
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 207.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 207.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 207.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 207.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 207.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 207.
+
+[10] [11] [12]
+<./Figures/dStar.pdf, id=356, 505.89pt x 505.89pt>
 File: ./Figures/dStar.pdf Graphic file (type pdf)
 <use ./Figures/dStar.pdf>
-Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 263.
+Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 261.
 (pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
 
+Overfull \hbox (13.68712pt too wide) in paragraph at lines 266--267
+[]\OT1/cmr/m/n/12 More gen-er-ally, the es-ti-ma-tor $[][]$ can be com-puted fo
+r a sam-ple of ob-ser-va-tions $(\OML/cmm/m/it/12 X[]; X[]\OT1/cmr/m/n/12 )[]$,
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 276.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 276.
-
-[10] [11 <./Figures/dStar.pdf>] [12]
-Overfull \hbox (60.74634pt too wide) in paragraph at lines 304--305
-[]\OT1/cmr/m/n/10.95 This is-sue is re-flected in Ta-bles 1-3, which dis-play t
-he ra-tio of the $\OML/cmm/m/it/10.95 MSE[]\OT1/cmr/m/n/10.95 ([][]; [])\OML/cm
-m/m/it/10.95 =MSE[]\OT1/cmr/m/n/10.95 ([][]; [])$
  []
 
-<./Figures/bias_plot.pdf, id=370, 505.89pt x 505.89pt>
+[13] [14 <./Figures/dStar.pdf>]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 274.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 274.
+
+[15] [16]
+Overfull \hbox (39.25462pt too wide) in paragraph at lines 302--303
+[]\OT1/cmr/m/n/12 This is-sue is re-flected in Ta-bles 1-3, which dis-play the 
+ra-tio of the $\OML/cmm/m/it/12 MSE[]\OT1/cmr/m/n/12 ([][]; [])\OML/cmm/m/it/12
+ =MSE[]\OT1/cmr/m/n/12 ([][]; [])$
+ []
+
+<./Figures/bias_plot.pdf, id=394, 505.89pt x 505.89pt>
 File: ./Figures/bias_plot.pdf Graphic file (type pdf)
 <use ./Figures/bias_plot.pdf>
-Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 312.
+Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 310.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
-<./Figures/var_plot.pdf, id=371, 505.89pt x 505.89pt>
+<./Figures/var_plot.pdf, id=395, 505.89pt x 505.89pt>
 File: ./Figures/var_plot.pdf Graphic file (type pdf)
 <use ./Figures/var_plot.pdf>
-Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 321.
+Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 319.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
 (./Figures/compare_10.tex
 ./Figures/compare_10.tex:7: Missing $ inserted.
@@ -1468,137 +1466,137 @@ l.8 \cmidrule
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 330.
+(hyperref)                removing `math shift' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\setbox' on input line 330.
+(hyperref)                removing `\setbox' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\hbox' on input line 330.
+(hyperref)                removing `\hbox' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 330.
+(hyperref)                removing `math shift' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\global' on input line 330.
+(hyperref)                removing `\global' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\<def>-command' on input line 330.
+(hyperref)                removing `\<def>-command' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\theboldgroup' on input line 330.
+(hyperref)                removing `\theboldgroup' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 330.
+(hyperref)                removing `math shift' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathchar' on input line 330.
+(hyperref)                removing `\mathchar' on input line 328.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 330.
+(hyperref)                removing `math shift' on input line 328.
 
-[13] [14 <./Figures/bias_plot.pdf>] [15 <./Figures/var_plot.pdf>] [16]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 363.
-
+[17] [18 <./Figures/bias_plot.pdf>] [19 <./Figures/var_plot.pdf>] [20] [21]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `subscript' on input line 363.
+(hyperref)                removing `math shift' on input line 361.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 363.
+(hyperref)                removing `subscript' on input line 361.
 
-[17]
-./FinalDraft.tex:370: Extra }, or forgotten $.
-l.370 $$\hat{\mu}^* = \sum_{i=1}^N \hat{\mu}_i^*}
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 361.
+
+./FinalDraft.tex:368: Extra }, or forgotten $.
+l.368 $$\hat{\mu}^* = \sum_{i=1}^N \hat{\mu}_i^*}
                                                  
 ? 
-./FinalDraft.tex:371: Missing $ inserted.
+./FinalDraft.tex:369: Missing $ inserted.
 <inserted text> 
                 $
-l.371 
+l.369 
       
 ? 
-./FinalDraft.tex:371: Missing } inserted.
-<inserted text> 
-                }
-l.371 
-      
-? 
-./FinalDraft.tex:371: Display math should end with $$.
+./FinalDraft.tex:369: Display math should end with $$.
 <to be read again> 
-                   \@@par 
-l.371 
+                   \par 
+l.369 
       
 ? 
-./FinalDraft.tex:371: Extra }, or forgotten \endgroup.
-\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
-                                                  \fi 
-l.371 
-      
-? 
+[22]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 378.
+(hyperref)                removing `math shift' on input line 376.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 378.
+(hyperref)                removing `math shift' on input line 376.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 378.
+(hyperref)                removing `math shift' on input line 376.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 378.
+(hyperref)                removing `math shift' on input line 376.
 
-(./Figures/synthetic.tex
+
+Overfull \hbox (7.09613pt too wide) in paragraph at lines 378--378
+[]\OT1/cmr/m/n/12 I be-gin by con-struct-ing a ``ground truth" dataset with 100
+0 ob-ser-va-tions of $(\OML/cmm/m/it/12 x[]; x[]; y[]; w[]\OT1/cmr/m/n/12 )$,
+ []
+
+[23] (./Figures/synthetic.tex
 ./Figures/synthetic.tex:55: Missing } inserted.
 <inserted text> 
                 }
 l.55 \end{tikzpicture}
                       
 ? 
-) [18]
+) [24]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 394.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 394.
+(hyperref)                removing `math shift' on input line 392.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 394.
+(hyperref)                removing `math shift' on input line 392.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 394.
+(hyperref)                removing `math shift' on input line 392.
 
-(./Figures/overview_tab.tex) [19]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 392.
+
+(./Figures/overview_tab.tex) [25]
+./FinalDraft.tex:401: Misplaced \noalign.
+\addlinespace ->\noalign 
+                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
+l.401 \addlinespace
+                   
+? 
 ./FinalDraft.tex:403: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.403 \addlinespace
                    
 ? 
-./FinalDraft.tex:405: Misplaced \noalign.
+./FinalDraft.tex:407: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.405 \addlinespace
+l.407 \addlinespace
                    
 ? 
 ./FinalDraft.tex:409: Misplaced \noalign.
@@ -1607,95 +1605,81 @@ l.405 \addlinespace
 l.409 \addlinespace
                    
 ? 
-./FinalDraft.tex:411: Misplaced \noalign.
+[26]
+./FinalDraft.tex:413: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.411 \addlinespace
+l.413 \addlinespace
                    
 ? 
-[20]
 ./FinalDraft.tex:415: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.415 \addlinespace
                    
 ? 
-./FinalDraft.tex:417: Misplaced \noalign.
-\addlinespace ->\noalign 
-                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.417 \addlinespace
-                   
-? 
+[27] [28]
 
-Overfull \hbox (1.9473pt too wide) in paragraph at lines 423--424
-[]\OT1/cmr/m/n/10.95 The de-ter-min-is-tic match-ing meth-ods used in this pa-p
-er are based upon those used by []Abramitzky
- []
-
-[21]
-
-./FinalDraft.tex:449: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:447: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.449 ...ods are based upon the canonical work of 
+l.447 ...ods are based upon the canonical work of 
                                                   \cite{fellegi69}, which I ...
 
 ? 
-[22]
+[29] [30] [31]
 
-./FinalDraft.tex:489: Package inputenc Error: Invalid UTF-8 byte 160.
+./FinalDraft.tex:487: Package inputenc Error: Invalid UTF-8 byte 160.
 
 See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.489 ...methods, however Figure \ref{match_hist} 
+l.487 ...methods, however Figure \ref{match_hist} 
                                                   shows that ABE Multi consi...
 
 ? 
-[23] (./Figures/match_rates.tex) (./Figures/multi_tab.tex)
-<./Figures/match_rate.pdf, id=541, 640.3925pt x 487.8225pt>
+[32] (./Figures/match_rates.tex) (./Figures/multi_tab.tex)
+<./Figures/match_rate.pdf, id=584, 640.3925pt x 487.8225pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
-Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 525.
+Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 523.
 (pdftex.def)             Requested size: 422.77664pt x 322.05316pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[24] (./Figures/est_tab.tex)
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./Figures/ahl_sw.pdf, id=554, 505.89pt x 559.08875pt>
+[33] [34 <./Figures/match_rate.pdf>] (./Figures/est_tab.tex)
+<./Figures/ahl_sw.pdf, id=605, 505.89pt x 559.08875pt>
 File: ./Figures/ahl_sw.pdf Graphic file (type pdf)
 <use ./Figures/ahl_sw.pdf>
-Package pdftex.def Info: ./Figures/ahl_sw.pdf  used on input line 555.
+Package pdftex.def Info: ./Figures/ahl_sw.pdf  used on input line 553.
 (pdftex.def)             Requested size: 469.75502pt x 519.16231pt.
-<./Figures/compare.pdf, id=555, 526.96875pt x 559.08875pt>
+<./Figures/compare.pdf, id=606, 526.96875pt x 559.08875pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
-Package pdftex.def Info: ./Figures/compare.pdf  used on input line 563.
+Package pdftex.def Info: ./Figures/compare.pdf  used on input line 561.
 (pdftex.def)             Requested size: 516.73338pt x 548.253pt.
 
-Overfull \hbox (46.97836pt too wide) in paragraph at lines 563--564
+Overfull \hbox (46.97836pt too wide) in paragraph at lines 561--562
  [] 
  []
 
-[25] [26 <./Figures/match_rate.pdf>] [27 <./Figures/ahl_sw.pdf>] [28 <./Figures
-/compare.pdf>] (./FinalDraft.bbl [29]
+[35] [36 <./Figures/ahl_sw.pdf>] [37 <./Figures/compare.pdf>] [38]
+(./FinalDraft.bbl
 ./FinalDraft.bbl:84: Misplaced alignment tab character &.
 l.84 ...Data Linkage}, United States: John Wiley &
                                                    Sons Inc., 2015.
 ? 
+[39]
 ./FinalDraft.bbl:112: Undefined control sequence.
 l.112 ...y Qian}, ``The Fluidity of Race: \enquote
                                                   {Passing} in
 ? 
-[30]) [31] [32] [33] (./Figures/compare_1.tex
+) [40] [41] [42] (./Figures/compare_1.tex
 ./Figures/compare_1.tex:7: Missing $ inserted.
 <inserted text> 
                 $
@@ -1790,45 +1774,30 @@ l.7 ...}{c}{ } & \multicolumn{10}{c}{$\hat{\pi}}$}
 l.8 \cmidrule
              (l{3pt}r{3pt}){2-11}
 ? 
-) [34] [35] [36]
-
-./FinalDraft.tex:641: LaTeX Error: \begin{abstract} on input line 79 ended by \
-end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.641 \end{document}
-                    
-? 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 641.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 641.
-(./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 641.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 641.
+) [43] [44] [45]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 639.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 639.
+ (./FinalDraft.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 639.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 639.
 Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
 (rerunfilecheck)             Checksum: 6303021D2C06D0598D6E74EC919CAF88;1546.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 641.
- )
-(\end occurred inside a group at level 1)
-
-### semi simple group (level 1) entered at line 79 (\begingroup)
-### bottom level 
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 639.
+ ) 
 Here is how much of TeX's memory you used:
- 32056 strings out of 492649
- 641214 string characters out of 6129622
- 748337 words of memory out of 5000000
- 35234 multiletter control sequences out of 15000+600000
- 546251 words of font info for 82 fonts, out of 8000000 for 9000
+ 32058 strings out of 492649
+ 641157 string characters out of 6129622
+ 748333 words of memory out of 5000000
+ 35228 multiletter control sequences out of 15000+600000
+ 544658 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,21n,84p,10382b,1028s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.4} has been referenced bu
-t does not exist, replaced by a fixed one
+ 56i,21n,84p,10382b,870s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exi
+st, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
 , replaced by a fixed one
@@ -1862,14 +1831,13 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2018/texmf-dist/
-fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on FinalDraft.pdf (36 pages, 604227 bytes).
+st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on FinalDraft.pdf (45 pages, 585646 bytes).
 PDF statistics:
- 765 PDF objects out of 1000 (max. 8388607)
- 665 compressed objects within 7 object streams
- 155 named destinations out of 1000 (max. 500000)
+ 804 PDF objects out of 1000 (max. 8388607)
+ 696 compressed objects within 7 object streams
+ 164 named destinations out of 1000 (max. 500000)
  331 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -64,8 +64,8 @@
 \setlength{\topmargin}{-0.4in} 
 \setlength{\textheight}{8.9in}
 \setlength{\parindent}{2em}
-% \setstretch{1.25}
-\doublespacing
+\setstretch{1.5}
+
 \title{\singlespacing Methods for analyzing linked data}
 \author{Rachel Anderson\thanks{Mailing Address: Department of Economics, Julis Romo Rabinowitz Building,
 Princeton, NJ 08544. Email: rachelsa@Princeton.edu.
@@ -79,18 +79,16 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 \begin{abstract}
 \singlespacing
 \noindent This paper compares methods for estimating linear regression models when the variables of interest are recorded in separate datasets that must be merged prior to analysis.  When it is not possible to identify the true matches with certainty, random errors in matching cause standard estimators to be biased \citep*{NeterMaynes}.  
-In this context, \cite{sw1993} and \citet*{ahl2019} propose methods to correct for the bias, however each procedure requires distinct assumptions on how the data are linked.  This paper establishes conditions under which these methods are equivalent, and compares their performance using data that are matched using different record linkage procedures.  The results suggest that the estimator from \citet*{ahl2019} is unbiased under weaker assumptions, without sacrificing efficiency.  The paper concludes with  suggestions for handling the matching problem in practice and for future areas of theoretical study. 
+In this context, \cite{sw1993} and \citet*{ahl2019} propose methods to correct for the bias, however each procedure requires distinct assumptions on how the data are linked.  This paper establishes conditions under which these methods are equivalent, and compares their performance using data that are matched using different record linkage procedures.  The results suggest that the estimator from \citet*{ahl2019} is unbiased under weaker assumptions, without sacrificing efficiency.  The paper concludes with  suggestions for handling the matching problem in practice and for future areas of theoretical study. \end{abstract}
 \newpage
 
 \section{Introduction}
 
-When analyzing multiple data sources with overlapping units, automated record linkage procedures offer the least cost solution for merging data.  These methods allow the researcher to specify a set of matching variables that are recorded across all of the datasets, and a decision rule for linking record pairs, in order to obtain a matched dataset in a matter of minutes.  When the files to be linked are large, the time saved relative to manual linking or automated linking with clerical review is immense. 
+When analyzing multiple data sources with overlapping units, automated record linkage procedures offer a computationally efficient solution for merging data.  These methods allow the researcher to specify a set of matching variables and a decision rule for linking observations to obtain a matched dataset in a matter of minutes.  If the files to be linked are large, the time saved relative to manual linking or automated linking with clerical review is immense. 
 
-In the social sciences, interest in automated record linkage methods emerged in response to the increasing availability of administrative datasets, including recently digitized historical complete count population censuses.  Although these techniques originated in other fields -- primarily statistics, computer science, operations research, and epidemiology -- social scientists have developed their own linking methods in response to concerns about the accuracy and representativeness of data that are matched using imperfect identifiers.  
+In the social sciences, interest in automated record linkage methods has emerged in response to the increasing availability of administrative datasets, including recently digitized historical complete count population censuses.  These data often contain identifiers that are prone to typographical, duplication, enumeration, and mis-reporting errors.  Although methods for record linkage in this context have been developed in statistics, computer science, operations research, and epidemiology, economic historians and historical demographers have developed their own linking algorithms out of concern about the accuracy and representativeness of data that are matched using imperfect identifiers \citep*{ferrie96, abe2012, abe2014, abe2019b}.
 
-This new research agenda is driven by economic historians and historical demographers, who use data with identifiers that are prone to  typographical, duplication, enumeration, and digitization error.  Additionally, the identifiers may be misreported -- for example, ages may be rounded to integers ending with a 0 or 5 -- or repeated within a sample, as might happen if several people born in the same year have the same name.  Historical record linkage procedures primarily differ according to how they address these issues of data quality. 
-
-Examples of this literature include recent papers by \citet*{abe2019} and \citet*{bailey2017}, who compare the performance of popular historical record linkage methods to datasets matched by hand-linking or to simulated ``ground truth" datasets.  Although they implement different methods, both papers document a tradeoff between the false positive rate and the (true) match rate across procedures, and seem to agree that using more conservative algorithms leads to more representative data.  
+Recent papers by \citet*{abe2019} and \citet*{bailey2017} compare the performance of popular historical record linkage methods to datasets matched by hand-linking or to simulated ``ground truth" datasets.  Although they implement different methods, both papers document a tradeoff between the false positive rate and the (true) match rate across procedures, and seem to agree that using more conservative algorithms leads to more representative data.  
 
 Other contributions to this literature include papers by \citet*{arp2018} and \citet*{enamorado2019}, who demonstrate how to apply probabilistic record linkage methods from statistics to match historical and large-scale survey data.  These methods offer an advantage over the deterministic methods studied by \citet*{abe2019} and \citet*{bailey2017}, in that they can quantify the uncertainty about the matched data.  Furthermore, this extra information can be used to correct for bias introduced by false matches in the Ordinary Least Squares (OLS) estimator, using methods proposed by \cite{sw1993} and \citet*{lahiri05}.
 
