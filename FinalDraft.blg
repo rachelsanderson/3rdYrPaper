@@ -5,46 +5,44 @@ The style file: aer.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: ./Deadlines/proposal_bib.bib
-Warning--empty author in spedis
-You've used 23 entries,
+You've used 26 entries,
             2984 wiz_defined-function locations,
-            794 strings with 7880 characters,
-and the built_in function-call counts, 19844 in all, are:
-= -- 3083
-> -- 1219
-< -- 339
-+ -- 412
-- -- 228
-* -- 1339
-:= -- 4454
-add.period$ -- 23
-call.type$ -- 23
-change.case$ -- 159
-chr.to.int$ -- 22
-cite$ -- 24
-duplicate$ -- 255
-empty$ -- 565
-format.name$ -- 599
-if$ -- 4907
+            816 strings with 8319 characters,
+and the built_in function-call counts, 22518 in all, are:
+= -- 3490
+> -- 1388
+< -- 382
++ -- 465
+- -- 256
+* -- 1489
+:= -- 5093
+add.period$ -- 27
+call.type$ -- 26
+change.case$ -- 183
+chr.to.int$ -- 25
+cite$ -- 26
+duplicate$ -- 284
+empty$ -- 634
+format.name$ -- 684
+if$ -- 5553
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 75
-num.names$ -- 264
-pop$ -- 333
+missing$ -- 23
+newline$ -- 85
+num.names$ -- 312
+pop$ -- 379
 preamble$ -- 1
-purify$ -- 181
+purify$ -- 208
 quote$ -- 0
 skip$ -- 0
 stack$ -- 0
-substring$ -- 531
-swap$ -- 81
+substring$ -- 608
+swap$ -- 87
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 86
-warning$ -- 1
-while$ -- 237
+type$ -- 98
+warning$ -- 0
+while$ -- 280
 width$ -- 0
-write$ -- 377
-(There was 1 warning)
+write$ -- 427

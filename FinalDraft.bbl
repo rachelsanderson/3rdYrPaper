@@ -79,6 +79,11 @@
   U.S. Federal Census Manuscript Schedules,'' {\it Historical Methods}, 1 1996,
   {\it 29} (4), 141--156.
 
+\harvarditem[Goldstein et al.]{Goldstein, Harron and Wade}{2012}{Goldstein2012}
+{\bf Goldstein, Harvey, Katie~L Harron, and Angela~Mills Wade}, ``The analysis
+  of record-linked data using multiple imputation with data value priors.,''
+  {\it Statistics in medicine}, 2012, {\it 31 28}, 3481--93.
+
 \harvarditem[Harron et al.]{Harron, Goldstein and Dibben}{2015}{harron_book}
 {\bf Harron, Katie, Harvey Goldstein, and Chris Dibben}, {\it Methodological
   Developments in Data Linkage}, United States: John Wiley & Sons Inc., 2015.
@@ -113,10 +118,17 @@
   the United States, 1880-1940,'' Working Paper 20828, National Bureau of
   Economic Research January 2015.
 
-\harvarditem[{\em SAS 9.4 Functions and CALL Routines: Reference, Fifth
-  Edition}]{{\em SAS 9.4 Functions and CALL Routines: Reference, Fifth
-  Edition}}{2019}{spedis}
-{\bf {\em SAS 9.4 Functions and CALL Routines: Reference, Fifth Edition}},
+\harvarditem[Odell and Russell]{Odell and Russell}{1918}{soundex}
+{\bf Odell, M and R~Russell}, ``The soundex coding system,'' 1918.
+
+\harvarditem[Philips]{Philips}{1990}{philips90}
+{\bf Philips, Lawrence}, ``Hanging on the Metaphone,'' {\it Computer Language
+  Magazine}, December 1990, {\it 7} (12), 39--44.
+\newblock Accessible at
+  \url{http://www.cuj.com/documents/s=8038/cuj0006philips/}.
+
+\harvarditem[SAS]{SAS}{2019}{spedis}
+{\bf SAS}, ``SAS 9.4 Functions and CALL Routines: Reference, Fifth Edition,''
   Report, SAS Institute Inc. 2019.
 
 \harvarditem[Scheuren and Winkler]{Scheuren and Winkler}{1993}{sw1993}
