@@ -5,44 +5,46 @@ The style file: aer.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: ./Deadlines/proposal_bib.bib
-You've used 22 entries,
+Warning--empty author in spedis
+You've used 23 entries,
             2984 wiz_defined-function locations,
-            790 strings with 7789 characters,
-and the built_in function-call counts, 19419 in all, are:
-= -- 2991
+            794 strings with 7880 characters,
+and the built_in function-call counts, 19844 in all, are:
+= -- 3083
 > -- 1219
-< -- 334
+< -- 339
 + -- 412
 - -- 228
-* -- 1313
-:= -- 4374
-add.period$ -- 22
-call.type$ -- 22
-change.case$ -- 155
-chr.to.int$ -- 21
-cite$ -- 22
-duplicate$ -- 243
-empty$ -- 541
+* -- 1339
+:= -- 4454
+add.period$ -- 23
+call.type$ -- 23
+change.case$ -- 159
+chr.to.int$ -- 22
+cite$ -- 24
+duplicate$ -- 255
+empty$ -- 565
 format.name$ -- 599
-if$ -- 4786
+if$ -- 4907
 int.to.chr$ -- 2
 int.to.str$ -- 0
 missing$ -- 21
-newline$ -- 72
+newline$ -- 75
 num.names$ -- 264
-pop$ -- 321
+pop$ -- 333
 preamble$ -- 1
-purify$ -- 176
+purify$ -- 181
 quote$ -- 0
 skip$ -- 0
 stack$ -- 0
-substring$ -- 520
-swap$ -- 75
+substring$ -- 531
+swap$ -- 81
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 82
-warning$ -- 0
+type$ -- 86
+warning$ -- 1
 while$ -- 237
 width$ -- 0
-write$ -- 363
+write$ -- 377
+(There was 1 warning)
