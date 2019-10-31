@@ -14,12 +14,15 @@ options(qwraps2_markup = "latex")
 
 source("~/Desktop/3rdYrPaper/Code/correct_type_ii.R")
 
-row_names <- c("ABE Single","ABE Multi", "PRL Single", "PRL Multi")
+row_names <- c("Deterministic (Single)",
+               "Deterministic (Multiple)", 
+               "Probabilistic (Single)", 
+               "Probabilistic (Multiple)")
 method_names <- c(
-  'abe_single' = "ABE Single",
-  'abe_multi' = "ABE Multi", 
-  'prl_single' = "PRL Single", 
-  'prl_multi' = "PRL Multi"
+  'abe_single' = "Deterministic (Single)",
+  'abe_multi' = "Deterministic (Multiple)", 
+  'prl_single' = "Probabilistic (Single)", 
+  'prl_multi' = "Probabilistic (Multiple)"
 )
 
 footnote_text = "Based on 1,000 simulations. Standard deviations are reported in parentheses."
@@ -106,8 +109,8 @@ colnames(tab2)[1] <- c("L")
 multi_tab <- kable(tab2, "latex", booktabs = T, 
                    align=c("l", rep("c", ncol(tab2)-1)),
                    escape=FALSE) %>%
-  pack_rows("ABE Multi", 1,2) %>%
-  pack_rows("PRL Multi", 3, 4) %>%
+  pack_rows("Deterministic", 1,2) %>%
+  pack_rows("Probabilistic", 3, 4) %>%
   footnote(general = footnote_text,
            footnote_as_chunk = T)
 

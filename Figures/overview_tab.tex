@@ -3,14 +3,14 @@
 \begin{center}
 \caption{Overview of Matching Methods}
 \vspace{6pt}
-\begin{tabular}{cccc}
+\begin{tabular}{ccc}
 \toprule
-Method Name & Type          & Unique Match & Matched Dataset                                                                           \\
+Method         & Unique Match & Matched Dataset                                                                           \\
 \midrule
-ABE Single      & Deterministic & Yes          & $\left(x_i, y_i\right)_{i=1}^N$                                                           \\
-ABE Multi       & Deterministic   & No           & $\left(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i}\right)_{i=1}^N$                                  \\
-PRL Single      & Probabilistic & Yes          & $\left(x_i, y_i, \pi_i \right)_{i=1}^N$                                                   \\
-PRL Multi       & Probabilistic & No           & $\left(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i}, \{\pi_{i\ell}\}_{\ell=1}^{L_i} \right)_{i=1}^N$ \\\bottomrule
+Deterministic  & Yes          & $\left(x_i, y_i\right)_{i=1}^N$                                                           \\
+Deterministic    & No           & $\left(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i}\right)_{i=1}^N$                                  \\
+Probabilistic     & Yes          & $\left(x_i, y_i, \pi_i \right)_{i=1}^N$                                                   \\
+Probabilistic & No           & $\left(x_i, \{y_{i\ell}\}_{\ell=1}^{L_i}, \{\pi_{i\ell}\}_{\ell=1}^{L_i} \right)_{i=1}^N$ \\\bottomrule
 \end{tabular}
 \label{overview}
 \end{center}

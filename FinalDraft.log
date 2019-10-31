@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  31 OCT 2019 11:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  31 OCT 2019 12:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1377,7 +1377,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 202.
 
 [9] [10] [11]
-<./Figures/dStar.pdf, id=333, 505.89pt x 505.89pt>
+<./Figures/dStar.pdf, id=334, 505.89pt x 505.89pt>
 File: ./Figures/dStar.pdf Graphic file (type pdf)
 <use ./Figures/dStar.pdf>
 Package pdftex.def Info: ./Figures/dStar.pdf  used on input line 256.
@@ -1405,12 +1405,12 @@ ra-tio of the $\OML/cmm/m/it/12 MSE[]\OT1/cmr/m/n/12 ([][]; [])\OML/cmm/m/it/12
  =MSE[]\OT1/cmr/m/n/12 ([][]; [])$
  []
 
-<./Figures/bias_plot.pdf, id=372, 505.89pt x 505.89pt>
+<./Figures/bias_plot.pdf, id=373, 505.89pt x 505.89pt>
 File: ./Figures/bias_plot.pdf Graphic file (type pdf)
 <use ./Figures/bias_plot.pdf>
 Package pdftex.def Info: ./Figures/bias_plot.pdf  used on input line 305.
 (pdftex.def)             Requested size: 469.75502pt x 469.76265pt.
-<./Figures/var_plot.pdf, id=373, 505.89pt x 505.89pt>
+<./Figures/var_plot.pdf, id=374, 505.89pt x 505.89pt>
 File: ./Figures/var_plot.pdf Graphic file (type pdf)
 <use ./Figures/var_plot.pdf>
 Package pdftex.def Info: ./Figures/var_plot.pdf  used on input line 314.
@@ -1560,30 +1560,36 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 376.
 
-(./Figures/overview_tab.tex) [23]
+[23]
+./FinalDraft.tex:383: Misplaced \noalign.
+\addlinespace ->\noalign 
+                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
+l.383 \addlinespace
+                   
+? 
 ./FinalDraft.tex:385: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.385 \addlinespace
                    
 ? 
-./FinalDraft.tex:387: Misplaced \noalign.
+./FinalDraft.tex:389: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.387 \addlinespace
+l.389 \addlinespace
                    
 ? 
-[24]
 ./FinalDraft.tex:391: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
 l.391 \addlinespace
                    
 ? 
-./FinalDraft.tex:393: Misplaced \noalign.
+[24]
+./FinalDraft.tex:395: Misplaced \noalign.
 \addlinespace ->\noalign 
                          {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.393 \addlinespace
+l.395 \addlinespace
                    
 ? 
 ./FinalDraft.tex:397: Misplaced \noalign.
@@ -1592,71 +1598,47 @@ l.393 \addlinespace
 l.397 \addlinespace
                    
 ? 
-./FinalDraft.tex:399: Misplaced \noalign.
-\addlinespace ->\noalign 
-                         {\ifnum 0=`}\fi \@ifnextchar [{\@addspace }{\@addsp...
-l.399 \addlinespace
-                   
-? 
-[25] [26]
-
-./FinalDraft.tex:428: Package inputenc Error: Invalid UTF-8 byte 160.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.428 ...ods are based upon the canonical work of 
-                                                  \cite{fellegi69}, which I ...
-
-? 
-[27] [28] [29]
-
-./FinalDraft.tex:468: Package inputenc Error: Invalid UTF-8 byte 160.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.468 ...methods, however Figure \ref{match_hist} 
-                                                  shows that ABE Multi consi...
-
-? 
-[30] (./Figures/match_rates.tex) [31] (./Figures/multi_tab.tex)
-<./Figures/match_rate.pdf, id=566, 640.3925pt x 487.8225pt>
+[25] [26] [27] [28] (./Figures/overview_tab.tex) [29] [30]
+(./Figures/match_rates.tex) (./Figures/multi_tab.tex)
+<./Figures/match_rate.pdf, id=563, 664.4825pt x 525.965pt>
 File: ./Figures/match_rate.pdf Graphic file (type pdf)
 <use ./Figures/match_rate.pdf>
-Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 504.
-(pdftex.def)             Requested size: 422.77664pt x 322.05316pt.
+Package pdftex.def Info: ./Figures/match_rate.pdf  used on input line 503.
+(pdftex.def)             Requested size: 422.77664pt x 334.65018pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[32] [33 <./Figures/match_rate.pdf>] (./Figures/est_tab.tex)
-<./Figures/ahl_sw.pdf, id=589, 505.89pt x 559.08875pt>
+[31] [32] (./Figures/est_tab.tex)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<./Figures/ahl_sw.pdf, id=578, 534.99875pt x 525.965pt>
 File: ./Figures/ahl_sw.pdf Graphic file (type pdf)
 <use ./Figures/ahl_sw.pdf>
-Package pdftex.def Info: ./Figures/ahl_sw.pdf  used on input line 534.
-(pdftex.def)             Requested size: 469.75502pt x 519.16231pt.
-<./Figures/compare.pdf, id=590, 526.96875pt x 559.08875pt>
+Package pdftex.def Info: ./Figures/ahl_sw.pdf  used on input line 533.
+(pdftex.def)             Requested size: 469.75502pt x 461.84743pt.
+<./Figures/compare.pdf, id=579, 534.99875pt x 525.965pt>
 File: ./Figures/compare.pdf Graphic file (type pdf)
 <use ./Figures/compare.pdf>
-Package pdftex.def Info: ./Figures/compare.pdf  used on input line 542.
-(pdftex.def)             Requested size: 516.73338pt x 548.253pt.
+Package pdftex.def Info: ./Figures/compare.pdf  used on input line 541.
+(pdftex.def)             Requested size: 516.73338pt x 508.05864pt.
 
-Overfull \hbox (46.97836pt too wide) in paragraph at lines 542--543
+Overfull \hbox (46.97836pt too wide) in paragraph at lines 541--542
  [] 
  []
 
-[34] [35 <./Figures/ahl_sw.pdf>] [36 <./Figures/compare.pdf>] (./FinalDraft.bbl
-[37]
-./FinalDraft.bbl:89: Misplaced alignment tab character &.
-l.89 ...Data Linkage}, United States: John Wiley &
-                                                   Sons Inc., 2015.
+[33 <./Figures/match_rate.pdf>] [34 <./Figures/ahl_sw.pdf>] [35 <./Figures/comp
+are.pdf>] [36] (./FinalDraft.bbl
+./FinalDraft.bbl:97: Misplaced alignment tab character &.
+l.97 ...evelopments in Data Linkage}. John Wiley &
+                                                   Sons Inc.,
 ? 
-./FinalDraft.bbl:117: Undefined control sequence.
-l.117 ...y Qian}, ``The Fluidity of Race: \enquote
-                                                  {Passing} in
+[37]
+./FinalDraft.bbl:129: Undefined control sequence.
+l.129   \enquote
+                {Passing} in the United States, 1880-1940,'' Working Paper 2...
+
 ? 
 ) [38] [39] [40] (./Figures/compare_1.tex
 ./Figures/compare_1.tex:7: Missing $ inserted.
@@ -1754,25 +1736,25 @@ l.8 \cmidrule
              (l{3pt}r{3pt}){2-11}
 ? 
 ) [41] [42] [43]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 620.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 620.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 613.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 613.
  (./FinalDraft.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 620.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 620.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 613.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 613.
 Package rerunfilecheck Info: File `FinalDraft.out' has not changed.
-(rerunfilecheck)             Checksum: B31086935DBD6C99CC0B0D78202EDB47;1467.
+(rerunfilecheck)             Checksum: F4577EBC1983491B53691ACE9E88643F;1481.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 620.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 613.
  ) 
 Here is how much of TeX's memory you used:
- 32068 strings out of 492649
- 641345 string characters out of 6129622
- 748578 words of memory out of 5000000
- 35240 multiletter control sequences out of 15000+600000
- 544658 words of font info for 76 fonts, out of 8000000 for 9000
+ 32071 strings out of 492649
+ 641408 string characters out of 6129622
+ 748834 words of memory out of 5000000
+ 35242 multiletter control sequences out of 15000+600000
+ 545260 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,21n,84p,10382b,870s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exi
@@ -1785,6 +1767,7 @@ pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 /usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
 usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></u
+sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></u
 sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><
 /usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
@@ -1805,10 +1788,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2018/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on FinalDraft.pdf (43 pages, 571772 bytes).
+Output written on FinalDraft.pdf (43 pages, 588215 bytes).
 PDF statistics:
- 778 PDF objects out of 1000 (max. 8388607)
- 674 compressed objects within 7 object streams
+ 783 PDF objects out of 1000 (max. 8388607)
+ 678 compressed objects within 7 object streams
  162 named destinations out of 1000 (max. 500000)
  323 words of extra memory for PDF output out of 10000 (max. 10000000)
 

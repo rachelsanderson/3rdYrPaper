@@ -1,142 +1,153 @@
-\ifx\undefined\bysame
-\newcommand{\bysame}{\leavevmode\hbox to\leftmargin{\hrulefill\,\,}}
+\ifx\undefined\BySame
+\newcommand{\BySame}{\leavevmode\rule[.5ex]{3em}{.5pt}\ }
 \fi
-\begin{thebibliography}{xx}
+\ifx\undefined\textsc
+\newcommand{\textsc}[1]{{\sc #1}}
+\newcommand{\emph}[1]{{\em #1\/}}
+\let\tmpsmall\small
+\renewcommand{\small}{\tmpsmall\sc}
+\fi
+\begin{thebibliography}{}
 
-\harvarditem[Abramitzky et al.]{Abramitzky, Boustan, Eriksson, Feigenbaum and
-  Perez}{2019a}{abe2019}
-{\bf Abramitzky, Ran, Leah Boustan, Katherine Eriksson, James Feigenbaum, and
-  Santiago Perez}, ``Automated Linking of Historical Data,'' {\it NBER Working
-  Paper}, 2019.
+\harvarditem[Abramitzky, Boustan, Eriksson, Feigenbaum, and Perez]{Abramitzky,
+  Boustan, Eriksson, Feigenbaum, and Perez}{2019}{abe2019}
+\textsc{Abramitzky, R., L.~Boustan, K.~Eriksson, J.~Feigenbaum,  {\small and}
+  S.~Perez}  (2019): ``Automated Linking of Historical Data,'' \emph{NBER
+  Working Paper}.
 
-\harvarditem[Abramitzky et al.]{Abramitzky, Boustan and
+\harvarditem[Abramitzky, Boustan, and Eriksson]{Abramitzky, Boustan, and
   Eriksson}{2012}{abe2012}
-{\bf \bysame{}, Leah~Platt Boustan, and Katherine Eriksson}, ``Europe's Tired,
-  Poor, Huddled Masses: Self-Selection and Economic Outcomes in the Age of Mass
-  Migration,'' {\it American Economic Review}, May 2012, {\it 102} (5),
+\textsc{Abramitzky, R., L.~P. Boustan,  {\small and} K.~Eriksson}  (2012):
+  ``Europe's Tired, Poor, Huddled Masses: Self-Selection and Economic Outcomes
+  in the Age of Mass Migration,'' \emph{American Economic Review}, 102(5),
   1832--56.
 
-\harvarditem[Abramitzky et al.]{Abramitzky, Boustan and
+\harvarditem[Abramitzky, Boustan, and Eriksson]{Abramitzky, Boustan, and
   Eriksson}{2014}{abe2014}
-{\bf \bysame{}, \bysame{}, and \bysame{}}, ``A Nation of Immigrants:
-  Assimilation and Economic Outcomes in the Age of Mass Migration,'' {\it
-  Journal of Political Economy}, 2014, {\it 122} (3), 467--506.
+\textsc{\BySame{}}  (2014): ``A Nation of Immigrants: Assimilation and Economic
+  Outcomes in the Age of Mass Migration,'' \emph{Journal of Political Economy},
+  122(3), 467--506.
 
-\harvarditem[Abramitzky et al.]{Abramitzky, Boustan and
-  Eriksson}{2019b}{abe2019b}
-{\bf \bysame{}, \bysame{}, and \bysame{}}, ``To the New World and Back Again:
-  Return Migrants in the Age of Mass Migration,'' {\it ILR Review}, 2019, {\it
-  72} (2), 300--322.
+\harvarditem[Abramitzky, Boustan, and Eriksson]{Abramitzky, Boustan, and
+  Eriksson}{2019}{abe2019b}
+\textsc{\BySame{}}  (2019): ``To the New World and Back Again: Return Migrants
+  in the Age of Mass Migration,'' \emph{ILR Review}, 72(2), 300--322.
 
-\harvarditem[Abramitzky et al.]{Abramitzky, Mill and Perez}{2018}{arp2018}
-{\bf \bysame{}, Roy Mill, and Santiago Perez}, ``Linking Individuals Across
-  Historical Sources: a Fully Automated Approach,'' Working Paper 24324,
-  National Bureau of Economic Research February 2018.
+\harvarditem[Abramitzky, Mill, and Perez]{Abramitzky, Mill, and
+  Perez}{2018}{arp2018}
+\textsc{Abramitzky, R., R.~Mill,  {\small and} S.~Perez}  (2018): ``Linking
+  Individuals Across Historical Sources: a Fully Automated Approach,'' Working
+  Paper 24324, National Bureau of Economic Research.
 
-\harvarditem[Aizer et al.]{Aizer, Eli, Ferrie and
+\harvarditem[Aizer, Eli, Ferrie, and Lleras-Muney]{Aizer, Eli, Ferrie, and
   Lleras-Muney}{2016}{aizer2016}
-{\bf Aizer, Anna, Shari Eli, Joseph Ferrie, and Adriana Lleras-Muney}, ``The
-  Long-Run Impact of Cash Transfers to Poor Families,'' {\it American Economic
-  Review}, April 2016, {\it 106} (4), 935--71.
+\textsc{Aizer, A., S.~Eli, J.~Ferrie,  {\small and} A.~Lleras-Muney}  (2016):
+  ``The Long-Run Impact of Cash Transfers to Poor Families,'' \emph{American
+  Economic Review}, 106(4), 935--71.
 
-\harvarditem[Anderson et al.]{Anderson, Honor\'{e} and
+\harvarditem[Anderson, Honor\'{e}, and Lleras-Muney]{Anderson, Honor\'{e}, and
   Lleras-Muney}{2019}{ahl2019}
-{\bf Anderson, Rachel, Bo~Honor\'{e}, and Adriana Lleras-Muney}, ``Estimation
-  and inference using imperfectly matched data,'' {\it Working paper}, August
-  2019.
+\textsc{Anderson, R., B.~Honor\'{e},  {\small and} A.~Lleras-Muney}  (2019):
+  ``Estimation and inference using imperfectly matched data,'' \emph{Working
+  paper}.
 
-\harvarditem[Bailey et al.]{Bailey, Cole, Henderson and
+\harvarditem[Bailey, Cole, Henderson, and Massey]{Bailey, Cole, Henderson, and
   Massey}{2017}{bailey2017}
-{\bf Bailey, Martha, Connor Cole, Morgan Henderson, and Catherine Massey},
+\textsc{Bailey, M., C.~Cole, M.~Henderson,  {\small and} C.~Massey}  (2017):
   ``How Well Do Automated Linking Methods Perform? Lessons from U.S. Historical
-  Data,'' Working Paper 24019, National Bureau of Economic Research November
-  2017.
+  Data,'' Working Paper 24019, National Bureau of Economic Research.
 
 \harvarditem[Christen]{Christen}{2012}{christen2012}
-{\bf Christen, Peter}, {\it Data Matching: Concepts and Techniques for Record
-  Linkage, Entity Resolution, and Duplicate Detection}, Springer Publishing
-  Company, Incorporated, 2012.
+\textsc{Christen, P.}  (2012): \emph{Data Matching: Concepts and Techniques for
+  Record Linkage, Entity Resolution, and Duplicate Detection}. Springer
+  Publishing Company, Incorporated.
 
-\harvarditem[Dempster et al.]{Dempster, Laird and Rubin}{1977}{em}
-{\bf Dempster, A.~P., N.~M. Laird, and D.~B. Rubin}, ``Maximum Likelihood from
-  Incomplete Data via the EM Algorithm,'' {\it Journal of the Royal Statistical
-  Society. Series B (Methodological)}, 1977, {\it 39} (1), 1--38.
+\harvarditem[Dempster, Laird, and Rubin]{Dempster, Laird, and Rubin}{1977}{em}
+\textsc{Dempster, A.~P., N.~M. Laird,  {\small and} D.~B. Rubin}  (1977):
+  ``Maximum Likelihood from Incomplete Data via the EM Algorithm,''
+  \emph{Journal of the Royal Statistical Society. Series B (Methodological)},
+  39(1), 1--38.
 
-\harvarditem[Enamorado et al.]{Enamorado, Fifield and
+\harvarditem[Enamorado, Fifield, and Imai]{Enamorado, Fifield, and
   Imai}{2019}{enamorado2019}
-{\bf Enamorado, Ted, Benjamin Fifield, and Kosuke Imai}, ``Using a
+\textsc{Enamorado, T., B.~Fifield,  {\small and} K.~Imai}  (2019): ``Using a
   Probabilistic Model to Assist Merging of Large-Scale Administrative
-  Records,'' {\it American Political Science Review}, 2019, {\it 113} (2),
-  353?371.
+  Records,'' \emph{American Political Science Review}, 113(2), 353?371.
 
 \harvarditem[Fellegi and Sunter]{Fellegi and Sunter}{1969}{fellegi69}
-{\bf Fellegi, I.~P. and A.~B. Sunter}, ``A Theory for Record Linkage,'' {\it
-  Journal of the American Statistical Association}, 1969, {\it 64}, 1183--1210.
+\textsc{Fellegi, I.~P.,  {\small and} A.~B. Sunter}  (1969): ``A Theory for
+  Record Linkage,'' \emph{Journal of the American Statistical Association}, 64,
+  1183--1210.
 
 \harvarditem[Ferrie]{Ferrie}{1996}{ferrie96}
-{\bf Ferrie, Joseph~P}, ``A New Sample of Males Linked from the Public Use
-  Microdata Sample of the 1850 U.S. Federal Census of Population to the 1860
-  U.S. Federal Census Manuscript Schedules,'' {\it Historical Methods}, 1 1996,
-  {\it 29} (4), 141--156.
+\textsc{Ferrie, J.~P.}  (1996): ``A New Sample of Males Linked from the Public
+  Use Microdata Sample of the 1850 U.S. Federal Census of Population to the
+  1860 U.S. Federal Census Manuscript Schedules,'' \emph{Historical Methods},
+  29(4), 141--156.
 
-\harvarditem[Goldstein et al.]{Goldstein, Harron and Wade}{2012}{Goldstein2012}
-{\bf Goldstein, Harvey, Katie~L Harron, and Angela~Mills Wade}, ``The analysis
-  of record-linked data using multiple imputation with data value priors.,''
-  {\it Statistics in medicine}, 2012, {\it 31 28}, 3481--93.
+\harvarditem[Goldstein, Harron, and Wade]{Goldstein, Harron, and
+  Wade}{2012}{Goldstein2012}
+\textsc{Goldstein, H., K.~L. Harron,  {\small and} A.~M. Wade}  (2012): ``The
+  analysis of record-linked data using multiple imputation with data value
+  priors.,'' \emph{Statistics in medicine}, 31 28, 3481--93.
 
-\harvarditem[Harron et al.]{Harron, Goldstein and Dibben}{2015}{harron_book}
-{\bf Harron, Katie, Harvey Goldstein, and Chris Dibben}, {\it Methodological
-  Developments in Data Linkage}, United States: John Wiley & Sons Inc., 2015.
+\harvarditem[Harron, Goldstein, and Dibben]{Harron, Goldstein, and
+  Dibben}{2015}{harron_book}
+\textsc{Harron, K., H.~Goldstein,  {\small and} C.~Dibben}  (2015):
+  \emph{Methodological Developments in Data Linkage}. John Wiley & Sons Inc.,
+  United States.
 
-\harvarditem[Herzog et al.]{Herzog, Scheuren and Winkler}{2007}{herzog07}
-{\bf Herzog, Thomas~N., Fritz~J. Scheuren, and William~E. Winkler}, {\it Data
-  Quality and Record Linkage Techniques}, 1st ed., Springer Publishing Company,
-  Incorporated, 2007.
+\harvarditem[Herzog, Scheuren, and Winkler]{Herzog, Scheuren, and
+  Winkler}{2007}{herzog07}
+\textsc{Herzog, T.~N., F.~J. Scheuren,  {\small and} W.~E. Winkler}  (2007):
+  \emph{Data Quality and Record Linkage Techniques}. Springer Publishing
+  Company, Incorporated, 1st edn.
 
 \harvarditem[Jaro]{Jaro}{1989}{jaro}
-{\bf Jaro, Matthew~A.}, ``Advances in Record-Linkage Methodology as Applied to
-  Matching the 1985 Census of Tampa, Florida,'' {\it Journal of the American
-  Statistical Association}, 1989, {\it 84} (406), 414--420.
+\textsc{Jaro, M.~A.}  (1989): ``Advances in Record-Linkage Methodology as
+  Applied to Matching the 1985 Census of Tampa, Florida,'' \emph{Journal of the
+  American Statistical Association}, 84(406), 414--420.
 
 \harvarditem[Lahiri and Larsen]{Lahiri and Larsen}{2005}{lahiri05}
-{\bf Lahiri, P. and Michael~D. Larsen}, ``Regression Analysis with Linked
-  Data,'' {\it Journal of the American Statistical Association}, 2005, {\it
-  100} (469), 222--230.
+\textsc{Lahiri, P.,  {\small and} M.~D. Larsen}  (2005): ``Regression Analysis
+  with Linked Data,'' \emph{Journal of the American Statistical Association},
+  100(469), 222--230.
 
 \harvarditem[Larsen and Rubin]{Larsen and Rubin}{2001}{larsen_rubin_2001}
-{\bf Larsen, Michael~D and Donald~B Rubin}, ``Iterative Automated Record
-  Linkage Using Mixture Models,'' {\it Journal of the American Statistical
-  Association}, 2001, {\it 96} (453), 32?41.
+\textsc{Larsen, M.~D.,  {\small and} D.~B. Rubin}  (2001): ``Iterative
+  Automated Record Linkage Using Mixture Models,'' \emph{Journal of the
+  American Statistical Association}, 96(453), 32?41.
 
-\harvarditem[Neter et al.]{Neter, Maynes and Ramanathan}{1965}{NeterMaynes}
-{\bf Neter, John, E.~Scott Maynes, and R.~Ramanathan}, ``The Effect of
-  Mismatching on the Measurement of Response Errors,'' {\it Journal of the
-  American Statistical Association}, 1965, {\it 60} (312), 1005--1027.
+\harvarditem[Neter, Maynes, and Ramanathan]{Neter, Maynes, and
+  Ramanathan}{1965}{NeterMaynes}
+\textsc{Neter, J., E.~S. Maynes,  {\small and} R.~Ramanathan}  (1965): ``The
+  Effect of Mismatching on the Measurement of Response Errors,'' \emph{Journal
+  of the American Statistical Association}, 60(312), 1005--1027.
 
 \harvarditem[Nix and Qian]{Nix and Qian}{2015}{nq2015}
-{\bf Nix, Emily and Nancy Qian}, ``The Fluidity of Race: \enquote{Passing} in
-  the United States, 1880-1940,'' Working Paper 20828, National Bureau of
-  Economic Research January 2015.
+\textsc{Nix, E.,  {\small and} N.~Qian}  (2015): ``The Fluidity of Race:
+  \enquote{Passing} in the United States, 1880-1940,'' Working Paper 20828,
+  National Bureau of Economic Research.
 
 \harvarditem[Odell and Russell]{Odell and Russell}{1918}{soundex}
-{\bf Odell, M and R~Russell}, ``The soundex coding system,'' 1918.
+\textsc{Odell, M.,  {\small and} R.~Russell}  (1918): ``The soundex coding
+  system,'' .
 
 \harvarditem[Philips]{Philips}{1990}{philips90}
-{\bf Philips, Lawrence}, ``Hanging on the Metaphone,'' {\it Computer Language
-  Magazine}, December 1990, {\it 7} (12), 39--44.
-\newblock Accessible at
+\textsc{Philips, L.}  (1990): ``Hanging on the Metaphone,'' \emph{Computer
+  Language Magazine}, 7(12), 39--44, Accessible at
   \url{http://www.cuj.com/documents/s=8038/cuj0006philips/}.
 
 \harvarditem[SAS]{SAS}{2019}{spedis}
-{\bf SAS}, ``SAS 9.4 Functions and CALL Routines: Reference, Fifth Edition,''
-  Report, SAS Institute Inc. 2019.
+\textsc{SAS}  (2019): ``SAS 9.4 Functions and CALL Routines: Reference, Fifth
+  Edition,'' Report, SAS Institute Inc.
 
 \harvarditem[Scheuren and Winkler]{Scheuren and Winkler}{1993}{sw1993}
-{\bf Scheuren, Fritz and William Winkler}, ``Regression analysis of data files
-  that are computer matched,'' {\it Survey Methodology}, 01 1993, {\it 19.}
+\textsc{Scheuren, F.,  {\small and} W.~Winkler}  (1993): ``Regression analysis
+  of data files that are computer matched,'' \emph{Survey Methodology}, 19.
 
 \harvarditem[Winkler]{Winkler}{2006}{winkler06}
-{\bf Winkler, William~E}, ``Overview of record linkage and current research
-  directions,'' Technical Report, U.S. Census Bureau 2006.
+\textsc{Winkler, W.~E.}  (2006): ``Overview of record linkage and current
+  research directions,'' Discussion paper, U.S. Census Bureau.
 
 \end{thebibliography}

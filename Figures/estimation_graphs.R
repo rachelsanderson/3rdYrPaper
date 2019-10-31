@@ -12,13 +12,17 @@ load(paste0(metaDataDir,"beta_opt.RData"))
 options(qwraps2_markup = "latex")
 
 # Code for plotting the histogram of the estimators
-levels(estimates$matching) <- c("ABE~Single","ABE~Multi","PRL~Single","PRL~Multi")
+levels(estimates$matching) <- c("Deterministics",
+                                "Deterministic",
+                                "Probabilistics",
+                                "Probabilistic")
 levels(estimates$param) <- c(expression(beta[0]==2), expression(beta[1]==0.5), expression(beta[2]==1))
 levels(estimates$est_method) <- c("AHL", "SW", "OLS (All)", "OLS (True)","OLS (Single)")
 est_methods <- levels(estimates$est_method)
 
 results <- estimates %>% filter(est_method == "SW" | est_method == "AHL" )
-results <- results %>% filter(matching == "ABE~Multi" | matching == "PRL~Multi")
+results <- results %>% filter(matching != "Deterministics" & matching == "Probabilistics")
+
 
 temp <- ggplot(results, aes(x=value, fill=est_method, color=est_method)) + 
     geom_density(alpha=0.3) + 

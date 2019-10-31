@@ -1,48 +1,47 @@
 This is BibTeX, Version 0.99d (TeX Live 2018)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: FinalDraft.aux
-The style file: aer.bst
-Reallocated singl_function (elt_size=4) to 100 items from 50.
-Reallocated singl_function (elt_size=4) to 100 items from 50.
+The style file: econometrica.bst
 Database file #1: ./Deadlines/proposal_bib.bib
+Done.
 You've used 26 entries,
-            2984 wiz_defined-function locations,
-            816 strings with 8319 characters,
-and the built_in function-call counts, 22518 in all, are:
-= -- 3490
-> -- 1388
-< -- 382
-+ -- 465
-- -- 256
-* -- 1489
-:= -- 5093
-add.period$ -- 27
+            2327 wiz_defined-function locations,
+            680 strings with 7593 characters,
+and the built_in function-call counts, 12943 in all, are:
+= -- 1217
+> -- 850
+< -- 3
++ -- 291
+- -- 252
+* -- 1217
+:= -- 2553
+add.period$ -- 29
 call.type$ -- 26
-change.case$ -- 183
-chr.to.int$ -- 25
+change.case$ -- 171
+chr.to.int$ -- 26
 cite$ -- 26
-duplicate$ -- 284
-empty$ -- 634
-format.name$ -- 684
-if$ -- 5553
-int.to.chr$ -- 2
+duplicate$ -- 423
+empty$ -- 727
+format.name$ -- 298
+if$ -- 2458
+int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 23
-newline$ -- 85
-num.names$ -- 312
-pop$ -- 379
+newline$ -- 90
+num.names$ -- 156
+pop$ -- 138
 preamble$ -- 1
-purify$ -- 208
+purify$ -- 168
 quote$ -- 0
-skip$ -- 0
+skip$ -- 386
 stack$ -- 0
 substring$ -- 608
-swap$ -- 87
+swap$ -- 72
 text.length$ -- 3
 text.prefix$ -- 0
-top$ -- 0
-type$ -- 98
+top$ -- 1
+type$ -- 277
 warning$ -- 0
-while$ -- 280
+while$ -- 133
 width$ -- 0
-write$ -- 427
+write$ -- 319

@@ -79,7 +79,7 @@ This project received funding from the NIH (Grant 1 R01 HD077227-01). }}
 \begin{abstract}
 \singlespacing
 \noindent This paper compares methods for estimating linear regression models when the variables of interest are recorded in separate datasets that must be merged prior to analysis.  When it is not possible to identify the true matches with certainty, random errors in matching cause standard estimators to be biased \citep*{NeterMaynes}.  
-In this context, \cite{sw1993} and \citet*{ahl2019} propose methods to correct for the bias, however each procedure requires distinct assumptions on how the data are linked.  This paper establishes conditions under which these methods are equivalent, and compares their performance using data that are matched using different record linkage procedures.  The results suggest that the estimator from \citet*{ahl2019} is unbiased under weaker assumptions, without sacrificing efficiency.  The paper concludes with  suggestions for handling the matching problem in practice and for future areas of theoretical study. \end{abstract}
+In this context, \cite{sw1993} and \cite*{ahl2019} propose methods to correct for the bias, however each procedure requires distinct assumptions on how the data are linked.  This paper establishes conditions under which these methods are equivalent, and compares their performance using data that are matched by different record linkage procedures.  The results suggest that the estimator from \citet*{ahl2019} is unbiased under weaker assumptions, and without sacrificing efficiency.  The paper concludes with practical suggestions for analyzing linked data and discusses future areas of theoretical study. \end{abstract}
 \newpage
 
 \section{Introduction}
@@ -374,9 +374,7 @@ Next, I split the ground truth dataset into the $x$- and $y$-datafiles, as in th
 The $y$-datafile includes all 1,000 values of $y_i$ from the ground truth data, along with the original identifiers $w_i$.  The aim of this construction is to make it likely that some observations in the $x$-datafile will be linked to multiple values of $y$.  The next section describes the record linkage methods used to link the $x$- and $y$-datafiles. 
 
 \subsection{Linking the $x$- and $y$-datafiles}
-Taking the $x$- and $y$-datafiles as given, I implement four record linkage procedures to obtain matched datasets with the general structure in (\ref{data}).  These procedures, and their respective outputs, are summarized in Table \ref{overview}.  This section offers a brief overview of these methods, however the interested reader should refer to \citet*{harron_book, christen2012} and \citet*{herzog07} to learn more about modern record linkage methods. 
-
-\input{./Figures/overview_tab.tex}
+Taking the $x$- and $y$-datafiles as given, I implement four record linkage procedures to obtain matched datasets with the general structure in (\ref{data}).  This section offers a brief overview of these methods, however the interested reader should refer to \citet*{harron_book, christen2012} and \citet*{herzog07} to learn more about modern record linkage methods. 
 
 For the purposes of this paper, I define a record linkage procedure as a set of decisions about (i) selecting and standardizing the identifying variables in $w_i$ and $w_j$, (ii) choosing which $(i,j)$ pairs to consider as potential matches, (iii) defining how to measure (partial) agreement between $(w_i,w_j)$, and (iv) designating $(i,j)$ pairs as matches.  
 
@@ -421,11 +419,11 @@ I implement the version that allows for multiple matches in exactly the same way
 \item[3.$^*$] Designate as a match any observation in the $y$-datafile that matches $i$'s phonetically spelled first and last name exactly, and whose birth year falls within $\pm$2 years of $i$'s birth year. 
 \end{enumerate}
 
-Although there are many ways to alter the above procedure, such as using a $\pm5$-year age band, replacing NYSIIS with another phonetic algorithm, or allowing for partial string agreement by incorporating Jaro-Winkler string distances, I design my methods to mimic the algorithm from \citet*{abe2019}.   As discussed above, I predict that the choice of the 2-year age band, combined with my data generation process, will result in a Type II error rate of about 5.7 percent for both the ABE Single and ABE Multi methods.  However, the focus of this paper is to study estimation methods for linked data, so I favor simplicity over choosing the optimal variant, and defer to \citet*{bailey2017} and \citet*{abe2019} for a discussion of these matters.  
+Although there are many ways to alter the above procedure, such as using a $\pm5$-year age band, replacing NYSIIS with another phonetic algorithm, or allowing for partial string agreement by incorporating Jaro-Winkler string distances, I design my methods to mimic the algorithm from \citet*{abe2019}.   As discussed above, I predict that the choice of the 2-year age band, combined with my data generation process, will result in a Type II error rate of about 5.7 percent for the deterministic methods.  However, the focus of this paper is to study estimation methods for linked data, so I favor simplicity over choosing the optimal variant, and defer to \citet*{bailey2017} and \citet*{abe2019} for a discussion of these matters.  
 
 \subsection{Probabilistic Method}
 
-The probabilistic matching methods implemented in this paper are implemented using the fastLink package in \texttt{R} created by \citet*{enamorado2019}.  Their methods are based upon the canonical work of \cite{fellegi69}, which I now review. 
+The probabilistic matching methods implemented in this paper are implemented using the fastLink package in \texttt{R} created by \citet*{enamorado2019}.  Their methods are based upon the canonical work of \cite{fellegi69}, which I now review. 
 
 \cite{fellegi69} present the record linkage task as a classification problem, where each $(i,j)$ record pair belongs either to the set of matches $(M)$, or non-matches $(U)$.  If the pairs are evaluated according to $K$,  comparison criteria, represented as a \textit{comparison vector}, $$\mathbf{\gamma_{ij}}= (\gamma_{ij}^1, \dots, \gamma_{ij}^{k}, \dots, \gamma_{ij}^K)$$ then the probability of observing a particular configuration of $\gamij$ can be represented by the mixture distribution:
 \begin{equation}
@@ -453,7 +451,10 @@ The fastLink package by \citet*{enamorado2019} estimates the posterior match pro
 
 \section{Monte Carlo Results}
 
-Following the data generating process described in Section 5.1, I generate 1,000 $x$- and $y$-dataset pairs, such that each of the 500 observations in the $x$-datafile has a unique, true match in the $y$-dataset, but the identifiers in the $y$-dataset may repeat, and the identifiers in the $x$-dataset contain random errors.  I then match each dataset pair a total of four times, using two deterministic matching methods that produce single or multiple matches, and two probabilistic record linkage methods that produce single or multiple matches per observation.   
+Following the data generating process described in Section 5.1, I generate 1,000 $x$- and $y$-dataset pairs, such that each of the 500 observations in the $x$-datafile has a unique, true match in the $y$-dataset, but the identifiers in the $y$-dataset may repeat, and the identifiers in the $x$-dataset contain random errors.  I then match each dataset pair a total of four times, using two deterministic matching methods and two probabilistic record linkage methods that produce either single or multiple matches per observation, as summarized in Table \ref{overview}.
+
+
+\input{./Figures/overview_tab.tex}
 
 Each linkage method produces a distinct matched dataset, and so the matching step produces a total of 4,000 matched datasets.  For each dataset, I compute and compare the following estimators:
 \begin{enumerate}
@@ -465,15 +466,13 @@ Each linkage method produces a distinct matched dataset, and so the matching ste
 \end{enumerate}
 
 \subsection{Matching results}
-The first column of Table \ref{match_rate} reports the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile, averaged across the Monte Carlo replications.  These rates range between 71 and 79 percent across methods, however Figure \ref{match_hist} shows that ABE Multi consistently matches more observations than any other procedure.  Additionally, PRL Single and PRL Multi have the same match rate, which suggests that allowing for multiple matches adds additional matches per observations, as opposed to matching new individuals.  This is an artifact of the fastLink algorithm, because the posterior probability threshold for designating a match is the same for both PRL Single and PRL Multi.  By contrast, ABE Multi seems to increase the match rate relative to ABE Single by matching  observations that are discarded by ABE Single. 
+The first column of Table \ref{match_rate} reports the proportion of observations in the $x$-datafile that are linked to at least one observation in the $y$-datafile, averaged across the Monte Carlo replications.  These rates range between 71 and 79 percent across methods, however Figure \ref{match_hist} shows that the deterministic method with multiple matches consistently matches more distinct observations than any other procedure.  Additionally, the probabilistic methods have the same match rate on average, which suggests that allowing for multiple matches adds additional matches per observations, as opposed to matching new individuals.  This is likely an artifact of the fastLink algorithm, because the posterior probability threshold for designating a match is the same for both methods.  By contrast, the match rate increases for the deterministic algorithm when multiple matches are allowed, because it matches observations that were discarded otherwise. 
 
-The second column of Table \ref{match_rate} displays the average number of links assigned by each matching procedure.  For ABE Multi and PRL Multi, each $(i, j)$ combination counts as a distinct link, so that an observation with $L$ linked outcomes counts as $L$ matches.  To explore whether these numbers are driven primarily by linking the observations to many matches, or by linking more observations to possibly multiple, but fewer, matches, I report the average number of links per observation in Table \ref{multi_L}.  On average, ABE Multi seems to assign larger $L_i$ per observation:  PRL Multi assigns a unique match to 59 percent of observations, and two matches to 33 percent of observations, compared to ABE Multi which assigns, on average, one, two, and three matches to 52, 35, and 11 percent of observations, respectively.  Both algorithms tend not to assign more than four matches for many observations.  Note that these probabilities do not sum to one, because they reflect the average of $P(L_i = \ell)$ across 1,000 observations, and not the average \textit{distribution} of $L_i$ across datasets. 
+The second column of Table \ref{match_rate} displays the average number of links assigned by each matching procedure.  For the methods that produce multiple matches, each $(i, j)$ combination counts as a distinct link, so that an observation with $L$ linked outcomes counts as $L$ matches.  To explore whether these numbers are driven primarily by linking the observations to many matches, or by linking more observations to possibly multiple, but fewer, matches, I report the average number of links per observation in Table \ref{multi_L}.  On average, the deterministic method seems to assign larger $L_i$ per observation.  Whereas the probabilistic method assigns a unique match to 59 percent of observations, and two matches to 33 percent of observations, the deterministic method assigns, on average, one, two, and three matches to 52, 35, and 11 percent of observations, respectively.  Both algorithms tend not to assign more than four matches for many observations.  Note that these probabilities do not sum to one, because they reflect the average of $P(L_i = \ell)$ across 1,000 observations, and not the average \textit{distribution} of $L_i$ across datasets. 
 
-Although ABE Single and PRL Single match a similar number of observations on average, ABE Single seems to produce higher quality matches as measured by its low Type I error (0.03 compared to 0.11 for PRL Single).  This comes at the cost of a high Type II error rate: ABE Single fails to match about 26 percent of possible links on average, compared to 15 percent for PRL Single.  As discussed in Section 5, about 6 percent of the Type II error can be attributed to the blocking structure imposed by the ABE algorithm; however, this cannot fully explain the gap between the two methods.  
+Of the methods that match pairs uniquely, the deterministic matching algorithm seems to produce higher quality matches, as measured by its low Type I error (0.03) relative to that of the probabilistic method (0.11).  It also produces a lower Type II error -- the deterministic method fails to match 31 percent of true links, and the probabilistic method misses 35 percent.  As discussed in Section 5, about 6 percent of the Type II error can be attributed to the blocking structure imposed by the deterministic algorithm, yet it still outperforms the probabilistic method.
 
-% TO DO : FIX TYPE II ERROR RATE FOR TE MULTIPLE MATCH METHODS! cannot be correct
-
-The last column in Table \ref{match_rate} reports the average probability that the set of matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ contains the true match.  This is an important metric to study, because the estimation methods used in this paper assume that this probability is equal to 1.  Notably, this assumption is most likely to fail for PRL Single (it finds the correct match only 89 percent of the time), but allowing for multiple matches in PRL Multi improves this probability significantly.   ABE Single and ABE Multi perform very well on this metric, including the correct match 97 and 99 percent of the time.  Breaking down this probability by the number of matches $L_i$ for ABE Multi and PRL Multi in Table \ref{multi_L} shows that allowing for multiple matches increases the probability that the true match is included in the sample.  
+The last column in Table \ref{match_rate} reports the average probability that the set of matches $\{y_{i\ell}\}_{\ell=1}^{L_i}$ contains the true match.  This is an important metric to study, because the estimation methods used in this paper assume that this probability is equal to 1.  Notably, this assumption is most likely to fail for the probabilistic method with unique matches (it finds the correct match only 89 percent of the time), but allowing for multiple matches in improves this probability significantly.   Both of the deterministic methods perform very well on this metric, as they include the correct match 97 and 99 percent of the time.  Breaking down this probability by the number of matches $L_i$ in Table \ref{multi_L} shows that allowing for multiple matches increases the probability that the true match is included in the sample.  
 
 % Match Rate Table 
 
@@ -508,11 +507,11 @@ The last column in Table \ref{match_rate} reports the average probability that t
 
 \subsection{Estimation Results}
 
-Based on Figure \ref{ahl_sw}, the AHL estimator appears to perform better than the SW estimator for both datasets, because the SW estimator for $\beta_0$ is not centered around the true value, and the distribution of the SW estimator has fatter tails than that of the AHL estimator for all parameter values.  The AHL estimator also performs better than the SW estimator as measured by the median absolute deviation across the 1,000 replications, and for both datasets (see Table\ref{mad}).   Furthermore, the AHL estimator performs better than the OLS estimator that uses only those observations assigned $L_i =1$ by the ABE Multi and PRL Multi methods, whereas the SW estimator performs worse.  The AHL and SW estimators cannot be compared using the datasets matched by ABE Single or PRL Single, because they are both equal to the Naive OLS estimator when $L_i = 1$.  
+Based on Figure 5, the AHL estimator appears to perform better than the SW estimator for both datasets, because the SW estimator for $\beta_0$ is not centered around the true value, and the distribution of the SW estimator has fatter tails than that of the AHL estimator for all parameter values.  The AHL estimator also performs better than the SW estimator as measured by the median absolute deviation across the 1,000 replications, and for both datasets (see Table\ref{mad}).   Furthermore, the AHL estimator performs better than the OLS estimator that uses only those observations assigned $L_i =1$ by the methods that allow $L_i$ to vary freely, whereas the SW estimator performs worse.  The AHL and SW estimators cannot be compared using the datasets matched by ABE Single or PRL Single, because they are both equal to the Naive OLS estimator when $L_i = 1$.  
 
 I calculate the AHL estimator by setting $\hat{g}(w_i, L_i)$ equal to the unconditional mean of the $y_j$, which, despite being the correct choice for my data generating process, means that the AHL estimator may perform better in scenarios where $w$ or $L$ is correlated with $y$.  By contrast, the SW estimator is biased when the matching variables $w$ are correlated with $y$, so the gains in accuracy achieved by the AHL estimator relative to the SW estimator reported here can be interpreted as a lower bound.  
 
-Table \ref{mad} also compares the AHL and SW estimators to the OLS estimator that uses only the true matches appearing in the matched datasets (OLS True).  As expected, no estimator performs as OLS True, however both AHL and SW do not perform significantly worse in terms of median absolute deviations. 
+Table \ref{mad} also compares the AHL and SW estimators to the OLS estimator that uses only the true matches appearing in the matched datasets.  As expected, no estimator performs as this theoretical estimator, however neither AHL nor SW performs significantly worse in terms of median absolute deviations. 
 
 Figure \ref{benchmark} serves as both a benchmark for comparing the AHL and SW methods, as well as an additional metric for evaluating the performance of the matching methods.   Note that the OLS estimator that incorporates all matches (counting multiple links as distinct observations) suffers from attenuation bias in its estimate of $\hat{\beta}_2$.  This is because the additional matches, by necessity, introduce measurement error.  
 
@@ -528,7 +527,7 @@ Figure \ref{benchmark} serves as both a benchmark for comparing the AHL and SW m
 
 % distribution of estimators
 \begin{figure}[htbp]
-\label{ahl_sw}
+\label{ahl_sw_fig}
 \caption{Monte Carlo Distribution of the SW and AHL Estimators}
 \begin{center}
 \includegraphics[width=\textwidth]{./Figures/ahl_sw.pdf}
@@ -551,7 +550,7 @@ The Monte Carlo study in this paper involved arbitrary choices about the types o
 
 \singlespacing
 \bibliography{./Deadlines/proposal_bib} 
-\bibliographystyle{aer}
+\bibliographystyle{econometrica}
 
 \newpage
 \doublespacing
@@ -603,13 +602,7 @@ $\Var{X_1}$ and $\Var{X_2}$ are calculated using the law of total variance, usin
 \end{align*}
 The same trick can be applied to calculate $\Var{X_2}$
 
-%\subsection{Variance of alternative AHL estimator}
-%Here I try to derive the variance of the AHL estimator based on the difference between conditional moments, but I ran out of time
-%\begin{align*}
-%\Var{\frac{2}{N_{L_2}} \sum_{i=1}^{N_{L_2}} (y_{i1} + y_{i2} - x_i'\beta) x_i \Bigg\vert L_i = 2} &= \frac{4}{N_{L_2}}\left(\Var{x_i\varepsilon_i | L_i = 2} + E[x_i^2 | L_i = 2](\omega^2 + \kappa^2) - E[x_i | L_i = 2 ] \kappa\right) \\
-%\Var{\frac{1}{N_{L_3}} \sum_{i=1}^{N_{L_3}} (y_{i1} + y_{i2} + y_{i3} - x_i'\beta) x_i \Bigg\vert L_i = 3} &= \frac{1}{N_{L_3}} \left(\Var{x_i\varepsilon_i | L_i = 3} + 2\left(E[x_i^2 | L_i = 3](\omega^2 + \kappa^2) - E[x_i | L_i = 3] \kappa \right)\right) \end{align*}
-
-\section{Additional MSE Tables}
+\subsection{Additional MSE Tables}
 
 \input{./Figures/compare_1.tex}
 \input{./Figures/compare_2.tex}

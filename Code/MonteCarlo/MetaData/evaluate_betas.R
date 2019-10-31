@@ -12,7 +12,10 @@ load(paste0(metaDataDir,"beta_opt.RData"))
 options(qwraps2_markup = "latex")
 
 # Code for plotting the histogram of the estimators
-levels(estimates$matching) <- c("ABE~Single","ABE~Multi","PRL~Single","PRL~Multi")
+levels(estimates$matching) <- c("Deterministic~(Single)",
+                                "Deterministic~(Multi)",
+                                "Probabilistic~(Single)",
+                                "Probabilistic~(Multi)")
 levels(estimates$param) <- c(expression(beta[0]==2), expression(beta[1]==0.5), expression(beta[2]==1))
 levels(estimates$est_method) <- c("AHL", "SW", "OLS (All)", "OLS (True)","OLS (Single)")
 est_methods <- levels(estimates$est_method)
@@ -72,10 +75,10 @@ est_tab[, 3:ncol(est_tab)] <- round(est_tab[, 3:ncol(est_tab)], 3)
 est_tab_out <- kable(est_tab[,-2], "latex", booktabs = T, 
                      align=c("l", rep("c", ncol(est_tab)-1)),
                      escape=FALSE) %>%
-  pack_rows("ABE Single", 1,3) %>%
-  pack_rows("ABE Multi", 4,6) %>%
-  pack_rows("PRL Single", 7, 9) %>%
-  pack_rows("PRL Multi", 10, 12) %>%
+  pack_rows("Deterministic (Single)", 1,3) %>%
+  pack_rows("Deterministic (Multiple)", 4,6) %>%
+  pack_rows("Probabilistic (Single)", 7, 9) %>%
+  pack_rows("Probabilistic (Multiple)", 10, 12) %>%
   column_spec(1, width = "5cm")
 
 writeLines(est_tab_out,paste0(figureDir,"est_tab.tex"))
